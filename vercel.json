@@ -1,0 +1,14 @@
+{
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
