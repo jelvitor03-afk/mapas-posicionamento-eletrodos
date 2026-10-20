@@ -347,3 +347,43 @@ h2 {
   background: #0d9488 !important;
   box-shadow: 0 4px 14px rgba(13, 148, 136, 0.4) !important;
 }
+
+/* ---- Clinical Proof Marquee Section ---- */
+.clinical-proof-section {
+  padding: 56px 0 32px !important;
+  background: #ffffff !important;
+}
+
+.clinical-proof-section .container {
+  margin-bottom: 24px !important;
+  text-align: center !important;
+}
+
+.clinical-proof-section h2 {
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  color: var(--ink) !important;
+  line-height: 1.2 !important;
+  margin-bottom: 12px !important;
+}
+
+.clinical-proof-section .sub {
+  font-size: 16px !important;
+  color: var(--muted) !important;
+  max-width: 620px !important;
+  margin: 0 auto !important;
+  line-height: 1.5 !important;
+}
+
+@media (max-width: 768px) {
+  .clinical-proof-section {
+    padding: 40px 0 24px !important;
+  }
+  .clinical-proof-section h2 {
+    font-size: 26px !important;
+  }
+  .clinical-proof-section .sub {
+    font-size: 14px !important;
+    padding: 0 16px !important;
+  }
+}
