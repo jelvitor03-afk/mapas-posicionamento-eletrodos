@@ -1090,6 +1090,139 @@
         text-align: center;
       }
     }
+  
+    /* ==========================================================================
+       DEPOIMENTOS SLIDER (CHATS WHATSAPP/INSTAGRAM - EXATAMENTE IGUAL À SCREENSHOT)
+       ========================================================================== */
+    .social-proof-section {
+      background-color: #e4f7f2;
+      padding: 64px 0 54px;
+      border-top: 1px solid #bbf7d0;
+      border-bottom: 1px solid #bbf7d0;
+    }
+    .slider {
+      max-width: 960px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .slides {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      padding: 6px 4px 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .slides::-webkit-scrollbar { display: none; }
+    .slides img {
+      width: 280px;
+      height: 498px;
+      aspect-ratio: 280/498;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+      flex: 0 0 280px;
+      scroll-snap-align: center;
+    }
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .dots button {
+      cursor: pointer;
+      background: #cbd5e1;
+      border: 0;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      transition: all 0.2s ease;
+    }
+    .dots button.on {
+      background: #0f172a;
+      border-radius: 999px;
+      width: 24px;
+    }
+    .cta-social-wrap {
+      text-align: center;
+      margin-top: 36px;
+    }
+    .btn-cta-green {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 900;
+      text-decoration: none;
+      padding: 18px 38px;
+      border-radius: 99px;
+      box-shadow: 0 10px 28px rgba(16, 185, 129, 0.35);
+      transition: all 0.2s ease;
+    }
+    .btn-cta-green:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(16, 185, 129, 0.45);
+    }
+
+    /* CARD DE GARANTIA COM SELO DOURADO OFICIAL */
+    .guarantee-wrap {
+      padding: 50px 0 60px;
+      background: #e4f7f2;
+    }
+    .guarantee-box {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #bbf7d0;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 32px 36px;
+    }
+    .guarantee-box img {
+      width: 180px;
+      height: 180px;
+      flex: 0 0 180px;
+      object-fit: contain;
+    }
+    .guarantee-content h2 {
+      text-align: left;
+      font-size: 24px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .guarantee-content p {
+      font-size: 15px;
+      color: #475569;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 768px) {
+      .slides {
+        justify-content: flex-start;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .guarantee-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px 20px;
+      }
+      .guarantee-content h2 { text-align: center; }
+      .guarantee-box img { width: 140px; height: 140px; flex: 0 0 140px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1731,44 +1864,47 @@
   </section>
 
   <!-- 12. PROVA SOCIAL PORTUGAL, GARANTIA E FAQ -->
-  <section class="section section-soft">
+  <!-- 12. VÊ O QUE OS NOSSOS CLIENTES ESTÃO A DIZER (CHATS WHATSAPP/INSTAGRAM) -->
+  <section class="social-proof-section">
     <div class="container">
-      <div class="sec-head">
-        <h2 class="sec-title">Aprovado por profissionais e estudantes <span class="serif-italic">em Portugal</span></h2>
+      <div class="sec-head" style="margin-bottom: 32px;">
+        <h2 class="sec-title" style="color: #0d4a46; font-size: 32px; font-weight: 800; line-height: 1.25;">Vê o que os nossos<br/><span style="color: #064e3b;">clientes estão a dizer</span></h2>
       </div>
-
-      <div class="reviews-3-grid">
-        <div class="rev-card">
-          <div class="rev-stars">★★★★★</div>
-          <p>"Abro no telemóvel ao lado da marquesa e confirmo logo onde colar cada par de elétrodos e qual a frequência em Hz. Poupa imenso tempo entre utentes."</p>
-          <strong style="font-size:13.5px; color:var(--text-main);">Inês Martins · Fisioterapeuta (Porto)</strong>
+      
+      <div class="slider">
+        <div class="slides" id="slidesTrack">
+          <img src="/dep1.webp" width="280" height="498" alt="Depoimento Camila Ribeiro" loading="lazy" />
+          <img src="/dep2.webp" width="280" height="498" alt="Depoimento Rafael Costa" loading="lazy" />
+          <img src="/dep3.webp" width="280" height="498" alt="Depoimento Bruno Martins" loading="lazy" />
         </div>
-        <div class="rev-card">
-          <div class="rev-stars">★★★★★</div>
-          <p>"As pranchas com os parâmetros sugeridos de TENS, NMES e FES valem ouro. Imprimi as da coluna lombar, ombro e joelho para ter sempre na bancada da clínica."</p>
-          <strong style="font-size:13.5px; color:var(--text-main);">Tiago Sousa · Fisioterapeuta (Lisboa)</strong>
-        </div>
-        <div class="rev-card">
-          <div class="rev-stars">★★★★★</div>
-          <p>"Estou em estágio clínico e tinha sempre receio de confundir os canais e pontos motores no quadricípite e no punho. Tudo super visual e direto ao ponto."</p>
-          <strong style="font-size:13.5px; color:var(--text-main);">Mariana Ferreira · Estudante (Coimbra)</strong>
+        
+        <div class="dots" id="sliderDots">
+          <button aria-label="Depoimento 1" onclick="goToSlide(0)"></button>
+          <button aria-label="Depoimento 2" class="on" onclick="goToSlide(1)"></button>
+          <button aria-label="Depoimento 3" onclick="goToSlide(2)"></button>
         </div>
       </div>
 
-      <div class="guarantee-card">
-        <div class="seal-7">
-          <strong style="font-size:24px; line-height:1;">7</strong>
-          <span style="font-size:10px;">DIAS</span>
-        </div>
-        <div>
-          <h3 style="font-size:19px; font-weight:800; color:var(--text-main); margin-bottom:6px;">Garantia Incondicional de 7 Dias</h3>
-          <p style="font-size:14px; color:var(--text-muted);">
-            Testa os +50 Mapas Visuais e os 4 Bónus no teu telemóvel, tablet ou computador durante 7 dias. Se sentires que não facilita a tua prática clínica, devolvemos 100% do teu valor na Hotmart.
-          </p>
+      <div class="cta-social-wrap">
+        <a href="#oferta" class="btn-cta-green">QUERO O MEU ACESSO AGORA</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       GARANTIA DE 7 DIAS (COM O SELO DOURADO OFICIAL DA SCREENSHOT)
+       ========================================================================== -->
+  <section class="guarantee-wrap">
+    <div class="container">
+      <div class="guarantee-box">
+        <img src="/garantia.webp" width="180" height="180" alt="Selo Oficial de Garantia 7 Dias" loading="lazy" />
+        <div class="guarantee-content">
+          <h2>GARANTIA DE 7 DIAS</h2>
+          <p>Se em 7 dias achares que o material não é para ti, basta pedires o reembolso. Sem burocracia.</p>
         </div>
       </div>
 
-      <div class="faq-box">
+      <div class="faq-box" style="margin-top: 48px;">
         <details class="faq-row">
           <summary>Como recebo os mapas após o pagamento? <span>+</span></summary>
           <p>Assim que o pagamento é confirmado (imediato por MB WAY, Cartão ou PayPal), recebes no teu e-mail o acesso completo através da Hotmart.</p>
