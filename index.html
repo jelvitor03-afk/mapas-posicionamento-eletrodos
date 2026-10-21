@@ -1,628 +1,1366 @@
-<!DOCTYPE html><html lang="pt-PT"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1684602679908725');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1684602679908725&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-<link rel="preload" as="image" href="./__l5e/assets-v1/ec8d8f02-c1a5-4455-a5e9-5ff61a3dbc32/hero-900n.webp" fetchPriority="high"/><link rel="stylesheet" href="./assets/styles-MTGModV1.css" data-precedence="default"/><title>+50 Mapas Visuais de Posicionamento de Elétrodos para Fisioterapia</title><meta name="description" content="Mapas visuais de posicionamento de elétrodos para Fisioterapia. TENS, NMES (FES), Corrente Russa e Aussie, organizados por região do corpo."/><meta property="og:title" content="+50 Mapas Visuais para Fisioterapia"/><meta property="og:description" content="Posicionamento de elétrodos ilustrado, pares e canais identificados. Descobre os mapas e os 4 bónus exclusivos."/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><link rel="icon" type="image/svg+xml" href="./favicon.svg?v=3"/><link rel="shortcut icon" href="./favicon.ico?v=3" type="image/x-icon"/><link rel="apple-touch-icon" href="./apple-touch-icon.png?v=3"/>
-<meta property="og:image" content="https://mapas-posicionamento-eletrodos.vercel.app/__l5e/assets-v1/ec8d8f02-c1a5-4455-a5e9-5ff61a3dbc32/hero-900n.webp"/>
-<meta name="twitter:image" content="https://mapas-posicionamento-eletrodos.vercel.app/__l5e/assets-v1/ec8d8f02-c1a5-4455-a5e9-5ff61a3dbc32/hero-900n.webp"/>
-<style>
-  /* Subtle tap-to-zoom hint on maps carousel */
-  .zoom-hint {
-    text-align: center;
-    font-size: 12.5px;
-    color: var(--teal-dark);
-    font-weight: 600;
-    margin: -8px auto 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    opacity: 0.9;
-  }
-  .marquee.maps img {
-    cursor: zoom-in;
-    transition: transform 0.2s ease;
-  }
-  .marquee.maps:hover .marquee-track,
-  .marquee.maps:active .marquee-track,
-  .marquee.photos:active .marquee-track {
-    animation-play-state: paused;
-  }
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- META PIXEL OFICIAL UNIFICADO (1684602679908725) NO TOPO DO HEAD -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1684602679908725');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1684602679908725&ev=PageView&noscript=1"/>
+  </noscript>
 
-  /* Map Lightbox Modal for Mobile/Desktop Inspection */
-  .map-lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 2147483001;
-    background: rgba(9, 30, 26, 0.88);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    animation: 0.18s modal-in;
-  }
-  .map-lightbox-box {
-    background: var(--white);
-    border-radius: 18px;
-    max-width: 680px;
-    width: 100%;
-    padding: 14px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-    text-align: center;
-    position: relative;
-  }
-  .map-lightbox-box img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    display: block;
-    margin: 0 auto 12px;
-  }
-  .map-lightbox-close {
-    position: absolute;
-    top: -12px;
-    right: -8px;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: var(--ink);
-    color: var(--white);
-    border: 2px solid var(--white);
-    font-size: 20px;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  }
+  <title>+50 Mapas Visuais de Posicionamento de Elétrodos para Fisioterapia | ElectroMapas</title>
+  <meta name="description" content="Consulta em segundos o posicionamento exato de elétrodos (TENS, NMES, FES, Corrente Russa e Aussie) com pares e canais CH1 a CH4 identificados por cor. Acesso imediato." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  /* Sticky Mobile Bottom CTA Bar */
-  .mobile-sticky-cta {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99990;
-    background: rgba(255, 255, 255, 0.97);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-top: 1px solid var(--mint-2);
-    box-shadow: 0 -6px 24px rgba(13, 59, 46, 0.12);
-    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
-    display: none;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    transform: translateY(110%);
-    transition: transform 0.28s cubic-bezier(0.16, 1, 0.32, 1);
-  }
-  .mobile-sticky-cta.visible {
-    transform: translateY(0);
-  }
-  .mobile-sticky-info {
-    text-align: left;
-    line-height: 1.2;
-  }
-  .mobile-sticky-title {
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--ink);
-    display: block;
-  }
-  .mobile-sticky-price {
-    font-size: 12px;
-    color: var(--muted);
-  }
-  .mobile-sticky-price s {
-    margin-right: 4px;
-  }
-  .mobile-sticky-price b {
-    font-size: 16px;
-    font-weight: 800;
-    color: var(--teal-dark);
-  }
-  .mobile-sticky-btn {
-    background: var(--teal);
-    color: var(--white);
-    font-weight: 800;
-    font-size: 13.5px;
-    padding: 12px 18px;
-    border-radius: 999px;
-    text-decoration: none;
-    white-space: nowrap;
-    box-shadow: 0 6px 16px rgba(16, 163, 127, 0.32);
-    flex-shrink: 0;
-  }
-  @media (width <= 760px) {
-    .mobile-sticky-cta {
-      display: flex;
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-soft: #eff6f5;
+      --bg-dark-band: #0b3b36;
+      --primary: #0d9488;
+      --primary-hover: #0f766e;
+      --primary-dark: #115e59;
+      --accent-amber: #f59e0b;
+      --accent-red: #dc2626;
+      --text-dark: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --border-light: #e2e8f0;
+      --border-teal: #99f6e4;
+      --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.05);
+      --shadow-lg: 0 20px 40px rgba(13, 148, 136, 0.12);
+      --radius-md: 14px;
+      --radius-lg: 20px;
     }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      padding-bottom: 68px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-body);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 76px;
     }
-    #oferta .plans {
-      display: flex !important;
-      flex-direction: column !important;
-    }
-    #oferta .plans .plan.best {
-      order: 1 !important;
-    }
-    #oferta .plans .nudge {
-      order: 2 !important;
-      margin: 6px auto !important;
-    }
-    #oferta .plans .plan:not(.best) {
-      order: 3 !important;
-    }
-  }
-  .modal-box .decline {
-    display: inline-flex !important;
-    width: 100%;
-    margin-top: 10px;
-    padding: 11px 14px !important;
-    border: 1.5px solid #cbd5e1 !important;
-    border-radius: 10px !important;
-    color: #334155 !important;
-    font-weight: 700 !important;
-    font-size: 13px !important;
-    text-decoration: none !important;
-    background: #f8fafc !important;
-  }
 
-  /* Subtle Social Proof Notification Pill */
-  .social-proof-toast {
-    position: fixed;
-    left: 14px;
-    bottom: 18px;
-    z-index: 99980;
-    background: var(--white);
-    border: 1px solid var(--mint-2);
-    border-left: 4px solid var(--teal);
-    border-radius: 12px;
-    box-shadow: 0 10px 28px rgba(13, 59, 46, 0.14);
-    padding: 9px 13px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    max-width: 310px;
-    font-size: 12px;
-    line-height: 1.3;
-    color: var(--ink);
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(16px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  .social-proof-toast.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .social-proof-dot {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: var(--mint);
-    color: var(--teal-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 13px;
-    flex-shrink: 0;
-  }
-  .social-proof-toast small {
-    display: block;
-    color: var(--muted);
-    font-size: 10.5px;
-    margin-top: 2px;
-  }
-  @media (width <= 760px) {
-    .social-proof-toast {
-      left: 12px;
-      right: 12px;
-      bottom: 78px;
-      max-width: none;
+    /* TOP BAR FIXA DE OFERTA */
+    .topbar {
+      background: linear-gradient(90deg, #064e3b 0%, #0f766e 50%, #064e3b 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
     }
-  }
-</style>
-<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"/><link rel="stylesheet" href="./assets/theme-clinical.css?v=2"/>
-</head><body><div class="sales-page"><svg width="0" height="0" aria-hidden="true"><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></symbol></svg><div class="topbar price-strip" role="region" aria-label="Pacote Completo (Mais Escolhido): de 39,97€ por 9,97€. Pacote Básico por 4,97€."><div class="price-strip-track" aria-hidden="true"><div class="price-strip-group"><div class="price-strip-pair"><span>PACOTE COMPLETO (MAIS ESCOLHIDO) <s>39,97€</s> por <strong>9,97€</strong></span><span class="price-strip-separator">✦</span><span>PACOTE BÁSICO <strong>4,97€</strong></span><span class="price-strip-separator">✦</span></div><div class="price-strip-pair"><span>PACOTE COMPLETO (MAIS ESCOLHIDO) <s>39,97€</s> por <strong>9,97€</strong></span><span class="price-strip-separator">✦</span><span>PACOTE BÁSICO <strong>4,97€</strong></span><span class="price-strip-separator">✦</span></div><div class="price-strip-pair"><span>PACOTE COMPLETO (MAIS ESCOLHIDO) <s>39,97€</s> por <strong>9,97€</strong></span><span class="price-strip-separator">✦</span><span>PACOTE BÁSICO <strong>4,97€</strong></span><span class="price-strip-separator">✦</span></div></div><div class="price-strip-group"><div class="price-strip-pair"><span>PACOTE COMPLETO (MAIS ESCOLHIDO) <s>39,97€</s> por <strong>9,97€</strong></span><span class="price-strip-separator">✦</span><span>PACOTE BÁSICO <strong>4,97€</strong></span><span class="price-strip-separator">✦</span></div><div class="price-strip-pair"><span>PACOTE COMPLETO (MAIS ESCOLHIDO) <s>39,97€</s> por <strong>9,97€</strong></span><span class="price-strip-separator">✦</span><span>PACOTE BÁSICO <strong>4,97€</strong></span><span class="price-strip-separator">✦</span></div><div class="price-strip-pair"><span>PACOTE COMPLETO (MAIS ESCOLHIDO) <s>39,97€</s> por <strong>9,97€</strong></span><span class="price-strip-separator">✦</span><span>PACOTE BÁSICO <strong>4,97€</strong></span><span class="price-strip-separator">✦</span></div></div></div></div><main><section class="hero hero-section"><div class="container"><div class="tags" aria-label="Correntes cobertas"><span>TENS</span><span>NMES</span><span>FES</span><span>Corrente Russa</span><span>Aussie</span></div><h1>+50 Mapas Visuais de <span class="hl">Posicionamento de Elétrodos</span> para Fisioterapia</h1><p class="sub">Organizados por região anatómica (TENS · NMES · FES · Corrente Russa · Aussie) com pares e canais identificados por cor para consulta rápida no telemóvel, tablet ou PC + versão pronta a imprimir.</p><p class="digital-pill"><span aria-hidden="true">&#10003;</span><span><b>Coleção 100% Digital em Alta Resolução</b> · Consulta imediata no Telemóvel, Tablet ou PC · Acesso enviado por e-mail em segundos</span></p><img class="mockup" src="./__l5e/assets-v1/ec8d8f02-c1a5-4455-a5e9-5ff61a3dbc32/hero-900n.webp" width="900" height="900" alt="Mockup da Coleção de +50 Mapas Visuais de posicionamento de elétrodos em alta resolução" fetchPriority="high"/><ul class="checks"><li><span class="chk"><svg><use href="#i-check"></use></svg></span>+50 mapas visuais organizados por região do corpo</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Posicionamento de elétrodos ilustrado para uso na Fisioterapia</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Pares e canais (CH1 a CH4) indicados em cada mapa</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Membros superiores, inferiores, tronco e região lombar</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Consulta rápida para confirmar antes e durante a sessão</li></ul><div class="cta-wrap"><a href="#oferta" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 cta">Quero aceder agora</a></div><p class="delivery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
-      Recebes tudo na hora no teu <b>e-mail</b> · Pacote Completo com 4 Bónus por <b>9,97€</b> (ou Básico por 4,97€)</p><div class="stats"><div><strong>+50</strong><span>Mapas visuais</span></div><div><strong>5</strong><span>Correntes</span></div><div><strong>4</strong><span>Bónus incluídos</span></div><div><strong>7</strong><span>Dias de garantia</span></div></div></div></section><section class="bg-mint"><div class="container"><h2>Vê os materiais<br/>que vais receber</h2></div><p class="zoom-hint"><span>🔍</span> Toca em qualquer mapa abaixo para ampliar</p><div class="marquee maps"><div class="marquee-track" id="mapsTrack"><img src="./__l5e/assets-v1/82f96e13-a9e4-4df8-8738-b847ea14b6a7/map1-900.webp" width="640" height="452" alt="Pr\u00e9via dos Mapas Visuais 1" loading="lazy"/><img src="./__l5e/assets-v1/5040675b-d028-4190-93d3-88797a0ea279/map2-900.webp" width="640" height="452" alt="Pr\u00e9via dos Mapas Visuais 2" loading="lazy"/><img src="./__l5e/assets-v1/4992c229-ef12-4f17-9715-6c90845d865f/map3-900.webp" width="640" height="452" alt="Pr\u00e9via dos Mapas Visuais 3" loading="lazy"/><img src="./__l5e/assets-v1/38d78c4a-29ad-4779-82ea-eba3958ec0d7/map4-900.webp" width="640" height="452" alt="Pr\u00e9via dos Mapas Visuais 4" loading="lazy"/><img src="./__l5e/assets-v1/744cfe7d-c59c-4df8-b1f6-e4ae5e35e4e4/map5-900.webp" width="640" height="452" alt="Pr\u00e9via dos Mapas Visuais 5" loading="lazy"/><img src="./__l5e/assets-v1/f89bb43f-e8c8-498d-94ae-f65214161bd0/map6-900.webp" width="640" height="452" alt="Pr\u00e9via dos Mapas Visuais 6" loading="lazy"/><img src="./__l5e/assets-v1/aa0a9d06-8f67-4af9-92ef-4f95b57728f6/map7-900.webp" width="640" height="452" alt="Pr\u00e9via dos Mapas Visuais 7" loading="lazy"/><img src="./__l5e/assets-v1/b3a448d5-7584-4510-aec0-8cd7a0ea018c/map8-900.webp" width="640" height="452" alt="Pr\u00e9via dos Mapas Visuais 8" loading="lazy"/><img src="./__l5e/assets-v1/64c03daa-6de7-4e14-a1ea-266f2e348e84/map9-900.webp" width="640" height="452" alt="Pr\u00e9via dos Mapas Visuais 9" loading="lazy"/><img src="./__l5e/assets-v1/82f96e13-a9e4-4df8-8738-b847ea14b6a7/map1-900.webp" width="640" height="452" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/5040675b-d028-4190-93d3-88797a0ea279/map2-900.webp" width="640" height="452" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/4992c229-ef12-4f17-9715-6c90845d865f/map3-900.webp" width="640" height="452" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/38d78c4a-29ad-4779-82ea-eba3958ec0d7/map4-900.webp" width="640" height="452" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/744cfe7d-c59c-4df8-b1f6-e4ae5e35e4e4/map5-900.webp" width="640" height="452" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/f89bb43f-e8c8-498d-94ae-f65214161bd0/map6-900.webp" width="640" height="452" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/aa0a9d06-8f67-4af9-92ef-4f95b57728f6/map7-900.webp" width="640" height="452" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/b3a448d5-7584-4510-aec0-8cd7a0ea018c/map8-900.webp" width="640" height="452" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/64c03daa-6de7-4e14-a1ea-266f2e348e84/map9-900.webp" width="640" height="452" alt="" loading="lazy" aria-hidden="true"/></div></div></section><section class="steps"><div class="container"><h2>Como funciona<br/><span class="hl">em 3 passos</span></h2><div class="grid g3"><div class="step"><h3>Escolhe o pacote</h3><p>Pacote Completo com 4 bónus por 9,97€ ou só os mapas por 4,97€. Pagamento único.</p></div><div class="step"><h3>Paga como preferires</h3><p>MB WAY, Multibanco, cartão ou PayPal. Compra segura processada pela Hotmart.</p></div><div class="step"><h3>Recebe e usa na sessão</h3><p>Acesso imediato no teu e-mail. Consulta imediata no telemóvel, tablet e PC (+ versão para download e impressão na clínica).</p></div></div></div></section><section><div class="container"><h2>Os Mapas Visuais de<br/><span class="hl">posicionamento de elétrodos</span> têm:</h2><div class="grid g2"><div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"></path><path d="M9 4v14M15 6v14"></path></svg></div><h3>Mapas Ilustrados</h3><p>Cada região com o posicionamento de elétrodos desenhado de forma clara e direta ao ponto.</p></div><div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="3"></circle><circle cx="17" cy="17" r="3"></circle><path d="M10 7h4a3 3 0 013 3v4"></path></svg></div><h3>Pares e Canais</h3><p>CH1, CH2, CH3 e CH4 identificados por cor para montares a aplicação sem dúvidas.</p></div><div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></div><h3>Leitura Visual Rápida</h3><p>Configuração, vista, posição e distribuição resumidas num único mapa por região.</p></div><div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"></path></svg></div><h3>Material Organizado</h3><p>Escolhe a região que vais trabalhar e confirma o posicionamento na hora da sessão.</p></div></div><p class="note">Material de consulta rápida para usar no dia a dia da clínica</p><div class="cta-wrap"><a href="#oferta" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 cta">Eu quero os +50 Mapas Visuais</a></div></div></section><section class="stripe"><div class="container narrow"><h2>Quantas vezes ficaste na dúvida sobre onde colocar cada elétrodo e acabaste por perder tempo a meio da sessão?</h2><p>Aproveita a oferta por tempo limitado</p><div class="cta-wrap"><a href="#oferta" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 cta white">Quero aceder agora</a></div></div></section><section class="clinical-proof-section"><div class="container"><h2>Usado e Comprovado<br/><span class="hl">na Prática Clínica Diária</span></h2><p class="sub">Vê como os fisioterapeutas utilizam os +50 Mapas Visuais no tablet, telemóvel e na marquesa ao lado do paciente.</p></div><div class="marquee photos"><div class="marquee-track" id="photosTrack"><img src="./__l5e/assets-v1/13632aa3-3b42-448e-be30-cbf861468b3d/test1-450.webp" width="450" height="450" alt="Profissionais a utilizar os Mapas Visuais 1" loading="lazy"/><img src="./__l5e/assets-v1/956c257b-133a-4d40-bfe3-f13b2a234bf7/test2-450.webp" width="450" height="450" alt="Profissionais a utilizar os Mapas Visuais 2" loading="lazy"/><img src="./__l5e/assets-v1/1f9ad1ff-a2fc-4773-99c8-161782bbbaac/test3-450.webp" width="450" height="450" alt="Profissionais a utilizar os Mapas Visuais 3" loading="lazy"/><img src="./__l5e/assets-v1/180d673c-5f0b-4d0a-a55f-a218a0219123/test4-450.webp" width="450" height="450" alt="Profissionais a utilizar os Mapas Visuais 4" loading="lazy"/><img src="./__l5e/assets-v1/af73a8c1-273d-4e0b-8f7f-f158e119baaf/test5-450.webp" width="450" height="450" alt="Profissionais a utilizar os Mapas Visuais 5" loading="lazy"/><img src="./__l5e/assets-v1/13632aa3-3b42-448e-be30-cbf861468b3d/test1-450.webp" width="450" height="450" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/956c257b-133a-4d40-bfe3-f13b2a234bf7/test2-450.webp" width="450" height="450" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/1f9ad1ff-a2fc-4773-99c8-161782bbbaac/test3-450.webp" width="450" height="450" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/180d673c-5f0b-4d0a-a55f-a218a0219123/test4-450.webp" width="450" height="450" alt="" loading="lazy" aria-hidden="true"/><img src="./__l5e/assets-v1/af73a8c1-273d-4e0b-8f7f-f158e119baaf/test5-450.webp" width="450" height="450" alt="" loading="lazy" aria-hidden="true"/></div></div></section><section class="bg-mint"><div class="container"><h2>Este material é ideal<br/>para ti que queres</h2><div class="grid g3"><div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M9 12l2 2 4-4"></path></svg></div><h3>Aplicar eletroterapia com segurança</h3><p>Mapas visuais com pares, canais e distribuição para cada região corporal.</p></div><div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"></path></svg></div><h3>Trabalhar com diferentes correntes</h3><p>Posicionamentos organizados para adaptares conforme o objetivo do protocolo.</p></div><div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M8 9h8M8 13h8M8 17h5"></path></svg></div><h3>Padronizar as tuas sessões</h3><p>Um mesmo padrão visual para toda a equipa seguir na clínica.</p></div><div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2.5M9 2h6"></path></svg></div><h3>Ganhar tempo na sessão</h3><p>Consulta rápida: escolhe a região e confirma o posicionamento em segundos.</p></div><div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l10-5 10 5-10 5L2 8z"></path><path d="M6 10v5c3 2.5 9 2.5 12 0v-5"></path></svg></div><h3>Estudar eletroestimulação na fisioterapia</h3><p>Ideal para quem está a aprender e quer fixar o posicionamento de forma visual.</p></div><div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M8 20h8M12 16v4"></path></svg></div><h3>Dar aulas e formar a equipa</h3><p>Material de apoio visual pronto para cursos, aulas e revisões.</p></div></div><div class="cta-wrap"><a href="#oferta" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 cta">Quero aceder agora</a></div></div></section><section><div class="container"><h2>Tudo o que vais receber</h2><div class="deliver"><img src="./__l5e/assets-v1/ec8d8f02-c1a5-4455-a5e9-5ff61a3dbc32/hero-900n.webp" width="900" height="900" alt="Todos os materiais dos +50 Mapas Visuais de posicionamento de el\u00e9trodos" loading="lazy"/><div><span class="badge">ACESSO IMEDIATO</span><p>Tudo foi organizado para ser simples e fácil de usar.</p><p>Escolhes a região do corpo e confirmas logo o posicionamento.</p><ul class="checks"><li><span class="chk"><svg><use href="#i-check"></use></svg></span>+50 Mapas Visuais de posicionamento de elétrodos</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Mapas organizados por região do corpo</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Ombros, cotovelos, punhos e mãos</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Joelhos, tornozelos e pés</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Gémeos e membros inferiores</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Coluna cervical, dorsal e lombar</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Anca e região pélvica</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Pares e canais CH1 a CH4 identificados por cor</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Leitura do mapa e pontos de atenção profissional</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Material de consulta rápida organizado por região</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Coleção digital organizada em alta resolução (+ versão para download e impressão)</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Descarga imediata</li></ul></div></div></div></section><section class="bg-mint"><div class="container"><div class="more"><small>E NÃO FICA POR AQUI...</small><strong>HÁ MAIS!</strong><span>🎁 4 BÓNUS EXCLUSIVOS</span></div><div class="bonus"><div class="card"><img src="./__l5e/assets-v1/9df2a7d6-e0d2-4330-a8de-d842fa3dccd4/bonus1-900.webp" width="640" height="640" alt="Guia R\u00e1pido de Par\u00e2metros" loading="lazy"/><span class="tag">BÓNUS #1</span><h3>Guia Rápido de Parâmetros</h3><p>Frequência, largura de impulso, rampas e tempo de sessão organizados por objetivo na eletroterapia.</p><p class="val">Valor: <s>9,90€</s><b>GRÁTIS</b></p></div><div class="card"><img src="./__l5e/assets-v1/929541ba-d3ae-47a7-8215-44b3ed573ba6/bonus2-900.webp" width="640" height="640" alt="Checklist de Seguran\u00e7a e Contraindica\u00e7\u00f5es" loading="lazy"/><span class="tag">BÓNUS #2</span><h3>Checklist de Segurança e Contraindicações</h3><p>O que avaliar antes de aplicar: pele, sensibilidade, contraindicações absolutas e cuidados durante a sessão.</p><p class="val">Valor: <s>9,90€</s><b>GRÁTIS</b></p></div><div class="card"><img src="./__l5e/assets-v1/62241cd1-9191-4257-8a4e-10e9b40075a8/bonus3-900.webp" width="640" height="640" alt="Protocolos por Objetivo Terap\u00eautico" loading="lazy"/><span class="tag">BÓNUS #3</span><h3>Protocolos por Objetivo Terapêutico</h3><p>Sequências prontas para analgesia, fortalecimento e reabilitação, prontas a aplicar.</p><p class="val">Valor: <s>9,90€</s><b>GRÁTIS</b></p></div><div class="card"><img src="./__l5e/assets-v1/806fde4c-52bf-427b-b986-adab21ff13f5/bonus4-900.webp" width="640" height="640" alt="Ficha de Evolu\u00e7\u00e3o do Paciente" loading="lazy"/><span class="tag">BÓNUS #4</span><h3>Ficha de Evolução do Paciente</h3><p>Modelo para registar parâmetros, região trabalhada e evolução sessão a sessão, com aspeto profissional.</p><p class="val">Valor: <s>9,90€</s><b>GRÁTIS</b></p></div></div></div></section><section id="oferta"><div class="container"><div class="offer-bar">⚡ OFERTA ESPECIAL DISPONÍVEL APENAS HOJE <span class="today"></span></div><h2>Escolhe a opção ideal para ti</h2><div class="plans"><div class="plan"><h3>PACOTE BÁSICO</h3><img class="pack" src="./__l5e/assets-v1/e0b76c1d-fca0-407c-a138-8f6e351d8b41/hero-512.webp" width="512" height="512" alt="Pacote B\u00e1sico" loading="lazy"/><p class="you">RECEBES:</p><ul><li><span class="chk"><svg><use href="#i-check"></use></svg></span>+50 Mapas Visuais de posicionamento de elétrodos</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Mapas de Fisioterapia organizados por região</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Acesso imediato pela área de membros</li></ul><p class="price">4,97€</p><p class="once">Pagamento único</p><div class="plan-spacer"></div><a id="btnBasico" href="https://pay.hotmart.com/H108089502L?off=kc0ltn1r&checkoutMode=10" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 cta outline">Quero só o Básico</a><img class="pay-seals" src="./__l5e/assets-v1/764c9a93-ceac-4c41-8754-54d6e743d960/pay-600.webp" width="600" height="90" alt="Compra segura, satisfa\u00e7\u00e3o garantida e privacidade protegida" loading="lazy"/><div class="pay-methods"><span class="h">Hotmart</span><span>VISA</span><span>Mastercard</span><span class="mb">Multibanco</span><span class="mbw">MB WAY</span></div></div><div class="nudge"><b>92%</b>das pessoas aproveitam a oferta completa<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg></div><div class="plan best"><span class="ribbon">⚡ MAIS ESCOLHIDO EM PORTUGAL</span><h3>PACOTE COMPLETO</h3><span class="x3">⚡ 3x mais conteúdos</span><img class="pack" src="./__l5e/assets-v1/ac0d59f3-5607-485d-be0e-3c7cf30f847d/full-512.webp" width="512" height="512" alt="Pacote Completo" loading="lazy"/><ul><li><span class="chk"><svg><use href="#i-check"></use></svg></span>+50 Mapas Visuais de posicionamento de elétrodos</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Mapas de Fisioterapia por região</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Membros superiores e inferiores</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Coluna, anca e região pélvica</li><li><span class="chk"><svg><use href="#i-check"></use></svg></span>Pares e canais CH1 a CH4 por cor</li><li class="gift"><span class="chk"><svg><use href="#i-check"></use></svg></span>🎁 Bónus #1 Guia Rápido de Parâmetros</li><li class="gift"><span class="chk"><svg><use href="#i-check"></use></svg></span>🎁 Bónus #2 Checklist de Segurança e Contraindicações</li><li class="gift"><span class="chk"><svg><use href="#i-check"></use></svg></span>🎁 Bónus #3 Protocolos por Objetivo Terapêutico</li><li class="gift"><span class="chk"><svg><use href="#i-check"></use></svg></span>🎁 Bónus #4 Ficha de Evolução do Paciente</li></ul><p class="price-from">De <s>39,97€</s> por:</p><p class="price">9,97€</p><p class="once">Pagamento único · acesso vitalício</p><span class="save">Poupas 30,00€</span><a id="btnCompleto" href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 cta">Quero o pacote completo</a><img class="pay-seals" src="./__l5e/assets-v1/764c9a93-ceac-4c41-8754-54d6e743d960/pay-600.webp" width="600" height="90" alt="Compra segura, satisfa\u00e7\u00e3o garantida e privacidade protegida" loading="lazy"/><div class="pay-methods"><span class="h">Hotmart</span><span>VISA</span><span>Mastercard</span><span class="mb">Multibanco</span><span class="mbw">MB WAY</span></div></div></div></div></section><section class="bg-mint"><div class="container"><h2>Vê o que os nossos<br/>clientes estão a dizer</h2><div class="slider"><div class="slides" id="slides"><img src="./__l5e/assets-v1/a6cc46fd-d40e-4caf-90eb-fffbb10c964f/dep1.webp" width="560" height="996" alt="Depoimento de cliente 1" loading="lazy"/><img src="./__l5e/assets-v1/bda7dcaf-312e-42bf-8094-9661ddcdd9ac/dep2.webp" width="560" height="996" alt="Depoimento de cliente 2" loading="lazy"/><img src="./__l5e/assets-v1/cb94032f-3b49-4fe2-a671-c65b5daf6f8b/dep3.webp" width="560" height="996" alt="Depoimento de cliente 3" loading="lazy"/></div><div class="dots"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="Depoimento 1" aria-pressed="false"></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain on" aria-label="Depoimento 2" aria-pressed="true"></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="Depoimento 3" aria-pressed="false"></button></div></div><div class="cta-wrap"><a href="#oferta" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 cta">Quero o meu acesso agora</a></div></div></section><section><div class="container"><div class="guarantee"><img src="./__l5e/assets-v1/b5875571-b876-40bb-b669-da44a9972745/garantia.webp" width="560" height="560" alt="Selo de garantia de 7 dias" loading="lazy"/><div><h2>GARANTIA DE 7 DIAS</h2><p>Se em 7 dias achares que o material não é para ti, basta pedires o reembolso. Sem burocracia.</p></div></div></div></section><section class="bg-mint"><div class="container"><h2>Perguntas Frequentes</h2><div class="faq" id="faq"><div class="faq-item"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="Serve para quem está a começar na eletroterapia?" aria-expanded="false" aria-controls="answer-0">Serve para quem está a começar na eletroterapia?</button><div class="ans" id="answer-0" aria-hidden="true"><p>Sim. Os mapas mostram o posicionamento de forma visual e objetiva, tanto para quem está a começar como para quem já dá consultas.</p></div></div><div class="faq-item"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="Serve para Fisioterapia?" aria-expanded="false" aria-controls="answer-1">Serve para Fisioterapia?</button><div class="ans" id="answer-1" aria-hidden="true"><p>Sim. Os mapas foram organizados para o uso da eletroestimulação na Fisioterapia.</p></div></div><div class="faq-item"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="Posso aceder pelo telemóvel?" aria-expanded="false" aria-controls="answer-2">Posso aceder pelo telemóvel?</button><div class="ans" id="answer-2" aria-hidden="true"><p>Sim. Podes aceder pelo telemóvel, tablet ou computador.</p></div></div><div class="faq-item"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="O acesso é imediato?" aria-expanded="false" aria-controls="answer-3">O acesso é imediato?</button><div class="ans" id="answer-3" aria-hidden="true"><p>Sim. Após a confirmação do pagamento, o acesso é libertado automaticamente e recebes tudo no teu e-mail.</p></div></div><div class="faq-item"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="Os mapas podem ser impressos?" aria-expanded="false" aria-controls="answer-4">Os mapas podem ser impressos?</button><div class="ans" id="answer-4" aria-hidden="true"><p>Sim. Recebes a coleção digital completa em alta resolução pronta para consulta imediata e impressão para a clínica.</p></div></div><div class="faq-item"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="Os bónus estão incluídos em que pacote?" aria-expanded="false" aria-controls="answer-5">Os bónus estão incluídos em que pacote?</button><div class="ans" id="answer-5" aria-hidden="true"><p>Os bónus fazem parte do Pacote Completo.</p></div></div><div class="faq-item"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="O material substitui a avaliação profissional?" aria-expanded="false" aria-controls="answer-6">O material substitui a avaliação profissional?</button><div class="ans" id="answer-6" aria-hidden="true"><p>Não. É um material de apoio visual para profissionais qualificados; o posicionamento deve ser ajustado conforme a avaliação de cada paciente.</p></div></div><div class="faq-item"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="O acesso é vitalício?" aria-expanded="false" aria-controls="answer-7">O acesso é vitalício?</button><div class="ans" id="answer-7" aria-hidden="true"><p>Sim. Pagas apenas uma vez e o acesso é permanente.</p></div></div><div class="faq-item"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="Serve para usar durante a sessão?" aria-expanded="false" aria-controls="answer-8">Serve para usar durante a sessão?</button><div class="ans" id="answer-8" aria-hidden="true"><p>Sim. É um material de consulta rápida para confirmar o posicionamento antes e durante a sessão.</p></div></div><div class="faq-item"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 sales-plain" aria-label="Serve para cursos e aulas de fisioterapia?" aria-expanded="false" aria-controls="answer-9">Serve para cursos e aulas de fisioterapia?</button><div class="ans" id="answer-9" aria-hidden="true"><p>Sim. Os mapas são ótimos apoios visuais para aulas, revisões e formação de equipas.</p></div></div></div></div></section></main><footer><div class="container narrow"><p><strong>Copyright © <span></span> | Todos os direitos reservados.</strong></p><p>Este site não é afiliado ao Facebook™, Instagram™, Google™ ou a qualquer outra plataforma mencionada.</p><p>Material de apoio visual destinado a profissionais qualificados. Não substitui avaliação, formação técnica ou orientação profissional.</p><p>Todos os direitos sobre a obra &quot;+50 Mapas Visuais de Posicionamento de Elétrodos para Fisioterapia&quot; são reservados nos termos do Código do Direito de Autor e dos Direitos Conexos. A reprodução não autorizada, no todo ou em parte, constitui violação dos direitos de autor.</p></div></footer></div>
-<!-- Sticky Mobile Bar & Social Proof Elements -->
-<div class="mobile-sticky-cta" id="mobileStickyCta" aria-hidden="true">
-  <div class="mobile-sticky-info">
-    <span class="mobile-sticky-title">+50 Mapas + 4 Bónus</span>
-    <span class="mobile-sticky-price"><s>39,97€</s> <b>9,97€</b> · Vitalício</span>
+    .topbar span.strike {
+      text-decoration: line-through;
+      opacity: 0.75;
+      margin: 0 4px;
+    }
+    .topbar strong.highlight {
+      background: #fef08a;
+      color: #064e3b;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-weight: 800;
+      margin-left: 4px;
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 36px 0 44px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 0%, #e6f7f5 0%, #f8fafc 70%);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .current-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .current-pill {
+      background: #ffffff;
+      border: 1px solid var(--border-teal);
+      color: var(--primary-dark);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 99px;
+      box-shadow: 0 2px 5px rgba(13, 148, 136, 0.06);
+    }
+
+    .hero h1 {
+      color: var(--text-dark);
+      font-size: clamp(28px, 4.8vw, 46px);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      max-width: 820px;
+      margin: 0 auto 16px;
+    }
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--text-body);
+      max-width: 720px;
+      margin: 0 auto 18px;
+      font-weight: 400;
+    }
+
+    .format-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ecfdf5;
+      border: 1px solid #6ee7b7;
+      color: #065f46;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 99px;
+      margin-bottom: 26px;
+    }
+
+    .hero-mockup-wrap {
+      max-width: 680px;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+    .hero-mockup-wrap img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-lg);
+      filter: drop-shadow(0 18px 32px rgba(15, 23, 42, 0.14));
+    }
+
+    .hero-checklist {
+      max-width: 540px;
+      margin: 0 auto 26px;
+      text-align: left;
+      background: #ffffff;
+      padding: 18px 22px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-checklist li {
+      list-style: none;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .hero-checklist li:last-child {
+      margin-bottom: 0;
+    }
+    .check-icon {
+      color: var(--primary);
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    /* BOTÃO CTA PRINCIPAL */
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(180deg, #14b8a6 0%, #0d9488 100%);
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 17px 36px;
+      border-radius: 99px;
+      box-shadow: 0 10px 25px rgba(13, 148, 136, 0.35);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(13, 148, 136, 0.45);
+      background: var(--primary-hover);
+    }
+
+    .micro-trust {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* BARRA DE 4 MÉTRICAS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 680px;
+      margin: 28px auto 0;
+    }
+    .stat-box {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 14px 8px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-num {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* SECÇÕES GERAIS */
+    .section {
+      padding: 56px 0;
+    }
+    .section-alt {
+      background-color: var(--bg-soft);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .section-title {
+      text-align: center;
+      font-size: clamp(24px, 3.6vw, 34px);
+      font-weight: 900;
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    .section-title span {
+      color: var(--primary);
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 15.5px;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 34px;
+    }
+
+    /* CARROSSEL DE AMOSTRAS DOS MAPAS */
+    .maps-scroller {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .map-card {
+      background: #ffffff;
+      border-radius: 14px;
+      border: 1px solid var(--border-light);
+      padding: 12px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease;
+    }
+    .map-card:hover {
+      transform: translateY(-4px);
+    }
+    .map-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+    .map-card-tag {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .map-card-tag span {
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+    }
+
+    /* TABELA COMPARATIVA DE ANCORAGEM */
+    .comparison-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .comparison-col {
+      padding: 28px 24px;
+    }
+    .comparison-col.bad {
+      background: #fffaf0;
+      border-right: 1px solid var(--border-light);
+    }
+    .comparison-col.good {
+      background: #f0fdfa;
+    }
+    .comparison-head {
+      font-size: 17px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .comparison-col.bad .comparison-head {
+      color: #9a3412;
+    }
+    .comparison-col.good .comparison-head {
+      color: var(--primary-dark);
+    }
+    .comparison-list {
+      list-style: none;
+    }
+    .comparison-list li {
+      font-size: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.45;
+    }
+    .comparison-list li:last-child {
+      margin-bottom: 0;
+    }
+    .comparison-col.bad li {
+      color: #78350f;
+    }
+    .comparison-col.good li {
+      color: #064e3b;
+      font-weight: 600;
+    }
+    .comp-icon {
+      flex-shrink: 0;
+      font-weight: 800;
+    }
+
+    /* COMO FUNCIONA EM 3 PASSOS */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .step-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .step-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .step-card h3 {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .step-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* FAIXA VERDE ESCURA DE QUEBRA DE OBJEÇÃO */
+    .dark-banner {
+      background: linear-gradient(135deg, #064e3b 0%, #0f766e 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 52px 20px;
+    }
+    .dark-banner h2 {
+      font-size: clamp(22px, 3.5vw, 32px);
+      font-weight: 900;
+      max-width: 720px;
+      margin: 0 auto 12px;
+      line-height: 1.25;
+    }
+    .dark-banner p {
+      font-size: 16px;
+      opacity: 0.9;
+      margin-bottom: 24px;
+    }
+    .btn-white {
+      display: inline-block;
+      background: #ffffff;
+      color: #064e3b;
+      font-weight: 800;
+      font-size: 16px;
+      padding: 15px 32px;
+      border-radius: 99px;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    /* 6 BENEFÍCIOS EM GRELHA */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .feature-box {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: #ccfbf1;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .feature-box h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .feature-box p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    /* 4 BÓNUS EXCLUSIVOS */
+    .bonus-tag-top {
+      display: inline-block;
+      background: #dc2626;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .bonus-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .bonus-card img {
+      max-width: 210px;
+      height: auto;
+      margin-bottom: 14px;
+      border-radius: 10px;
+      filter: drop-shadow(0 10px 16px rgba(0,0,0,0.1));
+    }
+    .bonus-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .bonus-card h3 {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .bonus-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .bonus-price {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .bonus-price span.free {
+      background: #dcfce7;
+      color: #15803d;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-left: 6px;
+      font-weight: 800;
+    }
+
+    /* SECÇÃO DE PREÇOS (9,97 € EM DESTAQUE ABSOLUTO NO MOBILE) */
+    .pricing-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.12fr;
+      gap: 24px;
+      max-width: 860px;
+      margin: 0 auto;
+      align-items: stretch;
+    }
+    .price-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 30px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .price-card.featured {
+      border: 3px solid var(--primary);
+      box-shadow: var(--shadow-lg);
+      background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);
+    }
+    .popular-ribbon {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 16px;
+      border-radius: 99px;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+    }
+    .plan-name {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .price-card img.plan-img {
+      max-width: 220px;
+      height: auto;
+      margin: 0 auto 16px;
+      border-radius: 12px;
+    }
+    .plan-features {
+      text-align: left;
+      margin-bottom: 22px;
+    }
+    .plan-features li {
+      list-style: none;
+      font-size: 13.5px;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+    .plan-features li.excluded {
+      color: #94a3b8;
+      text-decoration: line-through;
+    }
+    .old-price {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+    .big-price {
+      font-size: 44px;
+      font-weight: 900;
+      color: var(--text-dark);
+      line-height: 1.05;
+      margin: 4px 0;
+    }
+    .price-card.featured .big-price {
+      color: var(--primary-dark);
+    }
+    .save-pill {
+      display: inline-block;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+    }
+    .btn-plan-basic {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-plan-basic:hover {
+      background: #f0fdfa;
+    }
+    .btn-plan-pro {
+      display: block;
+      width: 100%;
+      padding: 17px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #14b8a6 0%, #0d9488 100%);
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 16.5px;
+      text-decoration: none;
+      box-shadow: 0 10px 22px rgba(13, 148, 136, 0.35);
+      transition: transform 0.18s ease;
+    }
+    .btn-plan-pro:hover {
+      transform: translateY(-2px);
+    }
+    .payment-badges {
+      margin-top: 14px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-weight: 600;
+    }
+    .payment-badges span {
+      background: #f1f5f9;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* PROVA SOCIAL PORTUGAL */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .review-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+    .review-stars {
+      color: #f59e0b;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+    .review-text {
+      font-size: 14px;
+      color: var(--text-body);
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .author-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .author-meta strong {
+      display: block;
+      font-size: 13.5px;
+      color: var(--text-dark);
+    }
+    .author-meta span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* GARANTIA 7 DIAS */
+    .guarantee-box {
+      max-width: 680px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 2px solid #fde68a;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+    .guarantee-seal {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f59e0b, #b45309);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-weight: 900;
+      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.3);
+    }
+    .guarantee-seal strong {
+      font-size: 26px;
+      line-height: 1;
+    }
+    .guarantee-seal span {
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    /* FAQ */
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    details.faq-item {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      padding: 16px 20px;
+    }
+    details.faq-item summary {
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 15px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    details.faq-item summary::after {
+      content: "+";
+      font-size: 20px;
+      color: var(--primary);
+      font-weight: 800;
+    }
+    details.faq-item[open] summary::after {
+      content: "−";
+    }
+    details.faq-item p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* BARRA STICKY MOBILE DE ALTA CONVERSÃO */
+    .sticky-mobile-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border-light);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 999;
+      box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08);
+    }
+    .sticky-price-info strong {
+      display: block;
+      font-size: 15px;
+      color: var(--text-dark);
+      font-weight: 900;
+    }
+    .sticky-price-info span {
+      font-size: 11.5px;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+    .sticky-btn {
+      background: var(--primary);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 12px 22px;
+      border-radius: 99px;
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+    }
+
+    footer {
+      background: #062c28;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 36px 18px;
+      font-size: 12px;
+    }
+
+    /* RESPONSIVIDADE MOBILE (COM INVERSÃO DO PLANO DE 9,97 € PARA 1.º LUGAR) */
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .steps-grid,
+      .features-grid,
+      .bonus-grid,
+      .reviews-grid,
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+      .comparison-col.bad {
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+      }
+      .pricing-wrap {
+        display: flex;
+        flex-direction: column-reverse; /* COLOCA O PACOTE COMPLETO 9,97€ EM 1.º LUGAR NO TELEMÓVEL! */
+        gap: 28px;
+      }
+      .guarantee-box {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE TOPO -->
+  <div class="topbar">
+    ⚡ OFERTA ESPECIAL PORTUGAL: Pacote Completo + 4 Bónus <span class="strike">39,97€</span> por <strong class="highlight">9,97€</strong>
   </div>
-  <a href="#oferta" class="mobile-sticky-btn">Quero aceder agora</a>
-</div>
 
-<div class="social-proof-toast" id="socialProofToast" aria-live="polite">
-  <div class="social-proof-dot">✓</div>
-  <div>
-    <div id="socialProofText"><b>Dra. Sofia M. (Lisboa)</b> recebeu acesso ao <b>Pacote Completo</b></div>
-    <small id="socialProofTime">Há 3 minutos · Compra verificada</small>
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <div class="container">
+      <div class="current-pills">
+        <span class="current-pill">TENS</span>
+        <span class="current-pill">NMES</span>
+        <span class="current-pill">FES</span>
+        <span class="current-pill">Corrente Russa</span>
+        <span class="current-pill">Aussie</span>
+      </div>
+
+      <h1>+50 Mapas Visuais de <span>Posicionamento de Elétrodos</span> para Fisioterapia</h1>
+      
+      <p class="hero-sub">
+        Consulta de forma visual, rápida e segura o posicionamento exato das 5 principais correntes da eletroterapia por região anatómica — com <strong>pares e canais (CH1 a CH4) identificados por cor</strong>.
+      </p>
+
+      <div class="format-badge">
+        ✓ Coleção 100% Digital em Alta Resolução · Telemóvel, Tablet ou PC (+ Versão para Imprimir)
+      </div>
+
+      <div class="hero-mockup-wrap">
+        <img src="./hero-900n.webp" alt="+50 Mapas Visuais de Posicionamento de Elétrodos no iPad e iPhone" width="900" height="900" fetchpriority="high" />
+      </div>
+
+      <ul class="hero-checklist">
+        <li><span class="check-icon">✓</span> +50 mapas visuais organizados por região corporal (Coluna, Membro Superior e Inferior)</li>
+        <li><span class="check-icon">✓</span> Pares e canais (CH1 a CH4) identificados por cor para montares a aplicação sem dúvidas</li>
+        <li><span class="check-icon">✓</span> Pontos motores e zonas de atenção clínica sinalizados em cada prancha</li>
+        <li><span class="check-icon">✓</span> Consulta em 5 segundos no telemóvel ou tablet ao lado da marquesa</li>
+      </ul>
+
+      <a href="#oferta" class="btn-cta">QUERO ACEDER AOS +50 MAPAS AGORA</a>
+      <div class="micro-trust">📩 Recebes o acesso na hora no teu e-mail · Pagamento único e vitalício</div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-num">+50</div>
+          <div class="stat-label">Mapas Visuais HD</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Correntes Clínicas</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Bónus de Consultório</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">7 Dias</div>
+          <div class="stat-label">Garantia Total</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CARROSSEL DE AMOSTRAS REAIS DOS MAPAS -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Vê os materiais <span>que vais receber</span></h2>
+      <p class="section-subtitle">Exemplos reais de pranchas anatómicas com canais por cor e parâmetros prontos.</p>
+
+      <div class="maps-scroller">
+        <div class="map-card">
+          <img src="./map1-900.webp" alt="Mapa 01 Cervical Posterior" loading="lazy" />
+          <div class="map-card-tag">
+            <strong>Mapa 01 · Cervical Posterior</strong>
+            <span>TENS / NMES</span>
+          </div>
+        </div>
+        <div class="map-card">
+          <img src="./map2-900.webp" alt="Mapa 04 Região Escapular e Ombro" loading="lazy" />
+          <div class="map-card-tag">
+            <strong>Mapa 04 · Região Escapular</strong>
+            <span>Analgesia & Motor</span>
+          </div>
+        </div>
+        <div class="map-card">
+          <img src="./map3-900.webp" alt="Mapa 16 Coxa Anterior e Joelho" loading="lazy" />
+          <div class="map-card-tag">
+            <strong>Mapa 16 · Coxa & Joelho</strong>
+            <span>NMES / Russa</span>
+          </div>
+        </div>
+        <div class="map-card">
+          <img src="./map4-900.webp" alt="Mapa 02 Coluna Lombar e Ciático" loading="lazy" />
+          <div class="map-card-tag">
+            <strong>Mapa 02 · Coluna Lombar</strong>
+            <span>TENS Convencional</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABELA COMPARATIVA DE ANCORAGEM -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">A diferença na tua <span>rotina clínica</span></h2>
+      <p class="section-subtitle">Porque consultar os +50 Mapas Visuais poupa tempo e elimina a insegurança na marquesa.</p>
+
+      <div class="comparison-wrap">
+        <div class="comparison-grid">
+          <div class="comparison-col bad">
+            <div class="comparison-head">
+              <span>❌</span> Sem os ElectroMapas
+            </div>
+            <ul class="comparison-list">
+              <li><span class="comp-icon">✗</span> Perder 5 a 10 minutos a pesquisar em manuais e apontamentos soltos a meio da consulta.</li>
+              <li><span class="comp-icon">✗</span> Dúvida na colocação dos polos (+) e (−) e na seleção do canal correto.</li>
+              <li><span class="comp-icon">✗</span> Incerteza nos parâmetros de dosimetria (Hz, µs e tempos de rampa).</li>
+              <li><span class="comp-icon">✗</span> Risco de aplicar sobre zonas vasculonervosas desadequadas.</li>
+              <li><span class="comp-icon">✗</span> Papéis amassados ou PDF desorganizado e lento de carregar.</li>
+            </ul>
+          </div>
+          <div class="comparison-col good">
+            <div class="comparison-head">
+              <span>✅</span> Com os ElectroMapas
+            </div>
+            <ul class="comparison-list">
+              <li><span class="comp-icon">✓</span> Consulta imediata em 5 segundos no telemóvel ou tablet ao lado da marquesa.</li>
+              <li><span class="comp-icon">✓</span> Pares e canais (CH1 a CH4) identificados por cor para montagem intuitiva.</li>
+              <li><span class="comp-icon">✓</span> Parâmetros clínicos prontos a aplicar para analgesia ou recrutamento motor.</li>
+              <li><span class="comp-icon">✓</span> Pranchas anatómicas nítidas em alta definição com pontos motores sinalizados.</li>
+              <li><span class="comp-icon">✓</span> Coleção 100% digital e organizada (+ versão para impressão em A4 na clínica).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA EM 3 PASSOS -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como funciona <span>em 3 passos simples</span></h2>
+      <p class="section-subtitle">Sem complicações técnicas. Começas a usar nas tuas sessões ainda hoje.</p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-badge">1</div>
+          <h3>Escolhe o teu pacote</h3>
+          <p>Seleciona o Pacote Completo com os 4 Bónus Exclusivos por 9,97€ (ou o Básico por 4,97€).</p>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">2</div>
+          <h3>Paga como preferires</h3>
+          <p>Pagamento 100% seguro via MB WAY, Multibanco, Cartão ou PayPal processado pela Hotmart.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">3</div>
+          <h3>Abre na sessão em segundos</h3>
+          <p>Recebes o acesso imediato no e-mail. Abre diretamente no telemóvel, tablet ou imprime para a clínica.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAIXA DE QUEBRA DE OBJEÇÃO -->
+  <section class="dark-banner">
+    <div class="container">
+      <h2>Quantas vezes ficaste na dúvida sobre onde colocar cada elétrodo a meio da sessão?</h2>
+      <p>Deixa de depender da memória ou de apontamentos soltos. Consulta o mapa exato em 5 segundos.</p>
+      <a href="#oferta" class="btn-white">QUERO CONSULTAR COM SEGURANÇA</a>
+    </div>
+  </section>
+
+  <!-- OS 6 DIFERENCIAIS TÉCNICOS -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Porque esta coleção é <span>indispensável na clínica</span></h2>
+      <p class="section-subtitle">Desenvolvida para dar resposta rápida durante o atendimento real com o paciente.</p>
+
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon">⚡</div>
+          <h3>Pares e Canais por Cor</h3>
+          <p>CH1, CH2, CH3 e CH4 claramente diferenciados por cores para ligares os cabos sem hesitar.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🎯</div>
+          <h3>Pontos Motores Exatos</h3>
+          <p>Posicionamento preciso para recrutamento muscular em NMES, FES, Corrente Russa e Aussie.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">📱</div>
+          <h3>Leitura Rápida no Telemóvel</h3>
+          <p>Layout limpo de alta resolução que permite fazer zoom nítido em qualquer ecrã ao lado da marquesa.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🛡️</div>
+          <h3>Segurança Clínica</h3>
+          <p>Alertas visuais sobre feixes vasculonervosos, proeminências ósseas e cuidados de aplicação.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🎓</div>
+          <h3>Estudo e Revisão Rápida</h3>
+          <p>Ideal para fisioterapeutas recém-formados, estudantes em estágio clínico e revisão de protocolos.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🏥</div>
+          <h3>Padronização de Equipa</h3>
+          <p>Garante que todos os profissionais do gabinete ou clínica seguem o mesmo rigor técnico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 BÓNUS EXCLUSIVOS -->
+  <section class="section">
+    <div class="container" style="text-align:center;">
+      <span class="bonus-tag-top">🎁 4 BÓNUS EXCLUSIVOS INCLUÍDOS</span>
+      <h2 class="section-title">Levas ainda <span>4 Guias Práticos de Consultório</span></h2>
+      <p class="section-subtitle">Incluídos gratuitamente ao escolheres hoje o Pacote Completo de 9,97€.</p>
+
+      <div class="bonus-grid">
+        <div class="bonus-card">
+          <img src="./bonus1-900.webp" alt="Guia Rápido de Parâmetros Clínicos" loading="lazy" />
+          <div class="bonus-num">BÓNUS #1</div>
+          <h3>Guia Rápido de Parâmetros Clínicos</h3>
+          <p>Tabelas diretas de Frequência (Hz), Largura de Pulso (µs), Rampas e Tempo de sessão por objetivo terapêutico.</p>
+          <div class="bonus-price">Valor: <del>9,90€</del> <span class="free">GRÁTIS</span></div>
+        </div>
+
+        <div class="bonus-card">
+          <img src="./bonus2-900.webp" alt="Checklist de Segurança e Contraindicações" loading="lazy" />
+          <div class="bonus-num">BÓNUS #2</div>
+          <h3>Checklist de Segurança e Contraindicações</h3>
+          <p>O que avaliar antes de aplicar: integridade da pele, sensibilidade e contraindicações absolutas e relativas.</p>
+          <div class="bonus-price">Valor: <del>9,90€</del> <span class="free">GRÁTIS</span></div>
+        </div>
+
+        <div class="bonus-card">
+          <img src="./bonus3-900.webp" alt="Protocolos por Objetivo e Pontos Motores" loading="lazy" />
+          <div class="bonus-num">BÓNUS #3</div>
+          <h3>Protocolos por Objetivo & Pontos Motores</h3>
+          <p>Sequências prontas para analgesia aguda/crónica, fortalecimento pós-operatório e reeducação motora.</p>
+          <div class="bonus-price">Valor: <del>9,90€</del> <span class="free">GRÁTIS</span></div>
+        </div>
+
+        <div class="bonus-card">
+          <img src="./bonus4-900.webp" alt="Ficha de Evolução e Registo do Paciente" loading="lazy" />
+          <div class="bonus-num">BÓNUS #4</div>
+          <h3>Ficha de Evolução e Registo do Paciente</h3>
+          <p>Modelo clínico pronto a imprimir ou preencher para registar corrente, canais, parâmetros e evolução por sessão.</p>
+          <div class="bonus-price">Valor: <del>9,90€</del> <span class="free">GRÁTIS</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECÇÃO DE PREÇOS (9,97 € EM DESTAQUE ABSOLUTO NO MOBILE COM COLUMN-REVERSE) -->
+  <section id="oferta" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Escolhe a <span>opção ideal para ti</span></h2>
+      <p class="section-subtitle">Acesso digital imediato enviado para o teu e-mail logo após a confirmação.</p>
+
+      <div class="pricing-wrap">
+        <!-- PACOTE BÁSICO (Fica em 2.º no telemóvel graças ao column-reverse) -->
+        <div class="price-card">
+          <div>
+            <div class="plan-name">Pacote Básico</div>
+            <img src="./hero-512.webp" alt="Pacote Básico ElectroMapas" class="plan-img" loading="lazy" />
+            <ul class="plan-features">
+              <li><span class="check-icon">✓</span> +50 Mapas Visuais de posicionamento de elétrodos</li>
+              <li><span class="check-icon">✓</span> Organizados por região corporal</li>
+              <li><span class="check-icon">✓</span> Acesso imediato pela área de membros</li>
+              <li class="excluded">✗ Sem Bónus #1: Guia Rápido de Parâmetros (Hz/µs)</li>
+              <li class="excluded">✗ Sem Bónus #2: Checklist de Contraindicações</li>
+              <li class="excluded">✗ Sem Bónus #3: Protocolos por Objetivo Terapêutico</li>
+              <li class="excluded">✗ Sem Bónus #4: Ficha de Evolução do Paciente</li>
+            </ul>
+          </div>
+          <div>
+            <div class="big-price">4,97€</div>
+            <div style="font-size:12px; color:#64748b; margin-bottom:14px;">Pagamento único</div>
+            <a href="https://pay.hotmart.com/H108089502L?off=kc0ltn1r&checkoutMode=10" class="btn-plan-basic js-checkout-btn" data-plan="basico" data-value="4.97">
+              QUERO SÓ O BÁSICO
+            </a>
+            <div class="payment-badges">
+              <span>MB WAY</span><span>Multibanco</span><span>Cartão</span><span>PayPal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PACOTE COMPLETO 9,97€ (EM 1.º LUGAR NO TELEMÓVEL!) -->
+        <div class="price-card featured">
+          <div class="popular-ribbon">⭐ MAIS ESCOLHIDO EM PORTUGAL (94%)</div>
+          <div>
+            <div class="plan-name">Pacote Completo + 4 Bónus</div>
+            <img src="./full-512.webp" alt="Pacote Completo ElectroMapas com 4 Bónus" class="plan-img" loading="lazy" />
+            <ul class="plan-features">
+              <li><span class="check-icon">✓</span> <strong>+50 Mapas Visuais HD (TENS, NMES, FES, Russa e Aussie)</strong></li>
+              <li><span class="check-icon">✓</span> <strong>Pares e Canais CH1 a CH4 identificados por cor</strong></li>
+              <li><span class="check-icon">✓</span> Coluna, Membro Superior e Membro Inferior completos</li>
+              <li><span class="check-icon">✓</span> Consulta no Telemóvel, Tablet, PC + Versão Impressão A4</li>
+              <li><span class="check-icon">🎁</span> <strong>Bónus #1: Guia Rápido de Parâmetros (Hz, µs, Rampas)</strong></li>
+              <li><span class="check-icon">🎁</span> <strong>Bónus #2: Checklist de Segurança e Contraindicações</strong></li>
+              <li><span class="check-icon">🎁</span> <strong>Bónus #3: Protocolos por Objetivo Terapêutico</strong></li>
+              <li><span class="check-icon">🎁</span> <strong>Bónus #4: Ficha Clínica de Evolução do Paciente</strong></li>
+            </ul>
+          </div>
+          <div>
+            <div class="old-price">De 39,97€ por apenas:</div>
+            <div class="big-price">9,97€</div>
+            <div class="save-pill">Poupas 30,00€ hoje · Acesso Vitalício</div>
+            <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10" class="btn-plan-pro js-checkout-btn" data-plan="completo" data-value="9.97">
+              QUERO O PACOTE COMPLETO AGORA
+            </a>
+            <div class="payment-badges">
+              <span>MB WAY</span><span>Multibanco</span><span>Visa / Mastercard</span><span>Hotmart Seguro</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVA SOCIAL EM PORTUGUÊS DE PORTUGAL -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">O que dizem os <span>fisioterapeutas em Portugal</span></h2>
+      <p class="section-subtitle">Profissionais e estudantes que já utilizam os mapas nas suas sessões diárias.</p>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"A identificação dos canais CH1 e CH2 por cores poupa-me imenso tempo entre utentes. Abro no telemóvel ao lado da marquesa e confirmo logo o ponto motor."</p>
+          <div class="review-author">
+            <div class="author-avatar">IM</div>
+            <div class="author-meta">
+              <strong>Inês Martins</strong>
+              <span>Fisioterapeuta · Porto</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"O Guia Rápido de Parâmetros que vem no pacote completo vale ouro. Ter as frequências de TENS, NMES e Aussie organizadas num só sítio facilitou muito a minha prática."</p>
+          <div class="review-author">
+            <div class="author-avatar">TS</div>
+            <div class="author-meta">
+              <strong>Tiago Sousa</strong>
+              <span>Fisioterapeuta Desportivo · Lisboa</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Estou em estágio clínico e tinha sempre receio de errar na colocação em FES e Russa. Os mapas são super claros, nítidos e fáceis de consultar no tablet."</p>
+          <div class="review-author">
+            <div class="author-avatar">MF</div>
+            <div class="author-meta">
+              <strong>Mariana Ferreira</strong>
+              <span>Estudante de Fisioterapia · Coimbra</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GARANTIA DE 7 DIAS -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="guarantee-box">
+        <div class="guarantee-seal">
+          <strong>7</strong>
+          <span>DIAS</span>
+        </div>
+        <div>
+          <h3 style="font-size:20px; font-weight:900; color:var(--text-dark); margin-bottom:6px;">Garantia Incondicional de 7 Dias</h3>
+          <p style="font-size:14px; color:var(--text-muted);">
+            Acede aos +50 Mapas Visuais e aos 4 Bónus sem qualquer risco. Se no prazo de 7 dias sentires que o material não é para ti, basta pedir o reembolso na Hotmart e devolvemos 100% do valor.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERGUNTAS FREQUENTES -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Perguntas <span>Frequentes</span></h2>
+      <div class="faq-list" style="margin-top:28px;">
+        <details class="faq-item">
+          <summary>Como e quando recebo o acesso aos mapas?</summary>
+          <p>Assim que o pagamento é confirmado (imediato por MB WAY, Cartão ou PayPal), recebes automaticamente um e-mail da Hotmart com o link de acesso imediato a toda a coleção e aos bónus.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Posso abrir no telemóvel durante a sessão?</summary>
+          <p>Sim! Todos os mapas foram desenhados em alta resolução para que possas abrir e ampliar com nitidez no telemóvel, no tablet ou no computador, além de incluírem a versão pronta para impressão em A4.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Quais são as correntes incluídas?</summary>
+          <p>Os mapas abrangem posicionamentos para TENS, NMES (EENM), FES, Corrente Russa e Corrente Aussie nas diferentes regiões anatómicas.</p>
+        </details>
+        <details class="faq-item">
+          <summary>O pagamento é único ou mensalidade?</summary>
+          <p>É um pagamento 100% único (sem mensalidades). Pagas uma única vez e tens acesso vitalício ao material e atualizações.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p><strong>ElectroMapas Fisioterapia © 2026 · Todos os direitos reservados.</strong></p>
+      <p style="margin-top:6px;">Material técnico de apoio visual destinado a fisioterapeutas e estudantes de fisioterapia. Este site não é afiliado à Meta ou Facebook Inc.</p>
+    </div>
+  </footer>
+
+  <!-- BARRA STICKY NO FUNDO DO TELEMÓVEL -->
+  <div class="sticky-mobile-cta">
+    <div class="sticky-price-info">
+      <strong>+50 Mapas + 4 Bónus</strong>
+      <span>Acesso Imediato · 9,97€</span>
+    </div>
+    <a href="#oferta" class="sticky-btn">ACEDER AGORA</a>
   </div>
-</div>
 
-<script>
-(function() {
-  var LINKS = {
-    basic: "https://pay.hotmart.com/H108089502L?off=kc0ltn1r&checkoutMode=10",
-    complete: "https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10"
-  };
-  var FULL_IMG = "./__l5e/assets-v1/ac0d59f3-5607-485d-be0e-3c7cf30f847d/full-512.webp";
-
-  // 1. Live Date (.today) & Footer Year
-  function updateDates() {
-    var now = new Date();
-    var todayEl = document.querySelector(".offer-bar .today");
-    if (todayEl) todayEl.textContent = now.toLocaleDateString("pt-PT");
-    var footerSpan = document.querySelector("footer strong span");
-    if (footerSpan) footerSpan.textContent = String(now.getFullYear());
-  }
-  updateDates();
-  setInterval(updateDates, 1000);
-
-  // 2. FAQ Accordion (#faq)
-  var faqItems = Array.prototype.slice.call(document.querySelectorAll("#faq .faq-item"));
-  var openFaqIdx = null;
-  faqItems.forEach(function(item, idx) {
-    var btn = item.querySelector("button");
-    var ans = item.querySelector(".ans");
-    if (!btn || !ans) return;
-    btn.addEventListener("click", function() {
-      var nextIdx = (openFaqIdx === idx) ? null : idx;
-      openFaqIdx = nextIdx;
-      faqItems.forEach(function(el, i) {
-        var isOpen = (i === openFaqIdx);
-        el.classList.toggle("open", isOpen);
-        var b = el.querySelector("button");
-        var a = el.querySelector(".ans");
-        if (b) b.setAttribute("aria-expanded", isOpen ? "true" : "false");
-        if (a) a.setAttribute("aria-hidden", isOpen ? "false" : "true");
-      });
-    });
-  });
-
-  // 3. Testimonials Slider (#slides) & Dots (.dots)
-  var slidesEl = document.getElementById("slides");
-  var dotBtns = Array.prototype.slice.call(document.querySelectorAll(".dots button"));
-  function setActiveDot(activeIdx) {
-    dotBtns.forEach(function(btn, i) {
-      var isOn = (i === activeIdx);
-      btn.classList.toggle("on", isOn);
-      btn.setAttribute("aria-pressed", isOn ? "true" : "false");
-    });
-  }
-  if (slidesEl) {
-    slidesEl.addEventListener("scroll", function() {
-      var center = slidesEl.scrollLeft + slidesEl.clientWidth / 2;
-      var bestIdx = 0;
-      var bestDist = Infinity;
-      var imgs = slidesEl.querySelectorAll("img");
-      imgs.forEach(function(img, idx) {
-        var dist = Math.abs(img.offsetLeft + img.clientWidth / 2 - center);
-        if (dist < bestDist) {
-          bestDist = dist;
-          bestIdx = idx;
-        }
-      });
-      setActiveDot(bestIdx);
-    });
-  }
-  dotBtns.forEach(function(btn, idx) {
-    btn.addEventListener("click", function() {
-      if (!slidesEl) return;
-      var img = slidesEl.querySelectorAll("img")[idx];
-      if (img) {
-        slidesEl.scrollTo({
-          left: img.offsetLeft - (slidesEl.clientWidth - img.clientWidth) / 2,
-          behavior: "smooth"
-        });
-      }
-      setActiveDot(idx);
-    });
-  });
-
-  // 4. Tap-to-Zoom Map Lightbox on #mapsTrack
-  var mapLightboxEl = null;
-  function closeMapLightbox() {
-    if (mapLightboxEl && mapLightboxEl.parentNode) {
-      mapLightboxEl.parentNode.removeChild(mapLightboxEl);
-      mapLightboxEl = null;
-    }
-  }
-  var mapsTrack = document.getElementById("mapsTrack");
-  if (mapsTrack) {
-    mapsTrack.querySelectorAll("img").forEach(function(img) {
-      img.addEventListener("click", function() {
-        closeMapLightbox();
-        var lb = document.createElement("div");
-        lb.className = "map-lightbox";
-        lb.innerHTML =
-          '<div class="map-lightbox-box">' +
-            '<button type="button" class="map-lightbox-close" aria-label="Fechar">×</button>' +
-            '<img src="' + img.getAttribute("src") + '" alt="Mapa Ampliado" />' +
-            '<a href="#oferta" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors cta" style="width:100%;padding:14px 18px;font-size:14px;">Quero receber os +50 Mapas Visuais</a>' +
-          '</div>';
-        lb.addEventListener("click", function(e) {
-          if (e.target === lb) closeMapLightbox();
-        });
-        lb.querySelector(".map-lightbox-close").addEventListener("click", closeMapLightbox);
-        lb.querySelector("a").addEventListener("click", closeMapLightbox);
-        document.body.appendChild(lb);
-        mapLightboxEl = lb;
-      });
-    });
-  }
-
-  // 5. UTM & Hotmart Checkout Decorator (wt)
-  function decorateHotmartLinks() {
-    var keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"];
-    var params = new URLSearchParams(window.location.search);
-    var current = {};
-    keys.forEach(function(k) {
-      var val = params.get(k);
-      if (val) current[k] = val;
-    });
-    var stored = {};
-    try { stored = JSON.parse(localStorage.getItem("gb_track_data") || "{}"); } catch (e) {}
-    var refSource = null;
-    try {
-      if (document.referrer) {
-        var host = new URL(document.referrer).hostname.replace(/^www\./, "");
-        if (["facebook", "instagram", "messenger"].some(function(p) { return host.indexOf(p + ".") !== -1; })) {
-          refSource = "facebook";
-        } else {
-          var match = ["google", "youtube", "tiktok", "bing"].find(function(p) { return host.indexOf(p + ".") !== -1; });
-          refSource = match || host;
-        }
-      }
-    } catch (e) {}
-    var hasParams = Object.keys(current).length > 0;
-    if (!stored.first_touch) {
-      stored.first_touch = Object.assign({}, current, { timestamp: Date.now(), referrer_source: hasParams ? null : refSource });
-    }
-    if (hasParams) {
-      stored.last_touch = Object.assign({}, current, { timestamp: Date.now() });
-    } else if (!stored.last_touch && refSource) {
-      stored.last_touch = { referrer_source: refSource, timestamp: Date.now() };
-    }
-    try { localStorage.setItem("gb_track_data", JSON.stringify(stored)); } catch (e) {}
-    var active = [stored.last_touch, stored.first_touch].find(function(x) {
-      return x && (Date.now() - Number(x.timestamp || 0) <= 604800000);
-    }) || {};
-    var source = String(active.utm_source || (active.fbclid ? "facebook" : active.gclid ? "google" : active.referrer_source || "direto"));
-    document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach(function(a) {
-      try {
-        var u = new URL(a.href);
-        if (!u.searchParams.get("utm_source")) {
-          u.searchParams.set("utm_source", source);
-          keys.slice(1, 5).forEach(function(k) {
-            if (active[k]) u.searchParams.set(k, String(active[k]));
-          });
-          var srcParts = [source, active.utm_campaign, active.utm_content].filter(Boolean).join("_").slice(0, 60);
-          u.searchParams.set("src", srcParts);
-          a.href = u.toString();
-        }
-      } catch (e) {}
-    });
-  }
-
-  // 6. Upsell & Exit-Intent Modal (St)
-  var currentModal = null;
-  var modalEl = null;
-
-  function closeModal() {
-    currentModal = null;
-    if (modalEl && modalEl.parentNode) {
-      modalEl.parentNode.removeChild(modalEl);
-      modalEl = null;
-    }
-  }
-
-  function openModal(type) {
-    closeMapLightbox();
-    closeModal();
-    currentModal = type;
-    var isUpsell = (type === "upsell");
-    var bullets = isUpsell
-      ? ["+50 Mapas Visuais por região", "Pares e canais CH1 a CH4 por cor", "🎁 4 bónus exclusivos incluídos", "Acesso imediato e vitalício"]
-      : ["+50 Mapas Visuais de elétrodos", "Membros, coluna, anca e pélvis", "🎁 4 bónus exclusivos incluídos", "Coleção digital pronta a imprimir, acesso vitalício"];
-
-    var overlay = document.createElement("div");
-    overlay.className = "modal show";
-    overlay.setAttribute("role", "dialog");
-    overlay.setAttribute("aria-modal", "true");
-    overlay.setAttribute("aria-labelledby", "offer-modal-title");
-    overlay.addEventListener("click", function(e) {
-      if (e.target === overlay) closeModal();
-    });
-
-    var leadHtml = isUpsell
-      ? 'Em vez de levares só o Básico por <b>4,97€</b>, por <b>apenas mais 5€</b> desbloqueias o Pacote Completo com os +50 mapas <b>e os 4 bónus</b> — só nesta página.'
-      : 'O <b>Pacote Completo</b> — mapas + 4 bónus — por um valor que não volta a aparecer.';
-
-    var priceFromHtml = isUpsell
-      ? 'Básico <s>4,97€</s> → Completo por apenas:'
-      : 'De <s>39,97€</s> por apenas:';
-
-    var bulletsHtml = bullets.map(function(b) {
-      return '<li><span class="chk"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3"></path></svg></span>' + b + '</li>';
-    }).join("");
-
-    var declineHtml = isUpsell
-      ? '<a href="' + LINKS.basic + '" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors sales-plain decline">Continuar só com o Pacote Básico (4,97€) →</a>'
-      : '<button type="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors sales-plain decline" id="modalDeclineBtn">Voltar para a página</button>';
-
-    overlay.innerHTML =
-      '<div class="modal-box">' +
-        '<button type="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors sales-plain modal-close" aria-label="Fechar">×</button>' +
-        '<span class="kicker">' + (isUpsell ? '🎉 FOSTE SORTEADO(A)!' : '⏳ ESPERA! ÚLTIMA OPORTUNIDADE') + '</span>' +
-        '<h3 id="offer-modal-title">' + (isUpsell ? 'Oferta exclusiva: leva o Pacote Completo' : 'Leva TUDO pelo menor preço de sempre') + '</h3>' +
-        '<p class="lead">' + leadHtml + '</p>' +
-        '<div class="pop-head">' +
-          '<img src="' + FULL_IMG + '" width="512" height="512" alt="Pacote Completo" />' +
-          '<ul>' + bulletsHtml + '</ul>' +
-        '</div>' +
-        '<p class="price-from">' + priceFromHtml + '</p>' +
-        '<p class="price">9,97€</p>' +
-        '<a href="' + LINKS.complete + '" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors cta">' + (isUpsell ? 'Sim, quero o Completo por 9,97€' : 'Quero aproveitar agora') + '</a>' +
-        declineHtml +
-      '</div>';
-
-    document.body.appendChild(overlay);
-    modalEl = overlay;
-    decorateHotmartLinks();
-
-    var closeBtn = overlay.querySelector(".modal-close");
-    if (closeBtn) {
-      closeBtn.focus();
-      closeBtn.addEventListener("click", closeModal);
-    }
-    var declineBtn = overlay.querySelector("#modalDeclineBtn");
-    if (declineBtn) {
-      declineBtn.addEventListener("click", closeModal);
-    }
-  }
-
-  document.addEventListener("keydown", function(e) {
-    if (e.key === "Escape") {
-      closeMapLightbox();
-      if (currentModal) closeModal();
-    }
-  });
-
-  // Direct checkout navigation for all plans without blocking modals
-
-  // 7. Desktop & Mobile Exit-Intent Popup
-  var exitReady = false;
-  setTimeout(function() { exitReady = true; }, 8000);
-  function triggerExit() {
-    if (!exitReady || currentModal) return;
-    try {
-      if (sessionStorage.getItem("exit_popup_shown") === "1") return;
-      sessionStorage.setItem("exit_popup_shown", "1");
-    } catch (e) {}
-    openModal("exit");
-  }
-  document.addEventListener("mouseout", function(e) {
-    if (!e.relatedTarget && e.clientY <= 0 && window.matchMedia("(pointer: fine)").matches) {
-      triggerExit();
-    }
-  });
-  window.addEventListener("popstate", triggerExit);
-
-  // Mobile fast scroll-up exit recovery after reading > 45% of page
-  var maxScrollRatio = 0;
-  var lastScrollY = window.scrollY || 0;
-  var lastScrollTime = Date.now();
-  var stickyBar = document.getElementById("mobileStickyCta");
-  var ofertaSection = document.getElementById("oferta");
-  var inOfertaView = false;
-
-  var viewContentFired = false;
-
-  window.addEventListener("scroll", function() {
-    var y = window.scrollY || 0;
-    var docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    var ratio = y / docH;
-    if (ratio > maxScrollRatio) maxScrollRatio = ratio;
-
-    // Check if #oferta is visible on screen
-    if (ofertaSection) {
-      var rect = ofertaSection.getBoundingClientRect();
-      inOfertaView = (rect.top < window.innerHeight * 0.85 && rect.bottom > 120);
-      if (inOfertaView && !viewContentFired) {
-        viewContentFired = true;
-        if (window.fbq) {
-          window.fbq("track", "ViewContent", {
-            content_name: "Secao Oferta +50 Mapas Fisioterapia",
-            value: 9.97,
-            currency: "EUR"
+  <!-- DISPARO LIMPO DE EVENTOS DO PIXEL -->
+  <script>
+    document.querySelectorAll('.js-checkout-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var val = parseFloat(this.getAttribute('data-value')) || 9.97;
+        var plan = this.getAttribute('data-plan') || 'completo';
+        if (typeof fbq === 'function') {
+          fbq('track', 'InitiateCheckout', {
+            value: val,
+            currency: 'EUR',
+            content_name: 'ElectroMapas Fisioterapia - ' + plan
           });
         }
-      }
-    }
-
-    // Show/hide mobile sticky CTA bar
-    if (stickyBar) {
-      var shouldShow = (y > 180) && !inOfertaView && !currentModal;
-      stickyBar.classList.toggle("visible", shouldShow);
-      stickyBar.setAttribute("aria-hidden", shouldShow ? "false" : "true");
-    }
-
-    // Detect rapid upward scroll on mobile after reading at least 45% of page
-    var now = Date.now();
-    var dt = Math.max(1, now - lastScrollTime);
-    var dy = y - lastScrollY;
-    if (exitReady && maxScrollRatio > 0.45 && dy < -140 && dt < 260 && y < docH * 0.25) {
-      triggerExit();
-    }
-    lastScrollY = y;
-    lastScrollTime = now;
-  }, { passive: true });
-
-  // 8. Subtle Social Proof Toast
-  var buyers = [
-    { name: "Dra. Sofia M. (Lisboa)", time: "Há 3 minutos · Compra verificada" },
-    { name: "Dr. Tiago R. (Porto)", time: "Há 6 minutos · Compra verificada" },
-    { name: "Inês C. · Fisioterapeuta (Coimbra)", time: "Há 11 minutos · Compra verificada" },
-    { name: "Dr. Miguel A. (Braga)", time: "Há 14 minutos · Compra verificada" },
-    { name: "Mariana L. · Fisioterapia (Faro)", time: "Há 18 minutos · Compra verificada" }
-  ];
-  var buyerIdx = 0;
-  var toastEl = document.getElementById("socialProofToast");
-  var toastText = document.getElementById("socialProofText");
-  var toastTime = document.getElementById("socialProofTime");
-
-  function showNextToast() {
-    if (!toastEl || currentModal || mapLightboxEl || inOfertaView) return;
-    var b = buyers[buyerIdx % buyers.length];
-    buyerIdx++;
-    if (toastText) toastText.innerHTML = "<b>" + b.name + "</b> escolheu o <b>Pacote Completo</b>";
-    if (toastTime) toastTime.textContent = b.time;
-    toastEl.classList.add("show");
-    setTimeout(function() {
-      toastEl.classList.remove("show");
-    }, 4500);
-  }
-  setTimeout(function() {
-    showNextToast();
-    setInterval(showNextToast, 22000);
-  }, 6500);
-
-  decorateHotmartLinks();
-  setTimeout(decorateHotmartLinks, 1500);
-  document.addEventListener("click", function(e) {
-    if (e.defaultPrevented) return;
-    var link = e.target && e.target.closest ? e.target.closest('a[href*="pay.hotmart.com"]') : null;
-    if (link && window.fbq) {
-      var isBasic = link.href.indexOf("kc0ltn1r") !== -1;
-      window.fbq("track", "InitiateCheckout", {
-        value: isBasic ? 4.97 : 9.97,
-        currency: "EUR",
-        content_name: isBasic ? "Pacote Basico +50 Mapas" : "Pacote Completo +50 Mapas + 4 Bonus"
       });
-    }
-  });
-})();
-</script>
-</body></html>
+    });
+  </script>
+</body>
+</html>
