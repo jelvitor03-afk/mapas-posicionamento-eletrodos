@@ -574,6 +574,31 @@
       font-weight: 800;
     }
 
+    /* BANNER DE DESTAQUE DO CHECKOUT (1000x300) */
+    .checkout-banner-hero {
+      max-width: 860px;
+      margin: 0 auto 32px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 2px solid var(--border-teal);
+      background: #ffffff;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .checkout-banner-hero:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(13, 148, 136, 0.22);
+    }
+    .checkout-banner-hero a {
+      display: block;
+      text-decoration: none;
+    }
+    .checkout-banner-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* SECÇÃO DE PREÇOS (9,97 € EM DESTAQUE ABSOLUTO NO MOBILE) */
     .pricing-wrap {
       display: grid;
@@ -1179,6 +1204,13 @@
     <div class="container">
       <h2 class="section-title">Escolhe a <span>opção ideal para ti</span></h2>
       <p class="section-subtitle">Acesso digital imediato enviado para o teu e-mail logo após a confirmação.</p>
+
+      <!-- BANNER DE DESTAQUE DO PACOTE COMPLETO COM 4 BÓNUS -->
+      <div class="checkout-banner-hero">
+        <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10" class="checkout-link" title="Garantir o Pacote Completo com 4 Bónus por 9,97€">
+          <img src="./Checkout_Banner_Desktop_1000x300.png" alt="ElectroMapas +50 Mapas Visuais - Pacote Completo com 4 Bónus por 9,97€" loading="lazy" />
+        </a>
+      </div>
 
       <div class="pricing-wrap">
         <!-- PACOTE BÁSICO (Fica em 2.º no telemóvel graças ao column-reverse) -->
