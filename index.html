@@ -2225,7 +2225,8 @@
             texto: (this.innerText || '').trim().substring(0, 40)
           });
         }
-        var target = document.getElementById('oferta-box') || document.getElementById('oferta');
+        var buyBtn = document.querySelector('.btn-plan-pro');
+        var target = buyBtn || document.getElementById('oferta-box') || document.getElementById('oferta');
         if (target) {
           target.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
