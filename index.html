@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://pay.hotmart.com">
+  <link rel="preconnect" href="https://connect.facebook.net">
+  <link rel="preload" as="image" href="/assets/01-hero-espaco-clinico.webp" fetchpriority="high">
+
 
   <!-- META PIXEL OFICIAL UNIFICADO (1684602679908725) NO TOPO DO HEAD -->
   <script>
@@ -2004,66 +2010,53 @@
 
   <!-- 11. OFERTA ESPECIAL E TABELA DE PREÇOS (9,97 € EM 1.º LUGAR NO TELEMÓVEL) -->
   <section id="oferta" class="section">
-    <div class="container">
-      <div class="sec-head">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <div class="sec-head" style="text-align: center; margin-bottom: 28px;">
         <span class="sec-pill">CONDIÇÃO ESPECIAL POR TEMPO LIMITADO</span>
-        <h2 class="sec-title">Acede hoje à <span class="serif-italic">Coleção Completa</span></h2>
-        <p class="sec-desc">Pagamento único com IVA já incluído. Acesso imediato enviado para o teu e-mail.</p>
+        <h2 class="sec-title" style="margin-top: 12px;">Acede hoje à <span class="serif-italic">Coleção Completa</span></h2>
+        <p class="sec-desc">Pagamento único com IVA já incluído. Acesso digital imediato enviado para o teu e-mail.</p>
       </div>
 
-      <div class="pricing-grid">
-        <!-- PACOTE BÁSICO 4,97 € (Fica em 2.º no telemóvel como âncora) -->
-        <div class="plan-card">
-          <div>
-            <div class="plan-name" style="color:var(--text-main);">PACOTE BÁSICO (SÓ OS MAPAS)</div>
-            <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">Apenas os mapas base para consulta simples</p>
-            <ul class="plan-ul">
-              <li><span style="color:var(--primary); font-weight:900;">✓</span> +50 Mapas Visuais de posicionamento de elétrodos por região</li>
-              <li><span style="color:var(--primary); font-weight:900;">✓</span> Organizados pelas 8 regiões corporais</li>
-              <li><span style="color:var(--primary); font-weight:900;">✓</span> Acesso imediato no e-mail</li>
-              <li class="disabled">✗ Sem o Guia Rápido de Parâmetros (Frequência Hz e Largura µs)</li>
-              <li class="disabled">✗ Sem os Protocolos por Objetivo e Pontos Motores</li>
-              <li class="disabled">✗ Sem a Checklist de Contraindicações e Ficha de Evolução</li>
-            </ul>
+      <!-- PACOTE COMPLETO UNIFICADO 9,97 € -->
+      <div id="oferta-box" class="plan-card pro" style="max-width: 650px; margin: 0 auto; text-align: left; border: 2px solid var(--accent-cyan); box-shadow: 0 12px 36px rgba(0, 229, 255, 0.25);">
+        <div class="ribbon-top" style="text-align: center;">⭐ EDIÇÃO COMPLETA · PACOTE OFICIAL DE GABINETE</div>
+        <div style="padding: 24px 24px 16px;">
+          <div class="plan-name" style="font-size: 21px; color: #ffffff; font-weight: 800; text-align: center;">
+            Pacote Clínico Completo ElectroMapas
           </div>
-          <div>
-            <div class="price-val" style="color:var(--text-main);">4,97€</div>
-            <div style="font-size:12px; color:var(--text-muted); margin-bottom:6px;">Pagamento único · IVA incluído</div>
-            <a href="https://pay.hotmart.com/H108089502L?off=kc0ltn1r&checkoutMode=10&locale=pt_PT" class="btn-plan-basic js-checkout-btn" data-plan="basico" data-value="4.97" style="background:transparent; border:1.5px solid #cbd5e1; color:#475569; font-weight:700; font-size:14px; text-transform:none;">
-              Quero apenas os mapas básicos (4,97€)
-            </a>
-          </div>
-        </div>
+          <p style="font-size: 13.5px; color: #a5f3fc; margin-top: 6px; text-align: center;">
+            Consulta visual rápida para confirmares o posicionamento de elétrodos em segundos no gabinete ou ao domicílio.
+          </p>
 
-        <!-- PACOTE COMPLETO 9,97 € (EM 1.º LUGAR NO TELEMÓVEL!) -->
-        <div class="plan-card pro">
-          <div class="ribbon-top">⭐ EDIÇÃO COMPLETA · A MAIS ESCOLHIDA NA CLÍNICA</div>
-          <div>
-            <div class="plan-name" style="font-size:19px; color:#ffffff;">PACOTE COMPLETO + 4 GUIAS DE CONSULTÓRIO</div>
-            <p style="font-size:13px; color:#a5f3fc; margin-top:4px;">Tudo o que precisas para posicionar os elétrodos e configurar o aparelho sem dúvidas:</p>
-            <ul class="plan-ul">
-              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>+50 Mapas Visuais HD (TENS, NMES, FES, Corrente Russa e Aussie)</strong></li>
-              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>Pares e Canais (CH1 a CH4) identificados por cor em todas as regiões</strong></li>
-              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>Formato 100% Digital em Alta Resolução (Telemóvel, Tablet e PC)</strong></li>
-              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #1: Guia Rápido de Parâmetros (Hz, µs, Rampas e Tempo)</strong></li>
-              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #2: Mapa de Pontos Motores e Protocolos por Objetivo</strong></li>
-              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #3: Checklist Visual de Segurança e Contraindicações</strong></li>
-              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #4: Ficha Clínica de Evolução e Registo de Sessão</strong></li>
-            </ul>
-          </div>
-          <div>
-            <div style="font-size:13px; opacity:0.75; text-decoration:line-through;">Valor total separado: 39,97€</div>
-            <div class="price-val">9,97€</div>
-            <div style="font-size:12px; color:#a7f3d0; font-weight:700; margin-bottom:6px;">Pagamento único · IVA já incluído · Acesso Vitalício</div>
-            <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10&locale=pt_PT" class="btn-plan-pro js-checkout-btn" data-plan="completo" data-value="9.97">
+          <ul class="plan-ul" style="margin: 20px 0 16px;">
+            <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>+50 Mapas Visuais HD:</strong> Organizados pelas 8 regiões corporais anatómicas principais (TENS, NMES, FES, Russa e Aussie).</li>
+            <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>Pares e Canais (CH1 a CH4):</strong> Identificados por cor em cada lâmina para evitar erros de cruzamento.</li>
+            <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>Formato 100% Digital HD:</strong> Otimizado para telemóvel, tablet e computador com consulta rápida.</li>
+            <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #1:</strong> Guia Rápido de Parâmetros Clínicos (Hz, µs, Rampas e Tempo).</li>
+            <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #2:</strong> Mapa de Pontos Motores e Protocolos por Objetivo Terapêutico.</li>
+            <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #3:</strong> Checklist Visual de Segurança e Contraindicações Clínicas.</li>
+            <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #4:</strong> Ficha de Evolução e Registo de Sessão de Eletroterapia.</li>
+            <li><span style="color:#fbbf24; font-weight:900;">🔥</span> <strong>PRESENTE SURPRESA:</strong> Atalho dos 15 Casos Mais Comuns + Pocket Card (0,00 € no Checkout).</li>
+          </ul>
+
+          <div style="text-align: center; background: rgba(0, 229, 255, 0.06); border-radius: 12px; padding: 16px; margin-top: 16px;">
+            <div style="font-size: 14px; opacity: 0.75; text-decoration: line-through; color: #94a3b8;">Valor total separado: 39,97€</div>
+            <div class="price-val" style="font-size: 38px; color: #ffffff; font-weight: 900; margin: 4px 0;">9,97€</div>
+            <div style="font-size: 13px; color: #a7f3d0; font-weight: 700; margin-bottom: 14px;">
+              Pagamento Único · IVA Já Incluído · Acesso Vitalício
+            </div>
+
+            <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10&locale=pt_PT" class="btn-plan-pro js-checkout-btn" data-plan="completo" data-value="9.97" style="display: block; width: 100%; font-size: 17px; padding: 18px 24px; border-radius: 12px; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);">
               QUERO O PACOTE COMPLETO (9,97€) →
             </a>
-            <div style="font-size:12px; color:#e2e8f0; margin-top:10px; font-weight:700;">
-              ⚡ Acesso Vitalício Imediato · MB WAY, Multibanco e Cartão
+
+            <div style="font-size: 12px; color: #cbd5e1; margin-top: 12px; font-weight: 600;">
+              ⚡ Acesso Vitalício Imediato no E-mail · MB WAY, Multibanco e Cartão · Garantia Total de 7 Dias
             </div>
           </div>
         </div>
-      </div></div>
+      </div>
+    </div>
   </section>
 
   <!-- 12. PROVA SOCIAL PORTUGAL, GARANTIA E FAQ -->
@@ -2144,9 +2137,9 @@
   <div class="sticky-bottom">
     <div>
       <strong style="display:block; font-size:13.5px; font-weight:800; color:#ffffff;">+50 Mapas + 4 Guias Clínicos</strong>
-      <span style="font-size:12px; color:var(--accent-cyan); font-weight:700;">Pagamento único · 9,97€</span>
+      <span style="font-size:12px; color:var(--accent-cyan); font-weight:700;">Pagamento Único · 9,97€</span>
     </div>
-    <a href="#oferta" class="sticky-btn">ACEDER AGORA →</a>
+    <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10&locale=pt_PT" class="sticky-btn js-checkout-btn" data-plan="completo" data-value="9.97">ACEDER AGORA (9,97€) →</a>
   </div>
 
   <!-- SCRIPTS DA PÁGINA (LIGHTBOX, SLIDER & PIXEL) -->
@@ -2226,14 +2219,19 @@
       });
     });
 
-    // RASTREIO DE CLIQUES NOS BOTÕES DA PÁGINA (LEAD / ROLAGEM PARA #OFERTA)
+    // ROLAGEM SUAVE E RASTREIO DE CLIQUES NOS BOTÕES DA PÁGINA (LEAD / ROLAGEM PARA #OFERTA)
     document.querySelectorAll('a[href="#oferta"]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
         if (typeof fbq === 'function') {
           fbq('trackCustom', 'Clique_Ir_Para_Oferta', {
             posicao: (this.className || 'botao_oferta').substring(0, 30),
             texto: (this.innerText || '').trim().substring(0, 40)
           });
+        }
+        var target = document.getElementById('oferta-box') || document.getElementById('oferta');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       });
     });
