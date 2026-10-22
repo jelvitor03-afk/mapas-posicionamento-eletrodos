@@ -2180,7 +2180,34 @@
       });
     }
 
-    // DISPARO DO PIXEL META
+        // PRESERVAÇÃO DE UTMS, FBCLID E PARÂMETROS PARA A HOTMART
+    (function decorateHotmartLinks() {
+      var currentParams = new URLSearchParams(window.location.search);
+      if (!currentParams.toString()) return;
+
+      document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach(function(link) {
+        try {
+          var targetUrl = new URL(link.href);
+          currentParams.forEach(function(value, key) {
+            if (!targetUrl.searchParams.has(key)) {
+              targetUrl.searchParams.set(key, value);
+            }
+          });
+          var sckParts = [];
+          if (currentParams.get('utm_source')) sckParts.push(currentParams.get('utm_source'));
+          if (currentParams.get('utm_campaign')) sckParts.push(currentParams.get('utm_campaign'));
+          if (currentParams.get('utm_content')) sckParts.push(currentParams.get('utm_content'));
+          if (sckParts.length && !targetUrl.searchParams.has('sck')) {
+            targetUrl.searchParams.set('sck', sckParts.join('|'));
+          }
+          link.href = targetUrl.toString();
+        } catch(e) {
+          console.error('Erro ao decorar link Hotmart:', e);
+        }
+      });
+    })();
+
+    // DISPARO SEGURO DO PIXEL META (INITIATECHECKOUT)
     document.querySelectorAll('.js-checkout-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var val = parseFloat(this.getAttribute('data-value')) || 9.97;
@@ -2190,6 +2217,18 @@
             value: val,
             currency: 'EUR',
             content_name: 'ElectroMapas Fisioterapia - ' + plan
+          });
+        }
+      });
+    });
+
+    // RASTREIO DE CLIQUES NOS BOTÕES DA PÁGINA (LEAD / ROLAGEM PARA #OFERTA)
+    document.querySelectorAll('a[href="#oferta"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (typeof fbq === 'function') {
+          fbq('trackCustom', 'Clique_Ir_Para_Oferta', {
+            posicao: (this.className || 'botao_oferta').substring(0, 30),
+            texto: (this.innerText || '').trim().substring(0, 40)
           });
         }
       });
