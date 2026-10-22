@@ -160,6 +160,173 @@
       box-shadow: var(--shadow-sm);
     }
 
+    
+    /* VITRINE HERO PRINCIPAL COM FOTO 01 (ESPAÇO CLÍNICO AVANÇADO) */
+    .hero-single-visual {
+      max-width: 840px;
+      margin: 0 auto 20px;
+      background: #ffffff;
+      padding: 10px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-single-visual img {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: cover;
+      border-radius: 14px;
+      display: block;
+    }
+
+    /* INTERMEDIATE CTAS AO LONGO DO FUNIL */
+    .inter-cta-wrap {
+      text-align: center;
+      margin-top: 36px;
+      padding: 12px 0;
+    }
+    .btn-inter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 800;
+      padding: 16px 36px;
+      border-radius: 99px;
+      background: linear-gradient(180deg, #10b981 0%, #0d9488 100%);
+      color: #ffffff;
+      text-decoration: none;
+      box-shadow: 0 10px 26px rgba(13, 148, 136, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-inter:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(13, 148, 136, 0.45);
+    }
+    .inter-trust {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* AVISO E BADGE DE ZOOM / LIGHTBOX */
+    .zoom-notice-pill {
+      text-align: center;
+      background: #e0f2fe;
+      border: 1px solid #7dd3fc;
+      color: #0369a1;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 99px;
+      max-width: 680px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .sheet-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .sheet-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.15);
+    }
+    .sheet-card .zoom-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(15, 23, 42, 0.82);
+      backdrop-filter: blur(4px);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      z-index: 2;
+    }
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 17, 26, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 999999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .lightbox-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    .lightbox-container {
+      position: relative;
+      max-width: 94vw;
+      max-height: 94vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .lightbox-container img {
+      max-width: 100%;
+      max-height: 84vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      background: #ffffff;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #0f172a;
+      color: #ffffff;
+      border: 2px solid #38bdf8;
+      font-size: 18px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .lightbox-close:hover {
+      background: #0284c7;
+      transform: scale(1.1);
+    }
+    .lightbox-caption {
+      margin-top: 12px;
+      color: #f1f5f9;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      background: rgba(15, 23, 42, 0.7);
+      padding: 6px 16px;
+      border-radius: 99px;
+    }
+
     /* VITRINE HERO COM FOTO 01 + FOTO 02 */
     .hero-visual-grid {
       max-width: 960px;
@@ -1080,10 +1247,20 @@
       .sheets-4-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+      .hero-single-visual img {
+        max-height: 290px;
+      }
       .pricing-grid {
         display: flex;
-        flex-direction: column-reverse; /* PACOTE COMPLETO 9,97 € EM 1.º LUGAR NO TELEMÓVEL */
-        gap: 26px;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .plan-card.pro {
+        order: -1 !important; /* PACOTE COMPLETO 9,97 € NO TOPO NO TELEMÓVEL */
+        border: 2px solid var(--accent-cyan);
+      }
+      .plan-card {
+        order: 1;
       }
       .guarantee-card {
         flex-direction: column;
@@ -1235,7 +1412,7 @@
   <!-- 1. HERO SECTION (ESTRUTURA DAS PÁGINAS DE REFERÊNCIA + FOTO 01 E FOTO 02) -->
   <header class="hero">
     <div class="container">
-      <div class="pill-top">PRODUTO 100% DIGITAL · ACESSO IMEDIATO</div>
+      <div class="pill-top">ATLAS CLÍNICO DIGITAL (ALTA RESOLUÇÃO) · TELEMÓVEL, TABLET E IMPRESSÃO A4</div>
 
       <p class="hero-question">
         Conheces a anatomia e as correntes, mas sentes dúvida ao ligar <span class="serif-italic">os canais e parâmetros na sessão?</span>
@@ -1248,26 +1425,12 @@
         Regiões anatómicas, pontos motores, pares e canais identificados por cor (CH1 a CH4) e parâmetros sugeridos (Hz, µs, tempo) para <strong>TENS, NMES, FES, Corrente Russa e Aussie</strong> explicados de forma visual, prática e organizada.
       </p>
 
-      <div class="hero-callout">
-        Não se trata apenas de colar elétrodos: trata-se de saber exatamente onde posicionar cada canal, que músculos recrutar e que dosimetria aplicar no telemóvel, no tablet ou nas folhas impressas na clínica.
-      </div>
-
-      <!-- VITRINE DUPLA: FOTO 01 (Espaço Clínico Avançado) + FOTO 02 (Tecnologia Médica Ombro/Joelho) -->
-      <div class="hero-visual-grid">
-        <div class="hero-main-img">
-          <img src="/assets/01-hero-espaco-clinico.png" alt="Espaço Clínico de Eletroterapia com iPad Pro, iPhone e Aparelho TENS/NMES/FES" />
-          <div class="img-caption-bar">
-            <span>⚡ Sincronia Total com o Aparelho na Sessão</span>
-            <span class="tag">TENS · NMES · FES · Russa · Aussie</span>
-          </div>
-        </div>
-
-        <div class="hero-side-img">
-          <img src="/assets/02-hero-ipad-iphone-ombro.png" alt="iPad Pro Região do Ombro e iPhone Joelho com Parâmetros Hz e µs" />
-          <div class="img-caption-bar">
-            <span>📱 Consulta em Segundos no Tablet e Telemóvel</span>
-            <span class="tag">Hz · µs · Tempo</span>
-          </div>
+      <!-- VITRINE HERO PRINCIPAL: FOTO 01 (Espaço Clínico Avançado) -->
+      <div class="hero-single-visual">
+        <img src="/assets/01-hero-espaco-clinico.png" alt="Espaço Clínico de Eletroterapia com iPad Pro, iPhone e Aparelho TENS/NMES/FES" />
+        <div class="img-caption-bar">
+          <span>⚡ Consulta Visual Rápida ao Lado do Aparelho</span>
+          <span class="tag">TENS · NMES · FES · Russa · Aussie</span>
         </div>
       </div>
 
@@ -1281,8 +1444,7 @@
       </div>
 
       <div class="cta-row">
-        <a href="#oferta" class="btn-main">QUERO ACEDER AOS +50 MAPAS AGORA</a>
-        <a href="#conteudos" class="btn-outline">VER TODO O CONTEÚDO ↓</a>
+        <a href="#oferta" class="btn-main">QUERO ACEDER AOS +50 MAPAS AGORA →</a>
       </div>
 
       <div class="trust-checks">
@@ -1380,7 +1542,7 @@
           <img src="/assets/05-telemovel-sobre-mapas.png" alt="Consulta no Telemóvel e Pranchas Impressas" />
           <div class="preview-photo-caption">
             <strong>No Ecrã do Telemóvel + Versão Impressa</strong>
-            <p>Abre a versão interativa escura no iPhone ou consulta as pranchas técnicas impressas em formato A4.</p>
+            <p>Abre a lâminas digitais de alto contraste no iPhone ou consulta as pranchas técnicas impressas em formato A4.</p>
           </div>
         </div>
 
@@ -1393,35 +1555,53 @@
         </div>
       </div>
 
-      <!-- 4 PRANCHAS TÉCNICAS DETALHADAS -->
+      <!-- AVISO DE ZOOM INTERATIVO -->
+      <div class="zoom-notice-pill">
+        <span>🔍</span>
+        <span><strong>Toca ou clica em qualquer lâmina</strong> para ampliar em ecrã inteiro e ler os parâmetros clínicos (Hz · µs)</span>
+      </div>
+
+      <!-- 4 PRANCHAS TÉCNICAS DETALHADAS COM ZOOM INTERATIVO -->
       <div class="sheets-4-grid">
-        <div class="sheet-card">
-          <img src="/mapa-01.webp" alt="Mapa 01 Região Cervical Posterior" />
+        <div class="sheet-card" onclick="openLightbox('/mapa-01.webp', 'Mapa 01: Região Cervical Posterior · TENS / NMES (CH1/CH2)')" title="Clica para ampliar">
+          <div class="zoom-badge">🔍 Ampliar</div>
+          <img src="/mapa-01.webp" alt="Mapa 01 Região Cervical Posterior" loading="lazy" />
           <div class="sheet-footer">
             <span>COLUNA CERVICAL</span>
             Cervical Posterior · CH1/CH2
           </div>
         </div>
-        <div class="sheet-card">
-          <img src="/mapa-04.webp" alt="Mapa 04 Região Escapular" />
+        <div class="sheet-card" onclick="openLightbox('/mapa-04.webp', 'Mapa 04: Região Escapular · TENS / NMES')" title="Clica para ampliar">
+          <div class="zoom-badge">🔍 Ampliar</div>
+          <img src="/mapa-04.webp" alt="Mapa 04 Região Escapular" loading="lazy" />
           <div class="sheet-footer">
             <span>OMBRO E ESCÁPULA</span>
             Região Escapular · TENS
           </div>
         </div>
-        <div class="sheet-card">
-          <img src="/mapa-16.webp" alt="Mapa 16 Coxa Anterior NMES" />
+        <div class="sheet-card" onclick="openLightbox('/mapa-16.webp', 'Mapa 16: Coxa Anterior · NMES / Ponto Motor Quadricípite')" title="Clica para ampliar">
+          <div class="zoom-badge">🔍 Ampliar</div>
+          <img src="/mapa-16.webp" alt="Mapa 16 Coxa Anterior NMES" loading="lazy" />
           <div class="sheet-footer">
             <span>COXA E JOELHO</span>
             Coxa Anterior · NMES / Ponto Motor
           </div>
         </div>
-        <div class="sheet-card">
-          <img src="/mapa-14.webp" alt="Mapa 14 Região do Tornozelo" />
+        <div class="sheet-card" onclick="openLightbox('/mapa-14.webp', 'Mapa 14: Região do Tornozelo · TENS / FES')" title="Clica para ampliar">
+          <div class="zoom-badge">🔍 Ampliar</div>
+          <img src="/mapa-14.webp" alt="Mapa 14 Região do Tornozelo" loading="lazy" />
           <div class="sheet-footer">
             <span>TORNOZELO E PÉ</span>
             Região do Tornozelo · TENS / FES
           </div>
+        </div>
+      </div>
+
+      <!-- BOTÃO DE AÇÃO INTERMÉDIO 1 -->
+      <div class="inter-cta-wrap">
+        <a href="#oferta" class="btn-inter">QUERO ACEDER AOS +50 MAPAS AGORA →</a>
+        <div class="inter-trust">
+          ⚡ Acesso Imediato no E-mail · 📱 Telemóvel, Tablet e A4 · 🔒 Pagamento Seguro (9,97€ com IVA)
         </div>
       </div>
     </div>
@@ -1495,9 +1675,22 @@
   <section class="section">
     <div class="container">
       <div class="solution-split">
-        <!-- FOTO 03: Guia Visual de Eletroterapia Clínica (1).png -->
-        <div class="solution-img-card">
-          <img src="/assets/03-colecao-completa-fichas.png" alt="Coleção Completa Mapas de Eletroterapia com 7 Lâminas e Parâmetros" />
+        <!-- VITRINE COM FOTO 03 (COLEÇÃO COMPLETA) E FOTO 02 (IPAD/IPHONE OMBRO) -->
+        <div class="solution-visuals-col">
+          <div class="solution-img-card">
+            <img src="/assets/03-colecao-completa-fichas.png" alt="Coleção Completa Mapas de Eletroterapia com 7 Lâminas e Parâmetros" />
+            <div class="img-caption-bar" style="margin-top:6px;">
+              <span>📚 Coleção Completa com +50 Lâminas Clínicas</span>
+              <span class="tag">HD · Imprimível A4</span>
+            </div>
+          </div>
+          <div class="solution-img-card" style="margin-top:14px;">
+            <img src="/assets/02-hero-ipad-iphone-ombro.png" alt="iPad Pro Região do Ombro e iPhone Joelho com Parâmetros Hz e µs" />
+            <div class="img-caption-bar" style="margin-top:6px;">
+              <span>📱 Consulta em Segundos no Tablet e Telemóvel</span>
+              <span class="tag">Hz · µs · Tempo</span>
+            </div>
+          </div>
         </div>
 
         <div>
@@ -1619,6 +1812,14 @@
             <p>Gastrocnémio (gémeos), sóleo, tibial anterior e estruturas do tornozelo e pé. Entorses, tendinopatia aquiliana, fascite plantar e pé pendente (FES).</p>
           </div>
           <div class="reg-highlight">✓ Aplicação funcional (FES 20-40 Hz) e analgesia direcionada no tornozelo</div>
+        </div>
+      </div>
+
+      <!-- BOTÃO DE AÇÃO INTERMÉDIO 2 -->
+      <div class="inter-cta-wrap">
+        <a href="#oferta" class="btn-inter">QUERO DOMINAR O POSICIONAMENTO CLÍNICO →</a>
+        <div class="inter-trust">
+          🗺️ Todas as 8 Regiões Corporais Incluídas · 🎁 4 Bónus no Pacote Completo · 🛡️ Garantia de 7 Dias
         </div>
       </div>
     </div>
@@ -1824,7 +2025,7 @@
           <div>
             <div class="price-val" style="color:var(--text-main);">4,97€</div>
             <div style="font-size:12px; color:var(--text-muted);">Pagamento único · IVA incluído</div>
-            <a href="https://pay.hotmart.com/H108089502L?off=kc0ltn1r&checkoutMode=10&locale=pt-BR" class="btn-plan-basic js-checkout-btn" data-plan="basico" data-value="4.97">
+            <a href="https://pay.hotmart.com/H108089502L?off=kc0ltn1r&checkoutMode=10&locale=pt_PT" class="btn-plan-basic js-checkout-btn" data-plan="basico" data-value="4.97">
               QUERO SÓ O BÁSICO
             </a>
           </div>
@@ -1832,12 +2033,12 @@
 
         <!-- PACOTE COMPLETO 9,97 € (EM 1.º LUGAR NO TELEMÓVEL!) -->
         <div class="plan-card pro">
-          <div class="ribbon-top">⭐ EDIÇÃO COMPLETA MAIS RECOMENDADA</div>
+          <div class="ribbon-top">⭐ EDIÇÃO COMPLETA MAIS ESCOLHIDA EM PORTUGAL</div>
           <div>
             <div class="plan-name">Coleção Completa + 4 Bónus</div>
             <p style="font-size:13px; color:#a5f3fc;">Acesso vitalício à coleção completa em PDF de alta resolução + 4 materiais de apoio</p>
             <ul class="plan-ul">
-              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>+50 Mapas Visuais HD (Modo Ecrã 3D + Pranchas Técnicas)</strong></li>
+              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>+50 Mapas Visuais HD · Lâminas Anatómicas 3D de Alto Contraste (Digital + Impressão A4)</strong></li>
               <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>Pares e Canais (CH1 a CH4) identificados por cor</strong></li>
               <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>5 Correntes:</strong> TENS, NMES, FES, Corrente Russa e Aussie</li>
               <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>8 Regiões Anatómicas Completas</strong></li>
@@ -1851,7 +2052,7 @@
             <div style="font-size:13px; opacity:0.75; text-decoration:line-through;">Valor total separado: 39,97€</div>
             <div class="price-val">9,97€</div>
             <div style="font-size:12px; color:#a7f3d0; font-weight:700; margin-bottom:4px;">Pagamento único · IVA já incluído · Acesso Vitalício</div>
-            <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10&locale=pt-BR" class="btn-plan-pro js-checkout-btn" data-plan="completo" data-value="9.97">
+            <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10&locale=pt_PT" class="btn-plan-pro js-checkout-btn" data-plan="completo" data-value="9.97">
               QUERO OS +50 MAPAS + 4 BÓNUS AGORA →
             </a>
             <div style="font-size:11.5px; color:#cbd5e1; margin-top:12px; font-weight:600;">
@@ -1921,6 +2122,15 @@
     </div>
   </section>
 
+  <!-- MODAL LIGHTBOX INTERATIVO PARA AS LÂMINAS -->
+  <div id="lightbox-modal" class="lightbox-overlay" onclick="closeLightbox(event)">
+    <div class="lightbox-container" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fechar">✕</button>
+      <img id="lightbox-img" src="" alt="Lâmina Ampliada" />
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
   <footer>
     <div class="container">
       <p><strong>ElectroMapas Fisioterapia © 2026 · Todos os direitos reservados.</strong></p>
@@ -1937,8 +2147,42 @@
     <a href="#oferta" class="sticky-btn">ACEDER AGORA →</a>
   </div>
 
-  <!-- DISPARO DO PIXEL META -->
+  <!-- SCRIPTS DA PÁGINA (LIGHTBOX, SLIDER & PIXEL) -->
   <script>
+    // LIGHTBOX INTERATIVO PARA MAPAS
+    function openLightbox(src, caption) {
+      var modal = document.getElementById('lightbox-modal');
+      var img = document.getElementById('lightbox-img');
+      var cap = document.getElementById('lightbox-caption');
+      if (!modal || !img) return;
+      img.src = src;
+      if (cap) cap.textContent = caption || '';
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      var modal = document.getElementById('lightbox-modal');
+      if (!modal) return;
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // SLIDER DE DEPOIMENTOS
+    function goToSlide(index) {
+      var track = document.getElementById('slidesTrack');
+      var dots = document.querySelectorAll('#sliderDots button');
+      if (!track || !dots.length) return;
+      var slideWidth = 280 + 20;
+      track.scrollTo({ left: index * slideWidth, behavior: 'smooth' });
+      dots.forEach(function(dot, i) {
+        dot.classList.toggle('on', i === index);
+      });
+    }
+
+    // DISPARO DO PIXEL META
     document.querySelectorAll('.js-checkout-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var val = parseFloat(this.getAttribute('data-value')) || 9.97;
