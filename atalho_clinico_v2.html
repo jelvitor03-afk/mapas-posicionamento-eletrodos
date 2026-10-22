@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <title>ElectroMapas Fisioterapia — Atalho Clínico de Bolso (15 Casos + Pocket Card CH1-CH4)</title>
+  <style>
+    :root {
+      --emerald-dark: #0b4d3e;
+      --emerald-main: #0f6853;
+      --emerald-light: #e6f4f0;
+      --accent-gold: #d97706;
+      --gold-bg: #fffbeb;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #cbd5e1;
+      --row-alt: #f8fafc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+      background: #ffffff;
+      font-size: 10.5px;
+      line-height: 1.36;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      max-height: 297mm;
+      padding: 10mm 12mm;
+      margin: 0 auto;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .banner-header {
+      background: linear-gradient(135deg, var(--emerald-dark) 0%, var(--emerald-main) 100%);
+      color: #ffffff;
+      padding: 12px 16px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .pill-bar {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .banner-header h1 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 2px;
+      color: #ffffff;
+    }
+    .banner-header p {
+      font-size: 10px;
+      opacity: 0.9;
+      color: #ffffff;
+    }
+    .safety-box {
+      background: var(--gold-bg);
+      border-left: 4px solid var(--accent-gold);
+      padding: 6px 10px;
+      font-size: 9.5px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 8px;
+    }
+    th {
+      background: var(--emerald-dark);
+      color: #ffffff;
+      text-align: left;
+      padding: 5.5px 6px;
+      font-size: 9.2px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    td {
+      padding: 5px 6px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 9.6px;
+      vertical-align: middle;
+    }
+    tr:nth-child(even) td { background: var(--row-alt); }
+    .map-pill {
+      background: var(--emerald-light);
+      color: var(--emerald-dark);
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .ch-tag {
+      font-weight: 700;
+      color: var(--emerald-main);
+      font-size: 9px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-bottom: 8px;
+    }
+    .card {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: #ffffff;
+    }
+    .card h3 {
+      font-size: 10.8px;
+      color: var(--emerald-dark);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 3px;
+      margin-bottom: 5px;
+    }
+    .list-clean li {
+      list-style: none;
+      margin-bottom: 3.5px;
+      font-size: 9.6px;
+    }
+    .quote-patient {
+      background: var(--emerald-light);
+      border-left: 3px solid var(--emerald-dark);
+      padding: 7px 9px;
+      font-style: italic;
+      font-size: 9.6px;
+      border-radius: 4px;
+    }
+    .line-input {
+      border-bottom: 1px dashed var(--border-color);
+      padding: 3.5px 0;
+      font-size: 9.5px;
+      color: var(--text-muted);
+    }
+    .footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 5px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8.8px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+<!-- PÁGINA 1: TABELA DOS 15 CASOS DE GABINETE COM CANAIS CH1-CH4 -->
+<div class="page">
+  <div>
+    <div class="banner-header">
+      <div>
+        <div class="pill-bar">TENS · NMES · FES · CORRENTE RUSSA · AUSSIE | PARES E CANAIS CH1 A CH4</div>
+        <h1>Atalho Clínico de Bolso — Os 15 Casos Mais Comuns de Gabinete</h1>
+        <p>Consulta rápida em 5 segundos no telemóvel ou impressão A4 · Associação direta ao Atlas ElectroMapas</p>
+      </div>
+      <div style="text-align:right; font-weight:800; font-size:12px;">PÁG. 1/2</div>
+    </div>
+
+    <div class="safety-box">
+      <strong>Importante (Uso Profissional):</strong> Este atalho organiza a navegação rápida no Atlas e apresenta intervalos de referência da literatura. Confirma sempre a avaliação clínica, o objetivo terapêutico, a sensibilidade cutânea e o manual do equipamento antes de iniciar a estimulação.
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:4%;">#</th>
+          <th style="width:20%;">Situação / Caso Clínico</th>
+          <th style="width:17%;">Mapa & Região</th>
+          <th style="width:14%;">Canais Sugeridos</th>
+          <th style="width:14%;">Corrente</th>
+          <th style="width:15%;">Parâmetros Ref.*</th>
+          <th style="width:16%;">Nota Clínica Rápida</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>01</strong></td>
+          <td><strong>Lombalgia aguda</strong></td>
+          <td><span class="map-pill">Mapa #12</span> Lombar</td>
+          <td><span class="ch-tag">CH1 + CH2</span> (Paravertebral)</td>
+          <td>TENS Conv.</td>
+          <td>80–120 Hz · 100–150 µs</td>
+          <td>Formigueiro forte confortável; sem contração motora.</td>
+        </tr>
+        <tr>
+          <td><strong>02</strong></td>
+          <td><strong>Ciatalgia / Irradiação</strong></td>
+          <td><span class="map-pill">Mapa #14</span> Trajeto</td>
+          <td><span class="ch-tag">CH1</span> Lombar + <span class="ch-tag">CH2</span> Membro</td>
+          <td>TENS / Aussie</td>
+          <td>80–100 Hz ou 2–10 Hz</td>
+          <td>Testar sensibilidade ao longo do dermátomo antes.</td>
+        </tr>
+        <tr>
+          <td><strong>03</strong></td>
+          <td><strong>Cervicalgia / Trapézio</strong></td>
+          <td><span class="map-pill">Mapa #01</span> Cervical</td>
+          <td><span class="ch-tag">CH1 + CH2</span> (Bilateral)</td>
+          <td>TENS Conv.</td>
+          <td>80–100 Hz · 100–150 µs</td>
+          <td>Evitar rigorosamente a região cervical anterior.</td>
+        </tr>
+        <tr>
+          <td><strong>04</strong></td>
+          <td><strong>Coifa dos Rotadores (dor)</strong></td>
+          <td><span class="map-pill">Mapa #08</span> Ombro</td>
+          <td><span class="ch-tag">CH1</span> Subacromial/Deltoide</td>
+          <td>TENS Conv.</td>
+          <td>80–120 Hz · 100–150 µs</td>
+          <td>Aplicar antes de mobilização articular ou exercício.</td>
+        </tr>
+        <tr>
+          <td><strong>05</strong></td>
+          <td><strong>Coifa (ativação motora)</strong></td>
+          <td><span class="map-pill">Mapa #09</span> Escapular</td>
+          <td><span class="ch-tag">CH1</span> Infraespinhoso</td>
+          <td>NMES / FES</td>
+          <td>30–50 Hz · 200–300 µs</td>
+          <td>Contração visível indolor; associar a rotação externa.</td>
+        </tr>
+        <tr>
+          <td><strong>06</strong></td>
+          <td><strong>Epicondilite lateral</strong></td>
+          <td><span class="map-pill">Mapa #18</span> Cotovelo</td>
+          <td><span class="ch-tag">CH1</span> Extensores carpo</td>
+          <td>TENS Conv.</td>
+          <td>80–100 Hz · 100–150 µs</td>
+          <td>Elétrodos pequenos; respeitar tolerância local.</td>
+        </tr>
+        <tr>
+          <td><strong>07</strong></td>
+          <td><strong>Síndrome femoropatelar</strong></td>
+          <td><span class="map-pill">Mapa #25</span> Joelho/VMO</td>
+          <td><span class="ch-tag">CH1</span> VMO + <span class="ch-tag">CH2</span> Reto Fem.</td>
+          <td>NMES / Russa</td>
+          <td>35–50 Hz · 200–350 µs</td>
+          <td>Sincronizar tempo "On" com mini-agachamento.</td>
+        </tr>
+        <tr>
+          <td><strong>08</strong></td>
+          <td><strong>Entorse tornozelo (aguda)</strong></td>
+          <td><span class="map-pill">Mapa #34</span> Tornozelo</td>
+          <td><span class="ch-tag">CH1</span> Perimaleolar lateral</td>
+          <td>TENS Conv.</td>
+          <td>80–120 Hz · 100–150 µs</td>
+          <td>Controlo álgico; confirmar integridade cutânea.</td>
+        </tr>
+        <tr>
+          <td><strong>09</strong></td>
+          <td><strong>Pós-op joelho (inibição)</strong></td>
+          <td><span class="map-pill">Mapa #26</span> Coxa Ant.</td>
+          <td><span class="ch-tag">CH1 + CH2</span> Quadricípite</td>
+          <td>NMES / FES</td>
+          <td>35–50 Hz · 250–400 µs</td>
+          <td>Combate à inibição artrogénica; longe da sutura.</td>
+        </tr>
+        <tr>
+          <td><strong>10</strong></td>
+          <td><strong>Lombalgia crónica</strong></td>
+          <td><span class="map-pill">Mapa #13</span> Lombar</td>
+          <td><span class="ch-tag">CH1 + CH2</span> Cruzado/Paralelo</td>
+          <td>TENS Baixa Freq.</td>
+          <td>2–10 Hz · 200–300 µs</td>
+          <td>Via opioide endógena; sessões de 20–30 minutos.</td>
+        </tr>
+        <tr>
+          <td><strong>11</strong></td>
+          <td><strong>Dor no ombro (referida)</strong></td>
+          <td><span class="map-pill">Mapa #07</span> Cervico-Esc.</td>
+          <td><span class="ch-tag">CH1</span> Cervical + <span class="ch-tag">CH2</span> Ombro</td>
+          <td>TENS Conv.</td>
+          <td>80–100 Hz · 100–150 µs</td>
+          <td>Verificar origem cervical e dermátomo C5–C6.</td>
+        </tr>
+        <tr>
+          <td><strong>12</strong></td>
+          <td><strong>Atrofia do quadricípite</strong></td>
+          <td><span class="map-pill">Mapa #27</span> Coxa Ant.</td>
+          <td><span class="ch-tag">CH1 + CH2</span> Vasto Med./Lat.</td>
+          <td>Russa / Aussie</td>
+          <td>40–50 Hz · Duty 1:2 / 1:3</td>
+          <td>Contração tetânica forte; vigiar fadiga muscular.</td>
+        </tr>
+        <tr>
+          <td><strong>13</strong></td>
+          <td><strong>Dor plantar / Fascite</strong></td>
+          <td><span class="map-pill">Mapa #35</span> Pé</td>
+          <td><span class="ch-tag">CH1</span> Arco plantar/Calcâneo</td>
+          <td>TENS Conv.</td>
+          <td>80–100 Hz · 100–150 µs</td>
+          <td>Higienizar pele plantar; aplicar pré-alongamento.</td>
+        </tr>
+        <tr>
+          <td><strong>14</strong></td>
+          <td><strong>Cervical + braquialgia</strong></td>
+          <td><span class="map-pill">Mapa #02</span> Membro Sup.</td>
+          <td><span class="ch-tag">CH1</span> Cervical + <span class="ch-tag">CH2</span> Braço</td>
+          <td>TENS Conv.</td>
+          <td>80–120 Hz · 100–150 µs</td>
+          <td>Excluir défice sensitivo marcado no território.</td>
+        </tr>
+        <tr>
+          <td><strong>15</strong></td>
+          <td><strong>Glúteo médio (estabilidade)</strong></td>
+          <td><span class="map-pill">Mapa #22</span> Anca/Glúteo</td>
+          <td><span class="ch-tag">CH1</span> Ventre Glúteo Médio</td>
+          <td>NMES Funcional</td>
+          <td>30–40 Hz · 200–350 µs</td>
+          <td>Associar à abdução ou apoio unipodal controlado.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Guia Rápido de Correntes & Canais por Cor</h3>
+        <ul class="list-clean">
+          <li><strong>• Canal CH1 (Par Principal) & CH2 (Par Secundário):</strong> Nunca cruzar cabos sobre o tórax anterior ou região carotídea.</li>
+          <li><strong>• TENS Convencional (80–120 Hz):</strong> Analgesia rápida por comporta medular (parestesia confortável).</li>
+          <li><strong>• TENS Baixa Frequência (2–10 Hz):</strong> Libertação de endorfinas/encefalinas para dor persistente.</li>
+          <li><strong>• NMES / FES / Russa / Aussie:</strong> Recrutamento motor com rampa de subida/descida (2s) e pausa Off obrigatória.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Índice Rápido das 8 Regiões do Atlas ElectroMapas</h3>
+        <ul class="list-clean">
+          <li><strong>01. Cervical e Cintura Escapular</strong> · <strong>02. Ombro e Coifa</strong></li>
+          <li><strong>03. Braço, Cotovelo e Antebraço</strong> · <strong>04. Punho e Mão</strong></li>
+          <li><strong>05. Coluna Dorsal e Lombar</strong> · <strong>06. Anca e Região Glútea</strong></li>
+          <li><strong>07. Coxa e Joelho (VMO/Quadricípite)</strong> · <strong>08. Perna, Tornozelo e Pé</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span><strong>ELECTROMAPAS FISIOTERAPIA</strong> · Coleção 100% Digital em Alta Resolução</span>
+    <span>*Bónus Surpresa Oficial · Não substitui a avaliação clínica individual</span>
+  </div>
+</div>
+
+<!-- PÁGINA 2: POCKET CARD DE DECISÃO EM 30 SEGUNDOS + CHECKLIST + REGISTO -->
+<div class="page">
+  <div>
+    <div class="banner-header">
+      <div>
+        <div class="pill-bar">POCKET CARD DE CONSULTÓRIO · VERIFICAÇÃO RÁPIDA PRÉ E PÓS-SESSÃO</div>
+        <h1>Fluxo de Decisão em 30 Segundos, Segurança e Registo Clínico</h1>
+        <p>Protocolo de verificação rápida para garantir segurança clínica, adesão do utente e documentação</p>
+      </div>
+      <div style="text-align:right; font-weight:800; font-size:12px;">PÁG. 2/2</div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Árvore de Decisão em 5 Passos (30 Segundos)</h3>
+        <ul class="list-clean">
+          <li><strong>01. Definir Objetivo Clínico:</strong> Modulação de dor aguda, dor persistente, combate à inibição artrogénica ou fortalecimento?</li>
+          <li><strong>02. Escolher Modalidade:</strong> TENS (sensorial/motor) vs. NMES/FES/Russa/Aussie (recrutamento muscular).</li>
+          <li><strong>03. Triagem de Bandeiras Vermelhas:</strong> Rever pacemaker/CDI, gravidez, trombose venosa, feridas abertas, neoplasia local e sensibilidade.</li>
+          <li><strong>04. Alinhar Canais (CH1 a CH4):</strong> Seguir o mapa de cores do Atlas garantindo distância mínima de 2–3 cm entre elétrodos.</li>
+          <li><strong>05. Titular e Monitorizar:</strong> Subir mA gradualmente com feedback verbal do utente e documentar os parâmetros finais.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Checklist de Segurança antes de Ligar o Canal</h3>
+        <ul class="list-clean">
+          <li>☐ Objetivo clínico, indicação e consentimento esclarecidos com o utente.</li>
+          <li>☐ Dispositivos eletrónicos implantados, epilepsia e precauções excluídos.</li>
+          <li>☐ Sensibilidade tátil e integridade da pele testadas na área de aplicação.</li>
+          <li>☐ Pele limpa (sem óleos/cremes) e elétrodos com aderência uniforme.</li>
+          <li>☐ Cabos CH1–CH4 verificados e intensidade a zero antes de ligar o aparelho.</li>
+          <li>☐ <strong>Regra de paragem imediata:</strong> interromper perante ardor, sensação de agulhada, reação cutânea ou desconforto inesperado.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Script de Explicação ao Utente em 20 Segundos</h3>
+        <p style="font-size:9.3px; color:var(--text-muted); margin-bottom:5px;">Lê ou adapta esta frase antes de subir a corrente para gerar confiança imediata:</p>
+        <div class="quote-patient">
+          "Antes de começarmos, vou explicar o que vai sentir: estes elétrodos enviam um estímulo controlado para [aliviar a dor / ajudar a acordar o músculo]. Vou subir a intensidade devagar. No modo de alívio da dor vai sentir um formigueiro forte mas agradável; no modo muscular verá o músculo a contrair sem dor. Se sentir ardor ou picada, avise-me logo."
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Ficha Rápida de Registo de Sessão</h3>
+        <div class="line-input"><strong>Utente / Data / Sessão:</strong> ____________________________________</div>
+        <div class="line-input"><strong>Região & Nº do Mapa ElectroMapas:</strong> _________________________</div>
+        <div class="line-input"><strong>Canais Utilizados:</strong> [ ] CH1   [ ] CH2   [ ] CH3   [ ] CH4</div>
+        <div class="line-input"><strong>Modalidade & Parâmetros (Hz · µs · On/Off):</strong> _________________</div>
+        <div class="line-input"><strong>Intensidade (mA) & Tempo Total:</strong> ____________________________</div>
+        <div class="line-input"><strong>Escala de Dor (EVA Pré → Pós) / Resposta:</strong> ___________________</div>
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--row-alt);">
+      <h3>Referências de Segurança e Consensos Internacionais</h3>
+      <p style="font-size:9px; color:var(--text-muted);">
+        • <strong>SAFE PAMP Consensus (BMJ Open, 2023):</strong> International multidisciplinary consensus on contraindications and precautions for physical agents in rehabilitation (doi:10.1136/bmjopen-2023-075348).<br>
+        • <strong>Physiotherapy Canada (Houghton et al.):</strong> Electrophysical agents — contraindications and precautions: an evidence-based approach (PMC3031347).<br>
+        • <strong>FDA Guidance:</strong> Guidance Document for Powered Muscle Stimulator & TENS 510(k)s.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span><strong>ELECTROMAPAS FISIOTERAPIA</strong> · Pocket Card de Consultório</span>
+    <span>Página 2/2 · Material exclusivo para profissionais de fisioterapia</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "headers": [
     {
-      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html)",
+      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|upsell\\.html|upsell)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.(png|webp|jpg|jpeg|svg|pdf|css|js)",
+      "source": "/(.*)\\.(png|webp|jpg|jpeg|svg|css|js)",
       "headers": [
         {
           "key": "Cache-Control",
