@@ -268,16 +268,18 @@
       <p>Acesso vitalício imediato no mesmo login do Hotmart Club onde vais consultar os teus mapas.</p>
       <div class="upsell-price">Por apenas + <strong>14,97 €</strong> <small>(Pagamento único · IVA incluído)</small></div>
 
-      <!-- CONTAINER OFICIAL DO WIDGET DO FUNIL DE VENDAS DA HOTMART -->
-      <div id="hotmart-sales-funnel-widget">
-        <!-- O widget oficial 1-Click da Hotmart é injetado dinamicamente aqui -->
-        <button type="button" class="widget-placeholder-fallback" id="hotmart-upsell-btn">
-          SIM, QUERO ADICIONAR O KIT CLÍNICA PRO (+14,97 €)
-        </button>
+      <!-- CONTAINER OFICIAL DO WIDGET DO FUNIL DE VENDAS DA HOTMART (1-CLICK UPSELL) -->
+      <div id="hotmart-sales-funnel"></div>
+
+      <!-- FALLBACK DE COMPRA DIRETA (ATIVO CASO ACESSO SEJA FORA DO FLUXO DE 1-CLIQUE) -->
+      <div id="hotmart-fallback-container" style="margin-top: 14px;">
+        <a href="https://pay.hotmart.com/N108089769S?locale=pt_PT" class="widget-placeholder-fallback" id="hotmart-upsell-btn">
+          SIM, QUERO ADICIONAR O KIT CLÍNICA PRO
+        </a>
       </div>
 
-      <div>
-        <a href="javascript:void(0);" class="upsell-refuse" id="hotmart-refuse-btn" onclick="if(window.hotmartFunnel && window.hotmartFunnel.next){window.hotmartFunnel.next();}else{alert('Redirecionando para a sua área de membros...');}">
+      <div style="margin-top: 18px;">
+        <a href="https://mapas-posicionamento-eletrodos.vercel.app/entrega-completo" class="upsell-refuse" id="hotmart-refuse-btn">
           Não, obrigado. Prefiro ficar apenas com os +50 Mapas e o Bónus dos 15 Casos.
         </a>
       </div>
@@ -288,6 +290,23 @@
     <p><strong>ElectroMapas Fisioterapia © 2026 · Todos os direitos reservados.</strong></p>
     <p style="margin-top:4px;">Material técnico de apoio visual destinado a fisioterapeutas. Pagamento processado com segurança pela Hotmart.</p>
   </footer>
+
+  <!-- HOTMART - Sales Funnel Widget Script -->
+  <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+  <script>
+    try {
+      checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+      setTimeout(function() {
+        var container = document.getElementById('hotmart-sales-funnel');
+        if (container && container.children.length > 0) {
+          var fb = document.getElementById('hotmart-fallback-container');
+          if (fb) fb.style.display = 'none';
+        }
+      }, 1200);
+    } catch(e) {
+      console.log('Hotmart Sales Funnel Widget fallback active:', e);
+    }
+  </script>
 
 </body>
 </html>
