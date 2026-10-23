@@ -551,6 +551,35 @@
       color: var(--text-muted);
     }
 
+    /* CTA imediato no hero + sticky (botão sempre visível) */
+    .hero-cta-wrap {
+      margin-top: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+    .sticky-buy {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -8px 28px rgba(16, 42, 67, 0.12);
+      display: flex;
+      justify-content: center;
+    }
+    .sticky-buy .btn-upsell-fallback {
+      max-width: 640px;
+      margin: 0;
+    }
+    body { padding-bottom: 92px; }
+
     @media (max-width: 680px) {
       .pillars-grid {
         grid-template-columns: 1fr;
@@ -593,6 +622,12 @@
       <p class="subtitle">
         Já tens o posicionamento exato dos elétrodos, os canais CH1 a CH4 e os parâmetros recomendados. Adiciona agora a <strong>Suíte Clínica Pro</strong> para saberes exatamente quando intervir em 30 segundos, desmistificares o medo do choque ao utente e registares a sessão em 60 segundos.
       </p>
+      <div class="hero-cta-wrap">
+        <a href="https://pay.hotmart.com/N108089769S?off=54lg83ib&checkoutMode=10&locale=pt_PT" class="btn-upsell-fallback" rel="noopener">
+          SIM, QUERO ADICIONAR O KIT CLÍNICO PRO (+14,97 €) ➔
+        </a>
+        <span class="price-sub">Pagamento único · IVA incluído · Acesso imediato</span>
+      </div>
     </section>
 
     <!-- VITRINE VISUAL DE PRODUTO -->
@@ -819,6 +854,12 @@
     <p><strong>ElectroMapas Fisioterapia © 2026 · Todos os direitos reservados.</strong></p>
     <p style="margin-top:4px;">Material técnico de consulta clínica para fisioterapeutas. Transação processada de forma segura pela Hotmart.</p>
   </footer>
+
+  <div class="sticky-buy" role="region" aria-label="Compra rápida">
+    <a href="https://pay.hotmart.com/N108089769S?off=54lg83ib&checkoutMode=10&locale=pt_PT" class="btn-upsell-fallback" rel="noopener">
+      ADICIONAR KIT CLÍNICO PRO (+14,97 €) ➔
+    </a>
+  </div>
 
   <!-- HOTMART - Sales Funnel Widget (opcional; botão principal permanece sempre visível) -->
   <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
