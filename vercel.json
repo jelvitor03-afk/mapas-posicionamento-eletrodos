@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "headers": [
     {
-      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|upsell\\.html|upsell|entrega-completo|entrega-pro)",
+      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|upsell\\.html|upsell|upsell-2|upsell-3|upsell-4|downsell|entrega-completo|entrega-pro)",
       "headers": [
         {
           "key": "Cache-Control",
