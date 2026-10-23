@@ -1550,7 +1550,7 @@
         <div class="preview-photo-box">
           <img src="/assets/06-secretaria-parametros.webp" alt="Mapas de Eletroterapia na Secretária com Parâmetros Hz e µs" loading="lazy" decoding="async" />
           <div class="preview-photo-caption">
-            <strong>Parâmetros Sugeridos em Cada Folha</strong>
+            <strong>Parâmetros Sugeridos em Cada Lâmina</strong>
             <p>Frequência (Hz), Largura de Pulso (µs) e tempo em minutos indicados na base de cada lâmina.</p>
           </div>
         </div>
@@ -1580,20 +1580,20 @@
             Região Escapular · TENS
           </div>
         </div>
-        <div class="sheet-card" onclick="openLightbox('/mapa-16.webp', 'Mapa 16: Coxa Anterior · NMES / Ponto Motor Quadricípite')" title="Clica para ampliar">
+        <div class="sheet-card" onclick="openLightbox('/mapa-16.webp', 'Mapa 14: Região do Tornozelo · TENS / FES')" title="Clica para ampliar">
           <div class="zoom-badge">🔍 Ampliar</div>
-          <img src="/mapa-16.webp" alt="Mapa 16 Coxa Anterior NMES" loading="lazy" />
-          <div class="sheet-footer">
-            <span>COXA E JOELHO</span>
-            Coxa Anterior · NMES / Ponto Motor
-          </div>
-        </div>
-        <div class="sheet-card" onclick="openLightbox('/mapa-14.webp', 'Mapa 14: Região do Tornozelo · TENS / FES')" title="Clica para ampliar">
-          <div class="zoom-badge">🔍 Ampliar</div>
-          <img src="/mapa-14.webp" alt="Mapa 14 Região do Tornozelo" loading="lazy" />
+          <img src="/mapa-16.webp" alt="Mapa 14 Região do Tornozelo" loading="lazy" />
           <div class="sheet-footer">
             <span>TORNOZELO E PÉ</span>
             Região do Tornozelo · TENS / FES
+          </div>
+        </div>
+        <div class="sheet-card" onclick="openLightbox('/mapa-14.webp', 'Mapa 08: Coxa Anterior · NMES / Ponto Motor Quadricípite')" title="Clica para ampliar">
+          <div class="zoom-badge">🔍 Ampliar</div>
+          <img src="/mapa-14.webp" alt="Mapa 08 Coxa Anterior NMES" loading="lazy" />
+          <div class="sheet-footer">
+            <span>COXA E JOELHO</span>
+            Coxa Anterior · NMES / Ponto Motor
           </div>
         </div>
       </div>
@@ -2055,47 +2055,73 @@
   </section>
 
   <section id="oferta" class="section">
-    <div class="container" style="max-width: 720px; margin: 0 auto;">
+    <div class="container">
       <div class="sec-head" style="text-align: center; margin-bottom: 28px;">
         <span class="sec-pill">CONDIÇÃO ESPECIAL POR TEMPO LIMITADO</span>
-        <h2 class="sec-title" style="margin-top: 12px;">Acede hoje à <span class="serif-italic">Coleção Completa</span></h2>
+        <h2 class="sec-title" style="margin-top: 12px;">Escolhe a tua opção de <span class="serif-italic">Acesso Imediato</span></h2>
         <p class="sec-desc">Pagamento único com IVA já incluído. Acesso digital imediato enviado para o teu e-mail.</p>
       </div>
 
-      <!-- PACOTE COMPLETO UNIFICADO 9,97 € -->
-      <div id="oferta-box" class="plan-card pro" style="max-width: 650px; margin: 0 auto; text-align: left; border: 2px solid var(--accent-cyan); box-shadow: 0 12px 36px rgba(0, 229, 255, 0.25);">
-        <div class="ribbon-top" style="text-align: center;">⭐ EDIÇÃO COMPLETA · PACOTE OFICIAL DE GABINETE</div>
-        <div style="padding: 24px 24px 16px;">
-          <div class="plan-name" style="font-size: 21px; color: #ffffff; font-weight: 800; text-align: center;">
-            Pacote Clínico Completo ElectroMapas
+      <div class="pricing-grid">
+        <!-- PACOTE BÁSICO 4,97 € (Fica em 2.º no telemóvel como âncora) -->
+        <div class="plan-card">
+          <div>
+            <div class="plan-name" style="color:var(--text-main);">PACOTE BÁSICO (SÓ OS MAPAS)</div>
+            <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">Apenas os mapas base para consulta simples</p>
+            <ul class="plan-ul">
+              <li><span style="color:var(--primary); font-weight:900;">✓</span> +50 Mapas Visuais de posicionamento de elétrodos por região</li>
+              <li><span style="color:var(--primary); font-weight:900;">✓</span> Organizados pelas 8 regiões corporais</li>
+              <li><span style="color:var(--primary); font-weight:900;">✓</span> Formato 100% Digital no e-mail</li>
+              <li class="disabled">✗ Sem o Guia Rápido de Parâmetros (Hz e µs)</li>
+              <li class="disabled">✗ Sem os Protocolos por Objetivo e Pontos Motores</li>
+              <li class="disabled">✗ Sem a Checklist de Contraindicações e Ficha de Evolução</li>
+              <li class="disabled">✗ Sem o Atalho dos 15 Casos Mais Comuns</li>
+            </ul>
           </div>
-          <p style="font-size: 13.5px; color: #a5f3fc; margin-top: 6px; text-align: center;">
-            Consulta visual rápida para confirmares o posicionamento de elétrodos em segundos no gabinete ou ao domicílio.
-          </p>
+          <div>
+            <div class="price-val" style="color:var(--text-main);">4,97€</div>
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">Pagamento único · IVA incluído</div>
+            <a href="https://pay.hotmart.com/H108089502L?off=kc0ltn1r&checkoutMode=10&locale=pt_PT" class="btn-plan-basic js-checkout-btn" data-plan="basico" data-value="4.97" style="display:block; width:100%; text-align:center; padding:14px 18px; border-radius:10px; background:transparent; border:1.5px solid #cbd5e1; color:#475569; font-weight:700; font-size:14px; text-transform:none;">
+              Quero apenas os mapas básicos (4,97€)
+            </a>
+          </div>
+        </div>
 
-          <ul class="plan-ul" style="margin: 20px 0 16px;">
-            <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>+50 Mapas Visuais HD:</strong> Organizados pelas 8 regiões corporais anatómicas principais (TENS, NMES, FES, Russa e Aussie).</li>
-            <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>Pares e Canais (CH1 a CH4):</strong> Identificados por cor em cada lâmina para evitar erros de cruzamento.</li>
-            <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>Formato 100% Digital HD:</strong> Otimizado para telemóvel, tablet e computador com consulta rápida.</li>
-            <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #1:</strong> Guia Rápido de Parâmetros Clínicos (Hz, µs, Rampas e Tempo).</li>
-            <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #2:</strong> Mapa de Pontos Motores e Protocolos por Objetivo Terapêutico.</li>
-            <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #3:</strong> Checklist Visual de Segurança e Contraindicações Clínicas.</li>
-            <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #4:</strong> Ficha de Evolução e Registo de Sessão de Eletroterapia.</li>
-            <li><span style="color:#fbbf24; font-weight:900;">🔥</span> <strong>PRESENTE SURPRESA:</strong> Atalho dos 15 Casos Mais Comuns + Pocket Card (0,00 € no Checkout).</li>
-          </ul>
+        <!-- PACOTE COMPLETO 9,97 € (EM 1.º LUGAR NO TELEMÓVEL!) -->
+        <div id="oferta-box" class="plan-card pro">
+          <div class="ribbon-top" style="text-align: center;">⭐ EDIÇÃO COMPLETA · PACOTE OFICIAL DE GABINETE</div>
+          <div>
+            <div class="plan-name" style="font-size: 20px; color: #ffffff; font-weight: 800; text-align: center;">
+              Pacote Clínico Completo ElectroMapas
+            </div>
+            <p style="font-size: 13px; color: #a5f3fc; margin-top: 6px; text-align: center;">
+              Consulta visual rápida para confirmares o posicionamento de elétrodos em segundos no gabinete ou ao domicílio.
+            </p>
 
-          <div style="text-align: center; background: rgba(0, 229, 255, 0.06); border-radius: 12px; padding: 16px; margin-top: 16px;">
-            <div style="font-size: 14px; opacity: 0.75; text-decoration: line-through; color: #94a3b8;">Valor total separado: 39,97€</div>
-            <div class="price-val" style="font-size: 38px; color: #ffffff; font-weight: 900; margin: 4px 0;">9,97€</div>
-            <div style="font-size: 13px; color: #a7f3d0; font-weight: 700; margin-bottom: 14px;">
+            <ul class="plan-ul" style="margin: 18px 0 16px;">
+              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>+50 Mapas Visuais HD:</strong> Organizados pelas 8 regiões corporais (TENS, NMES, FES, Russa e Aussie).</li>
+              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>Pares e Canais (CH1 a CH4):</strong> Identificados por cor em cada lâmina para evitar cruzamentos.</li>
+              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>Formato 100% Digital HD:</strong> Otimizado para telemóvel, tablet e computador.</li>
+              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #1:</strong> Guia Rápido de Parâmetros Clínicos (Hz, µs, Rampas e Tempo).</li>
+              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #2:</strong> Mapa de Pontos Motores e Protocolos por Objetivo Terapêutico.</li>
+              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #3:</strong> Checklist Visual de Segurança e Contraindicações Clínicas.</li>
+              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #4:</strong> Ficha de Evolução e Registo de Sessão de Eletroterapia.</li>
+              <li><span style="color:#fbbf24; font-weight:900;">🔥</span> <strong>PRESENTE SURPRESA:</strong> Atalho dos 15 Casos Mais Comuns + Pocket Card (0,00 € no Checkout).</li>
+            </ul>
+          </div>
+
+          <div style="text-align: center; background: rgba(0, 229, 255, 0.06); border-radius: 12px; padding: 14px; margin-top: 12px;">
+            <div style="font-size: 13px; opacity: 0.75; text-decoration: line-through; color: #94a3b8;">Valor total separado: 39,97€</div>
+            <div class="price-val" style="font-size: 36px; color: #ffffff; font-weight: 900; margin: 4px 0;">9,97€</div>
+            <div style="font-size: 12.5px; color: #a7f3d0; font-weight: 700; margin-bottom: 12px;">
               Pagamento Único · IVA Já Incluído · Acesso Vitalício
             </div>
 
-            <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10&locale=pt_PT" class="btn-plan-pro js-checkout-btn" data-plan="completo" data-value="9.97" style="display: block; width: 100%; font-size: 17px; padding: 18px 24px; border-radius: 12px; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);">
+            <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10&locale=pt_PT" class="btn-plan-pro js-checkout-btn" data-plan="completo" data-value="9.97" style="display: block; width: 100%; font-size: 16px; padding: 16px 20px; border-radius: 10px; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);">
               QUERO O PACOTE COMPLETO (9,97€) →
             </a>
 
-            <div style="font-size: 12px; color: #cbd5e1; margin-top: 12px; font-weight: 600;">
+            <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 10px; font-weight: 600;">
               ⚡ Acesso Vitalício Imediato no E-mail · MB WAY, Multibanco e Cartão · Garantia Total de 7 Dias
             </div>
           </div>
