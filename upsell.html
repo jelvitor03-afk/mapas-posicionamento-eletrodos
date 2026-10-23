@@ -21,274 +21,803 @@
     <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1684602679908725&ev=PageView&noscript=1"/>
   </noscript>
 
-  <title>EletroMapas Clínica Pro — Atualização de Membro | Upsell Oficial</title>
-  <meta name="description" content="Kit Clínico Pro: 25 Testes Ortopédicos, Pranchas Visuais ao Utente, Registo em 60s e Guias de Ultrassom e Laser por apenas +10,49€." />
+  <title>EletroMapas Clínica Pro — Atualização Exclusiva de Membro | Oferta Oficial</title>
+  <meta name="description" content="Kit Clínico Pro para Fisioterapeutas: 25 Testes Ortopédicos Rápidos, Pranchas de Comunicação ao Utente, Registo em 60s e Guias Oficiais de Ultrassom e Laser." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://pay.hotmart.com" crossorigin>
+  <link rel="dns-prefetch" href="https://pay.hotmart.com">
+  <link rel="preconnect" href="https://checkout.hotmart.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --emerald-dark: #0b4d3e;
-      --emerald-main: #0f6853;
-      --emerald-light: #ecfdf5;
-      --emerald-border: #a7f3d0;
-      --accent-gold: #d97706;
       --bg-page: #f8fafc;
-      --text-dark: #0f172a;
+      --bg-card: #ffffff;
+      --bg-dark: #06161e;
+      --bg-dark-card: #0b2532;
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --emerald-accent: #10b981;
+      --emerald-dark: #064e3b;
+      --accent-cyan: #00e5ff;
+      --accent-amber: #f59e0b;
+      --accent-orange: #ea580c;
+      --text-main: #0f172a;
       --text-body: #334155;
       --text-muted: #64748b;
-      --border-color: #e2e8f0;
+      --border: #e2e8f0;
+      --border-emerald: #a7f3d0;
+      --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
+      --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 20px 45px rgba(13, 148, 136, 0.16);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background-color: var(--bg-page);
       color: var(--text-body);
-      line-height: 1.55;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      padding: 0 0 40px;
+      padding-bottom: 60px;
     }
 
-    .upsell-status-bar {
-      background: linear-gradient(90deg, #064e3b 0%, #0f766e 50%, #064e3b 100%);
+    /* BARRA SUPERIOR DE STATUS DO FUNIL */
+    .funnel-bar {
+      background: linear-gradient(90deg, #06161e 0%, #0b2532 50%, #06161e 100%);
       color: #ffffff;
-      text-align: center;
       padding: 12px 18px;
-      font-size: 13.5px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
       position: sticky;
       top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .funnel-bar-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .funnel-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+    .funnel-status-badge span.check {
+      background: #10b981;
+      color: #ffffff;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .progress-track {
+      flex: 1;
+      min-width: 140px;
+      max-width: 280px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      width: 85%;
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #00e5ff);
+      border-radius: 99px;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 1; }
     }
 
-    .upsell-container {
-      max-width: 860px;
-      margin: 32px auto 0;
-      padding: 0 20px;
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 18px;
     }
 
+    /* HERO DO UPSELL */
     .upsell-hero {
       text-align: center;
-      margin-bottom: 32px;
+      padding: 40px 0 28px;
     }
-
-    .upsell-pretitle {
-      display: inline-block;
+    .pill-urgency {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       background: #fef3c7;
       border: 1px solid #fde68a;
       color: #92400e;
       font-size: 11.5px;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
-      padding: 6px 14px;
+      padding: 6px 16px;
       border-radius: 999px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
     }
-
     .upsell-hero h1 {
-      font-size: clamp(24px, 4vw, 36px);
+      font-size: clamp(23px, 3.8vw, 36px);
       font-weight: 900;
       line-height: 1.22;
-      color: var(--text-dark);
-      letter-spacing: -0.02em;
+      color: var(--text-main);
+      letter-spacing: -0.025em;
       margin-bottom: 16px;
     }
-
-    .upsell-subtitle {
-      font-size: clamp(15px, 2vw, 17px);
+    .upsell-hero h1 span.highlight {
+      color: var(--primary);
+    }
+    .upsell-hero p.subtitle {
+      font-size: clamp(15.5px, 2.1vw, 18px);
       color: var(--text-body);
-      max-width: 720px;
-      margin: 0 auto;
+      max-width: 780px;
+      margin: 0 auto 24px;
       line-height: 1.6;
     }
 
-    .upsell-grid {
+    /* VITRINE VISUAL DE PRODUTO */
+    .showcase-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 12px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .showcase-card img {
+      width: 100%;
+      height: auto;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+    }
+    .showcase-caption {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px 4px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      gap: 8px;
+    }
+    .showcase-tag {
+      background: #ccfbf1;
+      color: var(--primary-dark);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 800;
+    }
+
+    /* OS 4 PILARES DO KIT CLÍNICO PRO */
+    .pillars-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 18px;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
-
-    .upsell-item {
+    .pillar-box {
       background: #ffffff;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 22px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .upsell-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    .pillar-box:hover {
+      transform: translateY(-3px);
+      border-color: #99f6e4;
+      box-shadow: var(--shadow-md);
     }
-
-    .upsell-item h3 {
-      font-size: 16px;
+    .pillar-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .pillar-icon-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: #e0f2fe;
+      color: #0369a1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .pillar-box:nth-child(2) .pillar-icon-badge {
+      background: #ecfdf5;
+      color: #047857;
+    }
+    .pillar-box:nth-child(3) .pillar-icon-badge {
+      background: #fef3c7;
+      color: #b45309;
+    }
+    .pillar-box:nth-child(4) .pillar-icon-badge {
+      background: #f3e8ff;
+      color: #7e22ce;
+    }
+    .pillar-title-wrap h3 {
+      font-size: 16.5px;
       font-weight: 800;
-      color: var(--emerald-dark);
-      margin-bottom: 8px;
-      line-height: 1.35;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+    .pillar-title-wrap span.pill-meta {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .pillar-desc {
+      font-size: 13.8px;
+      color: var(--text-body);
+      line-height: 1.55;
+    }
+    .pillar-outcome {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #047857;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .upsell-item p {
-      font-size: 13.5px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .upsell-cta-box {
+    /* TABELA COMPARATIVA DE VALOR (BÁSICO VS SUÍTE PRO) */
+    .compare-section {
       background: #ffffff;
-      border: 2px solid var(--emerald-main);
+      border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 32px 24px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(15, 104, 83, 0.12);
-      margin-top: 10px;
+      padding: 28px 24px;
+      margin-bottom: 36px;
+      box-shadow: var(--shadow-sm);
     }
-
-    .upsell-cta-box h2 {
-      font-size: 24px;
+    .compare-title {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .compare-title h2 {
+      font-size: clamp(20px, 3vw, 26px);
       font-weight: 900;
-      color: var(--text-dark);
+      color: var(--text-main);
+    }
+    .compare-title p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    .compare-table th {
+      text-align: left;
+      padding: 12px 14px;
+      background: #f1f5f9;
+      color: var(--text-main);
+      font-weight: 800;
+      border-bottom: 2px solid var(--border);
+    }
+    .compare-table th.col-pro {
+      background: #ccfbf1;
+      color: #0f766e;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    }
+    .compare-table th.col-base {
+      text-align: center;
+      color: var(--text-muted);
+    }
+    .compare-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-table td.col-center {
+      text-align: center;
+      font-weight: 700;
+    }
+    .compare-table td.col-pro {
+      background: #f0fdfa;
+      text-align: center;
+      font-weight: 800;
+      color: #0f766e;
+    }
+    .check-green { color: #10b981; font-weight: 900; font-size: 16px; }
+    .cross-gray { color: #cbd5e1; font-weight: 900; font-size: 16px; }
+
+    /* CAIXA DE DECISÃO E CHECKOUT DO UPSELL */
+    .decision-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);
+      border: 2.5px solid var(--emerald-accent);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .decision-badge-top {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #10b981, #0d9488);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 5px 20px;
+      border-radius: 99px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+      white-space: nowrap;
+    }
+    .decision-card h2 {
+      font-size: clamp(22px, 3.2vw, 30px);
+      font-weight: 900;
+      color: var(--text-main);
       margin-bottom: 8px;
     }
-
-    .upsell-cta-box p {
-      font-size: 14.5px;
-      color: var(--text-muted);
-      margin-bottom: 18px;
+    .decision-card p.desc {
+      font-size: 15px;
+      color: var(--text-body);
+      max-width: 680px;
+      margin: 0 auto 20px;
     }
 
-    .upsell-price {
-      font-size: 28px;
+    .value-stack-box {
+      background: #ffffff;
+      border: 1px solid var(--border-emerald);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      max-width: 580px;
+      margin: 0 auto 24px;
+      text-align: left;
+      font-size: 13.5px;
+    }
+    .value-stack-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px dashed #f1f5f9;
+    }
+    .value-stack-row:last-child {
+      border-bottom: none;
+      padding-top: 10px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .strike-val {
+      color: #94a3b8;
+      text-decoration: line-through;
+    }
+
+    .price-display-box {
+      margin-bottom: 24px;
+    }
+    .price-old {
+      font-size: 16px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+    .price-big {
+      font-size: clamp(38px, 5.5vw, 54px);
       font-weight: 900;
       color: var(--emerald-dark);
-      margin-bottom: 22px;
+      line-height: 1;
+      margin: 6px 0;
     }
-    .upsell-price small {
+    .price-sub {
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-muted);
-      display: block;
-      margin-top: 2px;
     }
 
-    #hotmart-sales-funnel-widget {
-      min-height: 80px;
-      margin-top: 16px;
+    /* WIDGET HOTMART & BOTÃO FALLBACK */
+    #hotmart-sales-funnel {
+      min-height: 70px;
+      margin: 10px auto;
       display: flex;
       justify-content: center;
       align-items: center;
     }
-
-    .widget-placeholder-fallback {
-      display: inline-block;
-      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+    .btn-upsell-fallback {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(180deg, #10b981 0%, #0d9488 100%);
       color: #ffffff;
-      font-size: 17px;
-      font-weight: 800;
+      font-size: clamp(16px, 2.2vw, 18.5px);
+      font-weight: 900;
       text-decoration: none;
-      padding: 16px 36px;
+      padding: 18px 36px;
       border-radius: 99px;
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 10px 28px rgba(13, 148, 136, 0.4);
       border: none;
       cursor: pointer;
+      width: 100%;
+      max-width: 580px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .btn-upsell-fallback:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(13, 148, 136, 0.5);
+    }
+    .upsell-trust-seals {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 16px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .upsell-trust-seals span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
+    /* BOTÃO DE RECUSA DISCRETO E EDUCADO */
+    .refuse-wrap {
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
     .upsell-refuse {
       display: inline-block;
-      margin-top: 18px;
       font-size: 13px;
       color: var(--text-muted);
       text-decoration: underline;
       cursor: pointer;
+      line-height: 1.5;
+      padding: 4px 10px;
     }
     .upsell-refuse:hover {
-      color: var(--text-dark);
+      color: var(--text-main);
     }
 
-    @media (max-width: 640px) {
-      .upsell-grid {
+    /* GARANTIA HOTMART */
+    .guarantee-box {
+      margin-top: 36px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+      text-align: left;
+    }
+    .guarantee-icon {
+      font-size: 38px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .guarantee-text h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .guarantee-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer.upsell-footer {
+      text-align: center;
+      padding: 36px 18px 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 680px) {
+      .pillars-grid {
         grid-template-columns: 1fr;
       }
-      .upsell-cta-box {
-        padding: 24px 16px;
+      .decision-card {
+        padding: 28px 16px;
+      }
+      .btn-upsell-fallback {
+        font-size: 15px;
+        padding: 16px 20px;
+      }
+      .guarantee-box {
+        flex-direction: column;
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="upsell-status-bar">
-    ✅ <strong>PASSO 1 DE 2 CONCLUÍDO:</strong> Os teus +50 Mapas Visuais + o teu Presente Surpresa (Atalho dos 15 Casos) já estão garantidos! Não feches esta página.
-  </div>
+  <!-- BARRA DE TOPO: PROGRESSO E SEGURANÇA -->
+  <header class="funnel-bar">
+    <div class="funnel-bar-inner">
+      <div class="funnel-status-badge">
+        <span class="check">✓</span>
+        <span><strong>PASSO 1 DE 2 CONCLUÍDO:</strong> Os teus +50 Mapas e o Presente Surpresa (15 Casos) já estão garantidos!</span>
+      </div>
+      <div class="progress-track" title="Progresso da Encomenda: 85%">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+  </header>
 
-  <main class="upsell-container">
-    <header class="upsell-hero">
-      <span class="upsell-pretitle">OFERTA ÚNICA DE ATUALIZAÇÃO PARA NOVOS MEMBROS</span>
-      <h1>Gostaste do Atalho dos 15 Casos que acabaste de ganhar no checkout? Então fecha agora a outra metade da tua consulta.</h1>
-      <p class="upsell-subtitle">
-        Já tens o posicionamento dos elétrodos e os parâmetros de referência resolvidos. Adiciona agora o <strong>Kit Clínico Pro: 25 Testes Ortopédicos + Fichas de Avaliação e Suíte Completa</strong> para saberes exatamente quando intervir e registares as sessões em 60 segundos.
+  <main class="container">
+    
+    <!-- SEÇÃO HERO DO UPSELL -->
+    <section class="upsell-hero">
+      <div class="pill-urgency">⚡ OFERTA EXCLUSIVA DE BOAS-VINDAS · APENAS NESTA TRANSAÇÃO</div>
+      <h1>Gostaste do Atalho dos 15 Casos que acabaste de ganhar?<br><span class="highlight">Então fecha agora a outra metade da tua consulta.</span></h1>
+      <p class="subtitle">
+        Já tens o posicionamento exato dos elétrodos, os canais CH1 a CH4 e os parâmetros recomendados. Adiciona agora a <strong>Suíte Clínica Pro</strong> para saberes exatamente quando intervir em 30 segundos, desmistificares o medo do choque ao utente e registares a sessão em 60 segundos.
       </p>
-    </header>
+    </section>
 
-    <section class="upsell-grid">
-      <div class="upsell-item">
-        <h3>1. 25 Testes Ortopédicos com Sensibilidade & Especificidade</h3>
-        <p>Ombro, Joelho, Coluna Cervical/Lombar, Tornozelo e Punho. Procedimento passo a passo em 30 segundos, interpretação de testes positivos e cruzamento direto com o mapa de elétrodos ideal.</p>
-      </div>
-
-      <div class="upsell-item">
-        <h3>2. Pranchas Visuais de Explicação ao Utente ("O Que Estou a Sentir?")</h3>
-        <p>Lâminas ilustradas prontas para mostrares no tablet ou telemóvel no gabinete. Explicam visualmente ao utente a diferença entre formigueiro analgésico (TENS) e ativação muscular (NMES), eliminando o medo da corrente elétrica logo na primeira sessão.</p>
-      </div>
-
-      <div class="upsell-item">
-        <h3>3. Fichas de Registo de Eletroterapia em 60 Segundos</h3>
-        <p>Acabaram-se os registos demorados entre utentes. Marca com checkboxes a região, o número do mapa utilizado, corrente, Hz, largura de pulso, EVA inicial/final e resposta motora em menos de 1 minuto.</p>
-      </div>
-
-      <div class="upsell-item">
-        <h3>4. Bónus VIP: Guias Oficiais de Ultrassom Clínico & Laserterapia</h3>
-        <p>Dosimetria prática em Joules/cm² e W/cm² baseada nas normas WALT, protocolos de terapia combinada e regras de biossegurança prontas para o consultório.</p>
+    <!-- VITRINE VISUAL DE PRODUTO -->
+    <section class="showcase-card">
+      <img src="/assets/07-quatro-tablets-ondas.webp" alt="Suíte Clínica Pro em Ecrã Digital — EletroMapas Fisioterapia" fetchpriority="high" decoding="async">
+      <div class="showcase-caption">
+        <span>📱 SUÍTE DIGITAL DE ALTA EFICIÊNCIA CLÍNICA · TELEMÓVEL, TABLET E COMPUTADOR</span>
+        <span class="showcase-tag">ACESSO VITALÍCIO IMEDIATO</span>
       </div>
     </section>
 
-    <!-- Caixa de Decisão e Widget Hotmart -->
-    <section class="upsell-cta-box">
+    <!-- OS 4 PILARES DA SUÍTE CLÍNICA PRO -->
+    <section class="pillars-grid">
+      
+      <!-- PILAR 1: 25 TESTES ORTOPÉDICOS -->
+      <article class="pillar-box">
+        <div>
+          <div class="pillar-header">
+            <div class="pillar-icon-badge">🩺</div>
+            <div class="pillar-title-wrap">
+              <span class="pill-meta">DIAGNÓSTICO DIFERENCIAL</span>
+              <h3>25 Testes Ortopédicos Rápidos com Sensibilidade & Especificidade</h3>
+            </div>
+          </div>
+          <p class="pillar-desc">
+            Ombro, Joelho, Coluna Cervical e Lombar, Tornozelo e Punho. Manobra descrita passo a passo para execução em 30 segundos, interpretação clara de testes positivos e encaminhamento direto para o mapa de eletroterapia correspondente.
+          </p>
+        </div>
+        <div class="pillar-outcome">
+          <span>✓ Elimina a dúvida: sabe exatamente se a corrente está indicada</span>
+        </div>
+      </article>
+
+      <!-- PILAR 2: PRANCHAS VISUAIS AO UTENTE -->
+      <article class="pillar-box">
+        <div>
+          <div class="pillar-header">
+            <div class="pillar-icon-badge">🤝</div>
+            <div class="pillar-title-wrap">
+              <span class="pill-meta">COMUNICAÇÃO COM O UTENTE</span>
+              <h3>Pranchas Visuais Anti-Medo: "O Que Estou a Sentir na Sessão?"</h3>
+            </div>
+          </div>
+          <p class="pillar-desc">
+            Lâminas ilustradas no tablet para mostrares ao utente antes de ligar o aparelho. Explicam a diferença entre o formigueiro analgésico do TENS e a contração muscular do NMES, eliminando o pavor do "choque elétrico" logo na primeira sessão.
+          </p>
+        </div>
+        <div class="pillar-outcome">
+          <span>✓ Aumenta o relaxamento muscular e a adesão do doente ao tratamento</span>
+        </div>
+      </article>
+
+      <!-- PILAR 3: REGISTO EM 60 SEGUNDOS -->
+      <article class="pillar-box">
+        <div>
+          <div class="pillar-header">
+            <div class="pillar-icon-badge">⚡</div>
+            <div class="pillar-title-wrap">
+              <span class="pill-meta">PROTEÇÃO MÉDICO-LEGAL</span>
+              <h3>Fichas de Registo de Eletroterapia em 60 Segundos</h3>
+            </div>
+          </div>
+          <p class="pillar-desc">
+            Acaba com os registos clínicos demorados entre consultas. Marca com checkboxes a região, mapa utilizado, frequência (Hz), largura de pulso (µs), intensidade (mA), EVA inicial/final e resposta motora em menos de 1 minuto.
+          </p>
+        </div>
+        <div class="pillar-outcome">
+          <span>✓ Poupa 15 minutos por utente e garante salvaguarda documental total</span>
+        </div>
+      </article>
+
+      <!-- PILAR 4: ULTRASSOM & LASER WALT -->
+      <article class="pillar-box">
+        <div>
+          <div class="pillar-header">
+            <div class="pillar-icon-badge">💡</div>
+            <div class="pillar-title-wrap">
+              <span class="pill-meta">TERAPIA COMBINADA VIP</span>
+              <h3>Guias Oficiais de Ultrassom Clínico & Laserterapia WALT</h3>
+            </div>
+          </div>
+          <p class="pillar-desc">
+            Tabelas práticas de dosimetria em Joules/cm² e W/cm² baseadas nas recomendações mundiais da WALT. Protocolos prontos para terapia combinada com eletroestimulação sem risco de sobredosagem ou queimadura periosteal.
+          </p>
+        </div>
+        <div class="pillar-outcome">
+          <span>✓ Domina todos os agentes físicos da tua clínica com segurança</span>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- TABELA COMPARATIVA DE BENEFÍCIOS -->
+    <section class="compare-section">
+      <div class="compare-title">
+        <h2>Vê a diferença no teu dia a dia clínico</h2>
+        <p>A comparação direta entre o teu acesso aos mapas e o upgrade com a Suíte Pro</p>
+      </div>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Recurso de Consulta</th>
+            <th class="col-base">O Teu Pacote Base</th>
+            <th class="col-pro">Com a Suíte Clínica Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>+50 Mapas Visuais de Posicionamento (CH1 a CH4)</strong></td>
+            <td class="col-center"><span class="check-green">✓</span> Incluído</td>
+            <td class="col-pro"><span class="check-green">✓</span> Incluído</td>
+          </tr>
+          <tr>
+            <td><strong>Parâmetros Rápidos de Referência (Hz, µs, tempo)</strong></td>
+            <td class="col-center"><span class="check-green">✓</span> Incluído</td>
+            <td class="col-pro"><span class="check-green">✓</span> Incluído</td>
+          </tr>
+          <tr>
+            <td><strong>Atalho Clínico dos 15 Casos Rápidos (Bónus Surpresa)</strong></td>
+            <td class="col-center"><span class="check-green">✓</span> Incluído</td>
+            <td class="col-pro"><span class="check-green">✓</span> Incluído</td>
+          </tr>
+          <tr>
+            <td><strong>25 Testes Ortopédicos Rápidos (Sensibilidade/Especificidade)</strong></td>
+            <td class="col-center"><span class="cross-gray">✕</span></td>
+            <td class="col-pro"><span class="check-green">✓</span> <strong>Desbloqueado</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Pranchas Visuais de Explicação ao Utente (Anti-Medo)</strong></td>
+            <td class="col-center"><span class="cross-gray">✕</span></td>
+            <td class="col-pro"><span class="check-green">✓</span> <strong>Desbloqueado</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Fichas de Registo Clínico Rápido em 60 Segundos</strong></td>
+            <td class="col-center"><span class="cross-gray">✕</span></td>
+            <td class="col-pro"><span class="check-green">✓</span> <strong>Desbloqueado</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Guias Oficiais de Ultrassom Clínico & Laserterapia WALT</strong></td>
+            <td class="col-center"><span class="cross-gray">✕</span></td>
+            <td class="col-pro"><span class="check-green">✓</span> <strong>Desbloqueado</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- CAIXA DE DECISÃO E 1-CLICK UPSELL -->
+    <section class="decision-card">
+      <div class="decision-badge-top">⭐ ATUALIZAÇÃO RECOMENDADA PARA O TEU ACESSO</div>
       <h2>Adiciona o «Kit Clínico Pro» à tua Área de Membros</h2>
-      <p>Acesso vitalício imediato no mesmo login do Hotmart Club onde vais consultar os teus mapas.</p>
-      <div class="upsell-price">Por apenas + <strong>10,49 €</strong> <small>(Pagamento único · IVA incluído)</small></div>
+      <p class="desc">
+        Acesso vitalício instantâneo adicionado à mesma conta onde vais consultar os teus mapas de eletroterapia na Hotmart.
+      </p>
+
+      <!-- EMPILHAMENTO DE VALOR -->
+      <div class="value-stack-box">
+        <div class="value-stack-row">
+          <span>25 Testes Ortopédicos com Sensibilidade & Especificidade</span>
+          <span class="strike-val">27,00 €</span>
+        </div>
+        <div class="value-stack-row">
+          <span>Pranchas Visuais de Comunicação ao Utente ("O Que Sinto?")</span>
+          <span class="strike-val">19,00 €</span>
+        </div>
+        <div class="value-stack-row">
+          <span>Fichas de Registo de Eletroterapia em 60s (Médico-Legal)</span>
+          <span class="strike-val">15,00 €</span>
+        </div>
+        <div class="value-stack-row">
+          <span>Guias de Ultrassom Clínico & Laserterapia WALT</span>
+          <span class="strike-val">17,00 €</span>
+        </div>
+        <div class="value-stack-row">
+          <span><strong>Valor Total de Mercado:</strong></span>
+          <span style="color:var(--text-main); font-weight:800;"><span class="strike-val">78,00 €</span></span>
+        </div>
+      </div>
+
+      <div class="price-display-box">
+        <div class="price-old">De 47,00 € por</div>
+        <div class="price-big">+ 14,97 €</div>
+        <div class="price-sub">Pagamento Único · IVA Já Incluído · Sem Mensalidades</div>
+      </div>
 
       <!-- CONTAINER OFICIAL DO WIDGET DO FUNIL DE VENDAS DA HOTMART (1-CLICK UPSELL) -->
       <div id="hotmart-sales-funnel"></div>
 
       <!-- FALLBACK DE COMPRA DIRETA (ATIVO CASO ACESSO SEJA FORA DO FLUXO DE 1-CLIQUE OU VIA MB WAY) -->
-      <div id="hotmart-fallback-container" style="margin-top: 14px;">
-        <a href="https://pay.hotmart.com/N108089769S?off=54lg83ib&checkoutMode=10&locale=pt_PT" class="widget-placeholder-fallback" id="hotmart-upsell-btn">
-          SIM, QUERO ADICIONAR O KIT CLÍNICA PRO
+      <div id="hotmart-fallback-container" style="margin-top: 10px;">
+        <a href="https://pay.hotmart.com/N108089769S?off=54lg83ib&checkoutMode=10&locale=pt_PT" class="btn-upsell-fallback" id="hotmart-upsell-btn">
+          SIM, QUERO ADICIONAR O KIT CLÍNICO PRO (+14,97 €) ➔
         </a>
       </div>
 
-      <div style="margin-top: 18px;">
+      <div class="upsell-trust-seals">
+        <span>🔒 Pagamento 100% Seguro Hotmart</span>
+        <span>⚡ Acesso Vitalício Imediato</span>
+        <span>🛡️ Garantia Incondicional de 7 Dias</span>
+      </div>
+
+      <!-- BOTÃO DE RECUSA DISCRETO E EDUCADO -->
+      <div class="refuse-wrap">
         <a href="https://mapas-posicionamento-eletrodos.vercel.app/entrega-completo" class="upsell-refuse" id="hotmart-refuse-btn">
-          Não, obrigado. Prefiro ficar apenas com os +50 Mapas e o Bónus dos 15 Casos.
+          Não, obrigado. Prefiro ficar apenas com os +50 Mapas e abdico do Kit Clínico Pro com desconto de boas-vindas.
         </a>
+      </div>
+
+    </section>
+
+    <!-- BOX DE GARANTIA HOTMART -->
+    <section class="guarantee-box">
+      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-text">
+        <h4>Garantia Incondicional de Satisfação de 7 Dias</h4>
+        <p>
+          Explora o Kit Clínico Pro nas tuas próximas consultas. Se os 25 testes ortopédicos, as pranchas ao utente e as fichas de 60s não pouparem tempo real na marquesa, recebes 100% do teu dinheiro de volta com um simples clique na Hotmart. Risco zero para ti.
+        </p>
       </div>
     </section>
+
   </main>
 
-  <footer style="text-align:center; padding:30px 18px 10px; font-size:12px; color:#64748b;">
+  <footer class="upsell-footer">
     <p><strong>ElectroMapas Fisioterapia © 2026 · Todos os direitos reservados.</strong></p>
-    <p style="margin-top:4px;">Material técnico de apoio visual destinado a fisioterapeutas. Pagamento processado com segurança pela Hotmart.</p>
+    <p style="margin-top:4px;">Material técnico de consulta clínica para fisioterapeutas. Transação processada de forma segura pela Hotmart.</p>
   </footer>
 
   <!-- HOTMART - Sales Funnel Widget Script -->

@@ -22,11 +22,11 @@
   fbq('track', 'PageView');
   try {
     if (!sessionStorage.getItem('pixel_purchase_pro')) {
-      fbq('track', 'Purchase', { value: 10.49, currency: 'EUR', content_name: 'Kit Clinico Pro 25 Testes Ortopedicos' });
+      fbq('track', 'Purchase', { value: 14.97, currency: 'EUR', content_name: 'Kit Clinico Pro 25 Testes Ortopedicos' });
       sessionStorage.setItem('pixel_purchase_pro', '1');
     }
   } catch (e) {
-    fbq('track', 'Purchase', { value: 10.49, currency: 'EUR' });
+    fbq('track', 'Purchase', { value: 14.97, currency: 'EUR' });
   }
   </script>
   <noscript><img height="1" width="1" style="display:none"
