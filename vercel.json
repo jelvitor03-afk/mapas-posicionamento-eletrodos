@@ -1,31 +1,31 @@
 {
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/electromapas-pro-app", "destination": "/app/index.html" },
+    { "source": "/electromapas-pro-app.html", "destination": "/app/index.html" },
+    { "source": "/app", "destination": "/app/index.html" },
+    { "source": "/app/", "destination": "/app/index.html" },
+    { "source": "/tailwind.min.js", "destination": "/app/tailwind.min.js" },
+    { "source": "/manifest.json", "destination": "/app/manifest.json" },
+    { "source": "/sw.js", "destination": "/app/sw.js" }
+  ],
   "headers": [
     {
       "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|upsell\\.html|upsell|upsell-2|upsell-3|upsell-4|downsell|entrega-completo|entrega-pro)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/app/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
       ]
     },
     {
       "source": "/assets/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.(png|webp|jpg|jpeg|svg|css|js)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
   ]

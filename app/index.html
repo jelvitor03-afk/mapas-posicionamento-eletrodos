@@ -1,0 +1,2594 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <meta name="theme-color" content="#030c14" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="/app/manifest.json" />
+  <title>ElectroMapas PRO — Estação Clínica & Atlas de Eletroterapia</title>
+  
+  <!-- Tailwind CSS Local (100% Offline) -->
+  <script src="/app/tailwind.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            med: {
+              bg: '#030c14',
+              surface: '#071522',
+              card: '#0c1e30',
+              cardLight: '#122c45',
+              border: '#1a3c5a',
+              borderActive: '#00e5ff',
+              cyan: '#00e5ff',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              red: '#ef4444',
+              blue: '#3b82f6',
+              purple: '#a855f7'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #030c14;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    @keyframes pulse-beacon {
+      0% { transform: scale(0.85); opacity: 0.95; }
+      50% { transform: scale(1.4); opacity: 0.2; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+    .hotspot-beacon::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 9999px;
+      border: 2px solid #00e5ff;
+      animation: pulse-beacon 1.8s infinite ease-out;
+    }
+    
+    .hospital-grid {
+      background-image: radial-gradient(circle, rgba(0, 229, 255, 0.07) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .muscle-path {
+      fill: #092135;
+      stroke: #00e5ff;
+      stroke-width: 1.2;
+      stroke-opacity: 0.65;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .muscle-path:hover {
+      fill: #0d466b;
+      stroke: #00ffff;
+      stroke-opacity: 1;
+      stroke-width: 1.8;
+      filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.75));
+    }
+    .muscle-path.active, .muscle-path.selected-muscle {
+      fill: #0a4d75;
+      stroke: #00e5ff;
+      stroke-opacity: 1;
+      stroke-width: 2.2;
+      filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.95));
+    }
+
+    .electrode-pad {
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      transition: transform 0.1s ease;
+    }
+    .electrode-pad:active {
+      cursor: grabbing;
+      transform: scale(1.15);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col hospital-grid text-slate-200">
+
+  <!-- ======================================================================= -->
+  <!-- AVISO CLÍNICO & EPISTÉMICO (TRANSPARÊNCIA TOTAL) -->
+  <!-- ======================================================================= -->
+  <aside class="bg-amber-950/40 border-b border-amber-500/30 px-4 py-2 text-center text-xs text-amber-200/90 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+    <span><b>Nota Informativa:</b> Guia técnico de estudo baseado em fontes independentes: 1) Recomendações clínicas de Nussbaum EL et al. (2017, PMC5683854); 2) Posicionamento e pontos motores de Baker LL et al. (USC/Axelgaard, 2000); 3) Analgesia TENS por Johnson MI et al. (PMC4589923). <u>Não controla aparelhos físicos</u>.</span>
+    <span class="text-cyan-300 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Modo Offline: Consulta Essencial (Atlas, dosimetria e SOAP no navegador; vídeos práticos transmitidos online).</span>
+  </aside>
+
+  <!-- ======================================================================= -->
+  <!-- BARRA SUPERIOR: IDENTIFICAÇÃO DO GUIA & NAVEGAÇÃO -->
+  <!-- ======================================================================= -->
+  <header class="bg-[#05131f] border-b border-med-border px-4 py-3 shadow-xl sticky top-0 z-40 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Identificação -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/30 border border-cyan-400/50 flex items-center justify-center text-cyan-400 font-black text-xl shadow-lg shadow-cyan-500/20">
+          ⚡
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-black text-base tracking-tight text-white">ELECTROMAPAS <span class="text-cyan-400">PRO</span></span>
+            <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">Guia Clínico de Bolso</span>
+          </div>
+          <p class="text-[11px] text-slate-400">
+            Atlas de Posicionamento, Dosimetria Baseada em Evidência & Apoio à Decisão
+          </p>
+        </div>
+      </div>
+
+      <!-- Navegação Limpa (5 Secções Principais) & Status de Licença -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <nav class="flex items-center gap-1.5 text-xs font-bold flex-wrap">
+          <button onclick="switchViewSection('atlas')" id="btn-nav-atlas" class="nav-btn active px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950 transition flex items-center gap-1.5 shadow-md">
+            <span>🗺️</span> <span>Atlas & Colocação</span>
+          </button>
+          <button onclick="switchViewSection('protocols')" id="btn-nav-protocols" class="nav-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5">
+            <span>📚</span> <span>16 Protocolos</span>
+          </button>
+          <button onclick="switchViewSection('calculator')" id="btn-nav-calculator" class="nav-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5">
+            <span>🧮</span> <span>Calculadora mA/cm²</span>
+          </button>
+          <button onclick="switchViewSection('safety')" id="btn-nav-safety" class="nav-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5">
+            <span>🛡️</span> <span>Lista de Cuidados</span>
+          </button>
+          <button onclick="switchViewSection('notes')" id="btn-nav-notes" class="nav-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5">
+            <span>📋</span> <span>Registo SOAP</span>
+          </button>
+        </nav>
+        <div id="header-license-badge" class="flex-shrink-0"></div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- CORPO PRINCIPAL -->
+  <!-- ======================================================================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+
+    <!-- ===================================================================== -->
+    <!-- SECÇÃO 1: ATLAS DE COLOCAÇÃO DE ELÉTRODOS & ORIENTAÇÕES -->
+    <!-- ===================================================================== -->
+    <section id="section-atlas" class="main-section block space-y-4">
+      
+      <!-- SELETOR RÁPIDO DE REGIÕES E VISTA ANATÓMICA -->
+      <div class="bg-med-surface p-3.5 rounded-2xl border border-med-border space-y-3">
+        
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <!-- Vistas Frente / Dorso -->
+          <div class="flex items-center gap-1.5">
+            <span class="text-xs font-bold text-slate-400 mr-1">Vista:</span>
+            <button onclick="setBodyView('anterior')" id="view-btn-anterior" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 transition">
+              Anterior (Frente)
+            </button>
+            <button onclick="setBodyView('posterior')" id="view-btn-posterior" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-med-card border border-med-border text-slate-300 hover:text-white transition">
+              Posterior (Dorso)
+            </button>
+          </div>
+
+          <!-- Barra de Pesquisa Rápida -->
+          <div class="flex items-center gap-2 flex-1 max-w-sm">
+            <div class="relative w-full">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500 text-xs">🔍</span>
+              <input type="text" id="quick-search-input" oninput="handleQuickSearch(this.value)" placeholder="Pesquisar região, patologia ou corrente..." class="w-full pl-8 pr-3 py-1.5 rounded-xl bg-med-card border border-med-border text-xs text-white placeholder-slate-500 outline-none focus:border-cyan-400 transition" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Seletor dos 8 Módulos Clínicos -->
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar text-xs pt-1">
+          <span class="text-slate-400 font-semibold mr-1 flex-shrink-0">8 Regiões Clínicas:</span>
+          
+          <button id="art-btn-knee-ext" onclick="openModule('knee-ext')" class="art-btn px-3 py-1 rounded-lg bg-cyan-500/20 border border-cyan-400 text-cyan-300 font-bold hover:bg-cyan-500 hover:text-slate-950 transition flex-shrink-0">
+            Joelho (VMO & LCA)
+          </button>
+          <button id="art-btn-hamstrings-nmes" onclick="openModule('hamstrings-nmes')" class="art-btn px-3 py-1 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition flex-shrink-0">
+            Isquiotibiais (Coxa Post.)
+          </button>
+          <button id="art-btn-shoulder-flex" onclick="openModule('shoulder-flex')" class="art-btn px-3 py-1 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition flex-shrink-0">
+            Ombro (Deltóide)
+          </button>
+          <button id="art-btn-lumbar-sciatic" onclick="openModule('lumbar-sciatic')" class="art-btn px-3 py-1 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition flex-shrink-0">
+            Lombar & Ciático (L4-S1)
+          </button>
+          <button id="art-btn-cervical-spine" onclick="openModule('cervical-spine')" class="art-btn px-3 py-1 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition flex-shrink-0">
+            Cervical & Trapézio (C1-C7)
+          </button>
+          <button id="art-btn-elbow-ext" onclick="openModule('elbow-ext')" class="art-btn px-3 py-1 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition flex-shrink-0">
+            Cotovelo (Tríceps/Epicôndilo)
+          </button>
+          <button id="art-btn-wrist-hand" onclick="openModule('wrist-hand')" class="art-btn px-3 py-1 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition flex-shrink-0">
+            Punho & Canal Cárpico
+          </button>
+          <button id="art-btn-ankle-dorsi" onclick="openModule('ankle-dorsi')" class="art-btn px-3 py-1 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition flex-shrink-0">
+            Tornozelo (Tibial Anterior / FES)
+          </button>
+        </div>
+
+      </div>
+
+      <!-- WORKBENCH PRINCIPAL: CORPO ANATÓMICO (ESQUERDA) + GUIA VISUAL 4 CAMADAS (DIREITA) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- PALCO VETORIAL DO CORPO HUMANO (7 Colunas) -->
+        <div class="lg:col-span-7 bg-med-surface rounded-3xl border border-med-border p-4 relative overflow-hidden flex flex-col items-center justify-center min-h-[640px] shadow-2xl">
+          
+          <!-- Legenda de Elétrodos & Convenção de Canais -->
+          <div class="absolute top-4 left-4 z-20 flex flex-wrap gap-2 text-[10px] font-bold">
+            <div class="flex items-center gap-1.5 bg-slate-900/90 border border-red-500/40 px-2 py-0.5 rounded-lg text-red-400">
+              <span class="w-2 h-2 rounded-full bg-red-500"></span> CH1 (+) Polo A
+            </div>
+            <div class="flex items-center gap-1.5 bg-slate-900/90 border border-slate-700 px-2 py-0.5 rounded-lg text-slate-300">
+              <span class="w-2 h-2 rounded-full bg-slate-400"></span> CH1 (-) Polo B
+            </div>
+            <div class="flex items-center gap-1.5 bg-slate-900/90 border border-blue-500/40 px-2 py-0.5 rounded-lg text-blue-400">
+              <span class="w-2 h-2 rounded-full bg-blue-500"></span> CH2 (+) Polo A
+            </div>
+            <div class="flex items-center gap-1.5 bg-slate-900/90 border border-cyan-500/40 px-2 py-0.5 rounded-lg text-cyan-300">
+              <span class="w-2 h-2 rounded-full bg-cyan-400"></span> CH2 (-) Polo B
+            </div>
+          </div>
+
+          <div class="absolute top-4 right-4 z-20 bg-med-card/90 border border-med-border px-2.5 py-1 rounded-xl text-[10px] text-slate-400 flex items-center gap-1">
+            <span>🔘</span> <span>Clica nos músculos ou arrasta os elétrodos</span>
+          </div>
+
+          <!-- ÁREA DO CORPO VETORIAL & CANVAS DE CORRENTE -->
+          <div id="body-stage-container" class="relative w-full max-w-[420px] aspect-[1/2] my-2 flex items-center justify-center">
+            
+            <!-- SVG Vetorial do Corpo Humano -->
+            <svg id="vector-body-svg" viewBox="0 0 400 800" class="w-full h-full drop-shadow-[0_0_20px_rgba(0,229,255,0.2)]">
+              <!-- SILHUETA MÉDICA ANATÓMICA AVANÇADA (VISTA ANTERIOR) -->
+      <g id="svg-view-anterior">
+        <!-- Contorno Base do Corpo (Aura Cibernética / Médica) -->
+        <path d="
+          M200,32 
+          C222,32 228,52 228,70 
+          C228,82 220,95 214,102 
+          C226,106 248,112 268,124 
+          C282,132 292,152 288,175 
+          C285,195 288,220 282,242 
+          C278,258 290,285 288,322 
+          C286,340 280,360 274,368 
+          C268,368 266,350 266,335 
+          C265,315 264,285 260,265 
+          C258,255 252,245 250,235 
+          C248,255 244,285 238,335 
+          C234,375 238,425 228,455 
+          C226,462 232,475 228,510 
+          C224,550 226,605 224,635 
+          C224,648 234,665 232,675 
+          C228,680 216,680 214,668 
+          C212,652 210,630 208,610 
+          C204,560 204,500 204,465 
+          C203,450 202,380 201,340 
+          L199,340 
+          C198,380 197,450 196,465 
+          C196,500 196,560 192,610 
+          C190,630 188,652 186,668 
+          C184,680 172,680 168,675 
+          C166,665 176,648 176,635 
+          C174,605 176,550 172,510 
+          C168,475 174,462 172,455 
+          C162,425 166,375 162,335 
+          C156,285 152,255 150,235 
+          C148,245 142,255 140,265 
+          C136,285 135,315 134,335 
+          C134,350 132,368 126,368 
+          C120,360 114,340 112,322 
+          C110,285 122,258 118,242 
+          C112,220 115,195 112,175 
+          C108,152 118,132 132,124 
+          C152,112 174,106 186,102 
+          C180,95 172,82 172,70 
+          C172,52 178,32 200,32 Z" 
+          fill="#051624" stroke="#00e5ff" stroke-width="1.8" opacity="0.6" filter="drop-shadow(0 0 8px rgba(0,229,255,0.4))" />
+
+        <!-- 1. Cabeça & Mandíbula -->
+        <path d="M180,48 C180,28 220,28 220,48 C220,68 214,84 200,88 C186,84 180,68 180,48 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Cânio, Face & Mandíbula" data-muscle="Cânio, Face & Mandíbula" />
+        
+        <!-- 2. Pescoço & Esternocleidomastoideus -->
+        <path d="M188,88 L212,88 L218,110 L182,110 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Coluna Cervical & Esternocleidomastoideus" data-muscle="Coluna Cervical & Esternocleidomastoideus" />
+
+        <!-- 3. Trapézio Superior & Clavícula -->
+        <path d="M182,110 L218,110 L250,122 L150,122 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Trapézio Superior & Clavículas" data-muscle="Trapézio Superior & Clavículas" />
+
+        <!-- 4. Deltóides Anteriores / Médios -->
+        <path d="M148,122 C132,128 120,148 122,172 C124,182 132,185 138,180 C142,168 144,145 150,132 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Deltóide Anterior Esquerdo" data-muscle="Deltóide Anterior Esquerdo" />
+        <path d="M252,122 C268,128 280,148 278,172 C276,182 268,185 262,180 C258,168 256,145 250,132 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Deltóide Anterior Direito" data-muscle="Deltóide Anterior Direito" />
+
+        <!-- 5. Peitorais Maiores -->
+        <path d="M152,130 C165,124 195,124 198,130 L198,172 C180,175 155,170 142,156 C140,144 146,134 152,130 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Peitoral Maior Esquerdo" data-muscle="Peitoral Maior Esquerdo" />
+        <path d="M248,130 C235,124 205,124 202,130 L202,172 C220,175 245,170 258,156 C260,144 254,134 248,130 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Peitoral Maior Direito" data-muscle="Peitoral Maior Direito" />
+
+        <!-- 6. Bíceps Braquiais -->
+        <path d="M124,175 C118,192 118,220 125,238 C132,242 138,240 140,230 C142,212 140,190 138,175 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Bíceps Braquial Esquerdo" data-muscle="Bíceps Braquial Esquerdo" />
+        <path d="M276,175 C282,192 282,220 275,238 C268,242 262,240 260,230 C258,212 260,190 262,175 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Bíceps Braquial Direito" data-muscle="Bíceps Braquial Direito" />
+
+        <!-- 7. Antebraços (Braquiorradial & Flexores do Carpo) -->
+        <path d="M125,240 C116,260 112,295 116,324 C122,328 128,324 130,316 C134,290 136,265 138,240 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Antebraço Esquerdo (Flexores/Pronadores)" data-muscle="Antebraço Esquerdo (Flexores/Pronadores)" />
+        <path d="M275,240 C284,260 288,295 284,324 C278,328 272,324 270,316 C266,290 264,265 262,240 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Antebraço Direito (Flexores/Pronadores)" data-muscle="Antebraço Direito (Flexores/Pronadores)" />
+
+        <!-- 8. Mãos & Dedos -->
+        <path d="M116,325 C114,338 114,354 118,364 C122,366 128,364 128,354 C128,342 128,332 128,324 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Mão & Dedos Esquerdos" data-muscle="Mão & Dedos Esquerdos" />
+        <path d="M284,325 C286,338 286,354 282,364 C278,366 272,364 272,354 C272,342 272,332 272,324 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Mão & Dedos Direitos" data-muscle="Mão & Dedos Direitos" />
+
+        <!-- 9. Reto Abdominal & Linha Alba -->
+        <path d="M156,176 L196,176 L196,212 L154,212 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Reto Abdominal Superior (Esq)" data-muscle="Reto Abdominal Superior (Esq)" />
+        <path d="M204,176 L244,176 L246,212 L204,212 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Reto Abdominal Superior (Dir)" data-muscle="Reto Abdominal Superior (Dir)" />
+        <path d="M154,216 L196,216 L196,252 L152,252 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Reto Abdominal Médio (Esq)" data-muscle="Reto Abdominal Médio (Esq)" />
+        <path d="M204,216 L246,216 L248,252 L204,252 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Reto Abdominal Médio (Dir)" data-muscle="Reto Abdominal Médio (Dir)" />
+        <path d="M152,256 L196,256 L196,285 L156,285 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Reto Abdominal Inferior (Esq)" data-muscle="Reto Abdominal Inferior (Esq)" />
+        <path d="M204,256 L248,256 L244,285 L204,285 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Reto Abdominal Inferior (Dir)" data-muscle="Reto Abdominal Inferior (Dir)" />
+
+        <!-- 10. Oblíquos Externos -->
+        <path d="M142,176 C136,210 138,248 148,280 L154,280 C146,248 146,210 150,176 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Oblíquo Externo Esquerdo" data-muscle="Oblíquo Externo Esquerdo" />
+        <path d="M258,176 C264,210 262,248 252,280 L246,280 C254,248 254,210 250,176 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Oblíquo Externo Direito" data-muscle="Oblíquo Externo Direito" />
+
+        <!-- 11. Região Pélvica / Ílio -->
+        <path d="M152,288 C165,296 185,300 200,300 C215,300 235,296 248,288 C252,312 248,335 240,342 C228,348 214,346 200,346 C186,346 172,348 160,342 C152,335 148,312 152,288 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Cintura Pélvica / Virilha" data-muscle="Cintura Pélvica / Virilha" />
+
+        <!-- 12. COXAS / QUADRÍCEPS -->
+        <!-- Reto Femoral Esquerdo -->
+        <path d="M164,345 C158,375 158,415 166,442 C172,446 182,444 184,438 C182,405 180,370 176,346 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Reto Femoral Esquerdo" data-muscle="Reto Femoral Esquerdo" />
+        <!-- Vasto Lateral Esquerdo -->
+        <path d="M154,346 C140,375 138,415 146,445 C152,448 160,446 162,442 C154,410 156,375 162,346 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Vasto Lateral Esquerdo" data-muscle="Vasto Lateral Esquerdo" />
+        <!-- VASTO MEDIAL OBLÍQUO (VMO ESQUERDO) - A famosa gota muscular medial! -->
+        <path d="M176,412 C184,410 196,418 196,438 C196,454 184,458 174,452 C170,444 170,426 176,412 Z" class="muscle-path active-vmo" data-muscle="Vasto Medial Oblíquo (VMO Esq) — Ponto Motor" />
+
+        <!-- Reto Femoral Direito -->
+        <path d="M236,345 C242,375 242,415 234,442 C228,446 218,444 216,438 C218,405 220,370 224,346 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Reto Femoral Direito" data-muscle="Reto Femoral Direito" />
+        <!-- Vasto Lateral Direito -->
+        <path d="M246,346 C260,375 262,415 254,445 C248,448 240,446 238,442 C246,410 244,375 238,346 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Vasto Lateral Direito" data-muscle="Vasto Lateral Direito" />
+        <!-- VASTO MEDIAL OBLÍQUO (VMO DIREITO) - Gota muscular medial! -->
+        <path d="M224,412 C216,410 204,418 204,438 C204,454 216,458 226,452 C230,444 230,426 224,412 Z" class="muscle-path active-vmo" data-muscle="Vasto Medial Oblíquo (VMO Dir) — Ponto Motor" />
+
+        <!-- 13. Joelhos & Patela com Anel Sesamóide -->
+        <ellipse cx="170" cy="462" rx="10" ry="12" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Patela Esquerda & Tendão Rotuliano" data-muscle="Patela Esquerda & Tendão Rotuliano" />
+        <ellipse cx="230" cy="462" rx="10" ry="12" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Patela Direita & Tendão Rotuliano" data-muscle="Patela Direita & Tendão Rotuliano" />
+
+        <!-- 14. PERNAS (TIBIAL ANTERIOR & FIBULARES) -->
+        <!-- Tibial Anterior Esquerdo -->
+        <path d="M162,478 C154,510 152,560 158,612 C164,618 174,615 174,606 C176,562 176,515 174,478 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Tibial Anterior Esquerdo — Ponto Motor FES" data-muscle="Tibial Anterior Esquerdo — Ponto Motor FES" />
+        <!-- Tibial Anterior Direito -->
+        <path d="M238,478 C246,510 248,560 242,612 C236,618 226,615 226,606 C224,562 224,515 226,478 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Tibial Anterior Direito — Ponto Motor FES" data-muscle="Tibial Anterior Direito — Ponto Motor FES" />
+
+        <!-- 15. Tornozelos, Maléolos & Pés -->
+        <path d="M158,614 C156,632 146,654 150,668 C156,674 172,670 174,658 C176,644 174,625 174,614 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Tornozelo & Dorso do Pé Esquerdo" data-muscle="Tornozelo & Dorso do Pé Esquerdo" />
+        <path d="M242,614 C244,632 254,654 250,668 C244,674 228,670 226,658 C224,644 226,625 226,614 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Tornozelo & Dorso do Pé Direito" data-muscle="Tornozelo & Dorso do Pé Direito" />
+      </g>
+              <!-- SILHUETA MÉDICA ANATÓMICA AVANÇADA (VISTA POSTERIOR / DORSO) -->
+      <g id="svg-view-posterior" class="hidden">
+        <!-- Contorno Base do Corpo Posterior -->
+        <path d="
+          M200,32 
+          C222,32 228,52 228,70 
+          C228,82 220,95 214,102 
+          C226,106 248,112 268,124 
+          C282,132 292,152 288,175 
+          C285,195 288,220 282,242 
+          C278,258 290,285 288,322 
+          C286,340 280,360 274,368 
+          C268,368 266,350 266,335 
+          C265,315 264,285 260,265 
+          C258,255 252,245 250,235 
+          C248,255 244,285 238,335 
+          C234,375 238,425 228,455 
+          C226,462 232,475 228,510 
+          C224,550 226,605 224,635 
+          C224,648 234,665 232,675 
+          C228,680 216,680 214,668 
+          C212,652 210,630 208,610 
+          C204,560 204,500 204,465 
+          C203,450 202,380 201,340 
+          L199,340 
+          C198,380 197,450 196,465 
+          C196,500 196,560 192,610 
+          C190,630 188,652 186,668 
+          C184,680 172,680 168,675 
+          C166,665 176,648 176,635 
+          C174,605 176,550 172,510 
+          C168,475 174,462 172,455 
+          C162,425 166,375 162,335 
+          C156,285 152,255 150,235 
+          C148,245 142,255 140,265 
+          C136,285 135,315 134,335 
+          C134,350 132,368 126,368 
+          C120,360 114,340 112,322 
+          C110,285 122,258 118,242 
+          C112,220 115,195 112,175 
+          C108,152 118,132 132,124 
+          C152,112 174,106 186,102 
+          C180,95 172,82 172,70 
+          C172,52 178,32 200,32 Z" 
+          fill="#051624" stroke="#00e5ff" stroke-width="1.8" opacity="0.6" filter="drop-shadow(0 0 8px rgba(0,229,255,0.4))" />
+
+        <!-- 1. Occipital & Coluna Cervical (C1-C7) -->
+        <path d="M180,48 C180,28 220,28 220,48 C220,68 214,84 200,88 C186,84 180,68 180,48 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Occipital & Coluna Cervical (C1-C7)" data-muscle="Occipital & Coluna Cervical (C1-C7)" />
+        <path d="M188,88 L212,88 L216,108 L184,108 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Transição Cervicotorácica (C7-T1)" data-muscle="Transição Cervicotorácica (C7-T1)" />
+
+        <!-- 2. TRAPÉZIO POSTERIOR (Losango T1-T12) -->
+        <path d="M184,108 L216,108 L254,124 L228,195 L200,215 L172,195 L146,124 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Trapézio (Fibras Superiores, Médias e Inferiores)" data-muscle="Trapézio (Fibras Superiores, Médias e Inferiores)" />
+
+        <!-- 3. Deltóides Posteriores & Manguito Rotador -->
+        <path d="M146,124 C130,130 118,150 120,174 C124,184 132,185 138,180 C142,166 142,145 148,132 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Deltóide Posterior & Infraespinhal (Esq)" data-muscle="Deltóide Posterior & Infraespinhal (Esq)" />
+        <path d="M254,124 C270,130 282,150 280,174 C276,184 268,185 262,180 C258,166 258,145 252,132 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Deltóide Posterior & Infraespinhal (Dir)" data-muscle="Deltóide Posterior & Infraespinhal (Dir)" />
+
+        <!-- 4. Tríceps Braquial -->
+        <path d="M122,176 C116,195 116,222 124,240 C130,244 138,240 140,230 C142,210 140,188 136,176 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Tríceps Braquial Esquerdo — Cabeça Longa/Lateral" data-muscle="Tríceps Braquial Esquerdo — Cabeça Longa/Lateral" />
+        <path d="M278,176 C284,195 284,222 276,240 C270,244 262,240 260,230 C258,210 260,188 264,176 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Tríceps Braquial Direito — Cabeça Longa/Lateral" data-muscle="Tríceps Braquial Direito — Cabeça Longa/Lateral" />
+
+        <!-- 5. Cotovelos / Olecrânio -->
+        <circle cx="132" cy="242" r="7" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Olecrânio / Cotovelo Esquerdo" data-muscle="Olecrânio / Cotovelo Esquerdo" />
+        <circle cx="268" cy="242" r="7" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Olecrânio / Cotovelo Direito" data-muscle="Olecrânio / Cotovelo Direito" />
+
+        <!-- 6. Antebraço Posterior (Extensores do Punho) -->
+        <path d="M125,246 C116,266 112,298 116,324 C122,328 128,324 130,316 C134,290 136,265 136,246 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Extensores do Punho & Dedos (Esq)" data-muscle="Extensores do Punho & Dedos (Esq)" />
+        <path d="M275,246 C284,266 288,298 284,324 C278,328 272,324 270,316 C266,290 264,265 264,246 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Extensores do Punho & Dedos (Dir)" data-muscle="Extensores do Punho & Dedos (Dir)" />
+
+        <!-- 7. Grande Dorsal & Rombóides -->
+        <path d="M144,176 C136,215 142,260 160,285 L172,215 L156,182 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Grande Dorsal Esquerdo" data-muscle="Grande Dorsal Esquerdo" />
+        <path d="M256,176 C264,215 258,260 240,285 L228,215 L244,182 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Grande Dorsal Direito" data-muscle="Grande Dorsal Direito" />
+
+        <!-- 8. ERETORES DA COLUNA / PARAVERTEBRAIS LOMBARES (L1-S1) — PONTO-CHAVE LOMBALGIA -->
+        <path d="M172,212 L198,212 L198,295 L168,295 Z" class="muscle-path active-lumbar" data-muscle="Paravertebrais Lombares Esquerdos (L1-S1) — Canal 1 TENS" />
+        <path d="M228,212 L202,212 L202,295 L232,295 Z" class="muscle-path active-lumbar" data-muscle="Paravertebrais Lombares Direitos (L1-S1) — Canal 1 TENS" />
+
+        <!-- 9. GLÚTEOS MÁXIMOS & PIRIFORME (TRAJETO DO NERVO CIÁTICO) -->
+        <path d="M148,285 C138,315 140,358 158,375 C174,382 196,375 198,345 C198,300 178,285 156,282 Z" class="muscle-path active-glute" data-muscle="Glúteo Máximo & Músculo Piriforme (Esq) — Tronco Ciático" />
+        <path d="M252,285 C262,315 260,358 242,375 C226,382 204,375 202,345 C202,300 222,285 244,282 Z" class="muscle-path active-glute" data-muscle="Glúteo Máximo & Músculo Piriforme (Dir) — Tronco Ciático" />
+
+        <!-- 10. ISQUIOTIBIAIS (BÍCEPS FEMORAL, SEMITENDINOSO, SEMIMEMBRANOSO) -->
+        <path d="M152,375 C142,410 146,448 160,466 C170,470 184,466 188,446 C192,415 188,382 180,375 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Isquiotibiais Esquerdos (Bíceps Femoral & Semitendinoso)" data-muscle="Isquiotibiais Esquerdos (Bíceps Femoral & Semitendinoso)" />
+        <path d="M248,375 C258,410 254,448 240,466 C230,470 216,466 212,446 C208,415 212,382 220,375 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Isquiotibiais Direitos (Bíceps Femoral & Semitendinoso)" data-muscle="Isquiotibiais Direitos (Bíceps Femoral & Semitendinoso)" />
+
+        <!-- 11. FOSSA POPLÍTEA (NERVO TIBIAL & NERVO FIBULAR COMUM) -->
+        <polygon points="166,468 184,468 180,488 168,488" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Fossa Poplítea Esquerda (Nervo Tibial)" data-muscle="Fossa Poplítea Esquerda (Nervo Tibial)" />
+        <polygon points="234,468 216,468 220,488 232,488" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Fossa Poplítea Direita (Nervo Tibial)" data-muscle="Fossa Poplítea Direita (Nervo Tibial)" />
+
+        <!-- 12. GÉMEOS / TRÍCEPS SURAL (CABEÇA MEDIAL & LATERAL) -->
+        <path d="M156,488 C144,518 144,565 160,610 L176,610 C182,562 182,518 178,488 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Gémeos / Tríceps Sural Esquerdo" data-muscle="Gémeos / Tríceps Sural Esquerdo" />
+        <path d="M244,488 C256,518 256,565 240,610 L224,610 C218,562 218,518 222,488 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Gémeos / Tríceps Sural Direito" data-muscle="Gémeos / Tríceps Sural Direito" />
+
+        <!-- 13. TENDÃO DE AQUILES & CALCÂNEO -->
+        <path d="M162,610 L176,610 L178,668 L152,668 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Tendão de Aquiles & Calcâneo Esquerdo" data-muscle="Tendão de Aquiles & Calcâneo Esquerdo" />
+        <path d="M238,610 L224,610 L222,668 L248,668 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Tendão de Aquiles & Calcâneo Direito" data-muscle="Tendão de Aquiles & Calcâneo Direito" />
+      </g>
+            </svg>
+
+            <!-- Canvas de Vetores de Corrente (Simulação Visual) -->
+            <canvas id="current-vector-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></canvas>
+
+            <!-- Hotspots Clicáveis nas 7 Regiões Motoras -->
+            <div id="hotspots-layer" class="absolute inset-0 w-full h-full z-20 pointer-events-auto">
+              <!-- Cervical (Dorso) -->
+              <div onclick="openModule('cervical-spine')" role="button" tabindex="0" aria-label="Ponto motor: Coluna Cervical e Trapézio Superior (C1-C7)" onkeydown="if(event.key==='Enter'||event.key===' '){openModule('cervical-spine'); event.preventDefault();}" class="hotspot-beacon absolute w-6 h-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white border-2 border-slate-900 shadow-lg cursor-pointer hover:scale-125 transition flex items-center justify-center" style="left: 50%; top: 14%;" title="Coluna Cervical & Trapézio Superior">
+                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+              </div>
+              <!-- Ombro -->
+              <div onclick="openModule('shoulder-flex')" role="button" tabindex="0" aria-label="Ponto motor: Ombro e Deltóide Anterior/Médio" onkeydown="if(event.key==='Enter'||event.key===' '){openModule('shoulder-flex'); event.preventDefault();}" class="hotspot-beacon absolute w-6 h-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white border-2 border-slate-900 shadow-lg cursor-pointer hover:scale-125 transition flex items-center justify-center" style="left: 31%; top: 18%;" title="Ombro: Deltóide Anterior/Médio">
+                <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+              </div>
+              <!-- Cotovelo -->
+              <div onclick="openModule('elbow-ext')" role="button" tabindex="0" aria-label="Ponto motor: Cotovelo e Tríceps Braquial" onkeydown="if(event.key==='Enter'||event.key===' '){openModule('elbow-ext'); event.preventDefault();}" class="hotspot-beacon absolute w-6 h-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white border-2 border-slate-900 shadow-lg cursor-pointer hover:scale-125 transition flex items-center justify-center" style="left: 31%; top: 29%;" title="Cotovelo e Tríceps Braquial">
+                <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+              </div>
+              <!-- Punho / Mão -->
+              <div onclick="openModule('wrist-hand')" role="button" tabindex="0" aria-label="Ponto motor: Punho, Mão e Canal Cárpico" onkeydown="if(event.key==='Enter'||event.key===' '){openModule('wrist-hand'); event.preventDefault();}" class="hotspot-beacon absolute w-6 h-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white border-2 border-slate-900 shadow-lg cursor-pointer hover:scale-125 transition flex items-center justify-center" style="left: 29%; top: 41%;" title="Punho, Mão & Canal Cárpico">
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+              </div>
+              <!-- Lombar / Ciático -->
+              <div onclick="openModule('lumbar-sciatic')" role="button" tabindex="0" aria-label="Ponto motor: Coluna Lombar e Raízes Ciáticas (L4-S1)" onkeydown="if(event.key==='Enter'||event.key===' '){openModule('lumbar-sciatic'); event.preventDefault();}" class="hotspot-beacon absolute w-6 h-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white border-2 border-cyan-400 shadow-[0_0_12px_rgba(0,229,255,0.7)] cursor-pointer hover:scale-125 transition flex items-center justify-center" style="left: 47%; top: 32%;" title="Coluna Lombar & Raízes L4-S1">
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+              </div>
+              <!-- Joelho / VMO -->
+              <div onclick="openModule('knee-ext')" role="button" tabindex="0" aria-label="Ponto motor: Joelho, Vasto Medial Oblíquo (VMO) e Patela" onkeydown="if(event.key==='Enter'||event.key===' '){openModule('knee-ext'); event.preventDefault();}" class="hotspot-beacon absolute w-7 h-7 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white border-2 border-cyan-400 shadow-[0_0_15px_rgba(0,229,255,0.9)] cursor-pointer hover:scale-125 transition flex items-center justify-center" style="left: 45%; top: 54%;" title="Joelho: Vasto Medial Oblíquo (VMO) & Patela">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              </div>
+              <!-- Tornozelo / Tibial Anterior -->
+              <div onclick="openModule('ankle-dorsi')" role="button" tabindex="0" aria-label="Ponto motor: Tornozelo e Tibial Anterior (FES)" onkeydown="if(event.key==='Enter'||event.key===' '){openModule('ankle-dorsi'); event.preventDefault();}" class="hotspot-beacon absolute w-6 h-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white border-2 border-slate-900 shadow-lg cursor-pointer hover:scale-125 transition flex items-center justify-center" style="left: 41%; top: 68%;" title="Tornozelo: Tibial Anterior (FES)">
+                <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+              </div>
+            </div>
+
+            <!-- Os 4 Elétrodos Arrastáveis -->
+            <div id="electrodes-layer" class="absolute inset-0 w-full h-full z-30 pointer-events-none">
+              <div id="el-ch1-pos" role="button" tabindex="0" aria-label="Elétrodo Canal 1 Positivo (Polo A, Vermelho) - Arrastável ou ajustável" class="electrode-pad pointer-events-auto absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-red-600 border-2 border-red-300 text-white font-black text-[10px] flex items-center justify-center shadow-lg" style="left: 45%; top: 54%;">CH1+</div>
+              <div id="el-ch1-neg" role="button" tabindex="0" aria-label="Elétrodo Canal 1 Negativo (Polo B, Cinzento) - Arrastável ou ajustável" class="electrode-pad pointer-events-auto absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-slate-900 border-2 border-slate-400 text-slate-200 font-black text-[10px] flex items-center justify-center shadow-lg" style="left: 42%; top: 44%;">CH1-</div>
+              <div id="el-ch2-pos" role="button" tabindex="0" aria-label="Elétrodo Canal 2 Positivo (Polo A, Azul) - Arrastável ou ajustável" class="electrode-pad pointer-events-auto absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-blue-600 border-2 border-blue-300 text-white font-black text-[10px] flex items-center justify-center shadow-lg" style="left: 36%; top: 43%;">CH2+</div>
+              <div id="el-ch2-neg" role="button" tabindex="0" aria-label="Elétrodo Canal 2 Negativo (Polo B, Ciano) - Arrastável ou ajustável" class="electrode-pad pointer-events-auto absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-cyan-600 border-2 border-cyan-300 text-slate-950 font-black text-[10px] flex items-center justify-center shadow-lg" style="left: 42%; top: 57%;">CH2-</div>
+            </div>
+
+          </div>
+
+          <!-- NOTA CLÍNICA DE ELETROFISIOLOGIA -->
+          <div class="w-full mt-2 bg-[#020d18] border border-cyan-500/30 rounded-xl p-3 text-[11px] text-slate-300 flex items-start gap-2.5 shadow-md">
+            <span class="text-cyan-400 text-base flex-shrink-0">⚡</span>
+            <div>
+              <strong class="text-cyan-300 font-bold block mb-0.5">Eletrofisiologia da Polaridade & Forma de Onda:</strong>
+              <p class="text-slate-300 leading-relaxed text-[10px]">
+                Em <b>correntes bifásicas simétricas equilibradas</b> (o padrão clínico da vasta maioria dos aparelhos modernos de TENS e NMES), cada elétrodo atua ciclicamente como cátodo ativo durante 50% do tempo de pulso. Não ocorre acumulação eletrolítica líquida sob a pele (Johnson 2007, PMC4589923; PMC5683854). A identificação (+) e (-) serve para orientar os canais do equipamento; a polaridade ativa fixa só é determinante em correntes monofásicas ou bifásicas assimétricas desequilibradas.
+              </p>
+            </div>
+          </div>
+
+          <!-- Tooltip Informativo do Músculo -->
+          <div id="anatomy-tooltip" class="absolute bottom-4 left-4 z-20 bg-slate-900/95 border border-cyan-500/50 rounded-xl px-3 py-1.5 text-xs text-cyan-300 font-bold hidden shadow-xl">
+            Região Selecionada
+          </div>
+
+        </div>
+
+        <!-- PAINEL CLÍNICO INTEGRADO: 4 CAMADAS + PARÂMETROS BIBLIOGRÁFICOS (5 Colunas) -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <div class="bg-med-surface rounded-3xl border border-med-border p-4 md:p-5 space-y-4 shadow-xl">
+            
+            <!-- Título e Subtítulo da Condição Ativa -->
+            <div class="border-b border-med-border pb-3">
+              <div class="flex items-center justify-between gap-2">
+                <span id="card-region-badge" class="text-[10px] font-black uppercase text-cyan-400 tracking-wider">Membro Inferior</span>
+                <span id="card-mode-badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">NMES Síncrono</span>
+              </div>
+              <h2 id="card-module-title" class="text-lg font-black text-white mt-1 leading-snug">
+                Extensão do Joelho & VMO (Knee Extension)
+              </h2>
+              <p id="card-module-subtitle" class="text-xs text-slate-400 mt-0.5">
+                Ativação motora seletiva do Vasto Medial Oblíquo e Reto Femoral
+              </p>
+            </div>
+
+            <!-- SELETOR DAS 4 CAMADAS DE INSPEÇÃO CLÍNICA -->
+            <div class="flex items-center gap-1 bg-[#020b12] p-1 rounded-xl border border-med-border text-xs font-bold">
+              <button type="button" onclick="setInspectorLayer('placement')" id="btn-layer-placement" class="layer-btn active flex-1 py-1.5 rounded-lg bg-cyan-500 text-slate-950 text-center transition">
+                📸 Pele
+              </button>
+              <button type="button" onclick="setInspectorLayer('video')" id="btn-layer-video" class="layer-btn flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white text-center transition">
+                🎬 Vídeo pt-PT
+              </button>
+              <button type="button" onclick="setInspectorLayer('muscle')" id="btn-layer-muscle" class="layer-btn flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white text-center transition">
+                🥩 Atlas 3D
+              </button>
+              <button type="button" onclick="setInspectorLayer('nerve')" id="btn-layer-nerve" class="layer-btn flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white text-center transition">
+                ⚡ Inervação
+              </button>
+            </div>
+
+            <!-- PALCO DAS 4 CAMADAS CLÍNICAS -->
+            <div class="bg-[#020b12] rounded-2xl border border-med-border p-3 min-h-[230px] flex items-center justify-center overflow-hidden relative shadow-inner">
+              
+              <!-- 1. Foto Real de Colocação na Pele -->
+              <div id="pane-placement" class="layer-pane block w-full text-center space-y-1.5">
+                <img id="layer-placement-img" src="../assets/3d/clinica_marquesa_joelho.webp" alt="Colocação de Elétrodos" class="max-h-[190px] mx-auto rounded-xl object-contain border border-med-border/50 shadow-md" />
+                <p id="layer-caption-placement" class="text-[10px] text-cyan-300 font-bold">Colocação com Elétrodos Autoadesivos & Cabos de Derivação</p>
+              </div>
+
+              <!-- 2. Vídeo de Marquesa Comentado em pt-PT -->
+              <div id="pane-video" class="layer-pane hidden w-full space-y-2">
+                <div class="aspect-video w-full rounded-xl overflow-hidden border border-cyan-500/40 bg-black">
+                  <video id="layer-video-player" controls playsinline class="w-full h-full object-cover">
+                    <source id="layer-video-source" src="../assets/videos/video_joelho_pt_pt.mp4" type="video/mp4">
+                    <track id="layer-video-track" src="../assets/videos/legendas_joelho_pt_pt.vtt" kind="subtitles" srclang="pt" label="pt-PT" default>
+                  </video>
+                </div>
+                <div id="video-clinical-banner" class="text-[10px] bg-slate-900 p-2 rounded-xl border border-med-border text-slate-300">
+                  <span id="video-caption-text">🎬 Vídeo Prático de Marquesa: Extensão do Joelho & Ativação do VMO (pt-PT).</span>
+                </div>
+                <div class="flex justify-between items-center text-[10px]">
+                  <button type="button" onclick="selectVideoSource('placement')" id="btn-video-reg" class="text-cyan-300 hover:underline font-bold">🎬 Prática de Marquesa</button>
+                  <button type="button" onclick="selectVideoSource('prep')" id="btn-video-prep" class="text-amber-300 hover:underline font-bold">🧴 Preparação da Pele (Universal)</button>
+                </div>
+              </div>
+
+              <!-- 3. Músculo 3D -->
+              <div id="pane-muscle" class="layer-pane hidden w-full text-center space-y-1.5">
+                <img id="layer-muscle-img" src="../assets/3d/mapa_3d_joelho.webp" alt="Músculo 3D" class="max-h-[190px] mx-auto rounded-xl object-contain border border-med-border/50 shadow-md" />
+                <p id="layer-caption-muscle" class="text-[10px] text-cyan-300 font-bold">Vasto Medial Oblíquo, Reto Femoral & Patela</p>
+              </div>
+
+              <!-- 4. Trajeto Nervoso Motor -->
+              <div id="pane-nerve" class="layer-pane hidden w-full text-center space-y-1.5">
+                <img id="layer-nerve-img" src="../assets/3d/anatomia_neural_3d.webp" alt="Inervação Neural" class="max-h-[190px] mx-auto rounded-xl object-contain border border-med-border/50 shadow-md" />
+                <p id="layer-caption-nerve" class="text-[10px] text-cyan-300 font-bold">Nervo Femoral e Inervação Motora do Quadríceps (L2-L4)</p>
+              </div>
+
+            </div>
+
+            <!-- INSTRUÇÕES DE PALPAÇÃO & AVISO CLÍNICO DA DRA. LUCINDA BAKER -->
+            <div class="bg-med-card p-3 rounded-2xl border border-med-border space-y-1.5 text-xs">
+              <span class="text-[10px] font-black uppercase text-amber-400 tracking-wider">Instruções de Palpação & Colocação:</span>
+              <p id="layer-instructions-text" class="text-slate-300 leading-relaxed text-[11px]">
+                A patela é marcada com um círculo distalmente. Os elétrodos autoadesivos são colocados ao longo da coxa. O elétrodo proximal fica bem alto e lateral. O elétrodo distal é colocado na linha média ou ligeiramente medial.
+                <br><br>
+                <strong class="text-amber-300">⚠️ Aviso de Segurança:</strong> Uma colocação demasiado medial do elétrodo distal pode provocar uma cãibra dolorosa no Vasto Medial. Se isso ocorrer, mantenha o elétrodo distal na linha média.
+              </p>
+            </div>
+
+            <!-- PARÂMETROS CLÍNICOS DE REFERÊNCIA (TABELA TRANSPARENTE COM FONTES) -->
+            <div class="bg-med-card p-3 rounded-2xl border border-med-border space-y-2 text-xs">
+              <span class="text-[10px] font-black uppercase text-cyan-400 tracking-wider block">Parâmetros de Referência Bibliográfica</span>
+              
+              <div class="grid grid-cols-2 gap-2 text-[11px] font-mono">
+                <div class="bg-[#030d17] p-2 rounded-xl border border-med-border">
+                  <span class="text-slate-400 block text-[9px]">FREQUÊNCIA:</span>
+                  <strong id="ref-hz" class="text-cyan-300 text-sm">50 Hz</strong>
+                  <span class="text-[9px] text-slate-500 block">Tetanização motora</span>
+                </div>
+                <div class="bg-[#030d17] p-2 rounded-xl border border-med-border">
+                  <span class="text-slate-400 block text-[9px]">LARGURA DE PULSO:</span>
+                  <strong id="ref-us" class="text-cyan-300 text-sm">350 µs</strong>
+                  <span class="text-[9px] text-slate-500 block">Fibras Tipo II</span>
+                </div>
+                <div class="bg-[#030d17] p-2 rounded-xl border border-med-border">
+                  <span class="text-slate-400 block text-[9px]">TEMPORIZAÇÃO:</span>
+                  <strong id="ref-duty" class="text-emerald-400 text-xs">2s Rampa / 6s ON / 18s OFF</strong>
+                  <span class="text-[9px] text-slate-500 block">Prevenção de fadiga</span>
+                </div>
+                <div class="bg-[#030d17] p-2 rounded-xl border border-med-border">
+                  <span class="text-slate-400 block text-[9px]">INTENSIDADE SUGERIDA:</span>
+                  <strong class="text-white text-xs">Até Contração Visível</strong>
+                  <span class="text-[9px] text-slate-500 block">Sem dor / Limiar motor</span>
+                </div>
+              </div>
+
+              <!-- Fonte Bibliográfica Explícita -->
+              <p class="text-[10px] text-slate-400 border-t border-slate-800 pt-2 flex items-center justify-between">
+                <span>Referência Clínica: <strong id="ref-source" class="text-slate-200">Nussbaum EL et al. (2017)</strong></span>
+                <span class="text-slate-400">· Pontos Motores: <strong id="ref-placement" class="text-slate-300">Baker LL et al. (2000)</strong></span>
+                <a id="ref-pmc-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline font-mono text-[10px]">PMC5683854 (Nussbaum et al.) ↗</a>
+              </p>
+            </div>
+
+            <!-- Temporizador de Apoio ao Gabinete -->
+            <div class="bg-[#030d17] p-3 rounded-2xl border border-med-border flex items-center justify-between">
+              <div>
+                <span class="text-[9px] font-bold uppercase text-slate-400 tracking-wider">Temporizador de Gabinete:</span>
+                <div class="text-xl font-mono font-black text-white" id="session-timer-display">20:00</div>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="startTimer()" id="btn-timer-start" class="px-3 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400 transition">Iniciar</button>
+                <button type="button" onclick="pauseTimer()" id="btn-timer-pause" class="px-3 py-1.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 transition hidden">Pausar</button>
+                <button type="button" onclick="resetTimer()" class="px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 font-bold text-xs hover:text-white transition">Reset</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECÇÃO 2: PROTOCOLOS CLÍNICOS & FONTES BASEADAS EM EVIDÊNCIA (16 CASOS) -->
+    <!-- ===================================================================== -->
+    <section id="section-protocols" class="main-section hidden space-y-4">
+      <div class="bg-med-surface rounded-3xl border border-med-border p-6 shadow-xl space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <span class="text-[10px] font-black uppercase text-cyan-400 tracking-wider">Biblioteca de Eletroterapia Baseada em Evidência</span>
+            <h2 class="text-xl font-black text-white">16 Protocolos com Associação Anatómica Precisa</h2>
+            <p class="text-xs text-slate-400">Cada protocolo inclui mecanismo fisiológico comprovado, link PubMed/PMC e ligação 1-clique para a sua região anatómica real.</p>
+          </div>
+          <div class="text-xs text-slate-400 bg-med-card px-3 py-1.5 rounded-xl border border-med-border">
+            <span>💡 Clique em <b>"Ver Colocação no Atlas"</b> para carregar o protocolo diretamente no modelo humano.</span>
+          </div>
+        </div>
+
+        <!-- Filtros Rápidos -->
+        <div class="flex flex-wrap gap-2 text-xs font-bold border-b border-med-border pb-3">
+          <button onclick="filterProtocols('all')" class="proto-btn active px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950">Todos (16)</button>
+          <button onclick="filterProtocols('spine')" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Coluna & Tronco (4)</button>
+          <button onclick="filterProtocols('lower')" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Membro Inferior (5)</button>
+          <button onclick="filterProtocols('upper')" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Membro Superior & Punho (5)</button>
+          <button onclick="filterProtocols('neuro')" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Neurofuncional / FES (2)</button>
+        </div>
+
+        <!-- Grelha dos 16 Protocolos -->
+        <div id="protocols-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Renderizado via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECÇÃO 3: CALCULADORA DE DOSIMETRIA & DENSIDADE DE CORRENTE (FDA 510(k)) -->
+    <!-- ===================================================================== -->
+    <section id="section-calculator" class="main-section hidden space-y-6">
+      <div>
+        <span class="text-[10px] font-black uppercase text-cyan-400 tracking-wider">Apoio Eletrofisiológico à Decisão Clínica</span>
+        <h2 class="text-xl font-black text-white">Estimativa Multidimensional de Dosimetria & Risco Térmico</h2>
+        <p class="text-xs text-slate-400">Estimativa baseada nos parâmetros da diretriz regulamentar FDA 510(k) (Carga por Fase, Densidade de Corrente e Densidade de Potência). Ferramenta de apoio didático que não substitui a monitorização visual e o feedback verbal contínuo do utente.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+        <!-- Controlos de Entrada -->
+        <div class="lg:col-span-6 bg-med-card p-5 rounded-2xl border border-med-border space-y-4 text-xs">
+          
+          <div>
+            <label class="block text-slate-300 font-bold mb-1.5">Área Ativa do Menor Elétrodo do Par (cm²):</label>
+            <select id="calc-electrode-size" onchange="runDosimetryCalc()" class="w-full bg-[#030d17] border border-med-border rounded-xl p-2.5 text-slate-200 focus:border-cyan-400 focus:outline-none">
+              <option value="25" selected>Quadrado 5x5 cm (Área: 25 cm² — Padrão Clínico Geral)</option>
+              <option value="45">Retangular 5x9 cm (Área: 45 cm² — Grandes Grupos Musculares)</option>
+              <option value="16">Quadrado 4x4 cm (Área: 16 cm² — Antebraço / Punho)</option>
+              <option value="8">Circular 3.2 cm diâmetro (Área: ~8 cm² — Pontos Motores Pequenos)</option>
+              <option value="50">Retangular 5x10 cm (Área: 50 cm² — Lombar / Isquiotibiais)</option>
+            </select>
+            <span class="text-[10px] text-slate-500 mt-1 block">Conforme a FDA 510(k), o cálculo crítico deve incidir sempre sobre o menor elétrodo condutor do circuito.</span>
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-bold mb-1.5">Forma de Onda Utilizada:</label>
+            <select id="calc-waveform" onchange="runDosimetryCalc()" class="w-full bg-[#030d17] border border-med-border rounded-xl p-2.5 text-slate-200 focus:border-cyan-400 focus:outline-none">
+              <option value="biphasic_sym" selected>Bifásica Simétrica Retangular (Carga Líquida Zero · Padrão Moderno)</option>
+              <option value="biphasic_asym">Bifásica Assimétrica Equilibrada (Padrão TENS Convencional)</option>
+              <option value="monophasic">Monofásica Pulsada (Atenção: Efeito Polar Galvânico sob o Cátodo)</option>
+            </select>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="text-slate-300 font-bold">Intensidade de Pico Aplicada (mA):</label>
+              <span id="calc-current-display" class="font-mono text-cyan-300 font-black text-sm">25 mA</span>
+            </div>
+            <input type="range" id="calc-current-slider" min="1" max="80" value="25" oninput="runDosimetryCalc()" class="w-full accent-cyan-400 cursor-pointer">
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-0.5">
+              <span>1 mA (Sensorial)</span>
+              <span>35 mA (Motor Moderado)</span>
+              <span>80 mA (Recrutamento Intenso)</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 font-bold mb-1">Largura de Pulso (&micro;s):</label>
+              <div class="grid grid-cols-3 gap-1.5 font-mono text-[11px]">
+                <button type="button" onclick="setCalcPulseWidth(100)" class="calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400">100</button>
+                <button type="button" onclick="setCalcPulseWidth(250)" class="calc-pw-btn active py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold">250</button>
+                <button type="button" onclick="setCalcPulseWidth(350)" class="calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400">350</button>
+              </div>
+            </div>
+            <div>
+              <label class="block text-slate-300 font-bold mb-1">Frequência (Hz):</label>
+              <select id="calc-frequency" onchange="runDosimetryCalc()" class="w-full bg-[#030d17] border border-med-border rounded-xl p-2 text-slate-200 focus:border-cyan-400 focus:outline-none font-mono text-xs">
+                <option value="2">2 Hz (Endorfinas / Baixa Freq.)</option>
+                <option value="35">35 Hz (Recrutamento Tetânico Suave)</option>
+                <option value="50" selected>50 Hz (Padrão NMES Fortalecimento)</option>
+                <option value="80">80 Hz (TENS Convencional Parestesia)</option>
+                <option value="100">100 Hz (Comporta Medular Rápida)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mostrador & Análise Multidimensional (FDA 510(k)) -->
+        <div class="lg:col-span-6 bg-med-card p-5 rounded-2xl border border-med-border space-y-4">
+          
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-[#030d17] p-3 rounded-xl border border-slate-800">
+              <span class="text-[9px] uppercase font-bold text-slate-400 tracking-wider block">Densidade de Pico</span>
+              <div class="flex items-baseline justify-center gap-1 mt-1">
+                <span id="calc-density-val" class="text-2xl font-black font-mono text-cyan-300">1.00</span>
+                <span class="text-[9px] text-slate-500 font-mono">mA/cm²</span>
+              </div>
+            </div>
+            <div class="bg-[#030d17] p-3 rounded-xl border border-slate-800">
+              <span class="text-[9px] uppercase font-bold text-slate-400 tracking-wider block">Carga / Fase</span>
+              <div class="flex items-baseline justify-center gap-1 mt-1">
+                <span id="calc-phase-charge" class="text-2xl font-black font-mono text-cyan-300">6.25</span>
+                <span class="text-[9px] text-slate-500 font-mono">µC</span>
+              </div>
+            </div>
+            <div class="bg-[#030d17] p-3 rounded-xl border border-slate-800">
+              <span class="text-[9px] uppercase font-bold text-slate-400 tracking-wider block">Potência Média</span>
+              <div class="flex items-baseline justify-center gap-1 mt-1">
+                <span id="calc-power-density" class="text-2xl font-black font-mono text-emerald-400">0.01</span>
+                <span class="text-[9px] text-slate-500 font-mono">mW/cm² (em 500 Ω)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quadro Fisiológico Informativo Multidimensional -->
+          <div id="calc-verdict-box" class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60 text-xs text-slate-300 space-y-2">
+            <div class="flex items-center justify-between">
+              <strong id="calc-verdict-title" class="font-bold text-slate-200">ℹ️ Estimativa Eletrofisiológica Didática</strong>
+              <span id="calc-fda-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">FDA 510(k): Potência &le; 0.25 W/cm²</span>
+            </div>
+            <p id="calc-verdict-desc" class="text-slate-400 leading-relaxed text-[11px]">
+              A densidade superficial média de pico é de <span id="desc-dens" class="text-cyan-300 font-mono font-bold">1.00 mA/cm²</span> e a carga por fase de <span id="desc-charge" class="text-cyan-300 font-mono font-bold">6.25 µC</span> situam-se nos parâmetros habituais da estimulação neuromuscular terapêutica.
+            </p>
+          </div>
+
+          <!-- Nota Regulamentar FDA 510(k) Expandida -->
+          <div class="p-3.5 rounded-xl bg-[#030d17] border border-slate-800 text-[10.5px] text-slate-400 leading-relaxed space-y-1.5">
+            <strong class="text-slate-300 flex items-center gap-1.5">
+              <span>⚖️</span> <span>Limitações do Modelo Teórico & Diretrizes Regulamentares FDA:</span>
+            </strong>
+            <ul class="list-disc list-inside space-y-1 text-slate-400 pl-1">
+              <li><b>Aproximação Teórica da Forma de Onda:</b> O fator de forma de onda (ex: 1.15 na bifásica assimétrica) é uma modelagem matemática aproximada do ciclo de trabalho (área compensatória de TENS), e não uma medição em bancada por osciloscópio do aparelho físico do fisioterapeuta.</li>
+              <li><b>Referência Térmica FDA 510(k):</b> O valor orientativo de 0.25 W/cm² (250 mW/cm² em carga de 500 Ω) serve como guia de mitigação de sobreaquecimento tecidular, não constituindo validação de eficácia clínica universal nem dispensando a titulação sensorial individual.</li>
+              <li><b>Efeito de Borda (Edge Effect):</b> Em elétrodos ressecados ou com desgaste de hidrogel, as linhas de corrente concentram-se no contorno periférico, gerando densidades locais pontuais consideravelmente superiores à média da área condutora.</li>
+              <li><b>Forma de Onda & Depósito Eletrolítico:</b> Correntes bifásicas simétricas proporcionam carga líquida nula, prevenindo efeitos galvânicos. Ondas monofásicas concentram reações ácidas/básicas sob o elétrodo ativo.</li>
+              <li><b>Diretriz de Segurança Prática:</b> Nenhuma fórmula de dosimetria teórica substitui a inspeção visual prévia e subsequente da pele, nem a comunicação verbal contínua com o utente durante toda a intervenção.</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECÇÃO 4: LISTA DE VERIFICAÇÃO DE CUIDADOS & CONTRAINDICAÇÕES (EHRA) -->
+    <!-- ===================================================================== -->
+    <section id="section-safety" class="main-section hidden space-y-4">
+      <div class="bg-med-surface rounded-3xl border border-med-border p-6 shadow-xl space-y-4">
+        <div>
+          <span class="text-[10px] font-black uppercase text-amber-400 tracking-wider">Segurança & Prevenção de Riscos (Consenso Clínico)</span>
+          <h2 class="text-xl font-black text-white">Lista de Verificação de Contraindicações & Precauções</h2>
+          <p class="text-xs text-slate-400">Critérios fundamentados nas diretrizes europeias da EHRA (PMC11636572) e consensos de eletroterapia da IASP. A ausência de assinalações <u>não dispensa</u> a anamnese individual completa.</p>
+        </div>
+
+        <div id="safety-checklist-alert" class="p-4 rounded-2xl bg-slate-900 border border-slate-700 text-xs text-slate-300 flex items-start gap-3">
+          <span class="text-xl">📋</span>
+          <div>
+            <strong>Orientações de Responsabilidade Profissional:</strong>
+            <p class="mt-0.5 text-slate-400">Assinale os critérios abaixo caso identificados no seu utente. Se encontrar algum item assinalado, a aplicação de corrente elétrica está contraindicada ou exige validação médica e adaptação técnica estrita.</p>
+          </div>
+        </div>
+
+        <!-- Checklist de Critérios de Risco -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <!-- 1. Pacemaker / CDI (Consenso EHRA (2022) PMC11636572) -->
+          <label class="flex items-start gap-3 p-3 rounded-xl bg-med-card border border-med-border hover:border-amber-400/50 cursor-pointer transition">
+            <input type="checkbox" onchange="runSafetyAudit()" class="safety-box mt-0.5 w-4 h-4 rounded text-red-500 focus:ring-red-400" data-label="Dispositivo Eletrónico Cardíaco Implantado (Pacemaker/CDI)" />
+            <div>
+              <strong class="text-white block">Pacemaker / CDI (Consenso EHRA (2022) — PMC11636572)</strong>
+              <span class="text-slate-400 text-[11px]">Interdição de vetores que atravessem o gerador ou elétrodos intracardíacos (tórax/hemitórax esquerdo). A estimulação em extremidades periféricas requer validação com cardiologista/técnico do dispositivo.</span>
+            </div>
+          </label>
+
+          <!-- 2. Défice de Sensibilidade Cutânea / Hipoestesia -->
+          <label class="flex items-start gap-3 p-3 rounded-xl bg-med-card border border-med-border hover:border-amber-400/50 cursor-pointer transition">
+            <input type="checkbox" onchange="runSafetyAudit()" class="safety-box mt-0.5 w-4 h-4 rounded text-red-500 focus:ring-red-400" data-label="Défice de Sensibilidade Cutânea / Hipoestesia / Parestesia" />
+            <div>
+              <strong class="text-white block">Alteração de Sensibilidade Cutânea (Hipoestesia/Anestesia)</strong>
+              <span class="text-slate-400 text-[11px]">O utente não consegue discriminar dor, calor ou formigueiro excessivo, com risco elevado de queimadura eletroquímica ou térmica sob o elétrodo.</span>
+            </div>
+          </label>
+
+          <!-- 3. Gravidez -->
+          <label class="flex items-start gap-3 p-3 rounded-xl bg-med-card border border-med-border hover:border-amber-400/50 cursor-pointer transition">
+            <input type="checkbox" onchange="runSafetyAudit()" class="safety-box mt-0.5 w-4 h-4 rounded text-red-500 focus:ring-red-400" data-label="Gravidez (Região Abdominal, Pélvica e Lombar)" />
+            <div>
+              <strong class="text-white block">Gravidez (Região Abdominal, Pélvica e Lombar)</strong>
+              <span class="text-slate-400 text-[11px]">Risco de indução precoce de contrações uterinas. TENS permitido apenas em membros distais ou trabalho de parto sob protocolo específico.</span>
+            </div>
+          </label>
+
+          <!-- 4. Incapacidade de Comunicação / Cognição -->
+          <label class="flex items-start gap-3 p-3 rounded-xl bg-med-card border border-med-border hover:border-amber-400/50 cursor-pointer transition">
+            <input type="checkbox" onchange="runSafetyAudit()" class="safety-box mt-0.5 w-4 h-4 rounded text-red-500 focus:ring-red-400" data-label="Incapacidade de Comunicação / Défice Cognitivo Severo" />
+            <div>
+              <strong class="text-white block">Incapacidade de Comunicação / Défice Cognitivo</strong>
+              <span class="text-slate-400 text-[11px]">Impossibilidade de o utente sinalizar dor intolerável, desconforto acentuado ou solicitar a paragem imediata da emissão.</span>
+            </div>
+          </label>
+
+          <!-- 5. Seio Carotídeo -->
+          <label class="flex items-start gap-3 p-3 rounded-xl bg-med-card border border-med-border hover:border-amber-400/50 cursor-pointer transition">
+            <input type="checkbox" onchange="runSafetyAudit()" class="safety-box mt-0.5 w-4 h-4 rounded text-red-500 focus:ring-red-400" data-label="Seio Carotídeo / Região Cervical Anterior" />
+            <div>
+              <strong class="text-white block">Seio Carotídeo & Pescoço Anterior</strong>
+              <span class="text-slate-400 text-[11px]">Risco de bradicardia reflexa aguda, hipotensão severa ou vasoespasmo da artéria carótida.</span>
+            </div>
+          </label>
+
+          <!-- 6. TVP / Tromboflebite -->
+          <label class="flex items-start gap-3 p-3 rounded-xl bg-med-card border border-med-border hover:border-amber-400/50 cursor-pointer transition">
+            <input type="checkbox" onchange="runSafetyAudit()" class="safety-box mt-0.5 w-4 h-4 rounded text-red-500 focus:ring-red-400" data-label="Trombose Venosa Profunda (TVP) / Tromboflebite Ativa" />
+            <div>
+              <strong class="text-white block">Trombose Venosa Profunda (TVP) / Tromboflebite</strong>
+              <span class="text-slate-400 text-[11px]">Risco de desprendimento de êmbolo por contração mecânica ou aumento súbito do fluxo venoso.</span>
+            </div>
+          </label>
+
+          <!-- 7. Malignidade Ativa -->
+          <label class="flex items-start gap-3 p-3 rounded-xl bg-med-card border border-med-border hover:border-amber-400/50 cursor-pointer transition">
+            <input type="checkbox" onchange="runSafetyAudit()" class="safety-box mt-0.5 w-4 h-4 rounded text-red-500 focus:ring-red-400" data-label="Tecido Neoplásico / Tumor Ativo na Área de Aplicação" />
+            <div>
+              <strong class="text-white block">Malignidade Ativa / Áreas com Neoplasia</strong>
+              <span class="text-slate-400 text-[11px]">Risco teórico de aceleração da angiogénese e disseminação celular metastática.</span>
+            </div>
+          </label>
+
+          <!-- 8. Solução de Continuidade / Pele Lesada -->
+          <label class="flex items-start gap-3 p-3 rounded-xl bg-med-card border border-med-border hover:border-amber-400/50 cursor-pointer transition">
+            <input type="checkbox" onchange="runSafetyAudit()" class="safety-box mt-0.5 w-4 h-4 rounded text-red-500 focus:ring-red-400" data-label="Pele Lesada / Ferida Hemorrágica Aberta / Queimadura" />
+            <div>
+              <strong class="text-white block">Solução de Continuidade Cutânea / Ferida Aberta</strong>
+              <span class="text-slate-400 text-[11px]">Queda súbita de impedância cutânea concentrando a corrente num ponto e provocando queimadura química/térmica.</span>
+            </div>
+          </label>
+        </div>
+
+        <div id="safety-audit-verdict" class="p-4 rounded-2xl bg-med-card border border-med-border text-xs text-slate-300">
+          Nenhum critério impeditivo assinalado na lista de verificação.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECÇÃO 5: GERADOR DE REGISTO SOAP PARA PRONTUÁRIO OFICIAL -->
+    <!-- ===================================================================== -->
+    <section id="section-notes" class="main-section hidden space-y-4">
+      <div class="bg-med-surface rounded-3xl border border-med-border p-6 shadow-xl space-y-4">
+        <div>
+          <span class="text-[10px] font-black uppercase text-cyan-400 tracking-wider">Apoio à Documentação Clínica</span>
+          <h2 class="text-xl font-black text-white">Gerador de Registo SOAP</h2>
+          <p class="text-xs text-slate-400">Preencha os campos estritamente com os dados reais observados na sua sessão. Zero conclusões pré-fabricadas ou dados inventados.</p>
+        </div>
+
+        <div class="bg-cyan-950/20 border border-cyan-500/30 p-3 rounded-xl text-xs text-cyan-200">
+          🔒 <b>Privacidade & RGPD:</b> Os dados são processados exclusivamente na memória deste navegador. Nenhum dado clínico é transmitido para servidores externos.
+        </div>
+
+        <!-- Formulário SOAP Limpo -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div>
+            <label class="block text-slate-400 font-bold mb-1">Identificador / Iniciais do Utente:</label>
+            <input type="text" id="soap-patient-code" placeholder="Ex: UT-102 ou J.S." class="w-full bg-med-card border border-med-border rounded-xl px-3 py-2 text-white outline-none focus:border-cyan-400 font-mono" />
+          </div>
+          <div>
+            <label class="block text-slate-400 font-bold mb-1">Diagnóstico Clínico / Condição Tratada:</label>
+            <input type="text" id="soap-condition" placeholder="Ex: Inibição do VMO pós-reconstrução do LCA" class="w-full bg-med-card border border-med-border rounded-xl px-3 py-2 text-white outline-none focus:border-cyan-400" />
+          </div>
+        </div>
+
+        <!-- Escala Visual Analógica (EVA) Sem Valores Falsos Predefinidos -->
+        <div class="bg-med-card p-4 rounded-2xl border border-med-border space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Escala Visual Analógica (EVA) da Dor:</span>
+            <span id="soap-eva-delta-badge" class="font-mono text-xs font-black text-slate-400">Não avaliada nesta sessão</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div>
+              <label for="soap-eva-pre" class="block text-slate-300 font-bold mb-1">Dor Pré-Sessão (EVA):</label>
+              <select id="soap-eva-pre" onchange="updateEvaCalculations()" class="w-full bg-[#030d17] border border-med-border rounded-xl p-2.5 text-slate-200 text-xs focus:border-cyan-400 focus:outline-none">
+                <option value="" selected>-- [Não avaliada nesta sessão] --</option>
+                <option value="0">0 - Sem Dor (Indolor)</option>
+                <option value="1">1 - Dor Mínima / Quase impercetível</option>
+                <option value="2">2 - Dor Ligeira (Não interfere)</option>
+                <option value="3">3 - Dor Ligeira a Moderada</option>
+                <option value="4">4 - Dor Moderada (Desconforto claro)</option>
+                <option value="5">5 - Dor Moderada a Significativa</option>
+                <option value="6">6 - Dor Intensa (Interfere na função)</option>
+                <option value="7">7 - Dor Severa (Limita movimentos)</option>
+                <option value="8">8 - Dor Muito Severa (Dificuldade em repousar)</option>
+                <option value="9">9 - Dor Excruciante (Incapacitante)</option>
+                <option value="10">10 - Dor Máxima Insuportável</option>
+              </select>
+            </div>
+            <div>
+              <label for="soap-eva-post" class="block text-slate-300 font-bold mb-1">Dor Pós-Sessão Imediata (EVA):</label>
+              <select id="soap-eva-post" onchange="updateEvaCalculations()" class="w-full bg-[#030d17] border border-med-border rounded-xl p-2.5 text-slate-200 text-xs focus:border-cyan-400 focus:outline-none">
+                <option value="" selected>-- [Não avaliada nesta sessão] --</option>
+                <option value="0">0 - Sem Dor (Alívio completo)</option>
+                <option value="1">1 - Dor Mínima / Quase impercetível</option>
+                <option value="2">2 - Dor Ligeira</option>
+                <option value="3">3 - Dor Ligeira a Moderada</option>
+                <option value="4">4 - Dor Moderada</option>
+                <option value="5">5 - Dor Moderada a Significativa</option>
+                <option value="6">6 - Dor Intensa</option>
+                <option value="7">7 - Dor Severa</option>
+                <option value="8">8 - Dor Muito Severa</option>
+                <option value="9">9 - Dor Excruciante</option>
+                <option value="10">10 - Dor Máxima Insuportável</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parâmetros Efetivamente Administrados pelo Profissional (Diferenciação Rigorosa) -->
+        <div class="bg-med-card p-4 rounded-2xl border border-med-border space-y-3">
+          <span class="text-xs font-bold text-white block">Parâmetros Efetivamente Administrados na Sessão:</span>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div>
+              <label for="soap-actual-current" class="block text-slate-400 font-bold mb-1">Intensidade Efetiva (mA):</label>
+              <input type="number" id="soap-actual-current" min="1" max="100" placeholder="Ex: 28 mA (Tolerância)" oninput="updateSoapSummaryText()" class="w-full bg-[#030d17] border border-med-border rounded-xl p-2.5 text-white font-mono text-xs focus:border-cyan-400 focus:outline-none" />
+            </div>
+            <div>
+              <label for="soap-actual-duration" class="block text-slate-400 font-bold mb-1">Duração Real (min):</label>
+              <input type="number" id="soap-actual-duration" min="1" max="120" placeholder="Ex: 20 min" oninput="updateSoapSummaryText()" class="w-full bg-[#030d17] border border-med-border rounded-xl p-2.5 text-white font-mono text-xs focus:border-cyan-400 focus:outline-none" />
+            </div>
+            <div>
+              <label for="soap-actual-skin" class="block text-slate-400 font-bold mb-1">Inspeção Cutânea Pós-Sessão:</label>
+              <select id="soap-actual-skin" onchange="updateSoapSummaryText()" class="w-full bg-[#030d17] border border-med-border rounded-xl p-2.5 text-slate-200 text-xs focus:border-cyan-400 focus:outline-none">
+                <option value="" selected>-- [Pendente de inspeção / Não informada] --</option>
+                <option value="Pele íntegra sem eritema persistente">Pele íntegra sem eritema persistente</option>
+                <option value="Hiperemia fisiológica transitória (&lt; 15 min)">Hiperemia fisiológica transitória (&lt; 15 min)</option>
+                <option value="Sensação de ardor referida (hidrogel substituído)">Sensação de ardor referida (hidrogel substituído)</option>
+                <option value="Eritema localizado sob a área do elétrodo">Eritema localizado sob a área do elétrodo</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Campos SOAP -->
+        <div class="space-y-3 text-xs">
+          <div>
+            <label class="block text-slate-400 font-bold mb-1">S (Subjetivo) — Relato e queixas do utente:</label>
+            <textarea id="soap-subj" rows="2" placeholder="Descreva as queixas álgicas, localização e limitações funcionais referidas pelo utente..." class="w-full bg-med-card border border-med-border rounded-xl p-3 text-white outline-none focus:border-cyan-400"></textarea>
+          </div>
+          <div>
+            <label class="block text-slate-400 font-bold mb-1">O (Objetivo) — Parâmetros dosimetrizados e montagem:</label>
+            <div id="soap-obj-summary" class="bg-[#030d17] p-3 rounded-xl border border-med-border text-slate-300 font-mono text-[11px]">
+              Região ativa selecionada no guia de posicionamento.
+            </div>
+          </div>
+          <div>
+            <label class="block text-slate-400 font-bold mb-1">A (Avaliação) — Resposta motora e tolerância observada:</label>
+            <textarea id="soap-assess" rows="2" placeholder="Registe a contração motora objetiva (visível/palpável), simetria e resposta ao estímulo..." class="w-full bg-med-card border border-med-border rounded-xl p-3 text-white outline-none focus:border-cyan-400"></textarea>
+          </div>
+          <div>
+            <label class="block text-slate-400 font-bold mb-1">P (Plano) — Conduta clínica e próxima sessão:</label>
+            <textarea id="soap-plan" rows="2" placeholder="Indique a progressão de parâmetros, cinesioterapia associada ou reavaliação prevista..." class="w-full bg-med-card border border-med-border rounded-xl p-3 text-white outline-none focus:border-cyan-400"></textarea>
+          </div>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+          <button type="button" onclick="copySoapNote()" class="px-5 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs transition flex items-center gap-2 shadow-lg shadow-cyan-500/20">
+            <span>📋</span> <span>Copiar Registo Formatado para o Prontuário</span>
+          </button>
+          <button type="button" onclick="clearSoapForm()" class="px-4 py-3 rounded-xl bg-med-card border border-med-border text-slate-400 hover:text-white text-xs transition">
+            Limpar Campos
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================= -->
+  <!-- MODAL DE FALLBACK MANUAL PARA CÓPIA DO REGISTO SOAP -->
+  <!-- ======================================================================= -->
+  <div id="soap-modal-fallback" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-med-surface border border-med-border rounded-2xl max-w-lg w-full p-5 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <span>📋</span> <span>Registo SOAP Formatado</span>
+        </h3>
+        <button type="button" onclick="closeSoapModal()" class="text-slate-400 hover:text-white text-lg font-bold">&times;</button>
+      </div>
+      <p class="text-xs text-slate-400">Selecione o texto abaixo ou clique em "Copiar Tudo" para colar no seu prontuário clínico:</p>
+      <textarea id="soap-fallback-textarea" rows="10" readonly class="w-full bg-[#030d17] border border-med-border rounded-xl p-3 text-xs text-cyan-200 font-mono outline-none"></textarea>
+      <div class="flex justify-end gap-2">
+        <button type="button" onclick="closeSoapModal()" class="px-4 py-2 rounded-xl bg-med-card border border-med-border text-slate-300 text-xs font-bold hover:text-white">Fechar</button>
+        <button type="button" onclick="copyFromModalTextarea()" class="px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 text-xs font-bold hover:bg-cyan-400">Copiar Tudo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================= -->
+  <!-- MODAL DE ATIVAÇÃO DE LICENÇA PRO (HOTMART HP CODE) -->
+  <!-- ======================================================================= -->
+  <div id="modal-license-gate" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-[#05131f] border-2 border-cyan-500/50 rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl relative">
+      <button type="button" onclick="closeLicenseModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold p-1">&times;</button>
+      
+      <div class="flex items-center gap-2.5">
+        <span class="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-lg">⚡</span>
+        <div>
+          <h3 class="text-base font-bold text-white">Desbloqueio ElectroMapas PRO</h3>
+          <span class="text-[11px] text-cyan-300">Software Clínico do Fisioterapeuta</span>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-300 leading-relaxed">
+        Esta região ou protocolo clínico é exclusivo para membros com licença ativa. Introduza abaixo o seu <strong>Código de Transação Hotmart</strong> (ex: <code class="text-cyan-300">HP1829384756</code>) ou o seu e-mail de compra para desbloquear o acesso total nesta instalação.
+      </p>
+      <div class="p-2.5 rounded-xl bg-cyan-950/20 border border-cyan-500/20 text-[11px] text-cyan-200/90 leading-snug">
+        ℹ️ <b>Ativação Individual por Instalação (PWA):</b> Cada licença autoriza 1 dispositivo/navegador ativo em simultâneo. Para transferir para outro aparelho ou após formatação, a migração é assistida de forma segura pelo suporte.
+      </div>
+
+      <div class="space-y-2 pt-1">
+        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">Código Hotmart ou E-mail:</label>
+        <input type="text" id="input-license-code" placeholder="Ex: HP182938475612 ou seu@email.com" class="w-full bg-[#030d17] border border-cyan-500/40 focus:border-cyan-400 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 font-mono outline-none" />
+        <p id="license-error-msg" class="text-[11px] text-red-400 bg-red-950/40 border border-red-500/40 rounded-lg p-2 font-mono hidden"></p>
+      </div>
+
+      <div class="space-y-2 pt-1">
+        <button type="button" onclick="submitLicenseCode()" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 hover:from-cyan-300 hover:to-emerald-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg transition">
+          🔓 Ativar Licença e Desbloquear Tudo →
+        </button>
+        <button type="button" onclick="activateDemoMode()" class="w-full py-2 rounded-xl bg-med-card border border-med-border text-cyan-300 hover:text-white text-xs font-semibold transition">
+          Continuar no Modo de Demonstração (Módulo Joelho Grátis)
+        </button>
+      </div>
+
+      <div class="border-t border-slate-800 pt-3 text-center">
+        <p class="text-[11px] text-slate-400">
+          Ainda não adquiriu o ElectroMapas PRO?
+          <a href="../upsell.html" target="_blank" class="text-amber-400 hover:underline font-bold block mt-0.5">Obter Licença Vitalícia por 14,97 € na Hotmart ↗</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================= -->
+  <!-- TOAST DE NOTIFICAÇÃO -->
+  <!-- ======================================================================= -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 border border-cyan-400 text-cyan-300 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold transition-all duration-300 translate-y-20 opacity-0 pointer-events-none">
+    Ação concluída
+  </div>
+
+  <!-- ======================================================================= -->
+  <!-- JAVASCRIPT: MOTOR DA APLICAÇÃO -->
+  <!-- ======================================================================= -->
+  <script>
+    // =========================================================================
+    // 1. BASE DE DADOS DOS 7 MÓDULOS DE COLOCAÇÃO CLÍNICA
+    // =========================================================================
+        const CLINICAL_MODULES = [
+      {
+        key: 'knee-ext',
+        region: 'Membro Inferior',
+        modeBadge: 'NMES Síncrono (Bifásica Simétrica)',
+        title: 'Extensão do Joelho & Vasto Medial Oblíquo (VMO)',
+        subtitle: 'Ativação seletiva do VMO e estabilização patelar pós-reconstrução de LCA ou condromalácia',
+        placementImg: '/assets/3d/clinica_marquesa_joelho.webp',
+        videoSrc: '/assets/videos/video_joelho_pt_pt.mp4',
+        videoTrack: '/assets/videos/legendas_joelho_pt_pt.vtt',
+        hasDedicatedVideo: true,
+        videoCaption: '🎬 Demonstração Prática de Marquesa: Extensão do Joelho & Ativação do VMO (pt-PT).',
+        muscleImg: '/assets/3d/mapa_3d_joelho.webp',
+        nerveImg: '/assets/3d/anatomia_neural_3d.webp',
+        placementCaption: 'Colocação de elétrodos autoadesivos: proximal alto e lateral na coxa; distal na linha média / bordo súpero-medial da patela.',
+        muscleCaption: 'Vasto Medial Oblíquo (VMO), Reto Femoral e tendão rotuliano.',
+        nerveCaption: 'Nervo Femoral e ramos motores para o quadríceps (L2-L4).',
+        instructions: `A patela é marcada com um círculo distalmente. Os elétrodos autoadesivos são colocados ao longo da linha média da coxa (ventre proximal do reto femoral) e sobre o ponto motor do vasto medial oblíquo (distal medial).
+
+⚠️ PRECAUÇÃO ANATÓMICA (Baker LL et al., 2000): Uma colocação excessivamente medial do elétrodo distal pode provocar cãibra dolorosa no adutor magno. Se isso ocorrer, reposicione o elétrodo 1 a 2 cm para a face anterior.
+
+🔬 DIRETRIZ CLÍNICA (Nussbaum EL et al., 2017): Titular a intensidade individualmente até obter contração vigorosa tolerada, mantendo comunicação verbal contínua e inspeção da pele pré e pós-aplicação.`,
+        hz: 50,
+        us: 350,
+        duty: '2s Rampa / 6s ON / 18s OFF',
+        clinicalSource: 'Nussbaum EL et al. (2017)',
+        placementSource: 'Baker LL et al. (2000)',
+        sourcePmc: 'PMC5683854',
+        sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/',
+        view: 'anterior',
+        positions: { p1x: 45, p1y: 54, p2x: 42, p2y: 44, p3x: 36, p3y: 43, p4x: 42, p4y: 57 }
+      },
+      {
+        key: 'hamstrings-nmes',
+        region: 'Membro Inferior',
+        modeBadge: 'NMES Fortalecimento Muscular (Bifásica Simétrica)',
+        title: 'Isquiotibiais: Bíceps Femoral & Semitendinoso (Hamstrings)',
+        subtitle: 'Recrutamento motor gradual da cadeia posterior com titulação individualizada',
+        placementImg: '/assets/3d/clinica_colocacao_isquiotibiais.webp',
+        videoSrc: '/assets/videos/video_01_preparacao_pele_pt_pt.mp4',
+        videoTrack: '/assets/videos/video_01_preparacao_pele_pt_pt.vtt',
+        hasDedicatedVideo: false,
+        videoCaption: '🧴 Vídeo Base: Técnica Universal de Higienização & Preparação Cutânea com Álcool Isopropílico (Pré-requisito indispensável para todos os módulos). A montagem dos isquiotibiais está ilustrada nas abas Pele e Atlas 3D.',
+        muscleImg: '/assets/3d/mapa_3d_isquiotibiais.webp',
+        nerveImg: '/assets/3d/anatomia_neural_3d.webp',
+        placementCaption: 'Montagem bipolar longitudinal na coxa posterior: polo proximal no ventre alto dos isquiotibiais; polo distal 4-5 cm acima da fossa poplítea.',
+        muscleCaption: 'Bíceps Femoral (cabeça longa e curta), Semitendinoso e Semimembranoso.',
+        nerveCaption: 'Nervo Ciático e ramificações musculares posteriores (Tibial e Fibular comum - L5-S2).',
+        instructions: `O elétrodo proximal posiciona-se no terço superior da coxa posterior, imediatamente abaixo da prega glútea (ventre proximal do bíceps femoral e semitendinoso). O elétrodo distal posiciona-se 4 a 5 cm acima da linha articular do joelho, evitando a fossa poplítea.
+
+⚠️ PRECAUÇÃO ANATÓMICA (Baker LL et al., 2000): Nunca aplicar elétrodos diretamente sobre a fossa poplítea para não comprimir o feixe vasculonervoso poplíteo (artéria, veia poplítea e nervo tibial superficial).
+
+🔬 DIRETRIZ CLÍNICA (Nussbaum EL et al., 2017): Titular a amplitude individualmente com base na tolerância e contração visível/palpável, mantendo comunicação verbal contínua e relação de descanso intermitente amplo (1:3 a 1:5) para evitar fadiga precoce.`,
+        hz: 50,
+        us: 300,
+        duty: '2s Rampa / 6s ON / 24s OFF (Proporção 1:4)',
+        clinicalSource: 'Nussbaum EL et al. (2017)',
+        placementSource: 'Baker LL et al. (2000)',
+        sourcePmc: 'PMC5683854',
+        sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/',
+        view: 'posterior',
+        positions: { p1x: 44, p1y: 45, p2x: 43, p2y: 58, p3x: 48, p3y: 47, p4x: 47, p4y: 60 }
+      },
+      {
+        key: 'shoulder-flex',
+        region: 'Membro Superior',
+        modeBadge: 'NMES Síncrono (Bifásica Simétrica)',
+        title: 'Flexão e Abdução do Ombro (Shoulder Flexion & Abduction)',
+        subtitle: 'Ativação do Deltóide Anterior e Médio para elevação do braço',
+        placementImg: '/assets/3d/clinica_marquesa_ombro.webp',
+        videoSrc: '/assets/videos/video_01_preparacao_pele_pt_pt.mp4',
+        videoTrack: '/assets/videos/video_01_preparacao_pele_pt_pt.vtt',
+        hasDedicatedVideo: false,
+        videoCaption: '🧴 Vídeo Base: Técnica Universal de Higienização & Preparação Cutânea com Álcool Isopropílico. A montagem do deltóide está ilustrada nas abas Pele e Atlas 3D.',
+        muscleImg: '/assets/3d/mapa_3d_membros_superiores.webp',
+        nerveImg: '/assets/3d/anatomia_neural_3d.webp',
+        placementCaption: 'Colocação bipolar: proximal sobre o acrómio/espinha da escápula; distal no ventre do deltóide médio/anterior.',
+        muscleCaption: 'Deltóide (feixes anterior e médio) e inserção na tuberosidade deltóidea.',
+        nerveCaption: 'Nervo Axilar (Circunflexo) — Raízes C5-C6 do plexo braquial.',
+        instructions: `O elétrodo proximal é colocado sobre o acrómio e bordo do trapézio superior. O elétrodo distal é fixado 3 a 4 cm abaixo, no ponto motor central do feixe anterior/médio do deltóide.
+
+💡 ORIENTAÇÃO TÉCNICA (Baker LL et al., 2000): Para elevação pura sem rotação interna indesejada, assegurar que o cátodo (-) está no ventre posterior do deltóide ou perfeitamente alinhado com a linha média do úmero.`,
+        hz: 45,
+        us: 300,
+        duty: '2s Rampa / 5s ON / 15s OFF',
+        clinicalSource: 'Nussbaum EL et al. (2017)',
+        placementSource: 'Baker LL et al. (2000)',
+        sourcePmc: 'PMC5683854',
+        sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/',
+        view: 'anterior',
+        positions: { p1x: 31, p1y: 18, p2x: 30, p2y: 25, p3x: 35, p3y: 19, p4x: 32, p4y: 28 }
+      },
+      {
+        key: 'lumbar-sciatic',
+        region: 'Coluna & Pélvis',
+        modeBadge: 'TENS Convencional (Gate Control)',
+        title: 'Lombociatalgia Radicular & Tronco Ciático (L4-S1)',
+        subtitle: 'Bloqueio de condução aferente no trajeto espinhal e piriforme',
+        placementImg: '/assets/3d/clinica_marquesa_lombar.webp',
+        videoSrc: '/assets/videos/video_01_preparacao_pele_pt_pt.mp4',
+        videoTrack: '/assets/videos/video_01_preparacao_pele_pt_pt.vtt',
+        hasDedicatedVideo: false,
+        videoCaption: '🧴 Vídeo Base: Técnica Universal de Higienização & Preparação Cutânea com Álcool Isopropílico. A montagem paravertebral lombar está ilustrada nas abas Pele e Atlas 3D.',
+        muscleImg: '/assets/3d/mapa_3d_lombar.webp',
+        nerveImg: '/assets/3d/anatomia_neural_3d.webp',
+        placementCaption: 'Montagem paravertebral longitudinal em L4-S1 e emergência na incisura isquiática.',
+        muscleCaption: 'Multífidos lombares, eretores da espinha e feixes glúteos profundos.',
+        nerveCaption: 'Raízes espinhais L4-S1 e tronco comum do Nervo Ciático.',
+        instructions: `Colocação longitudinal bipolar dupla: Canal 1 paravertebral lombar (L4-S1) e incisura isquiática (piriforme). Canal 2 no ventre posterior da coxa e fossa poplítea cranial.
+
+💡 ORIENTAÇÃO CLÍNICA: Utilizar elétrodos de 5x5 cm para concentrar a densidade no trajeto neural sem dispersão indesejada.`,
+        hz: 100,
+        us: 150,
+        duty: 'Contínuo (sem rampa)',
+        clinicalSource: 'Johnson MI (2007)',
+        placementSource: 'Diretrizes Clínicas TENS (IASP)',
+        sourcePmc: 'PMC4589923',
+        sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4589923/',
+        view: 'posterior',
+        positions: { p1x: 47, p1y: 32, p2x: 52, p2y: 41, p3x: 44, p3y: 55, p4x: 43, p4y: 64 }
+      },
+      {
+        key: 'cervical-spine',
+        region: 'Coluna & Tronco',
+        modeBadge: 'TENS / IFT Tetrapolar',
+        title: 'Coluna Cervical & Trapézio Superior (C1-C7)',
+        subtitle: 'Alívio da dor cervicobraquial, espasmo do trapézio e whiplash',
+        placementImg: '/assets/3d/clinica_colocacao_cervical.webp',
+        videoSrc: '/assets/videos/video_01_preparacao_pele_pt_pt.mp4',
+        videoTrack: '/assets/videos/video_01_preparacao_pele_pt_pt.vtt',
+        hasDedicatedVideo: false,
+        videoCaption: '🧴 Vídeo Base: Técnica Universal de Higienização & Preparação Cutânea com Álcool Isopropílico. A montagem cervical/trapézio está ilustrada nas abas Pele e Atlas 3D.',
+        muscleImg: '/assets/3d/mapa_3d_cervical.webp',
+        nerveImg: '/assets/3d/anatomia_neural_3d.webp',
+        placementCaption: 'Montagem paravertebral cervical posterior bilateral (C2-C7) e ângulo superior da escápula.',
+        muscleCaption: 'Trapézio Superior, Esplénio da Cabeça, Elevador da Escápula e Semiespinhoso.',
+        nerveCaption: 'Ramos posteriores dos nervos cervicais (C2-C5) e Nervo Acessório (XI Par Craniano).',
+        instructions: `Colocação paravertebral cervical longitudinal: Elétrodos proximais na base occipital/C2; elétrodos distais sobre o trapézio superior/C7 bilateralmente.
+
+⚠️ PRECAUÇÃO CLÍNICA FUNDAMENTAL: Nunca posicionar elétrodos na face anterior do pescoço ou no triângulo carotídeo para evitar estimulação inadvertida do seio carotídeo e nervo vago.`,
+        hz: 80,
+        us: 125,
+        duty: 'Contínuo ou Modulado',
+        clinicalSource: 'Johnson MI (2007)',
+        placementSource: 'Kitchen & Bazin (2002)',
+        sourcePmc: 'PMC4589923',
+        sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4589923/',
+        view: 'posterior',
+        positions: { p1x: 48, p1y: 12, p2x: 52, p2y: 12, p3x: 45, p3y: 16, p4x: 55, p4y: 16 }
+      },
+      {
+        key: 'elbow-ext',
+        region: 'Membro Superior',
+        modeBadge: 'NMES / FES',
+        title: 'Extensão do Cotovelo & Tríceps Braquial (Elbow Extension)',
+        subtitle: 'Recrutamento da cabeça longa e lateral do tríceps',
+        placementImg: '/assets/3d/clinica_colocacao_cotovelo.webp',
+        videoSrc: '/assets/videos/video_01_preparacao_pele_pt_pt.mp4',
+        videoTrack: '/assets/videos/video_01_preparacao_pele_pt_pt.vtt',
+        hasDedicatedVideo: false,
+        videoCaption: '🧴 Vídeo Base: Técnica Universal de Higienização & Preparação Cutânea com Álcool Isopropílico. A montagem do cotovelo/tríceps está ilustrada nas abas Pele e Atlas 3D.',
+        muscleImg: '/assets/3d/mapa_3d_membros_superiores.webp',
+        nerveImg: '/assets/3d/anatomia_neural_3d.webp',
+        placementCaption: 'Elétrodo proximal na cabeça longa do tríceps e distal 3 cm acima do olecrânio.',
+        muscleCaption: 'Tríceps Braquial (cabeças longa, lateral e medial) e tendão tricipital.',
+        nerveCaption: 'Nervo Radial (C6-C8) no sulco espiral e ramos para o tríceps.',
+        instructions: `O elétrodo proximal é fixado no terço proximal posterior do braço (cabeça longa). O elétrodo distal fica no ventre muscular comum, 3 cm proximal ao olécrano.
+
+⚠️ PRECAUÇÃO ANATÓMICA (Baker LL et al., 2000): Não aproximar o elétrodo do nervo ulnar na goteira epitrocleana medial para evitar sensação de choque agudo no bordo ulnar da mão.`,
+        hz: 40,
+        us: 250,
+        duty: '1.5s Rampa / 4s ON / 12s OFF',
+        clinicalSource: 'Nussbaum EL et al. (2017)',
+        placementSource: 'Baker LL et al. (2000)',
+        sourcePmc: 'PMC5683854',
+        sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/',
+        view: 'posterior',
+        positions: { p1x: 31, p1y: 29, p2x: 30, p2y: 35, p3x: 28, p3y: 30, p4x: 29, p4y: 38 }
+      },
+      {
+        key: 'wrist-hand',
+        region: 'Membro Superior',
+        modeBadge: 'TENS / FES Seletivo',
+        title: 'Punho, Mão & Canal Cárpico (Wrist & Carpal Tunnel)',
+        subtitle: 'Descompressão do nervo mediano e reativação dos extensores do carpo',
+        placementImg: '/assets/3d/clinica_colocacao_punho.webp',
+        videoSrc: '/assets/videos/video_01_preparacao_pele_pt_pt.mp4',
+        videoTrack: '/assets/videos/video_01_preparacao_pele_pt_pt.vtt',
+        hasDedicatedVideo: false,
+        videoCaption: '🧴 Vídeo Base: Técnica Universal de Higienização & Preparação Cutânea com Álcool Isopropílico. A montagem do punho e canal cárpico está ilustrada nas abas Pele e Atlas 3D.',
+        muscleImg: '/assets/3d/mapa_3d_punho.webp',
+        nerveImg: '/assets/3d/anatomia_neural_3d.webp',
+        placementCaption: 'Montagem bipolar palmar longitudinal: proximal 4 cm acima da prega do punho; distal na eminência tenar.',
+        muscleCaption: 'Flexores e extensores do carpo, pronador redondo e retináculo dos flexores.',
+        nerveCaption: 'Nervo Mediano no túnel cárpico e Nervo Radial superficial.',
+        instructions: `Para Síndrome do Canal Cárpico: canal longitudinal suave com elétrodo proximal no terço distal do antebraço anterior e elétrodo distal na eminência tenar (trajeto sensorial do mediano).
+
+Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebraço dorsal (ventre do extensor radial longo do carpo) e distal no terço médio dorsal.`,
+        hz: 80,
+        us: 90,
+        duty: 'Contínuo ou 1s Rampa / 4s ON / 10s OFF',
+        clinicalSource: 'Johnson MI (2007)',
+        placementSource: 'Baker LL et al. (2000)',
+        sourcePmc: 'PMC4589923',
+        sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4589923/',
+        view: 'anterior',
+        positions: { p1x: 29, p1y: 36, p2x: 30, p2y: 42, p3x: 28, p3y: 38, p4x: 31, p4y: 44 }
+      },
+      {
+        key: 'ankle-dorsi',
+        region: 'Membro Inferior',
+        modeBadge: 'NMES / FES',
+        title: 'Dorsiflexão do Tornozelo & Tibial Anterior (Ankle Dorsiflexion)',
+        subtitle: 'Reativação funcional do nervo fibular comum e profundo (FES)',
+        placementImg: '/assets/3d/clinica_colocacao_tornozelo.webp',
+        videoSrc: '/assets/videos/video_01_preparacao_pele_pt_pt.mp4',
+        videoTrack: '/assets/videos/video_01_preparacao_pele_pt_pt.vtt',
+        hasDedicatedVideo: false,
+        videoCaption: '🧴 Vídeo Base: Técnica Universal de Higienização & Preparação Cutânea com Álcool Isopropílico. A montagem do tibial anterior/FES está ilustrada nas abas Pele e Atlas 3D.',
+        muscleImg: '/assets/3d/mapa_3d_tornozelo.webp',
+        nerveImg: '/assets/3d/anatomia_neural_3d.webp',
+        placementCaption: 'Elétrodo proximal no colo da fíbula (nervo fibular comum); distal no terço distal do tibial anterior.',
+        muscleCaption: 'Músculo Tibial Anterior, Extensor Longo dos Dedos e retináculo dos extensores.',
+        nerveCaption: 'Nervo Fibular Comum e Profundo (L4-S1).',
+        instructions: `O elétrodo proximal situa-se imediatamente abaixo da cabeça da fíbula, sobre o nervo fibular comum. O elétrodo distal situa-se 6 a 8 cm acima do maléolo lateral, sobre o ventre distal do tibial anterior.
+
+💡 ORIENTAÇÃO ANATÓMICA (Baker LL et al., 2000): Permite dorsiflexão pura sem inversão excessiva, facilitando a fase de balanço da marcha em utentes com pé pendente.`,
+        hz: 35,
+        us: 300,
+        duty: '1.5s Rampa / 4s ON / 10s OFF',
+        clinicalSource: 'Nussbaum EL et al. (2017)',
+        placementSource: 'Baker LL et al. (2000)',
+        sourcePmc: 'PMC5683854',
+        sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/',
+        view: 'anterior',
+        positions: { p1x: 41, p1y: 68, p2x: 43, p2y: 77, p3x: 44, p3y: 73, p4x: 43, p4y: 80 }
+      }
+    ];
+
+    let currentModuleIndex = 0;
+    let currentView = 'anterior';
+    let currentInspectorLayer = 'placement';
+    let electrodePositions = {
+      ch1Pos: { x: 45, y: 54 },
+      ch1Neg: { x: 42, y: 44 },
+      ch2Pos: { x: 36, y: 43 },
+      ch2Neg: { x: 42, y: 57 }
+    };
+
+    // =========================================================================
+    // 2. AUDITORIA DOS 16 PROTOCOLOS CLÍNICOS (100% CONGRUENTES COM ANATOMIA)
+    // =========================================================================
+        const PROTOCOLS_LIST = [
+      { id: 'p1', code: 'MAP-01', cat: 'spine', title: 'Lombociatalgia Radicular Aguda (L4-S1)', moduleKey: 'lumbar-sciatic', mode: 'TENS Simétrico', hz: 100, us: 150, duty: 'Contínuo (sem rampa)', clinicalSource: 'Johnson MI (2007)', placementSource: 'Diretrizes IASP', sourcePmc: 'PMC4589923', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4589923/', desc: 'Estimulação de alta frequência para ativação do mecanismo da comporta medular nas fibras A-beta.' },
+      { id: 'p2', code: 'MAP-02', cat: 'spine', title: 'Lombalgia Crónica Mecânica (Endorfinas)', moduleKey: 'lumbar-sciatic', mode: 'TENS Acupuntura', hz: 2, us: 250, duty: 'Contínuo (20-30 min)', clinicalSource: 'Johnson MI (2007)', placementSource: 'Diretrizes IASP', sourcePmc: 'PMC4589923', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4589923/', desc: 'Estimulação de baixa frequência para libertação sistémica de beta-endorfinas no SNC.' },
+      { id: 'p3', code: 'MAP-03', cat: 'spine', title: 'Cervicobraquialgia & Espasmo do Trapézio', moduleKey: 'cervical-spine', mode: 'Interferencial (IFT)', hz: 80, us: 125, duty: 'Contínuo (Cruzado)', clinicalSource: 'Kitchen & Bazin (2002)', placementSource: 'Kitchen & Bazin (2002)', sourcePmc: 'Pubmed', url: 'https://pubmed.ncbi.nlm.nih.gov/11264906/', desc: 'Interferência tetrapolar com portadora de 4000 Hz para relaxamento muscular profundo.' },
+      { id: 'p4', code: 'MAP-04', cat: 'spine', title: 'Whiplash Cervical / Síndrome do Chicote', moduleKey: 'cervical-spine', mode: 'TENS Modulado', hz: 120, us: 100, duty: 'Variação Cíclica', clinicalSource: 'Johnson MI (2007)', placementSource: 'Diretrizes IASP', sourcePmc: 'PMC4589923', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4589923/', desc: 'Variação automática de frequência para evitar acomodação sensitiva dos mecanorrecetores.' },
+      { id: 'p5', code: 'MAP-05', cat: 'lower', title: 'Inibição do VMO & Quads (Pós-LCA)', moduleKey: 'knee-ext', mode: 'NMES Síncrono', hz: 50, us: 350, duty: '2s Rampa / 6s ON / 18s OFF', clinicalSource: 'Nussbaum EL et al. (2017)', placementSource: 'Baker LL et al. (2000)', sourcePmc: 'PMC5683854', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/', desc: 'Recrutamento de fibras Tipo II para quebra da inibição artrogénica pós-derrame articular.' },
+      { id: 'p6', code: 'MAP-06', cat: 'lower', title: 'Tendinopatia Rotuliana (Jumper\'s Knee)', moduleKey: 'knee-ext', mode: 'TENS Bipolar', hz: 110, us: 100, duty: 'Contínuo pré-exercício', clinicalSource: 'Johnson MI (2007)', placementSource: 'Diretrizes IASP', sourcePmc: 'PMC4589923', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4589923/', desc: 'Analgesia local no polo inferior da patela antes do protocolo de carga excêntrica.' },
+      { id: 'p7', code: 'MAP-07', cat: 'lower', title: 'Entorse do Tornozelo & Reativação Fibulares', moduleKey: 'ankle-dorsi', mode: 'NMES Proprioceptivo', hz: 45, us: 300, duty: '1.5s Rampa / 5s ON / 15s OFF', clinicalSource: 'Nussbaum EL et al. (2017)', placementSource: 'Baker LL et al. (2000)', sourcePmc: 'PMC5683854', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/', desc: 'Treino neuromuscular do reflexo eversor para prevenção de instabilidade mecânica crónica.' },
+      { id: 'p8', code: 'MAP-08', cat: 'lower', title: 'Fascite Plantar Aguda', moduleKey: 'ankle-dorsi', mode: 'TENS Longitudinal', hz: 90, us: 150, duty: 'Contínuo', clinicalSource: 'Johnson MI (2007)', placementSource: 'Diretrizes IASP', sourcePmc: 'PMC4589923', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4589923/', desc: 'Dessensibilização dos recetores da fáscia plantar. [Nota de Âmbito: O mapa visual exibe a região da perna/tornozelo como base topográfica; a colocação específica em fascite requer elétrodos na face plantar e bordo calcâneo medial, descritos nas instruções clínicas.]' },
+      { id: 'p9', code: 'MAP-09', cat: 'lower', title: 'Reativação Muscular dos Isquiotibiais (Fase Proliferativa / Remodelação)', moduleKey: 'hamstrings-nmes', mode: 'NMES Motor Gradual', hz: 45, us: 300, duty: '2s Rampa / 6s ON / 24s OFF (Relação 1:4)', clinicalSource: 'Nussbaum EL et al. (2017)', placementSource: 'Baker LL et al. (2000)', sourcePmc: 'PMC5683854', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/', desc: 'Estimulação neuromuscular motora submáxima com descanso intermitente amplo (1:4) para recrutamento contrátil sem sobrecarga miotendínea, com titulação individual de intensidade e inspeção cutânea contínua.' },
+      { id: 'p10', code: 'MAP-10', cat: 'upper', title: 'Tendinopatia da Coifa dos Rotadores', moduleKey: 'shoulder-flex', mode: 'TENS Simétrico', hz: 100, us: 120, duty: 'Contínuo', clinicalSource: 'Johnson MI (2007)', placementSource: 'Diretrizes IASP', sourcePmc: 'PMC4589923', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4589923/', desc: 'Alívio do arco doloroso subacromial. [Nota de Âmbito: O mapa visual exibe a lâmina de Ombro/Deltóide como referência regional; a colocação na coifa envolve os recessos da fossa supra e infraespinhal posterior, detalhados no protocolo.]' },
+      { id: 'p11', code: 'MAP-11', cat: 'upper', title: 'Capsulite Adesiva / Ombro Congelado', moduleKey: 'shoulder-flex', mode: 'Interferencial Tetrapolar', hz: 90, us: 125, duty: 'Contínuo (Cruzado)', clinicalSource: 'Kitchen & Bazin (2002)', placementSource: 'Kitchen & Bazin (2002)', sourcePmc: 'Pubmed', url: 'https://pubmed.ncbi.nlm.nih.gov/11264906/', desc: 'Vasodilatação reflexa profunda na cápsula articular glenoumeral para ganho de ADM.' },
+      { id: 'p12', code: 'MAP-12', cat: 'upper', title: 'Epicondilalgia Lateral (Cotovelo de Tenista)', moduleKey: 'elbow-ext', mode: 'TENS no Ponto Motor', hz: 100, us: 100, duty: 'Contínuo', clinicalSource: 'Johnson MI (2007)', placementSource: 'Diretrizes IASP', sourcePmc: 'PMC4589923', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4589923/', desc: 'Interrupção do ciclo dor-espasmo. [Nota de Âmbito: O mapa visual exibe o Cotovelo como referência regional; a montagem na epicondilalgia incide especificamente no ventre do extensor radial curto do carpo e epicôndilo lateral.]' },
+      { id: 'p13', code: 'MAP-13', cat: 'upper', title: 'Extensão do Cotovelo & Tríceps NMES', moduleKey: 'elbow-ext', mode: 'NMES Síncrono', hz: 40, us: 250, duty: '2s Rampa / 5s ON / 15s OFF', clinicalSource: 'Nussbaum EL et al. (2017)', placementSource: 'Baker LL et al. (2000)', sourcePmc: 'PMC5683854', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/', desc: 'Recrutamento da cabeça longa do tríceps para transferência de carga em apoio.' },
+      { id: 'p14', code: 'MAP-14', cat: 'upper', title: 'Síndrome do Túnel Cárpico (Nervo Mediano)', moduleKey: 'wrist-hand', mode: 'TENS Longitudinal Suave', hz: 80, us: 90, duty: 'Contínuo Submotor', clinicalSource: 'Johnson MI (2007)', placementSource: 'Baker LL et al. (2000)', sourcePmc: 'PMC4589923', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4589923/', desc: 'Alívio de parestesias e redução do edema perineural na face palmar do punho.' },
+      { id: 'p15', code: 'MAP-15', cat: 'neuro', title: 'Pé Pendente Pós-AVC (FES Marcha)', moduleKey: 'ankle-dorsi', mode: 'NMES / FES', hz: 35, us: 300, duty: 'Sincronizado à passada', clinicalSource: 'Nussbaum EL et al. (2017)', placementSource: 'Baker LL et al. (2000)', sourcePmc: 'PMC5683854', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/', desc: 'Dorsiflexão sincronizada com a fase de balanço da marcha hemiparética.' },
+      { id: 'p16', code: 'MAP-16', cat: 'upper', title: 'Extensores do Punho & Queda da Mão', moduleKey: 'wrist-hand', mode: 'FES Nervo Radial', hz: 40, us: 250, duty: '1.5s Rampa / 4s ON / 10s OFF', clinicalSource: 'Nussbaum EL et al. (2017)', placementSource: 'Baker LL et al. (2000)', sourcePmc: 'PMC5683854', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5683854/', desc: 'Ativação seletiva do extensor comum dos dedos e radial para preensão funcional.' }
+    ];
+
+    // =========================================================================
+    // 3. INICIALIZAÇÃO
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      initLicenseCheck();
+      renderModuleData();
+      renderProtocolsList('all');
+      initDraggableElectrodes();
+      initVectorCanvas();
+      initAnatomicalSvgInteractions();
+      runDosimetryCalc();
+    });
+
+    // =========================================================================
+    // 4. TROCA DE SECÇÕES
+    // =========================================================================
+    function switchViewSection(secId) {
+      document.querySelectorAll('.main-section').forEach(s => s.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(b => {
+        b.className = 'nav-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5';
+      });
+
+      const targetSec = document.getElementById('section-' + secId);
+      const targetBtn = document.getElementById('btn-nav-' + secId);
+      if (targetSec) targetSec.classList.remove('hidden');
+      if (targetBtn) {
+        targetBtn.className = 'nav-btn active px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950 transition flex items-center gap-1.5 shadow-md';
+      }
+
+      if (secId === 'atlas') {
+        setTimeout(resizeVectorCanvas, 60);
+      }
+    }
+
+    // =========================================================================
+    // 5. RENDERIZAÇÃO DO MÓDULO ATIVO (DOS 7 MÓDULOS)
+    // =========================================================================
+    let _pendingLicenseTarget = null;
+
+    function getOrCreateDeviceId() {
+      try {
+        let devId = localStorage.getItem('electromapas_device_id');
+        if (!devId) {
+          devId = 'DEV-' + (window.crypto && crypto.randomUUID ? crypto.randomUUID().substring(0, 16) : Math.random().toString(36).substring(2, 14));
+          localStorage.setItem('electromapas_device_id', devId);
+        }
+        return devId;
+      } catch(e) {
+        return 'DEV-STANDALONE';
+      }
+    }
+
+    async function isProLicensed() {
+      return isProLicensedSync();
+    }
+
+    function isProLicensedSync() {
+      try {
+        const raw = localStorage.getItem('electromapas_pro_session');
+        if (!raw) return false;
+        // Validação criptográfica do dispositivo (impede cópia de localStorage para outro telemóvel)
+        try {
+          const parsed = JSON.parse(atob(raw));
+          if (!parsed || typeof parsed !== 'object') return false;
+          // Validação de integridade do schema do token
+          if (!parsed.tx || !parsed.sig || !parsed.iat || !parsed.deviceId) return false;
+          const currentDev = getOrCreateDeviceId();
+          if (parsed.deviceId !== currentDev) {
+            console.warn('[Anti-Pirataria] Sessão pertence a outro dispositivo. Bloqueando.');
+            return false;
+          }
+          // TTL de 30 dias para forçar revalidação com o servidor
+          const maxAgeMs = 30 * 24 * 60 * 60 * 1000;
+          if (Date.now() - parsed.iat > maxAgeMs) {
+            console.warn('[Licença] Sessão local expirada.');
+            return false;
+          }
+          return true;
+        } catch(e) {
+          return false; // Erro de decodificação Base64/JSON = REJEIÇÃO IMEDIATA (NUNCA TRUE)
+        }
+      } catch(e) {
+        return false;
+      }
+    }
+
+    async function initLicenseCheck() {
+      const params = new URLSearchParams(window.location.search);
+      const licenseParam = params.get('license') || params.get('token');
+
+      if (licenseParam && !isProLicensedSync()) {
+        await verifyLicenseOnServer(licenseParam, '', '');
+      }
+
+      // Revalidação assíncrona da assinatura criptográfica e status no servidor
+      const rawSession = localStorage.getItem('electromapas_pro_session');
+      if (rawSession && isProLicensedSync()) {
+        revalidateSessionWithServer(rawSession);
+      }
+
+      updateLicenseUI();
+    }
+
+    async function revalidateSessionWithServer(token) {
+      try {
+        const devId = getOrCreateDeviceId();
+        const res = await fetch('/api/verify-license', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'verify_session', sessionToken: token, deviceId: devId })
+        });
+        const data = await res.json();
+        if (!data.valid) {
+          console.warn('[Licença Revogada/Inválida]', data.message);
+          localStorage.removeItem('electromapas_pro_session');
+          localStorage.removeItem('electromapas_buyer_name');
+          localStorage.removeItem('electromapas_pro_tx');
+          updateLicenseUI();
+          renderProtocolsList(currentFilter || 'all');
+          if (data.revoked) {
+            showToast('⚠️ Licença revogada ou cancelada pelo servidor.');
+          } else if (data.deviceConflict) {
+            showToast('⚠️ Licença transferida para outra instalação.');
+          }
+        }
+      } catch(e) {
+        console.warn('[Revalidação Offline] Não foi possível verificar licença no servidor:', e.message);
+      }
+    }
+
+    async function verifyLicenseOnServer(code, email, transferKey = '') {
+      try {
+        const devId = getOrCreateDeviceId();
+        const payload = { code: code, email: email, deviceId: devId };
+        if (transferKey) payload.transferKey = transferKey;
+        const res = await fetch('/api/verify-license', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        return data;
+      } catch (err) {
+        console.warn('[License Server] Erro ao contactar servidor:', err);
+        return { valid: false, message: 'Não foi possível contactar o servidor de verificação. Verifique a sua ligação à internet.' };
+      }
+    }
+
+    function openLicenseModal(target) {
+      _pendingLicenseTarget = target || null;
+      const modal = document.getElementById('modal-license-gate');
+      if (modal) modal.classList.remove('hidden');
+      const inp = document.getElementById('input-license-code');
+      if (inp) {
+        inp.value = '';
+        setTimeout(() => inp.focus(), 60);
+      }
+      const err = document.getElementById('license-error-msg');
+      if (err) err.classList.add('hidden');
+    }
+
+    function closeLicenseModal() {
+      const modal = document.getElementById('modal-license-gate');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function activateDemoMode() {
+      closeLicenseModal();
+      openModule('knee-ext');
+      showToast('ℹ️ Modo Demonstração Ativo: Módulo Joelho e Protocolo MAP-05 (LCA) disponíveis para estudo.');
+    }
+
+    async function submitLicenseCode() {
+      const inp = document.getElementById('input-license-code');
+      const err = document.getElementById('license-error-msg');
+      const val = (inp ? inp.value : '').trim();
+
+      if (!val) {
+        if (err) {
+          err.textContent = 'Por favor introduza o seu código de transação Hotmart (ex: HP182938475612) ou o e-mail de compra.';
+          err.className = 'text-[11px] text-red-400 bg-red-950/40 border border-red-500/40 rounded-lg p-2 font-mono block';
+          err.classList.remove('hidden');
+        }
+        if (inp) inp.focus();
+        return;
+      }
+
+      if (err) {
+        err.textContent = '⏳ A consultar servidor oficial de registo Hotmart...';
+        err.className = 'text-[11px] text-cyan-300 bg-cyan-950/40 border border-cyan-500/40 rounded-lg p-2 font-mono block';
+        err.classList.remove('hidden');
+      }
+
+      let result = await verifyLicenseOnServer(val, val, '');
+
+      if (!result.valid && result.deviceConflict) {
+        if (err) {
+          err.innerHTML = `
+            <div class="space-y-1.5 text-left">
+              <div class="font-bold text-amber-300 flex items-center gap-1.5">
+                <span>⚠️</span> <span>Licença Ativa noutro Dispositivo</span>
+              </div>
+              <p class="text-slate-300 text-[10.5px] leading-relaxed">
+                ${result.message}
+              </p>
+              <div class="mt-2 p-2 rounded bg-black/40 border border-amber-500/30 text-[10px] text-slate-300">
+                <span class="text-amber-300 font-bold">Processo de Transferência Assistida:</span><br>
+                Para transferir a sua licença para este telemóvel de forma segura e desvincular a instalação anterior, envie um e-mail para o suporte oficial informando o e-mail da sua compra.
+              </div>
+            </div>
+          `;
+          err.className = 'text-[11px] bg-amber-950/40 border border-amber-500/40 rounded-xl p-3 font-sans block';
+          err.classList.remove('hidden');
+        }
+        return;
+      }
+
+      if (!result.valid) {
+        if (err) {
+          err.textContent = result.message || 'Código ou e-mail não localizado nos registos de compra da Hotmart.';
+          err.className = 'text-[11px] text-red-400 bg-red-950/40 border border-red-500/40 rounded-lg p-2 font-mono block';
+          err.classList.remove('hidden');
+        }
+        if (inp) inp.focus();
+        return;
+      }
+
+      // Sucesso comprovado pelo servidor
+      if (err) err.classList.add('hidden');
+      try {
+        localStorage.setItem('electromapas_pro_session', result.sessionToken);
+        localStorage.setItem('electromapas_buyer_name', result.buyer || 'Fisioterapeuta Licenciado');
+        localStorage.setItem('electromapas_pro_tx', result.transaction || val);
+      } catch(e) {}
+
+      closeLicenseModal();
+      updateLicenseUI();
+      renderProtocolsList(currentFilter || 'all');
+      showToast('✓ Licença Hotmart confirmada no servidor (' + (result.buyer || 'Fisioterapeuta') + ')! 8 módulos liberados.');
+
+      if (_pendingLicenseTarget) {
+        const tgt = _pendingLicenseTarget;
+        _pendingLicenseTarget = null;
+        if (tgt.startsWith('protocol-')) {
+          applyProtocolToAtlas(tgt.replace('protocol-', ''));
+        } else {
+          openModule(tgt);
+        }
+      }
+    }
+
+    function updateLicenseUI() {
+      const badge = document.getElementById('header-license-badge');
+      const licensed = isProLicensedSync();
+      if (badge) {
+        if (licensed) {
+          const buyer = localStorage.getItem('electromapas_buyer_name') || 'Gabinete Clínico';
+          const tx = localStorage.getItem('electromapas_pro_tx') || '';
+          badge.innerHTML = `
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-mono text-[11px] font-bold" title="Licença Confirmada no Servidor Hotmart (${tx})">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              SESSÃO PRO VERIFICADA (${buyer})
+            </span>
+          `;
+        } else {
+          badge.innerHTML = `
+            <button type="button" onclick="openLicenseModal()" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/40 text-cyan-300 hover:bg-cyan-500/20 font-mono text-[11px] font-bold transition">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+              Validar Licença PRO
+            </button>
+          `;
+        }
+      }
+    }
+
+    function openModule(key) {
+      if (key !== 'knee-ext' && !isProLicensedSync()) {
+        openLicenseModal(key);
+        return;
+      }
+      const idx = CLINICAL_MODULES.findIndex(m => m.key === key);
+      if (idx !== -1) currentModuleIndex = idx;
+      renderModuleData();
+    }
+
+    function renderModuleData() {
+      const mod = CLINICAL_MODULES[currentModuleIndex];
+      if (!mod) return;
+
+      document.getElementById('card-region-badge').textContent = mod.region;
+      document.getElementById('card-mode-badge').textContent = mod.modeBadge;
+      document.getElementById('card-module-title').textContent = mod.title;
+      document.getElementById('card-module-subtitle').textContent = mod.subtitle;
+      
+      // Imagens por camada
+      document.getElementById('layer-placement-img').src = mod.placementImg;
+      document.getElementById('layer-muscle-img').src = mod.muscleImg;
+      document.getElementById('layer-nerve-img').src = mod.nerveImg;
+      
+      // Legendas dinâmicas específicas de cada módulo
+      document.getElementById('layer-caption-placement').textContent = mod.placementCaption;
+      document.getElementById('layer-caption-muscle').textContent = mod.muscleCaption;
+      document.getElementById('layer-caption-nerve').textContent = mod.nerveCaption;
+
+      // Conteúdo e avisos
+      document.getElementById('layer-instructions-text').innerHTML = mod.instructions.replace(/\n\n/g, '<br><br>');
+      document.getElementById('ref-hz').textContent = `${mod.hz} Hz`;
+      document.getElementById('ref-us').textContent = `${mod.us} µs`;
+      document.getElementById('ref-duty').textContent = mod.duty;
+      document.getElementById('ref-source').textContent = mod.clinicalSource || mod.source;
+      const refPlacement = document.getElementById('ref-placement');
+      if (refPlacement) refPlacement.textContent = mod.placementSource || 'Baker LL et al. (2000)';
+
+      const pmcElem = document.getElementById('ref-pmc-link');
+      if (pmcElem) {
+        if (mod.sourcePmc && mod.sourcePmc !== 'N/A') {
+          pmcElem.textContent = `${mod.sourcePmc} (${(mod.clinicalSource || '').split(' ')[0]}) ↗`;
+          pmcElem.href = mod.sourceUrl || `https://pmc.ncbi.nlm.nih.gov/articles/${mod.sourcePmc}/`;
+          pmcElem.style.display = 'inline';
+        } else if (mod.sourceUrl) {
+          pmcElem.textContent = 'Ver Estudo ↗';
+          pmcElem.href = mod.sourceUrl;
+          pmcElem.style.display = 'inline';
+        } else {
+          pmcElem.style.display = 'none';
+        }
+      }
+
+      // Vídeo e legenda
+      const vidPlayer = document.getElementById('layer-video-player');
+      const vidSource = document.getElementById('layer-video-source');
+      const vidTrack = document.getElementById('layer-video-track');
+      const vidCaption = document.getElementById('video-caption-text');
+
+      // Ajuste honesto do botão e legendas de vídeo: Regional vs Preparação Cutânea
+      const btnVid = document.getElementById('btn-layer-video');
+      const isKnee = mod.key === 'knee-ext';
+
+      if (btnVid) {
+        btnVid.innerHTML = isKnee ? '🎬 Vídeo Joelho (VMO)' : '🧴 Vídeo Base (Pele)';
+      }
+
+      const btnVideoReg = document.getElementById('btn-video-reg');
+      if (btnVideoReg) {
+        if (isKnee) {
+          btnVideoReg.textContent = '🎬 Prática de Joelho (VMO)';
+          btnVideoReg.style.display = 'inline-block';
+        } else {
+          btnVideoReg.textContent = '🧴 Técnica de Preparação Cutânea (Universal)';
+          btnVideoReg.style.display = 'inline-block';
+        }
+      }
+
+      const btnVideoPrep = document.getElementById('btn-video-prep');
+      if (btnVideoPrep) {
+        btnVideoPrep.style.display = isKnee ? 'inline-block' : 'none';
+      }
+
+      if (vidPlayer && vidSource) {
+        vidSource.src = mod.videoSrc;
+        if (vidTrack && mod.videoTrack) vidTrack.src = mod.videoTrack;
+        if (vidCaption) vidCaption.textContent = mod.videoCaption;
+        vidPlayer.load();
+      }
+
+      // Atualiza botões de região
+      document.querySelectorAll('.art-btn').forEach(btn => {
+        btn.className = 'art-btn px-3 py-1 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition flex-shrink-0';
+      });
+      const activeBtn = document.getElementById(`art-btn-${mod.key}`);
+      if (activeBtn) {
+        activeBtn.className = 'art-btn px-3 py-1 rounded-lg bg-cyan-500/20 border border-cyan-400 text-cyan-300 font-bold hover:bg-cyan-500 hover:text-slate-950 transition flex-shrink-0';
+      }
+
+      // Ajusta vista anatómica recomendada
+      if (mod.view) {
+        setBodyView(mod.view);
+      }
+
+      // Ajusta posições dos elétrodos
+      if (mod.positions) {
+        setElectrodePositions(
+          mod.positions.p1x, mod.positions.p1y,
+          mod.positions.p2x, mod.positions.p2y,
+          mod.positions.p3x, mod.positions.p3y,
+          mod.positions.p4x, mod.positions.p4y
+        );
+      }
+
+      updateSoapSummaryText();
+    }
+
+    // =========================================================================
+    // 6. CAMADAS DO INSPETOR (PELE / VÍDEO / ATLAS / INERVAÇÃO)
+    // =========================================================================
+    function setInspectorLayer(layerName) {
+      currentInspectorLayer = layerName;
+      document.querySelectorAll('.layer-pane').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.layer-btn').forEach(b => {
+        b.className = 'layer-btn flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white text-center transition';
+      });
+
+      const activePane = document.getElementById('pane-' + layerName);
+      const activeBtn = document.getElementById('btn-layer-' + layerName);
+      if (activePane) activePane.classList.remove('hidden');
+      if (activeBtn) {
+        activeBtn.className = 'layer-btn active flex-1 py-1.5 rounded-lg bg-cyan-500 text-slate-950 text-center transition font-bold';
+      }
+
+      const vidPlayer = document.getElementById('layer-video-player');
+      if (layerName !== 'video' && vidPlayer) {
+        vidPlayer.pause();
+      }
+    }
+
+    function selectVideoSource(type) {
+      const player = document.getElementById('layer-video-player');
+      const track = document.getElementById('layer-video-track');
+      const caption = document.getElementById('video-caption-text');
+      if (!player) return;
+
+      if (type === 'placement') {
+        const mod = CLINICAL_MODULES[currentModuleIndex];
+        player.src = mod.videoSrc;
+        if (track && mod.videoTrack) track.src = mod.videoTrack;
+        if (caption) caption.textContent = mod.videoCaption;
+      } else {
+        player.src = '/assets/videos/video_01_preparacao_pele_pt_pt.mp4';
+        if (track) track.src = '/assets/videos/video_01_preparacao_pele_pt_pt.vtt';
+        if (caption) caption.textContent = '🧴 Vídeo Universal: Preparação da Pele com Álcool 70%, Degradação da Resistência Cutânea & Fixação dos Elétrodos (pt-PT).';
+      }
+      player.load();
+      player.play().catch(() => {});
+    }
+
+    // =========================================================================
+    // 7. VISTA ANATÓMICA FRENTE / DORSO
+    // =========================================================================
+    function setBodyView(viewType) {
+      currentView = viewType;
+      const gAnt = document.getElementById('svg-view-anterior');
+      const gPost = document.getElementById('svg-view-posterior');
+      const btnAnt = document.getElementById('view-btn-anterior');
+      const btnPost = document.getElementById('view-btn-posterior');
+
+      if (viewType === 'anterior') {
+        if (gAnt) gAnt.classList.remove('hidden');
+        if (gPost) gPost.classList.add('hidden');
+        if (btnAnt) btnAnt.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 transition';
+        if (btnPost) btnPost.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-med-card border border-med-border text-slate-300 hover:text-white transition';
+      } else {
+        if (gAnt) gAnt.classList.add('hidden');
+        if (gPost) gPost.classList.remove('hidden');
+        if (btnPost) btnPost.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 transition';
+        if (btnAnt) btnAnt.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-med-card border border-med-border text-slate-300 hover:text-white transition';
+      }
+
+      redrawCurrentVectorCanvas();
+    }
+
+    // =========================================================================
+    // 8. INTERATIVIDADE TOTAL NO CORPO ANATÓMICO SVG
+    // =========================================================================
+    function initAnatomicalSvgInteractions() {
+      const paths = document.querySelectorAll('.muscle-path');
+      paths.forEach(p => {
+        p.addEventListener('mouseenter', (e) => {
+          const tooltip = document.getElementById('anatomy-tooltip');
+          const muscleName = e.target.getAttribute('data-muscle');
+          if (tooltip && muscleName) {
+            tooltip.textContent = muscleName;
+            tooltip.classList.remove('hidden');
+          }
+        });
+
+        p.addEventListener('mouseleave', () => {
+          const tooltip = document.getElementById('anatomy-tooltip');
+          if (tooltip) tooltip.classList.add('hidden');
+        });
+
+        p.addEventListener('click', (e) => {
+          const m = e.target.getAttribute('data-muscle') || '';
+          const ml = m.toLowerCase();
+
+          document.querySelectorAll('.muscle-path').forEach(x => x.classList.remove('selected-muscle'));
+          e.target.classList.add('selected-muscle');
+
+          if (ml.includes('vmo') || ml.includes('quadríceps') || ml.includes('joelho') || ml.includes('patela') || ml.includes('femoral')) {
+            openModule('knee-ext');
+            showToast(`Região ativa: Joelho / VMO (${m})`);
+          } else if (ml.includes('cervical') || ml.includes('trapézio') || ml.includes('espinha')) {
+            openModule('cervical-spine');
+            showToast(`Região ativa: Coluna Cervical (${m})`);
+          } else if (ml.includes('deltóide') || ml.includes('ombro') || ml.includes('infraespinhal')) {
+            openModule('shoulder-flex');
+            showToast(`Região ativa: Ombro / Deltóide (${m})`);
+          } else if (ml.includes('lombar') || ml.includes('ciático') || ml.includes('glúteo') || ml.includes('paravertebrais')) {
+            openModule('lumbar-sciatic');
+            showToast(`Região ativa: Coluna Lombar (${m})`);
+          } else if (ml.includes('tríceps') || ml.includes('cotovelo') || ml.includes('olecrânio')) {
+            openModule('elbow-ext');
+            showToast(`Região ativa: Cotovelo / Tríceps (${m})`);
+          } else if (ml.includes('punho') || ml.includes('mão') || ml.includes('cárpico') || ml.includes('antebraço')) {
+            openModule('wrist-hand');
+            showToast(`Região ativa: Punho & Canal Cárpico (${m})`);
+          } else if (ml.includes('tibial') || ml.includes('tornozelo') || ml.includes('fibular') || ml.includes('pé')) {
+            openModule('ankle-dorsi');
+            showToast(`Região ativa: Tornozelo / Tibial (${m})`);
+          }
+        });
+      });
+    }
+
+    // =========================================================================
+    // 9. POSICIONAMENTO E ARRASTO DOS ELÉTRODOS
+    // =========================================================================
+    function setElectrodePositions(p1x, p1y, p2x, p2y, p3x, p3y, p4x, p4y) {
+      electrodePositions.ch1Pos = { x: p1x, y: p1y };
+      electrodePositions.ch1Neg = { x: p2x, y: p2y };
+      electrodePositions.ch2Pos = { x: p3x, y: p3y };
+      electrodePositions.ch2Neg = { x: p4x, y: p4y };
+
+      const e1 = document.getElementById('el-ch1-pos');
+      const e2 = document.getElementById('el-ch1-neg');
+      const e3 = document.getElementById('el-ch2-pos');
+      const e4 = document.getElementById('el-ch2-neg');
+
+      if (e1) { e1.style.left = `${p1x}%`; e1.style.top = `${p1y}%`; }
+      if (e2) { e2.style.left = `${p2x}%`; e2.style.top = `${p2y}%`; }
+      if (e3) { e3.style.left = `${p3x}%`; e3.style.top = `${p3y}%`; }
+      if (e4) { e4.style.left = `${p4x}%`; e4.style.top = `${p4y}%`; }
+
+      redrawCurrentVectorCanvas();
+    }
+
+    function initDraggableElectrodes() {
+      const container = document.getElementById('body-stage-container');
+      const pads = [
+        { el: document.getElementById('el-ch1-pos'), key: 'ch1Pos' },
+        { el: document.getElementById('el-ch1-neg'), key: 'ch1Neg' },
+        { el: document.getElementById('el-ch2-pos'), key: 'ch2Pos' },
+        { el: document.getElementById('el-ch2-neg'), key: 'ch2Neg' }
+      ];
+
+      pads.forEach(item => {
+        if (!item.el) return;
+        let isDragging = false;
+
+        const start = (e) => {
+          isDragging = true;
+          e.preventDefault();
+        };
+
+        const move = (e) => {
+          if (!isDragging) return;
+          const rect = container.getBoundingClientRect();
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+          let pctX = Math.max(5, Math.min(95, ((clientX - rect.left) / rect.width) * 100));
+          let pctY = Math.max(5, Math.min(95, ((clientY - rect.top) / rect.height) * 100));
+
+          electrodePositions[item.key] = { x: pctX, y: pctY };
+          item.el.style.left = `${pctX}%`;
+          item.el.style.top = `${pctY}%`;
+        };
+
+        const end = () => {
+          if (isDragging) {
+            isDragging = false;
+            showToast('Elétrodo ajustado na grelha');
+          }
+        };
+
+        item.el.addEventListener('mousedown', start);
+        item.el.addEventListener('touchstart', start, { passive: false });
+        window.addEventListener('mousemove', move);
+        window.addEventListener('touchmove', move, { passive: false });
+        window.addEventListener('mouseup', end);
+        window.addEventListener('touchend', end);
+      });
+    }
+
+    // =========================================================================
+    // 10. VETORES DE CORRENTE VISUAIS (CANVAS 60 FPS)
+    // =========================================================================
+    let currentCanvas, currentCtx;
+    let particleOffset = 0;
+    let vectorAnimFrame = null;
+
+    function initVectorCanvas() {
+      currentCanvas = document.getElementById('current-vector-canvas');
+      if (!currentCanvas) return;
+      currentCtx = currentCanvas.getContext('2d');
+      resizeVectorCanvas();
+      window.addEventListener('resize', resizeVectorCanvas);
+      animateVectorStreams();
+    }
+
+    function resizeVectorCanvas() {
+      if (!currentCanvas || !currentCanvas.parentElement) return;
+      currentCanvas.width = currentCanvas.parentElement.clientWidth;
+      currentCanvas.height = currentCanvas.parentElement.clientHeight;
+    }
+
+    function redrawCurrentVectorCanvas() {
+      resizeVectorCanvas();
+    }
+
+    function animateVectorStreams() {
+      if (window.pauseVectorAnimation) return;
+      if (!currentCtx || !currentCanvas) return;
+
+      const w = currentCanvas.width;
+      const h = currentCanvas.height;
+      currentCtx.clearRect(0, 0, w, h);
+
+      const p1 = { x: (electrodePositions.ch1Pos.x / 100) * w, y: (electrodePositions.ch1Pos.y / 100) * h };
+      const p2 = { x: (electrodePositions.ch1Neg.x / 100) * w, y: (electrodePositions.ch1Neg.y / 100) * h };
+      const p3 = { x: (electrodePositions.ch2Pos.x / 100) * w, y: (electrodePositions.ch2Pos.y / 100) * h };
+      const p4 = { x: (electrodePositions.ch2Neg.x / 100) * w, y: (electrodePositions.ch2Neg.y / 100) * h };
+
+      drawStreamLine(p1, p2, '#ef4444', '#f87171');
+      drawStreamLine(p3, p4, '#3b82f6', '#00e5ff');
+
+      particleOffset = (particleOffset + 1.2) % 30;
+      vectorAnimFrame = requestAnimationFrame(animateVectorStreams);
+    }
+
+    function drawStreamLine(from, to, baseColor, glowColor) {
+      currentCtx.save();
+      currentCtx.beginPath();
+      currentCtx.moveTo(from.x, from.y);
+      currentCtx.lineTo(to.x, to.y);
+      currentCtx.lineWidth = 3.5;
+      currentCtx.strokeStyle = baseColor;
+      currentCtx.shadowBlur = 10;
+      currentCtx.shadowColor = glowColor;
+      currentCtx.stroke();
+
+      currentCtx.setLineDash([6, 12]);
+      currentCtx.lineDashOffset = -particleOffset;
+      currentCtx.strokeStyle = '#ffffff';
+      currentCtx.lineWidth = 1.8;
+      currentCtx.stroke();
+      currentCtx.restore();
+    }
+
+    // =========================================================================
+    // 11. TEMPORIZADOR DE APOIO AO GABINETE
+    // =========================================================================
+    let timerSeconds = 1200; // 20 min
+    let timerInterval = null;
+
+    function startTimer() {
+      if (timerInterval) return;
+      document.getElementById('btn-timer-start').classList.add('hidden');
+      document.getElementById('btn-timer-pause').classList.remove('hidden');
+
+      timerInterval = setInterval(() => {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          updateTimerDisplay();
+        } else {
+          pauseTimer();
+          showToast('Sessão terminada');
+        }
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      document.getElementById('btn-timer-start').classList.remove('hidden');
+      document.getElementById('btn-timer-pause').classList.add('hidden');
+    }
+
+    function resetTimer() {
+      pauseTimer();
+      timerSeconds = 1200;
+      updateTimerDisplay();
+    }
+
+    function updateTimerDisplay() {
+      const m = Math.floor(timerSeconds / 60);
+      const s = timerSeconds % 60;
+      document.getElementById('session-timer-display').textContent = `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`;
+    }
+
+    // =========================================================================
+    // 12. GRELHA DE PROTOCOLOS COM LIGAÇÃO BIDIRECIONAL AO ATLAS
+    // =========================================================================
+    let currentFilter = 'all';
+
+    function renderProtocolsList(cat, searchTerm = '') {
+      if (cat) currentFilter = cat;
+      const container = document.getElementById('protocols-grid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      let list = (cat === 'all') ? PROTOCOLS_LIST : PROTOCOLS_LIST.filter(p => p.cat === cat);
+
+      if (searchTerm.trim() !== '') {
+        const st = searchTerm.toLowerCase();
+        list = list.filter(p => 
+          p.title.toLowerCase().includes(st) ||
+          p.desc.toLowerCase().includes(st) ||
+          p.code.toLowerCase().includes(st) ||
+          p.mode.toLowerCase().includes(st)
+        );
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-8 text-center text-slate-500 text-xs">
+            Nenhum protocolo encontrado para o termo pesquisado.
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'bg-med-card p-4 rounded-2xl border border-med-border flex flex-col justify-between hover:border-cyan-400 transition space-y-3';
+        card.innerHTML = `
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black uppercase text-cyan-400 font-mono px-2 py-0.5 rounded bg-[#030d17] border border-med-border">${p.code}</span>
+              <span class="text-[10px] uppercase font-bold text-slate-400">${p.mode}</span>
+            </div>
+            <h3 class="text-sm font-bold text-white leading-snug">${p.title}</h3>
+            <p class="text-[11px] text-slate-400 leading-relaxed">${p.desc}</p>
+            <div class="bg-[#030d17] p-2 rounded-xl text-[10px] font-mono text-cyan-300 flex justify-between border border-med-border">
+              <span>Freq: <strong>${p.hz} Hz</strong></span>
+              <span>Largura: <strong>${p.us} µs</strong></span>
+            </div>
+            <div class="flex items-center justify-between text-[10px] pt-1">
+              <span class="text-slate-500">Fonte: ${p.clinicalSource || p.source}</span>
+              <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline font-bold">Ver Estudo ↗</a>
+            </div>
+          </div>
+          ${(!isProLicensedSync() && p.id !== 'p1' && p.id !== 'p5') ? `
+            <button type="button" onclick="openLicenseModal('protocol-${p.id}')" class="w-full py-2 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500 hover:text-slate-950 text-amber-300 text-xs font-bold border border-amber-500/30 transition flex items-center justify-center gap-1.5 shadow-sm">
+              <span>🔒</span> <span>Acesso PRO • Desbloquear com Código</span>
+            </button>
+          ` : `
+            <button type="button" onclick="applyProtocolToAtlas('${p.id}')" class="w-full py-2 px-3 rounded-xl bg-cyan-500/15 hover:bg-cyan-500 hover:text-slate-950 text-cyan-300 text-xs font-bold border border-cyan-500/30 transition flex items-center justify-center gap-1.5 shadow-sm">
+              <span>🗺️</span> <span>Ver Colocação no Atlas</span>
+            </button>
+          `}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterProtocols(cat) {
+      document.querySelectorAll('.proto-btn').forEach(b => {
+        b.className = 'proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white';
+      });
+      if (event && event.currentTarget) {
+        event.currentTarget.className = 'proto-btn active px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950 font-bold';
+      }
+      renderProtocolsList(cat);
+    }
+
+    function handleQuickSearch(val) {
+      const v = val.trim().toLowerCase();
+      if (!v) return;
+
+      // 1. Procura módulo anatómico correspondente
+      const matchedMod = CLINICAL_MODULES.find(m => 
+        m.title.toLowerCase().includes(v) ||
+        m.subtitle.toLowerCase().includes(v) ||
+        m.region.toLowerCase().includes(v)
+      );
+
+      if (matchedMod) {
+        openModule(matchedMod.key);
+      }
+
+      // 2. Filtra protocolos
+      renderProtocolsList('all', v);
+    }
+
+    function applyProtocolToAtlas(protoId) {
+      const p = PROTOCOLS_LIST.find(x => x.id === protoId);
+      if (!p) return;
+
+      // Licença PRO check (p1 e p5 são livres no modo demo)
+      if (p.id !== 'p1' && p.id !== 'p5' && !isProLicensedSync()) {
+        openLicenseModal('protocol-' + protoId);
+        return;
+      }
+
+      // 1. Abre a região anatómica rigorosa
+      openModule(p.moduleKey);
+
+      // 2. Atualiza dosimetria exibida
+      document.getElementById('card-mode-badge').textContent = p.mode;
+      document.getElementById('ref-hz').textContent = `${p.hz} Hz`;
+      document.getElementById('ref-us').textContent = `${p.us} µs`;
+      document.getElementById('ref-duty').textContent = p.duty;
+      document.getElementById('ref-source').textContent = p.clinicalSource || p.source;
+      const refPlacement = document.getElementById('ref-placement');
+      if (refPlacement) refPlacement.textContent = p.placementSource || 'Baker LL et al. (2000)';
+      const pmcElem = document.getElementById('ref-pmc-link');
+      if (pmcElem && p.url) {
+        pmcElem.href = p.url;
+        pmcElem.textContent = p.sourcePmc ? `${p.sourcePmc} (${(p.clinicalSource || '').split(' ')[0]}) ↗` : 'Artigo ↗';
+        pmcElem.style.display = 'inline';
+      }
+
+      // 3. Atualiza calculadora com estes valores
+      document.getElementById('calc-current-slider').value = Math.min(80, Math.max(10, Math.round(p.hz * 0.4)));
+      setCalcPulseWidth(p.us);
+      runDosimetryCalc();
+
+      // 4. Muda para a secção do Atlas
+      switchViewSection('atlas');
+
+      // 5. Feedback
+      showToast(`✓ Protocolo ${p.code} (${p.title}) carregado no Atlas!`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // =========================================================================
+    // 13. CALCULADORA DE DOSIMETRIA & DENSIDADE DE CORRENTE (NOVO)
+    // =========================================================================
+    let currentCalcPulseWidth = 350;
+
+    function setCalcPulseWidth(us) {
+      currentCalcPulseWidth = us;
+      document.querySelectorAll('.calc-pw-btn').forEach(b => {
+        b.className = 'calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400';
+      });
+      if (event && event.currentTarget) {
+        event.currentTarget.className = 'calc-pw-btn active py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold';
+      }
+      runDosimetryCalc();
+    }
+
+    function runDosimetryCalc() {
+      const area = parseFloat(document.getElementById('calc-electrode-size').value) || 25;
+      const current = parseFloat(document.getElementById('calc-current-slider').value) || 25;
+      const waveform = document.getElementById('calc-waveform') ? document.getElementById('calc-waveform').value : 'biphasic_sym';
+      const freq = parseFloat(document.getElementById('calc-frequency') ? document.getElementById('calc-frequency').value : '50') || 50;
+
+      const currentDisp = document.getElementById('calc-current-display');
+      if (currentDisp) currentDisp.textContent = `${current} mA`;
+
+      // 1. Densidade de Corrente de Pico (mA/cm²)
+      const peakDensity = (current / area);
+      const densityElem = document.getElementById('calc-density-val');
+      if (densityElem) densityElem.textContent = peakDensity.toFixed(2);
+
+      // 2. Carga por Fase (µC) = Pico (mA) * Largura (µs) / 1000
+      const phaseCharge = (current * currentCalcPulseWidth) / 1000;
+      const chargeElem = document.getElementById('calc-phase-charge');
+      if (chargeElem) chargeElem.textContent = `${phaseCharge.toFixed(2)} µC`;
+
+      // 3. Densidade de Carga por Fase (µC/cm²)
+      const chargeDensity = phaseCharge / area;
+
+      // 4. Estimativa de Potência Média (mW/cm² e W/cm²) segundo modelo FDA 510(k) em carga de 500 Ω
+      // Modelagem eletrofisiológica da forma de onda (Aproximação Matemática Teórica):
+      // - Monofásica: 1 fase ativa de duração pw (fator 1.0).
+      // - Bifásica Simétrica: 2 fases idênticas em amplitude e duração (fator 2.0).
+      // - Bifásica Assimétrica Equilibrada: Na onda TENS típica, a fase compensatória adiciona ~15%
+      //   de dissipação RMS estimada (fator 1.15). Trata-se de uma aproximação teórica do ciclo
+      //   de trabalho e NÃO de uma medição por osciloscópio do equipamento físico específico.
+      let waveFactor = 2.0;
+      if (waveform === 'monophasic') {
+        waveFactor = 1.0;
+      } else if (waveform === 'biphasic_asym') {
+        waveFactor = 1.15; // Aproximação matemática teórica do duty cycle (área compensatória TENS)
+      }
+      const dutyFraction = (currentCalcPulseWidth * 1e-6) * waveFactor * freq;
+      const rmsCurrent_mA = current * Math.sqrt(Math.min(1, Math.max(0.0001, dutyFraction)));
+      const rmsCurrent_A = rmsCurrent_mA / 1000;
+      const avgPower_W = Math.pow(rmsCurrent_A, 2) * 500;
+      const avgPowerDensity = avgPower_W / area;
+      const avgPower_mW = avgPowerDensity * 1000;
+      const powerElem = document.getElementById('calc-power-density');
+      if (powerElem) {
+        // Exibe diretamente em mW/cm² com precisão adecuada para evitar falso 0.000
+        powerElem.textContent = avgPower_mW < 0.01 ? avgPower_mW.toFixed(3) : avgPower_mW.toFixed(2);
+      }
+
+      // Atualização dos Painéis e Rótulos FDA 510(k)
+      const titleElem = document.getElementById('calc-verdict-title');
+      const descElem = document.getElementById('calc-verdict-desc');
+      const fdaBadge = document.getElementById('calc-fda-badge');
+      const boxElem = document.getElementById('calc-verdict-box');
+      const descDens = document.getElementById('desc-dens');
+      const descCharge = document.getElementById('desc-charge');
+
+      if (descDens) descDens.textContent = `${peakDensity.toFixed(2)} mA/cm²`;
+      if (descCharge) descCharge.textContent = `${phaseCharge.toFixed(2)} µC`;
+
+      const powerDisplayStr = avgPower_mW < 0.01 
+        ? `${avgPower_mW.toFixed(3)} mW/cm² (< 0.001 W/cm²)` 
+        : `${avgPower_mW.toFixed(2)} mW/cm² (${avgPowerDensity < 0.001 ? '< 0.001 W/cm²' : avgPowerDensity.toFixed(3) + ' W/cm²'})`;
+
+      // Avaliação regulamentar segundo a Diretriz FDA 510(k) (Powered Muscle Stimulators)
+      // A diretriz da FDA recomenda que a densidade de potência média não exceda 0.25 W/cm² (250 mW/cm²) em carga de 500 Ω
+      // para mitigar risco de queimadura térmica superficial.
+      if (avgPowerDensity > 0.25) {
+        if (fdaBadge) {
+          fdaBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30';
+          fdaBadge.textContent = 'FDA 510(k): Potência Média Excede 0.25 W/cm² (250 mW/cm²)';
+        }
+        if (boxElem) {
+          boxElem.className = 'p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/40 text-xs text-amber-200 space-y-2';
+        }
+        if (titleElem) titleElem.textContent = '⚠️ Alerta de Potência Térmica Elevada';
+        if (descElem) {
+          descElem.innerHTML = `A densidade de potência média estimada em <b>${avgPower_mW.toFixed(1)} mW/cm² (${avgPowerDensity.toFixed(3)} W/cm²)</b> ultrapassa a recomendação de referência da FDA de 0.25 W/cm² (250 mW/cm² em carga nominal de 500 Ω). Para diminuir a densidade térmica superficial, aumente a área condutora do elétrodo (~${area > 25 ? area : 50} cm²), diminua a intensidade ou reduza a largura de pulso.`;
+        }
+      } else {
+        if (fdaBadge) {
+          fdaBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+          fdaBadge.textContent = 'FDA 510(k): Potência Média Inferior a 0.25 W/cm² (Referência Térmica)';
+        }
+        if (boxElem) {
+          boxElem.className = 'p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60 text-xs text-slate-300 space-y-2';
+        }
+        if (titleElem) titleElem.textContent = 'ℹ️ Estimativa Teórica Eletrofisiológica (Não Constitui Validação de Eficácia Clínica)';
+        if (descElem) {
+          descElem.innerHTML = `Densidade de pico teórica de <b>${peakDensity.toFixed(2)} mA/cm²</b>, carga por fase calculada de <b>${phaseCharge.toFixed(2)} µC</b> (${chargeDensity.toFixed(2)} µC/cm²) e densidade de potência média estimada de <b>${powerDisplayStr}</b>.<br><br><span class="text-slate-400"><b>Ressalva de Modelo:</b> Valores nominais calculados para fins educativos sobre modelo de carga padrão (500 Ω). O fator de forma de onda (ex: 1.15 na bifásica assimétrica) é uma aproximação matemática teórica do ciclo de trabalho, e não uma medição por osciloscópio da forma de onda física do seu aparelho estimulador. O estímulo real é modulado pela impedância cutânea do utente e pela hidratação do elétrodo. Interrompa perante queixa de desconforto pontual ou picada.</span>`;
+        }
+      }
+    }
+
+    function runSafetyAudit() {
+      const chks = document.querySelectorAll('.safety-box');
+      let checkedItems = [];
+
+      chks.forEach(chk => {
+        if (chk.checked) checkedItems.push(chk.getAttribute('data-label'));
+      });
+
+      const verdict = document.getElementById('safety-audit-verdict');
+      if (!verdict) return;
+
+      if (checkedItems.length === 0) {
+        verdict.className = 'p-4 rounded-2xl bg-med-card border border-med-border text-xs text-slate-300';
+        verdict.innerHTML = `
+          <strong>Nenhum critério impeditivo assinalado na lista.</strong>
+          <p class="text-slate-400 mt-1">Lembre-se: esta lista é uma ferramenta de triagem inicial e não certifica a aptidão física do utente. Cabe exclusivamente ao fisioterapeuta a avaliação do estado clínico geral.</p>
+        `;
+      } else {
+        verdict.className = 'p-4 rounded-2xl bg-red-950/40 border border-red-500/50 text-xs text-red-200';
+        verdict.innerHTML = `
+          <strong class="text-red-400 font-bold block text-sm">⚠️ Atenção: ${checkedItems.length} critério(s) de risco / contraindicação assinalado(s):</strong>
+          <p class="mt-1 font-semibold text-white">• ${checkedItems.join('<br>• ')}</p>
+          <p class="text-red-300/90 mt-2 font-bold">Conduta clínica recomendada: Suspender a aplicação de corrente ou requerer prescrição médica e adaptação técnica fundamentada.</p>
+        `;
+      }
+    }
+
+    // =========================================================================
+    // 15. GERADOR DE REGISTO SOAP
+    // =========================================================================
+    function updateEvaCalculations() {
+      const preVal = document.getElementById('soap-eva-pre').value;
+      const postVal = document.getElementById('soap-eva-post').value;
+      const badge = document.getElementById('soap-eva-delta-badge');
+
+      if (!badge) return;
+
+      if (preVal === '' || postVal === '') {
+        badge.textContent = 'EVA: Selecione valores inicial e final para calcular variação álgica';
+        badge.className = 'font-mono text-xs font-bold text-slate-400';
+        updateSoapSummaryText();
+        return;
+      }
+
+      const pre = parseInt(preVal, 10);
+      const post = parseInt(postVal, 10);
+
+      if (pre > 0) {
+        const delta = Math.round(((pre - post) / pre) * 100);
+        if (delta > 0) {
+          badge.textContent = `✓ ${delta}% de redução referida da dor (${pre}/10 → ${post}/10)`;
+          badge.className = 'font-mono text-xs font-black text-emerald-400';
+        } else if (delta === 0) {
+          badge.textContent = `Sem alteração na intensidade da dor (mantém ${pre}/10)`;
+          badge.className = 'font-mono text-xs font-black text-slate-400';
+        } else {
+          badge.textContent = `⚠️ Agravamento álgico de ${Math.abs(delta)}% (${pre}/10 → ${post}/10)`;
+          badge.className = 'font-mono text-xs font-black text-amber-400';
+        }
+      } else {
+        badge.textContent = post === 0 ? 'Indolor antes e após a intervenção (0/10)' : `Dor reportada após a sessão: ${post}/10`;
+        badge.className = 'font-mono text-xs font-black text-slate-400';
+      }
+
+      updateSoapSummaryText();
+    }
+
+    function updateSoapSummaryText() {
+      const mod = CLINICAL_MODULES[currentModuleIndex];
+      const el = document.getElementById('soap-obj-summary');
+      if (el && mod) {
+        const actualMa = document.getElementById('soap-actual-current')?.value;
+        const actualMin = document.getElementById('soap-actual-duration')?.value;
+        const actualSkin = document.getElementById('soap-actual-skin')?.value;
+
+        let txt = `Protocolo de Referência Consultado: ${mod.title} (${mod.modeBadge}) | Teórico: ${mod.hz} Hz, ${mod.us} µs, ${mod.duty}`;
+        if (actualMa) txt += ` | Aplicado: ${actualMa} mA`;
+        if (actualMin) txt += ` (${actualMin} min)`;
+        if (actualSkin) { txt += ` | Inspeção de Pele: ${actualSkin}`; } else { txt += ` | Pele: [Pendente de inspeção]`; }
+        el.textContent = txt;
+      }
+    }
+
+    function generateFormattedSoapText() {
+      const code = document.getElementById('soap-patient-code').value.trim() || '[Não especificado]';
+      const cond = document.getElementById('soap-condition').value.trim() || '[Não especificado]';
+      const preVal = document.getElementById('soap-eva-pre').value;
+      const postVal = document.getElementById('soap-eva-post').value;
+      const subj = document.getElementById('soap-subj').value.trim() || '[Sem notas adicionais relatadas pelo utente]';
+      const assess = document.getElementById('soap-assess').value.trim() || '[Avaliação pendente de preenchimento]';
+      const plan = document.getElementById('soap-plan').value.trim() || '[Plano terapêutico pendente de preenchimento]';
+
+      const mod = CLINICAL_MODULES[currentModuleIndex];
+      const actualMa = document.getElementById('soap-actual-current')?.value.trim();
+      const actualMin = document.getElementById('soap-actual-duration')?.value.trim();
+      const actualSkin = document.getElementById('soap-actual-skin')?.value;
+
+      // Tratamento honesto e rigoroso da Escala EVA (sem registar 0/10 fictício)
+      let evaReport = '';
+      if (preVal !== '' && postVal !== '') {
+        const p1 = parseInt(preVal, 10);
+        const p2 = parseInt(postVal, 10);
+        const delta = p1 > 0 ? Math.round(((p1 - p2) / p1) * 100) : 0;
+        const deltaStr = delta > 0 ? ` (${delta}% de redução)` : (delta < 0 ? ` (${Math.abs(delta)}% de agravamento)` : ' (sem variação)');
+        evaReport = `- Dor inicial (Escala EVA): ${p1}/10.
+- Dor pós-sessão imediata (Escala EVA): ${p2}/10${deltaStr}.`;
+      } else if (preVal !== '') {
+        evaReport = `- Dor inicial (Escala EVA): ${preVal}/10.
+- Dor pós-sessão imediata: [Não avaliada nesta data].`;
+      } else {
+        evaReport = `- Avaliação de dor por Escala EVA: [Não realizada nesta sessão].`;
+      }
+
+      return `=== REGISTO CLÍNICO DE FISIOTERAPIA (SOAP) ===
+DATA DA SESSÃO: ${new Date().toLocaleDateString('pt-PT')}
+IDENTIFICAÇÃO DO UTENTE: ${code}
+DIAGNÓSTICO / MOTIVO DA CONSULTA: ${cond}
+
+S (SUBJETIVO):
+${evaReport}
+- Relato e queixas funcionais do utente: ${subj}
+
+O (OBJETIVO):
+- Protocolo Clínico Consultado (Parâmetros de Referência Didática):
+  * Região / Modalidade: ${mod.title} (${mod.modeBadge})
+  * Parâmetros Teóricos: ${mod.hz} Hz | ${mod.us} µs | Ciclo: ${mod.duty}
+  * Montagem Anatómica: ${mod.placementCaption}
+- Parâmetros Efetivamente Administrados pelo Fisioterapeuta:
+  * Intensidade Efetiva Aplicada: ${actualMa ? actualMa + ' mA' : '[Não registada]'}
+  * Tempo de Aplicação Efetivo: ${actualMin ? actualMin + ' minutos' : '[Não registado]'}
+  * Inspeção Cutânea Pós-Sessão: ${actualSkin ? actualSkin : '[Não informada / Pendente de inspeção clínica]'}
+
+A (AVALIAÇÃO):
+- Resposta motora/sensorial observada: ${assess}
+
+P (PLANO):
+- Conduta clínica para a próxima sessão: ${plan}
+============================================================
+Nota: Gerado localmente pelo ElectroMapas PRO como apoio à documentação clínica.`;
+    }
+
+    function copySoapNote() {
+      const text = generateFormattedSoapText();
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('✓ Texto SOAP copiado para a área de transferência!');
+        }).catch(() => {
+          openSoapFallbackModal(text);
+        });
+      } else {
+        openSoapFallbackModal(text);
+      }
+    }
+
+    function openSoapFallbackModal(text) {
+      const modal = document.getElementById('soap-modal-fallback');
+      const textarea = document.getElementById('soap-fallback-textarea');
+      if (modal && textarea) {
+        textarea.value = text;
+        modal.classList.remove('hidden');
+        textarea.focus();
+        textarea.select();
+      }
+    }
+
+    function closeSoapModal() {
+      const modal = document.getElementById('soap-modal-fallback');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function copyFromModalTextarea() {
+      const textarea = document.getElementById('soap-fallback-textarea');
+      if (textarea) {
+        textarea.focus();
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showToast('✓ Texto copiado!');
+          closeSoapModal();
+        } catch (e) {
+          showToast('Por favor use Ctrl+C / Cmd+C');
+        }
+      }
+    }
+
+    function clearSoapForm() {
+      document.getElementById('soap-patient-code').value = '';
+      document.getElementById('soap-condition').value = '';
+      document.getElementById('soap-eva-pre').value = '';
+      document.getElementById('soap-eva-post').value = '';
+      document.getElementById('soap-subj').value = '';
+      document.getElementById('soap-assess').value = '';
+      document.getElementById('soap-plan').value = '';
+      updateEvaCalculations();
+      showToast('Formulário limpo com sucesso');
+    }
+
+    // =========================================================================
+    // 16. TOAST DE NOTIFICAÇÃO
+    // =========================================================================
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2600);
+    }
+  </script>
+
+  <!-- Registo de Service Worker para PWA Offline -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/app/sw.js', { scope: '/app/' }).catch((e) => {
+          console.log('[PWA] Service Worker offline opcional:', e);
+        });
+      });
+    }
+  </script>
+  <!-- MARCA D'ÁGUA FORENSE DINÂMICA (ANTI-VAZAMENTO SECOPS) -->
+  <div id="pro-forensic-watermark" class="fixed inset-0 pointer-events-none z-50 overflow-hidden hidden select-none opacity-5">
+    <div id="watermark-text" class="w-[200vw] h-[200vh] -translate-x-1/4 -translate-y-1/4 flex flex-wrap gap-24 items-center justify-around text-xs font-mono font-black text-cyan-300 -rotate-12">
+      LICENÇA INDIVIDUAL ELECTROMAPAS PRO • USO RESTRITO
+    </div>
+  </div>
+</body>
+</html>

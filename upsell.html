@@ -16,15 +16,15 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1684602679908725');
     fbq('track', 'PageView');
+    fbq('trackCustom', 'UpsellView_ProApp_49');
   </script>
   <noscript>
     <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1684602679908725&ev=PageView&noscript=1"/>
   </noscript>
 
-  <title>Central Clínica ElectroMapas — Biblioteca + Calculadora | Upsell 27,77 €</title>
-  <meta name="description" content="Upsell pós-compra: Central Clínica com biblioteca de parâmetros, tabela mestra de dosimetria e bónus de segurança, protocolos e fichas de registo. 27,77 € IVA incluído." />
-  <!-- HOTMART U1: produto N108089769S — reconfigurar oferta 54lg83ib (ou criar nova) para 27,77 € IVA incluído. Ver PLANO_EXECUCAO_DETALHADO.md -->
-
+  <title>Passo 2 (80%): Ativação da Licença ElectroMapas PRO — Aplicação Clínica de Marquesa</title>
+  <meta name="description" content="Oferta exclusiva pós-compra: Ativa a licença vitalícia da Aplicação ElectroMapas PRO com abatimento dos teus 9,97 € pagos hoje. Consulta em 2 segundos ao lado da marquesa sem folhear PDFs." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://pay.hotmart.com" crossorigin>
@@ -34,28 +34,27 @@
 
   <style>
     :root {
-      --bg-page: #f8fafc;
-      --bg-card: #ffffff;
-      --bg-dark: #06161e;
-      --bg-dark-card: #0b2532;
-      --primary: #0d9488;
-      --primary-dark: #0f766e;
-      --emerald-accent: #10b981;
-      --emerald-dark: #064e3b;
-      --accent-cyan: #00e5ff;
-      --accent-amber: #f59e0b;
-      --accent-orange: #ea580c;
-      --text-main: #0f172a;
-      --text-body: #334155;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --border-emerald: #a7f3d0;
+      --bg-page: #06111a;
+      --bg-card: #0b1f2d;
+      --bg-card-light: #112a3d;
+      --primary: #06b6d4;
+      --primary-dark: #0891b2;
+      --emerald: #10b981;
+      --emerald-dark: #059669;
+      --amber: #f59e0b;
+      --red-ch1: #ef4444;
+      --blue-ch2: #3b82f6;
+      --text-main: #f8fafc;
+      --text-body: #cbd5e1;
+      --text-muted: #94a3b8;
+      --border: #1e3a4f;
+      --border-accent: #00e5ff;
       --radius-sm: 8px;
       --radius-md: 14px;
-      --radius-lg: 20px;
-      --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.05);
-      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.08);
-      --shadow-lg: 0 20px 45px rgba(13, 148, 136, 0.16);
+      --radius-lg: 22px;
+      --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 20px 50px rgba(6, 182, 212, 0.2);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -66,258 +65,426 @@
       color: var(--text-body);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 60px;
+      padding-bottom: 40px;
     }
 
-    /* BARRA SUPERIOR DE STATUS DO FUNIL */
-    .funnel-bar {
-      background: linear-gradient(90deg, #06161e 0%, #0b2532 50%, #06161e 100%);
+    /* BARRA SUPERIOR DE STATUS DO FUNIL (SISTEMA A 80%) */
+    .system-status-bar {
+      background: linear-gradient(90deg, #040c13 0%, #081d2c 50%, #040c13 100%);
       color: #ffffff;
       padding: 12px 18px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(0, 229, 255, 0.3);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      border-bottom: 2px solid rgba(0, 229, 255, 0.4);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     }
-    .funnel-bar-inner {
+    .status-bar-inner {
       max-width: 960px;
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
       font-size: 13px;
     }
-    .funnel-status-badge {
+    .status-steps {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .step-item {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
+      font-size: 12.5px;
       font-weight: 700;
-      color: #f1f5f9;
     }
-    .funnel-status-badge span.check {
-      background: #10b981;
-      color: #ffffff;
+    .step-item.done {
+      color: #a7f3d0;
+    }
+    .step-item.pending {
+      color: #fde68a;
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    .step-bullet {
       width: 20px;
       height: 20px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 900;
+    }
+    .step-item.done .step-bullet {
+      background: #10b981;
+      color: #ffffff;
+    }
+    .step-item.pending .step-bullet {
+      background: #f59e0b;
+      color: #06111a;
     }
     .progress-track {
       flex: 1;
-      min-width: 140px;
-      max-width: 280px;
+      min-width: 150px;
+      max-width: 260px;
       height: 8px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.12);
       border-radius: 99px;
       overflow: hidden;
     }
     .progress-fill {
-      width: 85%;
+      width: 80%;
       height: 100%;
       background: linear-gradient(90deg, #10b981, #00e5ff);
       border-radius: 99px;
-      animation: pulse 2s infinite ease-in-out;
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.8);
     }
-    @keyframes pulse {
+
+    @keyframes pulse-slow {
       0%, 100% { opacity: 0.9; }
-      50% { opacity: 1; }
+      50% { opacity: 1; filter: brightness(1.2); }
     }
 
     .container {
-      max-width: 900px;
+      max-width: 980px;
       margin: 0 auto;
-      padding: 0 18px;
+      padding: 24px 18px 60px;
+    }
+
+    /* AVISO DO MB WAY CRONÓMETRO */
+    .mbway-banner {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.08) 100%);
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      margin: 10px 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .mbway-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13.5px;
+      color: #fef3c7;
+    }
+    .mbway-left strong {
+      color: #fbbf24;
+    }
+    .mbway-timer {
+      background: #b45309;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 16px;
+      padding: 6px 16px;
+      border-radius: 8px;
+      letter-spacing: 1px;
+      font-variant-numeric: tabular-nums;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+      white-space: nowrap;
     }
 
     /* HERO DO UPSELL */
     .upsell-hero {
       text-align: center;
-      padding: 40px 0 28px;
+      padding: 10px 0 32px;
     }
     .pill-urgency {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: #fef3c7;
-      border: 1px solid #fde68a;
-      color: #92400e;
+      gap: 8px;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      color: #00e5ff;
       font-size: 11.5px;
       font-weight: 800;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.9px;
       text-transform: uppercase;
-      padding: 6px 16px;
+      padding: 6px 18px;
       border-radius: 999px;
       margin-bottom: 18px;
-      box-shadow: var(--shadow-sm);
     }
     .upsell-hero h1 {
-      font-size: clamp(23px, 3.8vw, 36px);
+      font-size: clamp(24px, 4.2vw, 38px);
       font-weight: 900;
-      line-height: 1.22;
+      line-height: 1.25;
       color: var(--text-main);
       letter-spacing: -0.025em;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
-    .upsell-hero h1 span.highlight {
-      color: var(--primary);
-    }
-    .upsell-hero p.subtitle {
-      font-size: clamp(15.5px, 2.1vw, 18px);
-      color: var(--text-body);
-      max-width: 780px;
-      margin: 0 auto 24px;
-      line-height: 1.6;
+    .upsell-hero h1 span.cyan {
+      color: #00e5ff;
+      text-shadow: 0 0 25px rgba(0, 229, 255, 0.45);
     }
 
-    /* VITRINE VISUAL DE PRODUTO */
-    .showcase-card {
-      background: #ffffff;
+    /* O CHOQUE DE REALIDADE NA MARQUESA */
+    .reality-box {
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 12px;
-      box-shadow: var(--shadow-md);
-      margin-bottom: 36px;
-      position: relative;
+      border-left: 4px solid var(--amber);
+      border-radius: var(--radius-md);
+      padding: 24px 26px;
+      margin: 16px auto 36px;
+      text-align: left;
+      box-shadow: var(--shadow-sm);
     }
-    .showcase-card img {
-      width: 100%;
-      height: auto;
-      max-height: 420px;
-      object-fit: cover;
-      border-radius: 12px;
-      display: block;
-    }
-    .showcase-caption {
+    .reality-box h3 {
+      font-size: 17px;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-bottom: 12px;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
       align-items: center;
-      padding: 10px 12px 4px;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--text-main);
       gap: 8px;
     }
-    .showcase-tag {
-      background: #ccfbf1;
-      color: var(--primary-dark);
-      padding: 3px 10px;
-      border-radius: 6px;
-      font-size: 11.5px;
-      font-weight: 800;
+    .reality-box p {
+      font-size: 14.5px;
+      color: #cbd5e1;
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .reality-contrast {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border);
+    }
+    .contrast-item {
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+    .contrast-bad {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+    .contrast-good {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #86efac;
     }
 
-    /* OS 4 PILARES DO KIT CLÍNICO PRO */
-    .pillars-grid {
+    /* VITRINE CINEMÁTICA PRINCIPAL (SHOWCASE) */
+    .hero-visual-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 20px;
       margin-bottom: 36px;
     }
-    .pillar-box {
-      background: #ffffff;
+    .visual-card-large {
+      background: #04101a;
+      border: 2px solid rgba(0, 229, 255, 0.5);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 229, 255, 0.2);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .visual-card-large img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .visual-card-large:hover img {
+      transform: scale(1.03);
+    }
+    .visual-card-caption {
+      padding: 14px 18px;
+      background: linear-gradient(180deg, #061824 0%, #030c13 100%);
+      border-top: 1px solid var(--border);
+    }
+    .visual-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      background: rgba(0, 229, 255, 0.15);
+      color: #00e5ff;
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      margin-bottom: 6px;
+    }
+
+    /* GALERIA DOS MODELOS 3D ANATÓMICOS */
+    .gallery-3d-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 38px;
+    }
+    .gallery-3d-card {
+      background: #040e17;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+    }
+    .gallery-3d-card:hover {
+      transform: translateY(-4px);
+      border-color: #00e5ff;
+      box-shadow: 0 12px 30px rgba(0, 229, 255, 0.25);
+    }
+    .gallery-3d-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-3d-info {
+      padding: 12px 14px;
+      background: #081d2c;
+      border-top: 1px solid var(--border);
+    }
+    .gallery-3d-info h4 {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+    .gallery-3d-info p {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* BOTÃO TESTE DRIVE DO APP */
+    .testdrive-wrap {
+      text-align: center;
+      margin: 10px auto 42px;
+    }
+    .btn-testdrive {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%);
+      border: 1.5px solid #00e5ff;
+      color: #00e5ff;
+      font-size: 14.5px;
+      font-weight: 800;
+      padding: 12px 26px;
+      border-radius: 99px;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(0, 229, 255, 0.2);
+      transition: all 0.2s ease;
+    }
+    .btn-testdrive:hover {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.3) 0%, rgba(16, 185, 129, 0.3) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 229, 255, 0.35);
+    }
+
+    /* OS 6 ECRÃS REAIS DO APP */
+    .app-features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 42px;
+    }
+    .app-feature-box {
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 22px;
       box-shadow: var(--shadow-sm);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
-    .pillar-box:hover {
+    .app-feature-box:hover {
       transform: translateY(-3px);
-      border-color: #99f6e4;
-      box-shadow: var(--shadow-md);
+      border-color: rgba(6, 182, 212, 0.5);
     }
-    .pillar-header {
+    .app-feature-header {
       display: flex;
       align-items: flex-start;
       gap: 12px;
       margin-bottom: 12px;
     }
-    .pillar-icon-badge {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      background: #e0f2fe;
-      color: #0369a1;
+    .feature-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 22px;
       flex-shrink: 0;
     }
-    .pillar-box:nth-child(2) .pillar-icon-badge {
-      background: #ecfdf5;
-      color: #047857;
-    }
-    .pillar-box:nth-child(3) .pillar-icon-badge {
-      background: #fef3c7;
-      color: #b45309;
-    }
-    .pillar-box:nth-child(4) .pillar-icon-badge {
-      background: #f3e8ff;
-      color: #7e22ce;
-    }
-    .pillar-title-wrap h3 {
-      font-size: 16.5px;
+    .bg-icon-cyan { background: rgba(6, 182, 212, 0.15); color: #00e5ff; }
+    .bg-icon-emerald { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .bg-icon-amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+    .bg-icon-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+    .bg-icon-blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+    .bg-icon-red { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+
+    .feature-title-wrap h3 {
+      font-size: 16px;
       font-weight: 800;
       color: var(--text-main);
       line-height: 1.3;
     }
-    .pillar-title-wrap span.pill-meta {
+    .feature-title-wrap span.meta {
       font-size: 11px;
       font-weight: 700;
       color: var(--primary);
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .pillar-desc {
-      font-size: 13.8px;
-      color: var(--text-body);
+    .feature-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
       line-height: 1.55;
     }
-    .pillar-outcome {
-      margin-top: 12px;
+    .feature-outcome {
+      margin-top: 14px;
       padding-top: 10px;
       border-top: 1px dashed var(--border);
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 700;
-      color: #047857;
+      color: #34d399;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    /* TABELA COMPARATIVA DE VALOR (BÁSICO VS SUÍTE PRO) */
+    /* TABELA DECOY */
     .compare-section {
-      background: #ffffff;
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 28px 24px;
-      margin-bottom: 36px;
+      padding: 30px 24px;
+      margin-bottom: 42px;
       box-shadow: var(--shadow-sm);
     }
     .compare-title {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
     .compare-title h2 {
-      font-size: clamp(20px, 3vw, 26px);
+      font-size: clamp(20px, 3.2vw, 26px);
       font-weight: 900;
       color: var(--text-main);
     }
     .compare-title p {
       font-size: 14px;
       color: var(--text-muted);
+      margin-top: 4px;
     }
     .compare-table {
       width: 100%;
@@ -326,273 +493,264 @@
     }
     .compare-table th {
       text-align: left;
-      padding: 12px 14px;
-      background: #f1f5f9;
+      padding: 14px 16px;
+      background: rgba(15, 23, 42, 0.6);
       color: var(--text-main);
       font-weight: 800;
       border-bottom: 2px solid var(--border);
     }
     .compare-table th.col-pro {
-      background: #ccfbf1;
-      color: #0f766e;
+      background: rgba(6, 182, 212, 0.15);
+      color: #00e5ff;
       text-align: center;
-      border-radius: 8px 8px 0 0;
+      border-top: 2px solid #00e5ff;
+      border-left: 2px solid #00e5ff;
+      border-right: 2px solid #00e5ff;
+      border-radius: 12px 12px 0 0;
     }
-    .compare-table th.col-base {
+    .compare-table th.col-sub {
       text-align: center;
       color: var(--text-muted);
     }
     .compare-table td {
-      padding: 12px 14px;
+      padding: 13px 16px;
       border-bottom: 1px solid var(--border);
+      color: var(--text-body);
     }
     .compare-table td.col-center {
       text-align: center;
-      font-weight: 700;
+      font-weight: 600;
     }
     .compare-table td.col-pro {
-      background: #f0fdfa;
+      background: rgba(6, 182, 212, 0.05);
+      border-left: 2px solid #00e5ff;
+      border-right: 2px solid #00e5ff;
       text-align: center;
       font-weight: 800;
-      color: #0f766e;
+      color: #f8fafc;
     }
-    .check-green { color: #10b981; font-weight: 900; font-size: 16px; }
-    .cross-gray { color: #cbd5e1; font-weight: 900; font-size: 16px; }
+    .compare-table tr:last-child td.col-pro {
+      border-bottom: 2px solid #00e5ff;
+      border-radius: 0 0 12px 12px;
+      background: rgba(6, 182, 212, 0.12);
+    }
+    .check-green { color: #34d399; font-weight: 900; font-size: 16px; }
+    .cross-gray { color: #64748b; font-weight: 900; font-size: 16px; }
 
-    /* CAIXA DE DECISÃO E CHECKOUT DO UPSELL */
-    .decision-card {
-      background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);
-      border: 2.5px solid var(--emerald-accent);
+    /* CAIXA DE RECIBO COM ABATIMENTO DO CRÉDITO */
+    .receipt-card {
+      background: linear-gradient(180deg, #0d283b 0%, #081d2c 100%);
+      border: 2px solid #00e5ff;
       border-radius: var(--radius-lg);
-      padding: 36px 28px;
+      padding: 36px 26px;
       text-align: center;
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 0 35px rgba(0, 229, 255, 0.25);
       position: relative;
+      margin-bottom: 34px;
     }
-    .decision-badge-top {
+    .receipt-badge-top {
       position: absolute;
       top: -14px;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(90deg, #10b981, #0d9488);
+      background: linear-gradient(90deg, #10b981, #06b6d4);
       color: #ffffff;
       font-size: 12px;
       font-weight: 900;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
       text-transform: uppercase;
-      padding: 5px 20px;
+      padding: 5px 22px;
       border-radius: 99px;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.5);
       white-space: nowrap;
     }
-    .decision-card h2 {
+    .receipt-card h2 {
       font-size: clamp(22px, 3.2vw, 30px);
       font-weight: 900;
       color: var(--text-main);
       margin-bottom: 8px;
     }
-    .decision-card p.desc {
-      font-size: 15px;
+    .receipt-card p.desc {
+      font-size: 14.5px;
       color: var(--text-body);
-      max-width: 680px;
-      margin: 0 auto 20px;
+      max-width: 660px;
+      margin: 0 auto 24px;
     }
 
-    .value-stack-box {
-      background: #ffffff;
-      border: 1px solid var(--border-emerald);
+    .receipt-ledger {
+      background: #040e16;
+      border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 16px 20px;
+      padding: 18px 22px;
       max-width: 580px;
       margin: 0 auto 24px;
       text-align: left;
       font-size: 13.5px;
     }
-    .value-stack-row {
+    .receipt-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 6px 0;
-      border-bottom: 1px dashed #f1f5f9;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
     }
-    .value-stack-row:last-child {
+    .receipt-row.strike {
+      color: var(--text-muted);
+    }
+    .receipt-row.credit {
+      color: #34d399;
+      font-weight: 700;
+    }
+    .receipt-row.grant {
+      color: #67e8f9;
+      font-weight: 700;
+    }
+    .receipt-row.final {
       border-bottom: none;
-      padding-top: 10px;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-    .strike-val {
-      color: #94a3b8;
-      text-decoration: line-through;
+      padding-top: 14px;
+      margin-top: 4px;
+      font-size: 16px;
+      font-weight: 900;
+      color: #ffffff;
+      border-top: 2px solid rgba(0, 229, 255, 0.4);
     }
 
-    .price-display-box {
-      margin-bottom: 24px;
-    }
-    .price-old {
-      font-size: 16px;
-      color: var(--text-muted);
-      text-decoration: line-through;
-      font-weight: 600;
-    }
-    .price-big {
-      font-size: clamp(38px, 5.5vw, 54px);
+    .price-final-highlight {
+      font-size: clamp(44px, 6vw, 58px);
       font-weight: 900;
-      color: var(--emerald-dark);
+      color: #00e5ff;
       line-height: 1;
-      margin: 6px 0;
+      margin: 12px 0 6px;
+      text-shadow: 0 0 25px rgba(0, 229, 255, 0.5);
     }
-    .price-sub {
+    .price-sub-note {
       font-size: 13px;
       font-weight: 700;
-      color: var(--text-muted);
+      color: #94a3b8;
+      margin-bottom: 22px;
+    }
+    .consult-note {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 12px 18px;
+      max-width: 580px;
+      margin: 0 auto 24px;
+      font-size: 13.5px;
+      color: #a7f3d0;
+      font-weight: 600;
     }
 
-    /* WIDGET HOTMART & BOTÃO FALLBACK */
-    #hotmart-sales-funnel {
-      min-height: 70px;
-      margin: 10px auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .btn-upsell-fallback {
+    /* BOTÃO PRINCIPAL DE ATAQUE */
+    .btn-upsell-cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      background: linear-gradient(180deg, #10b981 0%, #0d9488 100%);
+      gap: 12px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       color: #ffffff;
-      font-size: clamp(16px, 2.2vw, 18.5px);
+      font-size: clamp(16px, 2.2vw, 19px);
       font-weight: 900;
       text-decoration: none;
-      padding: 18px 36px;
+      padding: 20px 36px;
       border-radius: 99px;
-      box-shadow: 0 10px 28px rgba(13, 148, 136, 0.4);
+      box-shadow: 0 10px 32px rgba(16, 185, 129, 0.5);
       border: none;
       cursor: pointer;
       width: 100%;
-      max-width: 580px;
+      max-width: 620px;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
       text-transform: uppercase;
       letter-spacing: 0.3px;
     }
-    .btn-upsell-fallback:hover {
+    .btn-upsell-cta:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 34px rgba(13, 148, 136, 0.5);
-    }
-    .upsell-trust-seals {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 16px;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-    .upsell-trust-seals span {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      box-shadow: 0 14px 40px rgba(16, 185, 129, 0.7);
     }
 
-    /* BOTÃO DE RECUSA DISCRETO E EDUCADO */
-    .refuse-wrap {
-      margin-top: 22px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
+    /* BOTÃO DE RECUSA PSICOLÓGICA */
+    .refusal-box {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .upsell-refuse {
+    .refusal-link {
       display: inline-block;
-      font-size: 13px;
-      color: var(--text-muted);
+      font-size: 12.8px;
+      color: #94a3b8;
       text-decoration: underline;
       cursor: pointer;
-      line-height: 1.5;
-      padding: 4px 10px;
+      line-height: 1.55;
+      max-width: 620px;
+      padding: 6px 12px;
+      transition: color 0.18s ease;
     }
-    .upsell-refuse:hover {
-      color: var(--text-main);
+    .refusal-link:hover {
+      color: #f87171;
     }
 
     /* GARANTIA HOTMART */
     .guarantee-box {
       margin-top: 36px;
-      background: #ffffff;
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 20px;
+      padding: 22px 24px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 18px;
       box-shadow: var(--shadow-sm);
       text-align: left;
     }
     .guarantee-icon {
-      font-size: 38px;
+      font-size: 42px;
       line-height: 1;
       flex-shrink: 0;
     }
     .guarantee-text h4 {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 800;
       color: var(--text-main);
       margin-bottom: 4px;
     }
     .guarantee-text p {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text-muted);
+      line-height: 1.5;
     }
 
     footer.upsell-footer {
       text-align: center;
-      padding: 36px 18px 10px;
+      padding: 40px 18px 20px;
       font-size: 12px;
       color: var(--text-muted);
     }
 
-    /* CTA imediato no hero + sticky (botão sempre visível) */
-    .hero-cta-wrap {
-      margin-top: 22px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
-    }
-    .sticky-buy {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 9999;
-      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid var(--border);
-      box-shadow: 0 -8px 28px rgba(16, 42, 67, 0.12);
-      display: flex;
-      justify-content: center;
-    }
-    .sticky-buy .btn-upsell-fallback {
-      max-width: 640px;
-      margin: 0;
-    }
-    body { padding-bottom: 92px; }
-
-    @media (max-width: 680px) {
-      .pillars-grid {
+    @media (max-width: 768px) {
+      .hero-visual-grid {
         grid-template-columns: 1fr;
       }
-      .decision-card {
+      .gallery-3d-grid {
+        grid-template-columns: 1fr;
+      }
+      .app-features-grid {
+        grid-template-columns: 1fr;
+      }
+      .reality-contrast {
+        grid-template-columns: 1fr;
+      }
+      .receipt-card {
         padding: 28px 16px;
       }
-      .btn-upsell-fallback {
+      .btn-upsell-cta {
         font-size: 15px;
         padding: 16px 20px;
       }
       .guarantee-box {
+        flex-direction: column;
+        text-align: center;
+      }
+      .mbway-banner {
         flex-direction: column;
         text-align: center;
       }
@@ -601,250 +759,391 @@
 </head>
 <body>
 
-  <!-- BARRA DE TOPO: FUNIL (sem bump — só pós-compra) -->
-  <header class="funnel-bar">
-    <div class="funnel-bar-inner">
-      <div class="funnel-status-badge">
-        <span class="check">✓</span>
-        <span><strong>PASSO 1 CONCLUÍDO:</strong> Atlas +50 Mapas 3D e o atalho dos 15 casos já estão na tua conta.</span>
+  <!-- BARRA SUPERIOR DE STATUS DO FUNIL (SISTEMA A 80%) -->
+  <header class="system-status-bar">
+    <div class="status-bar-inner">
+      <div class="status-steps">
+        <div class="step-item done">
+          <span class="step-bullet">✓</span>
+          <span>PASSO 1 CONCLUÍDO: Ficheiros Base Liberados (9,97 €)</span>
+        </div>
+        <div class="step-item pending">
+          <span class="step-bullet">!</span>
+          <span>PASSO 2 PENDENTE (80%): Modo de Marquesa / Licença PRO</span>
+        </div>
       </div>
-      <div class="progress-track" title="Progresso do funil pós-compra">
+      <div class="progress-track" title="Progresso da configuração clínica">
         <div class="progress-fill"></div>
       </div>
     </div>
   </header>
 
   <main class="container">
-    
-    <!-- HERO — UPSELL 1 = CENTRAL / BIBLIOTECA + CALCULADORA @ 27,77 € -->
+
+    <!-- CRONÓMETRO DE RESERVA DO MB WAY -->
+    <div class="mbway-banner">
+      <div class="mbway-left">
+        <span style="font-size:24px;">⏳</span>
+        <div>
+          <strong>RESERVA DE CRÉDITO ATIVA:</strong> O teu abatimento de <strong>9,97 €</strong> está guardado para ativação imediata.
+        </div>
+      </div>
+      <div class="mbway-timer" id="mbway-countdown">03:00</div>
+    </div>
+
+    <!-- HERO SECTION -->
     <section class="upsell-hero">
-      <div class="pill-urgency">OFERTA PÓS-COMPRA · SÓ NESTA SEQUÊNCIA · SEM ORDER BUMP</div>
-      <h1>Os mapas dizem-te <em>onde</em> colocar.<br><span class="highlight">A Central diz-te o que ajustar em 5 segundos.</span></h1>
-      <p class="subtitle">
-        Acabaste de garantir o posicionamento (CH por cor, Hz, µs, tempo). Agora adiciona a
-        <strong>Central Clínica ElectroMapas</strong>: biblioteca organizada + tabela mestra de parâmetros
-        (a tua “calculadora” de marquesa) + bónus de segurança, protocolos e fichas de registo.
-        Ultrassom, laser e testes ortopédicos ficam para passos seguintes — aqui focamos o essencial da eletroterapia.
-      </p>
-      <div class="hero-cta-wrap">
-        <a href="https://pay.hotmart.com/N108089769S?off=54lg83ib&checkoutMode=10&locale=pt_PT" class="btn-upsell-fallback js-u1-checkout" rel="noopener" data-value="27.77">
-          SIM, QUERO A CENTRAL CLÍNICA (+27,77 €) →
-        </a>
-        <span class="price-sub">Pagamento único · IVA incluído · Acesso imediato na mesma conta Hotmart</span>
+      <div class="pill-urgency">⚡ OFERTA ÚNICA PÓS-COMPRA · NÃO VOLTARÁ A SER EXIBIDA</div>
+      <h1>
+        Os mapas em PDF dizem-te <em>onde</em> colocar.<br>
+        <span class="cyan">A Aplicação ElectroMapas PRO</span> dá-te a resposta em <span class="cyan">2 segundos</span> sem folhear ficheiros.
+      </h1>
+
+      <!-- O CHOQUE DE REALIDADE NA MARQUESA -->
+      <div class="reality-box">
+        <h3>⚠️ Lê isto com atenção antes de descarregar os teus ficheiros:</h3>
+        <p>
+          Acabaste de garantir mais de 140 páginas divididas em 4 documentos: o Master Atlas 3D (72 páginas), o Manual Anti-Queimadura, os 50 Textos de Prontuário e a Tabela de Parâmetros.
+        </p>
+        <p>
+          Este material vale ouro para estudar em casa. <strong>Mas pensa em amanhã, às 09h00 da manhã:</strong>
+        </p>
+        <p>
+          Quando o teu utente estiver deitado na marquesa com dor aguda, à espera do tratamento... tu vais mesmo abrir 4 PDFs no telemóvel, rodar páginas e dar zoom com os dedos à frente dele?
+        </p>
+
+        <div class="reality-contrast">
+          <div class="contrast-item contrast-bad">
+            <strong>❌ No Modo Manual (PDF):</strong><br>
+            Abrir pasta de ficheiros, procurar página 47, ampliar com dois dedos, calcular Hz e µs de cabeça... Transmite lentidão e dúvida na presença do doente.
+          </div>
+          <div class="contrast-item contrast-good">
+            <strong>⚡ No Modo Automático (App PRO):</strong><br>
+            Tocas na patologia ("Lombalgia" ou "Joelho VMO"), e em 0,1s tens o mapa interativo CH1/CH2, parâmetros clínicos dinâmicos e vídeo demonstrativo em pt-PT.
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="showcase-card">
-      <img src="/assets/07-quatro-tablets-ondas.webp" alt="Central Clínica ElectroMapas — consulta rápida em tablet" fetchpriority="high" decoding="async">
-      <div class="showcase-caption">
-        <span>BIBLIOTECA + TABELA MESTRA · TELEMÓVEL, TABLET E PC</span>
-        <span class="showcase-tag">27,77 € · IVA INCLUÍDO</span>
+    <!-- VITRINE CINEMÁTICA PRINCIPAL: FOTO REAL DE MARQUESA + RENDER 3D 8K -->
+    <section class="hero-visual-grid">
+      <!-- Card 1: Prática Clínica Real -->
+      <div class="visual-card-large">
+        <img src="/assets/3d/clinica_marquesa_ombro.webp" alt="Fisioterapeuta consultando mapa 3D no iPad ao lado da marquesa" loading="eager" />
+        <div class="visual-card-caption">
+          <span class="visual-badge">Consultório em Tempo Real</span>
+          <h3 style="color:#ffffff; font-size:16px; font-weight:800;">A Tua Consulta de Segunda-Feira na Marquesa</h3>
+          <p style="color:#94a3b8; font-size:12.5px; margin-top:2px;">
+            Abre a patologia no tablet em 2 segundos. Sem folhear folhas de papel ou PDFs pesados na frente do paciente.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2: Render 3D Octane 8K -->
+      <div class="visual-card-large" style="border-color: rgba(16, 185, 129, 0.5);">
+        <img src="/assets/3d/mapa_3d_lombar.webp" alt="Render 3D de alta definição da musculatura lombar e elétrodos fluorescentes" loading="eager" />
+        <div class="visual-card-caption">
+          <span class="visual-badge" style="background:rgba(16,185,129,0.15); color:#34d399; border-color:rgba(16,185,129,0.4);">8K Octane Render</span>
+          <h3 style="color:#ffffff; font-size:16px; font-weight:800;">Atlas 3D de Precisão Anatómica</h3>
+          <p style="color:#94a3b8; font-size:12.5px; margin-top:2px;">
+            Visualização profunda dos feixes musculares, canais CH1/CH2 identificados por cor e trajeto das correntes elétricas.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- 4 PILARES DO U1 (sem US/Laser/25 testes — esses vão a U2/U3) -->
-    <section class="pillars-grid">
-      
-      <article class="pillar-box">
+    <!-- GALERIA DOS MODELOS 3D DO SOFTWARE PRO -->
+    <div style="text-align:center; margin-bottom:16px;">
+      <span class="pill-urgency" style="font-size:11px;">MODELOS ANATÓMICOS INTEGRADOS NA APLICAÇÃO</span>
+      <h3 style="color:#ffffff; font-size:20px; font-weight:800;">Visualização Anatómica Cirúrgica de Cada Região</h3>
+    </div>
+
+    <section class="gallery-3d-grid">
+      <div class="gallery-3d-card" onclick="window.open('/electromapas-pro-app.html', '_blank')">
+        <img src="/assets/3d/mapa_3d_joelho.webp" alt="Mapa 3D do Joelho e VMO" loading="lazy" />
+        <div class="gallery-3d-info">
+          <h4>Joelho & Vasto Medial Oblíquo</h4>
+          <p>Ativação seletiva de ponto motor (NMES Pós-LCA)</p>
+        </div>
+      </div>
+
+      <div class="gallery-3d-card" onclick="window.open('/electromapas-pro-app.html', '_blank')">
+        <img src="/assets/3d/mapa_3d_cervical.webp" alt="Mapa 3D Cervical e Manguito" loading="lazy" />
+        <div class="gallery-3d-info">
+          <h4>Coluna Cervical & Manguito</h4>
+          <p>Descompressão foraminal e alívio de dor irradiada</p>
+        </div>
+      </div>
+
+      <div class="gallery-3d-card" onclick="window.open('/electromapas-pro-app.html', '_blank')">
+        <img src="/assets/3d/clinica_marquesa_lombar.webp" alt="Aplicação real de eletroterapia na região lombar" loading="lazy" />
+        <div class="gallery-3d-info">
+          <h4>Demonstração com Utente Real</h4>
+          <p>Palpação e colocação correta dos elétrodos na pele</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTE DRIVE DIRETO DO APP -->
+    <div class="testdrive-wrap">
+      <a href="/electromapas-pro-app.html" target="_blank" rel="noopener" class="btn-testdrive">
+        <span>📱</span> Abrir Demonstração Interativa do Software no teu Ecrã →
+      </a>
+    </div>
+
+    <!-- OS 6 PILARES REAIS DO SOFTWARE ELECTROMAPAS PRO -->
+    <section class="app-features-grid">
+
+      <!-- Ecrã 1 -->
+      <article class="app-feature-box">
         <div>
-          <div class="pillar-header">
-            <div class="pillar-icon-badge">📚</div>
-            <div class="pillar-title-wrap">
-              <span class="pill-meta">CORE · BIBLIOTECA</span>
-              <h3>Biblioteca Clínica por região e corrente</h3>
+          <div class="app-feature-header">
+            <div class="feature-icon-badge bg-icon-cyan">⚡</div>
+            <div class="feature-title-wrap">
+              <span class="meta">ECRÃ 1 & 2 · VELOCIDADE</span>
+              <h3>Busca Instantânea de Marquesa (&lt; 2s)</h3>
             </div>
           </div>
-          <p class="pillar-desc">
-            Material organizado para consulta na marquesa: o que já tens nos mapas ganha uma camada de referência cruzada
-            (região → corrente → nota prática), para não ficares a saltar entre ficheiros soltos.
+          <p class="feature-desc">
+            Pesquisa em tempo real por sintoma, músculo ou nervo ("Ciática", "VMO", "Ombro Congelado", "Epicondilite"). O mapa e a dosimetria surgem no ecrã sem esperas nem downloads.
           </p>
         </div>
-        <div class="pillar-outcome">
-          <span>✓ Menos hesitação entre o mapa e o botão do aparelho</span>
+        <div class="feature-outcome">
+          <span>✓ Zero ficheiros pesados ou pesquisas lentas</span>
         </div>
       </article>
 
-      <article class="pillar-box">
+      <!-- Ecrã 2 -->
+      <article class="app-feature-box">
         <div>
-          <div class="pillar-header">
-            <div class="pillar-icon-badge">🧮</div>
-            <div class="pillar-title-wrap">
-              <span class="pill-meta">CORE · CALCULADORA</span>
-              <h3>Tabela Mestra de Parâmetros (Hz · µs · tempo)</h3>
+          <div class="app-feature-header">
+            <div class="feature-icon-badge bg-icon-emerald">🎯</div>
+            <div class="feature-title-wrap">
+              <span class="meta">ECRÃ 3 · PRECISÃO ANATÓMICA</span>
+              <h3>Mapas 3D Interativos com Camadas</h3>
             </div>
           </div>
-          <p class="pillar-desc">
-            A tua calculadora prática: TENS, NMES/FES, Russa e Aussie numa grelha única.
-            Escolhes a intenção clínica e partes de valores iniciais honestos — depois afinas por resposta do doente.
+          <p class="feature-desc">
+            Visualização clara dos canais CH1 (Vermelho) e CH2 (Azul). Alterna num toque entre a <b>Camada de Superfície (Pele)</b> e a <b>Camada Profunda (Músculo e Pontos Motores)</b> para não errar a palpação.
           </p>
         </div>
-        <div class="pillar-outcome">
-          <span>✓ Ritual: abre tabela → confirma → aplica → regista</span>
+        <div class="feature-outcome">
+          <span>✓ Contração motora 100% eficaz sem efeito picada</span>
         </div>
       </article>
 
-      <article class="pillar-box">
+      <!-- Ecrã 3 -->
+      <article class="app-feature-box">
         <div>
-          <div class="pillar-header">
-            <div class="pillar-icon-badge">🛡️</div>
-            <div class="pillar-title-wrap">
-              <span class="pill-meta">BÓNUS INCLUÍDO</span>
-              <h3>Segurança essencial + protocolos práticos</h3>
+          <div class="app-feature-header">
+            <div class="feature-icon-badge bg-icon-amber">🧮</div>
+            <div class="feature-title-wrap">
+              <span class="meta">ECRÃ 3 · DOSIMETRIA</span>
+              <h3>Calculadora Automática de Parâmetros</h3>
             </div>
           </div>
-          <p class="pillar-desc">
-            Contraindicações habituais, precauções e checklist antes/durante/depois — mais protocolos de sessão
-            para não improvisares sob pressão de tempo.
+          <p class="feature-desc">
+            Alternador direto entre modalidades (TENS Convencional, TENS Burst, NMES Fortalecimento, Corrente Russa e IFT). Valores de Hz, µs e tempo recomendados na literatura pré-calculados.
           </p>
         </div>
-        <div class="pillar-outcome">
-          <span>✓ Decisão mais segura sem dramatizar o risco</span>
+        <div class="feature-outcome">
+          <span>✓ Dosimetria segura baseada em evidência científica</span>
         </div>
       </article>
 
-      <article class="pillar-box">
+      <!-- Ecrã 4 -->
+      <article class="app-feature-box">
         <div>
-          <div class="pillar-header">
-            <div class="pillar-icon-badge">📋</div>
-            <div class="pillar-title-wrap">
-              <span class="pill-meta">BÓNUS INCLUÍDO</span>
-              <h3>Fichas de registo de eletroterapia em 60 segundos</h3>
+          <div class="app-feature-header">
+            <div class="feature-icon-badge bg-icon-purple">👁️</div>
+            <div class="feature-title-wrap">
+              <span class="meta">ECRÃ 4 · AUTORIDADE</span>
+              <h3>Modo Utente ("O que estou a sentir?")</h3>
             </div>
           </div>
-          <p class="pillar-desc">
-            Checkboxes: região, mapa, Hz, µs, mA, EVA e resposta. Proteção documental sem roubar a pausa entre utentes.
+          <p class="feature-desc">
+            Interface clínica de alto contraste desenhada para mostrares ao paciente na marquesa. Explica o trajeto da corrente e o mecanismo de alívio da dor (Gate Control), eliminando o medo do choque elétrico.
           </p>
         </div>
-        <div class="pillar-outcome">
-          <span>✓ Registo limpo, rápido e defensável</span>
+        <div class="feature-outcome">
+          <span>✓ Reduz em 90% a ansiedade do paciente na marquesa</span>
+        </div>
+      </article>
+
+      <!-- Ecrã 5 -->
+      <article class="app-feature-box">
+        <div>
+          <div class="app-feature-header">
+            <div class="feature-icon-badge bg-icon-blue">📋</div>
+            <div class="feature-title-wrap">
+              <span class="meta">ECRÃ 5 · PRONTUÁRIO RGPD</span>
+              <h3>Gerador de Registo Clínico num Toque</h3>
+            </div>
+          </div>
+          <p class="feature-desc">
+            Seleciona os parâmetros aplicados e a escala de dor (EVA) e clica em <i>"Copiar para Prontuário"</i>. O texto técnico é copiado para a área de transferência. 100% local, sem envio de dados para a nuvem.
+          </p>
+        </div>
+        <div class="feature-outcome">
+          <span>✓ Proteção jurídica e prontuário preenchido em 10 segundos</span>
+        </div>
+      </article>
+
+      <!-- Ecrã 6 -->
+      <article class="app-feature-box">
+        <div>
+          <div class="app-feature-header">
+            <div class="feature-icon-badge bg-icon-red">🎬</div>
+            <div class="feature-title-wrap">
+              <span class="meta">ECRÃ 6 · VÍDEOS DE MARQUESA</span>
+              <h3>Vídeos Práticos Dobrados em Português (pt-PT)</h3>
+            </div>
+          </div>
+          <p class="feature-desc">
+            Demonstrações práticas filmadas em pacientes reais com narração clínica e legendas em Português de Portugal. Vê a palpação anatómica exata e a resposta motora antes de ligar o aparelho.
+          </p>
+        </div>
+        <div class="feature-outcome">
+          <span>✓ Segurança total na aplicação clínica de cada corrente</span>
         </div>
       </article>
 
     </section>
 
+    <!-- TABELA COMPARATIVA DE ANCORAGEM (DECOY TABLE) -->
     <section class="compare-section">
       <div class="compare-title">
-        <h2>O que já tens vs. o que a Central acrescenta</h2>
-        <p>Entrada 9,97 € resolve o <em>onde</em>. O Upsell 1 resolve o <em>ajustar e documentar</em>.</p>
+        <h2>Comparação de Planos e Modalidades de Acesso</h2>
+        <p>Por que a Licença Vitalícia nesta página é a decisão mais inteligente para a tua clínica:</p>
       </div>
       <table class="compare-table">
         <thead>
           <tr>
-            <th>Recurso</th>
-            <th class="col-base">Atlas 9,97 €</th>
-            <th class="col-pro">+ Central 27,77 €</th>
+            <th>Recursos da Plataforma</th>
+            <th class="col-sub">Plano Público Geral<br><span style="font-size:12px; font-weight:600;">(Assinatura Mensal)</span></th>
+            <th class="col-pro">Upgrade Vitalício<br><span style="font-size:12px; font-weight:800; color:#34d399;">(Exclusivo Pós-Compra)</span></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>+50 Mapas Visuais 3D (CH1–CH4)</strong></td>
+            <td><strong>Aplicação PWA ElectroMapas PRO</strong></td>
             <td class="col-center"><span class="check-green">✓</span></td>
-            <td class="col-pro"><span class="check-green">✓</span></td>
+            <td class="col-pro"><span class="check-green">✓</span> <strong>Incluído</strong></td>
           </tr>
           <tr>
-            <td><strong>Parâmetros no próprio mapa (EM 5s)</strong></td>
+            <td><strong>Modelos 3D de Precisão Anatómica</strong></td>
             <td class="col-center"><span class="check-green">✓</span></td>
-            <td class="col-pro"><span class="check-green">✓</span></td>
+            <td class="col-pro"><span class="check-green">✓</span> <strong>Incluído</strong></td>
           </tr>
           <tr>
-            <td><strong>Atalho 15 casos (bónus entrada)</strong></td>
+            <td><strong>Modo Marquesa Rápido (&lt; 2s)</strong></td>
             <td class="col-center"><span class="check-green">✓</span></td>
-            <td class="col-pro"><span class="check-green">✓</span></td>
-          </tr>
-          <tr>
-            <td><strong>Biblioteca clínica organizada</strong></td>
-            <td class="col-center"><span class="cross-gray">✕</span></td>
             <td class="col-pro"><span class="check-green">✓</span> <strong>Incluído</strong></td>
           </tr>
           <tr>
-            <td><strong>Tabela mestra / calculadora de parâmetros</strong></td>
-            <td class="col-center"><span class="cross-gray">✕</span></td>
+            <td><strong>Vídeos Práticos com Áudio em pt-PT</strong></td>
+            <td class="col-center"><span class="check-green">✓</span></td>
             <td class="col-pro"><span class="check-green">✓</span> <strong>Incluído</strong></td>
           </tr>
           <tr>
-            <td><strong>Segurança + protocolos (bónus)</strong></td>
-            <td class="col-center"><span class="cross-gray">✕</span></td>
+            <td><strong>Modo Offline (Sem Wi-Fi na Clínica)</strong></td>
+            <td class="col-center"><span class="check-green">✓</span></td>
             <td class="col-pro"><span class="check-green">✓</span> <strong>Incluído</strong></td>
           </tr>
           <tr>
-            <td><strong>Fichas de registo 60s (bónus)</strong></td>
-            <td class="col-center"><span class="cross-gray">✕</span></td>
+            <td><strong>Instalação em 2 Dispositivos (PC + Telemóvel)</strong></td>
+            <td class="col-center"><span class="check-green">✓</span></td>
             <td class="col-pro"><span class="check-green">✓</span> <strong>Incluído</strong></td>
           </tr>
           <tr>
-            <td><strong>25 testes · pranchas utente · US · Laser</strong></td>
-            <td class="col-center" colspan="2" style="text-align:center;color:var(--text-muted);font-size:13px;">
-              Não neste passo — vêm nos Upsells 2 e 3 (17,77 € / 14,77 €)
-            </td>
+            <td><strong>Modalidade de Cobrança</strong></td>
+            <td class="col-center" style="color:#f87171;">19,90 € / mês<br><small>(238,80 € / ano recorrente)</small></td>
+            <td class="col-pro" style="color:#34d399; font-size:15px;">PAGAMENTO ÚNICO VITALÍCIO<br><small style="color:#a7f3d0;">Zero mensalidades para sempre</small></td>
+          </tr>
+          <tr>
+            <td><strong>Abatimento do que pagaste hoje (9,97 €)</strong></td>
+            <td class="col-center"><span class="cross-gray">0,00 €</span></td>
+            <td class="col-pro" style="color:#34d399;"><strong>- 9,97 € (Abatido a 100%)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Subvenção / Bolsa Fundador</strong></td>
+            <td class="col-center"><span class="cross-gray">0,00 €</span></td>
+            <td class="col-pro" style="color:#67e8f9;"><strong>- 38,03 € (Desconto desta tela)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>VALOR TOTAL HOJE</strong></td>
+            <td class="col-center" style="font-weight:800; color:#f87171;">19,90 € / mês</td>
+            <td class="col-pro" style="font-size:18px; color:#00e5ff; font-weight:900;">49,00 € (PAGAMENTO ÚNICO)</td>
           </tr>
         </tbody>
       </table>
     </section>
 
-    <section class="decision-card">
-      <div class="decision-badge-top">UPSELL 1 DE 3 · CENTRAL CLÍNICA</div>
-      <h2>Adiciona a Central à mesma conta Hotmart</h2>
+    <!-- RECIBO FORMAL DE CRÉDITO ABATIDO & CHECKOUT -->
+    <section class="receipt-card">
+      <div class="receipt-badge-top">⭐ UPGRADE CLÍNICO VITALÍCIO · VAGA RESERVADA</div>
+      <h2>Ativa a tua Licença Vitalícia ElectroMapas PRO</h2>
       <p class="desc">
-        Um pagamento único. Sem mensalidade. Sem order bump no checkout anterior — só esta página pós-compra.
+        Aproveita o teu crédito de entrada. O valor de 9,97 € que acabaste de pagar é deduzido na íntegra da licença de software de 97,00 €.
       </p>
 
-      <div class="value-stack-box">
-        <div class="value-stack-row">
-          <span>Biblioteca clínica por região / corrente</span>
-          <span class="strike-val">29,00 €</span>
+      <!-- O RECIBO TÉCNICO -->
+      <div class="receipt-ledger">
+        <div class="receipt-row strike">
+          <span>Licença Vitalícia Oficial de Software (Tabela):</span>
+          <span>97,00 €</span>
         </div>
-        <div class="value-stack-row">
-          <span>Tabela mestra de parâmetros (calculadora)</span>
-          <span class="strike-val">19,00 €</span>
+        <div class="receipt-row credit">
+          <span>Crédito de Entrada (Pago Hoje no Pacote Base):</span>
+          <span>- 9,97 €</span>
         </div>
-        <div class="value-stack-row">
-          <span>Bónus: segurança + protocolos práticos</span>
-          <span class="strike-val">15,00 €</span>
+        <div class="receipt-row grant">
+          <span>Bolsa Fundador Exclusiva (Subvenção desta Sessão):</span>
+          <span>- 38,03 €</span>
         </div>
-        <div class="value-stack-row">
-          <span>Bónus: fichas de registo em 60s</span>
-          <span class="strike-val">12,00 €</span>
-        </div>
-        <div class="value-stack-row">
-          <span><strong>Valor de referência empilhado:</strong></span>
-          <span style="color:var(--text-main); font-weight:800;"><span class="strike-val">75,00 €</span></span>
+        <div class="receipt-row final">
+          <span>TOTAL FINAL A PAGAR HOJE (PAGAMENTO ÚNICO):</span>
+          <span style="color:#00e5ff; font-size:20px;">49,00 €</span>
         </div>
       </div>
 
-      <div class="price-display-box">
-        <div class="price-old">Hoje, só nesta sequência</div>
-        <div class="price-big">+ 27,77 €</div>
-        <div class="price-sub">Pagamento único · IVA incluído · Sem mensalidades</div>
+      <div class="consult-note">
+        💡 <b>Nota de Bom Senso Clínico:</b> Em Portugal, o valor médio de uma única consulta particular de fisioterapia situa-se entre os 40 € e os 60 €. O teu investimento no ElectroMapas PRO fica <b>100% pago logo no primeiro paciente de segunda-feira</b>.
       </div>
 
-      <div id="hotmart-fallback-container" style="margin-top: 10px; width: 100%;">
-        <a href="https://pay.hotmart.com/N108089769S?off=54lg83ib&checkoutMode=10&locale=pt_PT" class="btn-upsell-fallback js-u1-checkout" id="hotmart-upsell-btn" rel="noopener" data-value="27.77">
-          SIM, QUERO A CENTRAL CLÍNICA (+27,77 €) →
+      <div class="price-final-highlight">49,00 €</div>
+      <div class="price-sub-note">Pagamento Único · IVA Já Incluído · Sem Assinaturas ou Mensalidades</div>
+
+      <!-- BOTÃO PRINCIPAL DE COMPRA -->
+      <div style="margin-top: 14px;">
+        <a href="https://pay.hotmart.com/N108089769S?off=54lg83ib&checkoutMode=10&locale=pt_PT&sck=upsell_pika_49" class="btn-upsell-cta js-u1-checkout" id="btn-upsell-main" rel="noopener" data-value="49.00">
+          ⚡ SIM! QUERO ABATER OS MEUS 9,97 € E ATIVAR A LICENÇA PRO POR 49,00 € →
         </a>
       </div>
 
-      <div id="hotmart-sales-funnel" aria-hidden="true"></div>
-
-      <div class="upsell-trust-seals">
-        <span>Pagamento seguro Hotmart</span>
-        <span>Acesso vitalício imediato</span>
-        <span>Garantia 7 dias</span>
+      <!-- SELOS DE CONFIANÇA -->
+      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:18px; margin-top:18px; font-size:12.5px; font-weight:700; color:#94a3b8;">
+        <span>🔒 Pagamento Seguro Hotmart</span>
+        <span>⚡ MB WAY, Cartão e Multibanco</span>
+        <span>🛡️ 7 Dias de Garantia Total</span>
+        <span>📱 Ativação Instantânea no E-mail</span>
       </div>
 
-      <div class="refuse-wrap">
-        <a href="/downsell" class="upsell-refuse" id="hotmart-refuse-btn">
-          Não, obrigado — ver alternativa a 17,77 € (Manual Essencial).
+      <!-- BOTÃO DA VERGONHA / RECUSA COM DISSONÂNCIA COGNITIVA -->
+      <div class="refusal-box">
+        <a href="/entrega-completo.html" class="refusal-link" id="btn-refusal-link">
+          Não, obrigado. Eu prefiro continuar no Modo Manual, folheando 72 páginas de PDF e calculando os parâmetros sozinho na frente do paciente, e abro mão para sempre do meu crédito de 9,97 € na licença vitalícia.
         </a>
       </div>
     </section>
 
+    <!-- GARANTIA DE 7 DIAS HOTMART -->
     <section class="guarantee-box">
       <div class="guarantee-icon">🛡️</div>
       <div class="guarantee-text">
-        <h4>Garantia de 7 dias</h4>
+        <h4>Garantia Incondicional de 7 Dias Hotmart</h4>
         <p>
-          Usa a tabela mestra e as fichas nas próximas consultas. Se não acelerarem a tua decisão na marquesa,
-          pedes reembolso na Hotmart. Sem letra pequena inventada — o risco fica do nosso lado.
+          Instala a aplicação no teu telemóvel e utiliza-a nas tuas consultas desta semana ao lado da marquesa. Se sentires que não te poupou tempo precioso nem aumentou a tua segurança e autoridade clínica, basta enviares um clique na Hotmart e recebes 100% do teu dinheiro de volta. Sem perguntas nem burocracias.
         </p>
       </div>
     </section>
@@ -852,26 +1151,45 @@
   </main>
 
   <footer class="upsell-footer">
-    <p><strong>ElectroMapas Fisioterapia © 2026 · Todos os direitos reservados.</strong></p>
-    <p style="margin-top:4px;">Material de apoio para profissionais qualificados. Pagamento processado pela Hotmart. Sem order bump no checkout de entrada.</p>
+    <p><strong>ElectroMapas PRO © 2026 · Todos os direitos reservados.</strong></p>
+    <p style="margin-top:4px;">Ferramenta clínica de suporte à decisão para fisioterapeutas qualificados. Pagamento processado de forma 100% segura pela Hotmart.</p>
   </footer>
 
-  <div class="sticky-buy" role="region" aria-label="Compra rápida">
-    <a href="https://pay.hotmart.com/N108089769S?off=54lg83ib&checkoutMode=10&locale=pt_PT" class="btn-upsell-fallback js-u1-checkout" rel="noopener" data-value="27.77">
-      CENTRAL CLÍNICA (+27,77 €) →
-    </a>
-  </div>
-
-  <!-- HOTMART - Sales Funnel Widget (opcional; botão principal permanece sempre visível) -->
-  <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+  <!-- SCRIPT DO TEMPORIZADOR MB WAY REGRESSIVO -->
   <script>
-    try {
-      if (typeof checkoutElements !== 'undefined') {
-        checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+    (function() {
+      var duration = 180; // 3 minutos em segundos
+      var timerDisplay = document.getElementById('mbway-countdown');
+      
+      var savedEndTime = sessionStorage.getItem('upsell_timer_end');
+      var now = Math.floor(Date.now() / 1000);
+      
+      if (!savedEndTime) {
+        savedEndTime = now + duration;
+        sessionStorage.setItem('upsell_timer_end', savedEndTime);
       }
-    } catch (e) {
-      console.log('Hotmart salesFunnel widget skipped:', e);
-    }
+      
+      function updateTimer() {
+        var currentNow = Math.floor(Date.now() / 1000);
+        var remaining = savedEndTime - currentNow;
+        
+        if (remaining <= 0) {
+          timerDisplay.textContent = "00:00";
+          timerDisplay.style.background = "#dc2626";
+          return;
+        }
+        
+        var minutes = Math.floor(remaining / 60);
+        var seconds = remaining % 60;
+        
+        timerDisplay.textContent = 
+          (minutes < 10 ? "0" + minutes : minutes) + ":" + 
+          (seconds < 10 ? "0" + seconds : seconds);
+      }
+      
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    })();
   </script>
 
 </body>
