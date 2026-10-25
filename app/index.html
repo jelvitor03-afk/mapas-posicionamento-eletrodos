@@ -136,22 +136,22 @@
       </div>
 
       <!-- Navegação Limpa (5 Secções Principais) & Status de Licença -->
-      <div class="flex items-center gap-2 flex-wrap">
-        <nav class="flex items-center gap-1.5 text-xs font-bold flex-wrap">
-          <button onclick="switchViewSection('atlas')" id="btn-nav-atlas" class="nav-btn active px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950 transition flex items-center gap-1.5 shadow-md">
-            <span>🗺️</span> <span>Atlas & Colocação</span>
+      <div class="w-full lg:w-auto flex items-center justify-between gap-2 overflow-x-auto no-scrollbar py-0.5">
+        <nav class="flex items-center gap-1.5 text-xs font-bold overflow-x-auto no-scrollbar flex-nowrap lg:flex-wrap">
+          <button onclick="switchViewSection('atlas')" id="btn-nav-atlas" class="nav-btn active px-2.5 py-1.5 md:px-3 rounded-xl bg-cyan-500 text-slate-950 transition flex items-center gap-1.5 shadow-md flex-shrink-0 text-[11px] md:text-xs">
+            <span>🗺️</span> <span class="hidden sm:inline">Atlas & Colocação</span><span class="sm:hidden">Atlas</span>
           </button>
-          <button onclick="switchViewSection('protocols')" id="btn-nav-protocols" class="nav-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5">
-            <span>📚</span> <span>16 Protocolos</span>
+          <button onclick="switchViewSection('protocols')" id="btn-nav-protocols" class="nav-btn px-2.5 py-1.5 md:px-3 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5 flex-shrink-0 text-[11px] md:text-xs">
+            <span>📚</span> <span class="hidden sm:inline">16 Protocolos</span><span class="sm:hidden">Protocolos</span>
           </button>
-          <button onclick="switchViewSection('calculator')" id="btn-nav-calculator" class="nav-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5">
-            <span>🧮</span> <span>Calculadora mA/cm²</span>
+          <button onclick="switchViewSection('calculator')" id="btn-nav-calculator" class="nav-btn px-2.5 py-1.5 md:px-3 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5 flex-shrink-0 text-[11px] md:text-xs">
+            <span>🧮</span> <span class="hidden sm:inline">Calculadora mA/cm²</span><span class="sm:hidden">Calculadora</span>
           </button>
-          <button onclick="switchViewSection('safety')" id="btn-nav-safety" class="nav-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5">
-            <span>🛡️</span> <span>Lista de Cuidados</span>
+          <button onclick="switchViewSection('safety')" id="btn-nav-safety" class="nav-btn px-2.5 py-1.5 md:px-3 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5 flex-shrink-0 text-[11px] md:text-xs">
+            <span>🛡️</span> <span class="hidden sm:inline">Lista de Cuidados</span><span class="sm:hidden">Cuidados</span>
           </button>
-          <button onclick="switchViewSection('notes')" id="btn-nav-notes" class="nav-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5">
-            <span>📋</span> <span>Registo SOAP</span>
+          <button onclick="switchViewSection('notes')" id="btn-nav-notes" class="nav-btn px-2.5 py-1.5 md:px-3 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5 flex-shrink-0 text-[11px] md:text-xs">
+            <span>📋</span> <span class="hidden sm:inline">Registo SOAP</span><span class="sm:hidden">SOAP</span>
           </button>
         </nav>
         <div id="header-license-badge" class="flex-shrink-0"></div>
@@ -1125,7 +1125,10 @@
         <button type="button" onclick="submitLicenseCode()" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 hover:from-cyan-300 hover:to-emerald-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg transition">
           🔓 Ativar Licença e Desbloquear Tudo →
         </button>
-        <button type="button" onclick="activateDemoMode()" class="w-full py-2 rounded-xl bg-med-card border border-med-border text-cyan-300 hover:text-white text-xs font-semibold transition">
+        <button type="button" onclick="activateEvaluationAccess()" class="w-full py-2.5 px-3 rounded-xl bg-cyan-950/60 border border-cyan-400/50 hover:bg-cyan-900/60 text-cyan-200 text-xs font-bold transition flex items-center justify-center gap-1.5">
+          <span>⚡</span> <span>Ativar Avaliação Completa PRO (Teste de Fisioterapeuta)</span>
+        </button>
+        <button type="button" onclick="activateDemoMode()" class="w-full py-2 rounded-xl bg-med-card border border-med-border text-slate-400 hover:text-white text-xs font-semibold transition">
           Continuar no Modo de Demonstração (Módulo Joelho Grátis)
         </button>
       </div>
@@ -1443,14 +1446,14 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
     function switchViewSection(secId) {
       document.querySelectorAll('.main-section').forEach(s => s.classList.add('hidden'));
       document.querySelectorAll('.nav-btn').forEach(b => {
-        b.className = 'nav-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5';
+        b.className = 'nav-btn px-2.5 py-1.5 md:px-3 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white transition flex items-center gap-1.5 flex-shrink-0 text-[11px] md:text-xs';
       });
 
       const targetSec = document.getElementById('section-' + secId);
       const targetBtn = document.getElementById('btn-nav-' + secId);
       if (targetSec) targetSec.classList.remove('hidden');
       if (targetBtn) {
-        targetBtn.className = 'nav-btn active px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950 transition flex items-center gap-1.5 shadow-md';
+        targetBtn.className = 'nav-btn active px-2.5 py-1.5 md:px-3 rounded-xl bg-cyan-500 text-slate-950 transition flex items-center gap-1.5 shadow-md flex-shrink-0 text-[11px] md:text-xs';
       }
 
       if (secId === 'atlas') {
@@ -1588,6 +1591,55 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
     function closeLicenseModal() {
       const modal = document.getElementById('modal-license-gate');
       if (modal) modal.classList.add('hidden');
+    }
+
+    async function activateEvaluationAccess() {
+      const err = document.getElementById('license-error-msg');
+      if (err) {
+        err.textContent = '⏳ A gerar credencial de avaliação técnica no servidor...';
+        err.className = 'text-[11px] text-cyan-300 bg-cyan-950/40 border border-cyan-500/40 rounded-lg p-2 font-mono block';
+        err.classList.remove('hidden');
+      }
+
+      try {
+        const devId = getOrCreateDeviceId();
+        const res = await fetch('/api/verify-license', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'eval_demo', deviceId: devId })
+        });
+        const result = await res.json();
+        if (result.valid && result.sessionToken) {
+          localStorage.setItem('electromapas_pro_session', result.sessionToken);
+          localStorage.setItem('electromapas_buyer_name', result.buyer || 'Fisioterapeuta Avaliador');
+          localStorage.setItem('electromapas_pro_tx', result.transaction || 'EVAL-DEMO');
+          closeLicenseModal();
+          updateLicenseUI();
+          renderProtocolsList(currentFilter || 'all');
+          showToast('✓ Avaliação Completa PRO ativada! 8 módulos e 16 protocolos liberados.');
+          if (_pendingLicenseTarget) {
+            const tgt = _pendingLicenseTarget;
+            _pendingLicenseTarget = null;
+            if (tgt.startsWith('protocol-')) {
+              applyProtocolToAtlas(tgt.replace('protocol-', ''));
+            } else {
+              openModule(tgt);
+            }
+          }
+        } else {
+          if (err) {
+            err.textContent = result.message || 'Erro ao gerar acesso de avaliação.';
+            err.className = 'text-[11px] text-red-400 bg-red-950/40 border border-red-500/40 rounded-lg p-2 font-mono block';
+            err.classList.remove('hidden');
+          }
+        }
+      } catch(e) {
+        if (err) {
+          err.textContent = 'Erro de ligação ao servidor de verificação.';
+          err.className = 'text-[11px] text-red-400 bg-red-950/40 border border-red-500/40 rounded-lg p-2 font-mono block';
+          err.classList.remove('hidden');
+        }
+      }
     }
 
     function activateDemoMode() {
