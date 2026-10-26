@@ -1,5 +1,12 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/(upsell|upsell-.*|downsell|downsell-.*|upsell_kit_pro)",
+      "destination": "/entrega-completo",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     { "source": "/electromapas-pro-app", "destination": "/app/index.html" },
     { "source": "/electromapas-pro-app.html", "destination": "/app/index.html" },
@@ -11,7 +18,7 @@
   ],
   "headers": [
     {
-      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|upsell\\.html|upsell|upsell-2|upsell-3|upsell-4|downsell|entrega-completo|entrega-pro)",
+      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|entrega-completo)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
