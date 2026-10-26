@@ -127,17 +127,31 @@
         </div>
       </div>
 
-      <!-- CONTAINER DO WIDGET HOTMART (1-CLICK NATIVO SE DISPONÍVEL) -->
-      <div id="hotmart-sales-funnel"></div>
-      <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+      <!-- CONTAINER DO WIDGET HOTMART (1-CLICK NATIVO CONDICIONAL) -->
+      <div id="hotmart-funnel-container"></div>
       <script>
-        try {
-          if (window.checkoutElements) {
-            checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+        (function() {
+          const params = new URLSearchParams(window.location.search);
+          const hasFunnelParams = params.has('token') || params.has('funnel') || params.has('transaction') || params.has('order');
+          if (hasFunnelParams) {
+            const funnelDiv = document.createElement('div');
+            funnelDiv.id = 'hotmart-sales-funnel';
+            document.getElementById('hotmart-funnel-container').appendChild(funnelDiv);
+
+            const script = document.createElement('script');
+            script.src = 'https://checkout.hotmart.com/lib/hotmart-checkout-elements.js';
+            script.onload = function() {
+              try {
+                if (window.checkoutElements) {
+                  checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+                }
+              } catch(e) {
+                console.log('Hotmart widget init:', e);
+              }
+            };
+            document.body.appendChild(script);
           }
-        } catch(e) {
-          console.log('Hotmart widget init:', e);
-        }
+        })();
       </script>
 
       <!-- BOTÃO DE COMPRA DO UPSELL (LINK OFICIAL HOTMART FALLBACK DIRETO) -->
