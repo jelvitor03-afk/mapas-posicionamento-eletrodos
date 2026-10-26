@@ -2,12 +2,19 @@
   "cleanUrls": true,
   "redirects": [
     {
-      "source": "/(upsell|upsell-.*|downsell|downsell-.*|upsell_kit_pro)",
-      "destination": "/entrega-completo",
+      "source": "/(entrega-.*|area-membros.*)",
+      "destination": "/obrigado",
       "permanent": false
     }
   ],
   "rewrites": [
+    { "source": "/upsell", "destination": "/upsell.html" },
+    { "source": "/downsell", "destination": "/downsell.html" },
+    { "source": "/upsell-ultrassom", "destination": "/upsell-ultrassom.html" },
+    { "source": "/upsell-3", "destination": "/upsell-ultrassom.html" },
+    { "source": "/upsell-laser", "destination": "/upsell-laser.html" },
+    { "source": "/upsell-4", "destination": "/upsell-laser.html" },
+    { "source": "/obrigado", "destination": "/obrigado.html" },
     { "source": "/electromapas-pro-app", "destination": "/app/index.html" },
     { "source": "/electromapas-pro-app.html", "destination": "/app/index.html" },
     { "source": "/app", "destination": "/app/index.html" },
@@ -18,7 +25,7 @@
   ],
   "headers": [
     {
-      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|entrega-completo)",
+      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|obrigado|upsell|downsell|upsell-ultrassom|upsell-laser)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
