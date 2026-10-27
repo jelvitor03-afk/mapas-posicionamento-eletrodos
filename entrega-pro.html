@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Acesso Liberado — Pacote Completo (+58 Mapas Visuais · 9 ficheiros)</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=3"/>
+  <link rel="shortcut icon" href="./favicon.ico?v=3" type="image/x-icon"/>
+  <link rel="stylesheet" href="./assets/styles-MTGModV1.css"/>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1684602679908725');
+  fbq('track', 'PageView');
+  try {
+    // localStorage (not sessionStorage) so re-opening this page from the upsell download buttons never double-counts a Purchase.
+    if (!localStorage.getItem('pixel_purchase_completo')) {
+      fbq('track', 'Purchase', { value: 9.97, currency: 'EUR', content_name: 'Pacote Completo +58 Mapas + 9 ficheiros' });
+      localStorage.setItem('pixel_purchase_completo', '1');
+    }
+  } catch (e) {
+    // Storage blocked: skip the Purchase event rather than risk duplicates.
+  }
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1684602679908725&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <style>
+    body { background: var(--mint); color: var(--ink); font-family: Poppins, Arial, sans-serif; margin: 0; }
+    .delivery-wrap { max-width: 820px; margin: 0 auto; padding: 36px 18px 64px; }
+    .delivery-badge { display: inline-flex; align-items: center; gap: 8px; background: #0f9f76; color: #fff; font-weight: 800; font-size: 12.5px; padding: 6px 16px; border-radius: 999px; margin-bottom: 14px; }
+    .delivery-card { background: #fff; border: 2px solid var(--teal); border-radius: 24px; padding: 32px 24px; box-shadow: var(--best-shadow); text-align: center; }
+    .delivery-card h1 { font-size: 28px; line-height: 1.2; margin: 0 0 10px; color: var(--ink); }
+    .delivery-card p.sub { color: var(--muted); font-size: 15px; max-width: 580px; margin: 0 auto 22px; }
+    .delivery-preview { max-width: 220px; margin: 0 auto 20px; display: block; border-radius: 12px; }
+    .download-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--teal); color: #fff; font-weight: 800; font-size: 16px; padding: 18px 28px; border-radius: 14px; text-decoration: none; width: 100%; max-width: 520px; box-shadow: 0 10px 24px rgba(16, 163, 127, 0.32); transition: transform 0.15s ease; box-sizing: border-box; }
+    .download-btn:hover { transform: translateY(-2px); }
+    .download-zip-btn { background: linear-gradient(135deg, #059669 0%, #047857 100%); font-size: 17px; padding: 20px 28px; box-shadow: 0 12px 28px rgba(5, 150, 105, 0.38); }
+    .items-download-wrap { margin-top: 30px; text-align: left; }
+    .items-download-title { font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 14px; text-align: center; }
+    .item-file-row { background: var(--mint); border: 1.5px solid var(--mint-2); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; transition: border-color 0.15s ease; }
+    .item-file-row:hover { border-color: var(--teal); background: #f0fdf9; }
+    .item-file-info { flex: 1; }
+    .item-file-tag { font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--teal-dark); letter-spacing: 0.5px; margin-bottom: 3px; display: inline-block; background: rgba(15, 159, 118, 0.12); padding: 2px 8px; border-radius: 4px; }
+    .item-file-name { font-size: 15px; font-weight: 800; color: var(--ink); margin: 2px 0 4px; }
+    .item-file-desc { font-size: 12.5px; color: var(--muted); line-height: 1.4; margin: 0; }
+    .item-file-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: var(--teal); color: #fff; font-weight: 700; font-size: 13.5px; padding: 10px 18px; border-radius: 8px; text-decoration: none; white-space: nowrap; flex-shrink: 0; box-shadow: 0 4px 12px rgba(16, 163, 127, 0.25); }
+    .item-file-btn:hover { background: var(--teal-dark); }
+    @media (max-width: 640px) {
+      .item-file-row { flex-direction: column; align-items: stretch; text-align: left; }
+      .item-file-btn { width: 100%; box-sizing: border-box; }
+    }
+    .secondary-btn { display: inline-block; margin-top: 14px; color: var(--teal-dark); font-size: 13.5px; font-weight: 700; text-decoration: underline; }
+    .included-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; text-align: left; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--mint-2); }
+    .inc-item { background: var(--mint); border-radius: 12px; padding: 12px 14px; font-size: 13px; font-weight: 600; display: flex; align-items: flex-start; gap: 10px; }
+    .inc-item span { background: var(--teal); color: #fff; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 1px; }
+    .tips-box { background: #fff; border: 1px solid var(--mint-2); border-radius: 18px; padding: 22px; margin-top: 22px; text-align: left; }
+    .tips-box h3 { font-size: 16px; margin: 0 0 10px; color: var(--teal-dark); }
+    .tips-box ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div class="delivery-wrap">
+    <div class="delivery-card">
+      <div class="delivery-badge">✓ COMPRA CONFIRMADA · ACESSO VITALÍCIO</div>
+      <h1>O teu Pacote Completo está pronto!</h1>
+      <p class="sub">Já podes descarregar os <b>9 ficheiros</b>: o Atlas com <b>+58 Mapas Visuais de Posicionamento de Elétrodos</b>, os <b>5 Bónus</b> e os <b>3 Guias Extra</b>.</p>
+      <img class="delivery-preview" src="./__l5e/assets-v1/ac0d59f3-5607-485d-be0e-3c7cf30f847d/full-512.webp" alt="Pacote Completo +58 Mapas + 5 Bónus + 3 Guias Extra"/>
+            <div style="margin-bottom: 24px;">
+        <a class="download-btn download-zip-btn" href="/entregaveis/ElectroMapas_PACOTE_COMPLETO_COM_TODOS_OS_BONUS.zip" download="ElectroMapas_PACOTE_COMPLETO_COM_TODOS_OS_BONUS.zip">
+          📦 Descarregar Coleção Completa (ZIP com os 9 Ficheiros · 8.4 MB)
+        </a>
+        <div style="font-size: 12px; color: var(--muted); margin-top: 6px;">
+          Inclui o Atlas + 5 Bónus + 3 Guias Extra (Ultrassom · Laser · Testes Ortopédicos) em PDF
+        </div>
+      </div>
+
+      <div class="items-download-wrap">
+        <div class="items-download-title">📁 Ou Descarrega Cada Ficheiro Individualmente:</div>
+
+        <!-- ITEM 1: ATLAS MESTRE -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag">PRODUTO PRINCIPAL · 76 PÁGINAS</span>
+            <div class="item-file-name">🗺️ Master Atlas ElectroMapas (+58 Mapas Visuais 3D)</div>
+            <p class="item-file-desc">Posicionamento anatómico ilustrado para as 8 regiões corporais, identificação de canais CH1 a CH4 por cor e alta definição.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" download="01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf">
+            ⬇ Baixar PDF (8.3 MB)
+          </a>
+        </div>
+
+        <!-- ITEM 2: BONUS 1 -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag">BÓNUS 1 · DOSIMETRIA DIRETA</span>
+            <div class="item-file-name">⚡ Guia Rápido de Parâmetros Clínicos (Hz, µs e Tempo)</div>
+            <p class="item-file-desc">Tabela mestra com dosimetria pronta para TENS (80-120 Hz / 100-200 µs), NMES (30-50 Hz), FES, Russa e Aussie sem cálculo manual.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/02_Bonus_1_Guia_Rapido_de_Parametros.pdf" download="02_Bonus_1_Guia_Rapido_de_Parametros.pdf">
+            ⬇ Baixar PDF (48 KB)
+          </a>
+        </div>
+
+        <!-- ITEM 3: BONUS 2 -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag">BÓNUS 2 · SEGURANÇA CLÍNICA</span>
+            <div class="item-file-name">🛡️ Checklist de Segurança e Contraindicações</div>
+            <p class="item-file-desc">Protocolo de triagem em 15 segundos, contraindicações absolutas (pacemakers, seio carotídeo, gravidez) e bandeiras vermelhas.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/03_Bonus_2_Checklist_Seguranca_e_Contraindicacoes.pdf" download="03_Bonus_2_Checklist_Seguranca_e_Contraindicacoes.pdf">
+            ⬇ Baixar PDF (54 KB)
+          </a>
+        </div>
+
+        <!-- ITEM 4: BONUS 3 -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag">BÓNUS 3 · CONDUTA TERAPÊUTICA</span>
+            <div class="item-file-name">🎯 Protocolos por Objetivo Terapêutico</div>
+            <p class="item-file-desc">Janela analgésica de 15 min, analgesia com TENS combinada à terapia manual e recrutamento motor NMES sobreposto ao exercício.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/04_Bonus_3_Protocolos_por_Objetivo_Terapeutico.pdf" download="04_Bonus_3_Protocolos_por_Objetivo_Terapeutico.pdf">
+            ⬇ Baixar PDF (48 KB)
+          </a>
+        </div>
+
+        <!-- ITEM 5: BONUS 4 -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag">BÓNUS 4 · DOCUMENTAÇÃO & SOAP</span>
+            <div class="item-file-name">📝 Ficha de Evolução do Utente & Planeamento</div>
+            <p class="item-file-desc">Ficha de registo em 60 segundos, modelo de avaliação fisioterapêutica imprimível e registo de acompanhamento para 5 sessões.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/05_Bonus_4_Ficha_de_Evolucao_do_Paciente.pdf" download="05_Bonus_4_Ficha_de_Evolucao_do_Paciente.pdf">
+            ⬇ Baixar PDF (110 KB)
+          </a>
+        </div>
+
+        <!-- ITEM 6: BONUS EXTRA -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag" style="background: rgba(245, 158, 11, 0.15); color: #b45309;">BÓNUS EXTRA · ATALHO DE GABINETE</span>
+            <div class="item-file-name">📑 Pocket Card: Atalho Clínico dos 15 Casos Mais Comuns</div>
+            <p class="item-file-desc">Pranchas clínicas de consulta ultra-rápida de 2 páginas (Lombalgia, Ciatalgia, Cervicalgia, Coifa, Entorse, Pós-op, etc.).</p>
+          </div>
+          <a class="item-file-btn" style="background: #0d9488;" href="/entregaveis/06_Bonus_Especial_Pocket_Card_15_Casos_Clinicos.pdf" download="06_Bonus_Especial_Pocket_Card_15_Casos_Clinicos.pdf">
+            ⬇ Baixar PDF (172 KB)
+          </a>
+        </div>
+
+        <!-- ITEM 7: ULTRASOUND GUIDE (part of the 9-file Complete Pack) -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag">GUIA EXTRA 1 · ULTRASSOM</span>
+            <div class="item-file-name">🔊 Guia Visual de Ultrassom &amp; Terapia Combinada</div>
+            <p class="item-file-desc">1 MHz vs 3 MHz, ciclo de trabalho e protocolos de terapia combinada com corrente.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/Guia_Ultrassom_e_Terapia_Combinada_Fisioterapia.pdf" download="07_Guia_Ultrassom_e_Terapia_Combinada.pdf">
+            ⬇ Baixar PDF (119 KB)
+          </a>
+        </div>
+
+        <!-- ITEM 8: LASER MANUAL -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag">GUIA EXTRA 2 · LASER &amp; LED</span>
+            <div class="item-file-name">🔴 Manual Prático de Laserterapia &amp; LED</div>
+            <p class="item-file-desc">Dosimetria em Joules por patologia, vermelho vs infravermelho e segurança ocular.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/Manual_Laserterapia_LED_Fotobiomodulacao_Fisioterapia.pdf" download="08_Manual_Laserterapia_e_LED.pdf">
+            ⬇ Baixar PDF (118 KB)
+          </a>
+        </div>
+
+        <!-- ITEM 9: ORTHOPAEDIC TESTS KIT -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag">GUIA EXTRA 3 · AVALIAÇÃO</span>
+            <div class="item-file-name">🦴 Kit de Testes Ortopédicos &amp; Fichas de Avaliação</div>
+            <p class="item-file-desc">Testes ortopédicos por região com fichas de avaliação imprimíveis.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/Kit_Clinico_Pro_Testes_Ortopedicos_e_Fichas_Avaliacao.pdf" download="09_Kit_Testes_Ortopedicos_e_Fichas_Avaliacao.pdf">
+            ⬇ Baixar PDF (124 KB)
+          </a>
+        </div>
+      </div>
+
+      <a class="secondary-btn" href="/entregaveis/01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" target="_blank" rel="noopener">
+        Abrir Atlas Principal no navegador agora →
+      </a>
+
+      <!-- UPGRADES OPCIONAIS ADQUIRIDOS NO FUNIL -->
+      <div class="items-download-wrap" style="margin-top: 28px; padding-top: 22px; border-top: 2px dashed rgba(15, 159, 118, 0.25);">
+        <div class="items-download-title">🚀 Adquiriste também algum Upgrade Especial?</div>
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag" style="background: rgba(56, 189, 248, 0.16); color: #0369a1;">UPGRADE 1 · WEB APP &amp; PWA</span>
+            <div class="item-file-name">📱 App ElectroMapas PRO (58 Mapas + Calculadora de Dosimetria)</div>
+            <p class="item-file-desc">Abre a App no navegador ou instala no telemóvel e ativa com o código HP da tua compra Hotmart.</p>
+          </div>
+          <a class="item-file-btn" style="background: #0284c7;" href="/app/index.html">
+            Abrir App PRO →
+          </a>
+        </div>
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag" style="background: rgba(56, 189, 248, 0.16); color: #0369a1;">UPGRADE 2 · 25 PÁGINAS</span>
+            <div class="item-file-name">🧠 Casos Clínicos de Eletroterapia — 20 Raciocínios Resolvidos</div>
+            <p class="item-file-desc">Árvore de decisão clínica, 20 quadros reais com conduta passo a passo, progressão em 3 fases e erros fatais.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/Casos_Clinicos_Eletroterapia_20_Raciocinios.pdf" download="Casos_Clinicos_Eletroterapia_20_Raciocinios.pdf">
+            ⬇ Baixar PDF (235 KB)
+          </a>
+        </div>
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag" style="background: rgba(16, 185, 129, 0.16); color: #047857;">UPGRADE 3 · 15 PÁGINAS EDITÁVEIS</span>
+            <div class="item-file-name">💬 Kit de Comunicação &amp; Retenção do Utente</div>
+            <p class="item-file-desc">Scripts de 30s, Consentimento Informado preenchível, Plano de Tratamento, Reação Normal vs Alerta e Adesão ao Plano.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/Kit_Comunicacao_Retencao_Utente.pdf" download="Kit_Comunicacao_Retencao_Utente.pdf">
+            ⬇ Baixar PDF (248 KB)
+          </a>
+        </div>
+      </div>
+
+      <!-- ACESSO DIRETO AO PORTAL INTERATIVO & MÓDULO DE VÍDEOS -->
+      <div style="margin: 24px auto 0; max-width: 520px; background: linear-gradient(135deg, #092635 0%, #061822 100%); border: 2px solid #00e5ff; border-radius: 16px; padding: 20px; box-shadow: 0 10px 28px rgba(0, 229, 255, 0.2); text-align: center;">
+        <div style="display: inline-block; background: #00e5ff; color: #04141e; font-size: 11px; font-weight: 900; padding: 3px 10px; border-radius: 6px; text-transform: uppercase; margin-bottom: 8px;">
+          NOVO · PLATAFORMA CLÍNICA FISIOVANTA
+        </div>
+        <h3 style="color: #ffffff; font-size: 17px; font-weight: 800; margin: 0 0 6px;">
+          Aceder à Área de Membros com Vídeos Práticos
+        </h3>
+        <p style="color: #94a3b8; font-size: 13px; margin: 0 0 14px; line-height: 1.45;">
+          Consulta os mapas digitais e assiste às demonstrações de marquesa da Axelgaard dobradas em Português de Portugal.
+        </p>
+        <a href="./area-membros.html" style="display: block; width: 100%; background: #00e5ff; color: #04141e; font-weight: 800; font-size: 15px; padding: 14px 18px; border-radius: 10px; text-decoration: none; text-align: center; box-shadow: 0 4px 14px rgba(0, 229, 255, 0.35);">
+          ENTRAR NO PORTAL DO FISIOTERAPEUTA →
+        </a>
+      </div>
+
+      
+      </div>
+    </div>
+
+    <div class="tips-box">
+      <h3>💡 Como aproveitar ao máximo os teus Mapas Visuais:</h3>
+      <ul>
+        <li><b>No Telemóvel ou Tablet:</b> Guarda o ficheiro PDF nos teus Favoritos / Ficheiros para consulta rápida em segundos ao lado do utente.</li>
+        <li><b>Formato de Alta Definição:</b> O PDF oficial está otimizado para abertura imediata no telemóvel, iPad/tablet ou computador para ampliar qualquer ponto motor com nitidez cirúrgica.</li>
+        <li><b>Guarda este link:</b> O teu acesso é vitalício. Podes voltar a esta página sempre que precisares descarregar novamente.</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
