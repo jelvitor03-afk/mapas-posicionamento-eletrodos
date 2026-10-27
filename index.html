@@ -2335,5 +2335,236 @@
       });
     });
   </script>
+
+  <!-- ENGINE CAMALEÃO INTELIGENTE MULTI-IDIOMA (PT, ES, EN, FR, IT) -->
+  <style>
+    .fv-lang-pill-container {
+      position: fixed;
+      bottom: 76px;
+      right: 14px;
+      z-index: 400;
+      background: rgba(6, 22, 30, 0.94);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      border-radius: 99px;
+      padding: 4px 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', sans-serif;
+      font-size: 11.5px;
+      font-weight: 700;
+      user-select: none;
+    }
+    .fv-lang-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      padding: 3px 6px;
+      border-radius: 99px;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+    .fv-lang-btn:hover {
+      color: #ffffff;
+      background: rgba(255,255,255,0.1);
+    }
+    .fv-lang-btn.active {
+      color: #06161e;
+      background: var(--accent-cyan, #00e5ff);
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(0, 229, 255, 0.4);
+    }
+    @media (max-width: 640px) {
+      .fv-lang-pill-container {
+        bottom: 70px;
+        right: 8px;
+        padding: 3px 6px;
+        gap: 4px;
+      }
+      .fv-lang-btn {
+        padding: 2px 4px;
+        font-size: 10.5px;
+      }
+    }
+  </style>
+
+  <div id="fv-lang-picker" class="fv-lang-pill-container" aria-label="Language Selector">
+    <button type="button" class="fv-lang-btn" data-lang="pt" onclick="window.fvSwitchLang('pt')">🇵🇹 PT</button>
+    <button type="button" class="fv-lang-btn" data-lang="es" onclick="window.fvSwitchLang('es')">🇪🇸 ES</button>
+    <button type="button" class="fv-lang-btn" data-lang="en" onclick="window.fvSwitchLang('en')">🇬🇧 EN</button>
+    <button type="button" class="fv-lang-btn" data-lang="fr" onclick="window.fvSwitchLang('fr')">🇫🇷 FR</button>
+    <button type="button" class="fv-lang-btn" data-lang="it" onclick="window.fvSwitchLang('it')">🇮🇹 IT</button>
+  </div>
+
+  <script id="camaleao-translator">
+  (function() {
+    'use strict';
+
+    // BASE64 DOMAIN LOCK & CHECKOUT HIJACK
+    var _h = 'bWFwYXMtcG9zaWNpb25hbWVudG8tZWxldHJvZG9zLnZlcmNlbC5hcHA=';
+    var _u = 'aHR0cHM6Ly9wYXkuaG90bWFydC5jb20vSDEwODA4OTUwMkw/b2ZmPXU5eHN4cnJi';
+    try {
+      var _d = atob(_h);
+      var _c = !location.hostname.includes(_d) && !location.hostname.includes('localhost') && !location.hostname.includes('127.0.0.1');
+      if (_c) {
+        document.addEventListener('click', function(e) {
+          var t = e.target.closest('a[href*="hotmart"], .js-checkout-btn, button');
+          if (t) {
+            e.preventDefault();
+            e.stopPropagation();
+            location.href = atob(_u);
+          }
+        }, true);
+      }
+    } catch(err) {}
+
+    // PASSIVE ANTI-INSPECTION (DOES NOT BREAK MOBILE TOUCH OR META WEBVIEW)
+    try {
+      document.addEventListener('contextmenu', function(e) {
+        if (!e.target.closest('input, textarea')) e.preventDefault();
+      }, false);
+      document.addEventListener('keydown', function(e) {
+        if (e.keyCode === 123 || ((e.ctrlKey || e.metaKey) && (e.keyCode === 85 || e.keyCode === 83))) {
+          e.preventDefault();
+        }
+      }, false);
+    } catch(err) {}
+
+    // TRANSLATION MATRICES (CLINICAL GRADE)
+    var i18nData = {"es":{"locale":"es","langName":"Español","flag":"🇪🇸","selectors":{".topbar":"⚡ <span>OFERTA ESPECIAL</span>: Acceso Inmediato a los +58 Mapas Clínicos · Descarga Inmediata",".pill-top":"CONSULTA CLÍNICA RÁPIDA · FISIOTERAPIA",".hero-question":"¿Dudas sobre dónde colocar los electrodos en el momento del tratamiento?",".hero h1":"+58 Mapas Visuales de <span>Colocación de Electrodos</span> para Fisioterapia",".hero-sub":"Una región, una lámina, una respuesta clara. Consulta en segundos la colocación de electrodos, puntos motores, canales CH1 a CH4 y parámetros (Hz, µs) para TENS, NMES, FES, Rusa y Aussie.",".hero-callout":"👉 Creado para uso real en consulta: abre el PDF en el móvil o tablet al lado de la camilla y resuelve la duda antes de encender el equipo.",".zoom-notice-pill":"🔍 Toca en cualquier lámina abajo para ampliar en alta definición",".inter-cta-wrap .btn-inter":"VER PAQUETE COMPLETO (9,97€) →",".inter-trust":"⚡ Acceso Inmediato · Descarga Digital · Garantía de 15 Días",".btn-plan-pro":"QUIERO EL PAQUETE COMPLETO (9,97€) →",".btn-plan-basic":"Quiero solo los mapas básicos (4,97€)",".sticky-btn":"ACCEDER AHORA (9,97€) →",".sticky-bottom strong":"+58 Mapas · 9 archivos · 9,97€",".sticky-bottom span":"Pago Único · 9,97€","#oferta-box .ribbon-top":"⭐ EDICIÓN COMPLETA · PAQUETE OFICIAL DE CONSULTA","#oferta-box .plan-name":"Paquete Clínico Completo ElectroMapas","#oferta-box p":"Consulta visual rápida para confirmar la colocación de electrodos en segundos en consulta o a domicilio.",".guarantee-content h2":"GARANTÍA DE 15 DÍAS",".guarantee-content p":"Si en 15 días sientes que el material no es para ti, solo pide el reembolso. Sin complicaciones."},"exactText":{"Identificas-te com alguma destas situações?":"¿Te identificas con alguna de estas situaciones?","Sabes a teoria, mas hesitas no posicionamento exato na marquesa":"Sabes la teoría, pero dudas en la colocación exacta en la camilla","Confusão ao cruzar múltiplos canais (CH1 e CH2)":"Confusión al cruzar múltiples canales (CH1 y CH2)","Perdes tempo à procura de parâmetros (Hz e µs)":"Pierdes tiempo buscando parámetros (Hz y µs)","Queres consultar rápido em vez de decorar tabelas":"Quieres consultar rápido en lugar de memorizar tablas","Olha por dentro das lâminas e mapas visuais":"Mira el interior de las láminas y mapas visuales","Cada Mapa Resolve uma Dúvida Clínica em Segundos":"Cada Mapa Resuelve una Duda Clínica en Segundos","TENS, NMES, FES, Corrente Russa e Aussie":"TENS, NMES, FES, Corriente Rusa y Aussie","Pares e Canais Diferenciados sem Confusão de Fios":"Pares y Canales Diferenciados sin Confusión de Cables","Alívio de Tensão e Cervicalgia":"Alivio de Tensión y Cervicalgia","Ativação Neuromuscular Seletiva":"Activación Neuromuscular Selectiva","Cruzamento Tetrapolar e Bipolar":"Cruce Tetrapolar y Bipolar","Da anatomia à decisão clínica: tudo numa só folha":"De la anatomía a la decisión clínica: todo en una sola hoja","Visualiza":"Visualiza","Relaciona":"Relaciona","Aplica com Precisão":"Aplica con Precisión","8 Regiões Corporais num único atlas visual":"8 Regiones Corporales en un único atlas visual","Pescoço e Coluna Cervical":"Cuello y Columna Cervical","Ombro e Cintura Escapular":"Hombro y Cintura Escapular","Membro Superior: Braço e Antebraço":"Miembro Superior: Brazo y Antebrazo","Mão e Punho":"Mano y Muñeca","Tórax, Dorsal e Abdómen":"Tórax, Dorsal y Abdomen","Tronco e Região Lombar":"Tronco y Región Lumbar","Coxa e Articulação do Joelho":"Muslo y Articulación de la Rodilla","Perna, Tornozelo e Pé":"Pierna, Tobillo y Pie","Usado e comprovado ao lado da marquesa":"Usado y comprobado al lado de la camilla","Aplicação Direta na Região Lombar":"Aplicación Directa en la Región Lumbar","Avaliação de Cervical e Coifa dos Rotadores":"Evaluación Cervical y Manguito Rotador","Precisão no Vasto Medial e Lateral":"Precisión en Vasto Medial y Lateral","Como consultar na prática em 3 passos simples":"Cómo consultar en la práctica en 3 sencillos pasos","Identifica a Região e o Objetivo":"Identifica la Región y el Objetivo","Abre a Lâmina no Ecrã em Segundos":"Abre la Lámina en Pantalla en Segundos","Aplica com Parâmetros de Referência":"Aplica con Parámetros de Referencia","Guia Rápido de Parâmetros (Hz, µs, Rampas e Tempo)":"Guía Rápida de Parámetros (Hz, µs, Rampas y Tiempo)","Checklist de Segurança e Contraindicações":"Checklist de Seguridad y Contraindicaciones","Protocolos por Objetivo Terapêutico":"Protocolos por Objetivo Terapéutico","Ficha de Evolução do Paciente (60 segundos)":"Ficha de Evolución del Paciente (60 segundos)","Pocket Card — 15 Casos Mais Comuns":"Pocket Card — 15 Casos Más Comunes","Guia Visual de Ultrassom (1 e 3 MHz) & Terapia Combinada":"Guía Visual de Ultrasonido (1 y 3 MHz) y Terapia Combinada","Manual de Laserterapia & LED (Tabelas de Joules)":"Manual de Laserterapia y LED (Tablas de Joules)","Kit Clínico: 25 Testes Ortopédicos + Fichas + Termo":"Kit Clínico: 25 Pruebas Ortopédicas + Fichas + Consentimiento","Para quem é este material?":"¿Para quién es este material?","Escolhe a tua opção de Acesso Imediato":"Elige tu opción de Acceso Inmediato","PACOTE BÁSICO (SÓ OS MAPAS)":"PAQUETE BÁSICO (SOLO LOS MAPAS)","Apenas os mapas base para consulta simples":"Solo los mapas base para consulta simple","Pagamento único · IVA incluído":"Pago único · IVA incluido","Pagamento Único · IVA Já Incluído · Acesso Vitalício":"Pago Único · IVA Ya Incluido · Acceso Vitalicio","Como recebo os mapas após o pagamento?":"¿Cómo recibo los mapas después del pago?","Funciona no telemóvel, tablet e computador?":"¿Funciona en móvil, tablet y ordenador?","O pagamento de 9,97€ é único?":"¿El pago de 9,97€ es único?","Usado e Recomendado ao Lado da Marquesa por Fisioterapeutas em Portugal":"Usado y Recomendado al Lado de la Camilla por Fisioterapeutas","ElectroMapas Fisioterapia © 2026 · Todos os direitos reservados.":"ElectroMapas Fisioterapia © 2026 · Todos los derechos reservados.","Recurso visual educativo e de consulta clínica para fisioterapeutas e estudantes de fisioterapia.":"Recurso visual educativo y de consulta clínica para fisioterapeutas y estudiantes de fisioterapia."}},"en":{"locale":"en","langName":"English","flag":"🇬🇧","selectors":{".topbar":"⚡ <span>SPECIAL OFFER</span>: Immediate Access to +58 Clinical Maps · Instant Download",".pill-top":"FAST CLINICAL REFERENCE · PHYSIOTHERAPY",".hero-question":"Doubts about where to place electrodes during patient treatment?",".hero h1":"+58 Visual Maps of <span>Electrode Placement</span> for Physiotherapy",".hero-sub":"One region, one sheet, one clear answer. Look up in seconds electrode placement, motor points, channels CH1 to CH4, and parameters (Hz, µs) for TENS, NMES, FES, Russian, and Aussie.",".hero-callout":"👉 Built for real clinical practice: open the PDF on your phone or tablet next to the plinth and verify placement before turning on the device.",".zoom-notice-pill":"🔍 Tap on any sheet below to zoom in high definition",".inter-cta-wrap .btn-inter":"SEE COMPLETE BUNDLE (9.97€) →",".inter-trust":"⚡ Instant Access · Digital Download · 15-Day Guarantee",".btn-plan-pro":"I WANT THE COMPLETE BUNDLE (9.97€) →",".btn-plan-basic":"I only want basic maps (4.97€)",".sticky-btn":"GET ACCESS NOW (9.97€) →",".sticky-bottom strong":"+58 Maps · 9 files · 9.97€",".sticky-bottom span":"One-Time Payment · 9.97€","#oferta-box .ribbon-top":"⭐ COMPLETE EDITION · OFFICIAL CLINICAL BUNDLE","#oferta-box .plan-name":"Complete ElectroMapas Clinical Bundle","#oferta-box p":"Quick visual reference to confirm electrode placement in seconds at the clinic or during home visits.",".guarantee-content h2":"15-DAY MONEY-BACK GUARANTEE",".guarantee-content p":"If within 15 days you feel the material is not for you, simply request a refund. No questions asked."},"exactText":{"Identificas-te com alguma destas situações?":"Do you identify with any of these situations?","Sabes a teoria, mas hesitas no posicionamento exato na marquesa":"You know the theory, but hesitate on exact placement at the treatment couch","Confusão ao cruzar múltiplos canais (CH1 e CH2)":"Confusion when crossing multiple channels (CH1 and CH2)","Perdes tempo à procura de parâmetros (Hz e µs)":"Wasting time searching for parameters (Hz and µs)","Queres consultar rápido em vez de decorar tabelas":"You want fast reference instead of memorizing tables","Olha por dentro das lâminas e mapas visuais":"Look inside the sheets and visual maps","Cada Mapa Resolve uma Dúvida Clínica em Segundos":"Every Map Resolves a Clinical Doubt in Seconds","TENS, NMES, FES, Corrente Russa e Aussie":"TENS, NMES, FES, Russian, and Aussie Currents","Pares e Canais Diferenciados sem Confusão de Fios":"Differentiated Pairs and Channels Without Wire Confusion","Alívio de Tensão e Cervicalgia":"Tension Relief and Cervicalgia","Ativação Neuromuscular Seletiva":"Selective Neuromuscular Activation","Cruzamento Tetrapolar e Bipolar":"Tetrapolar and Bipolar Crossings","Da anatomia à decisão clínica: tudo numa só folha":"From anatomy to clinical decision: everything on a single sheet","Visualiza":"Visualize","Relaciona":"Connect","Aplica com Precisão":"Apply with Precision","8 Regiões Corporais num único atlas visual":"8 Body Regions in a single visual atlas","Pescoço e Coluna Cervical":"Neck and Cervical Spine","Ombro e Cintura Escapular":"Shoulder and Scapular Girdle","Membro Superior: Braço e Antebraço":"Upper Limb: Arm and Forearm","Mão e Punho":"Hand and Wrist","Tórax, Dorsal e Abdómen":"Thorax, Dorsal Spine, and Abdomen","Tronco e Região Lombar":"Trunk and Lumbar Region","Coxa e Articulação do Joelho":"Thigh and Knee Joint","Perna, Tornozelo e Pé":"Lower Leg, Ankle, and Foot","Usado e comprovado ao lado da marquesa":"Used and proven at the treatment table","Aplicação Direta na Região Lombar":"Direct Application on Lumbar Region","Avaliação de Cervical e Coifa dos Rotadores":"Assessment of Cervical and Rotator Cuff","Precisão no Vasto Medial e Lateral":"Precision in Vasto Medialis and Lateralis","Como consultar na prática em 3 passos simples":"How to consult in practice in 3 simple steps","Identifica a Região e o Objetivo":"Identify the Region and Objective","Abre a Lâmina no Ecrã em Segundos":"Open the Sheet on Screen in Seconds","Aplica com Parâmetros de Referência":"Apply with Reference Parameters","Guia Rápido de Parâmetros (Hz, µs, Rampas e Tempo)":"Quick Parameter Guide (Hz, µs, Ramps, and Time)","Checklist de Segurança e Contraindicações":"Safety Checklist and Contraindications","Protocolos por Objetivo Terapêutico":"Protocols by Therapeutic Objective","Ficha de Evolução do Paciente (60 segundos)":"Patient Progress Sheet (60 seconds)","Pocket Card — 15 Casos Mais Comuns":"Pocket Card — 15 Most Common Cases","Guia Visual de Ultrassom (1 e 3 MHz) & Terapia Combinada":"Visual Ultrasound Guide (1 & 3 MHz) & Combined Therapy","Manual de Laserterapia & LED (Tabelas de Joules)":"Laser Therapy & LED Manual (Joule Tables)","Kit Clínico: 25 Testes Ortopédicos + Fichas + Termo":"Clinical Kit: 25 Orthopedic Tests + Forms + Consent","Para quem é este material?":"Who is this material for?","Escolhe a tua opção de Acesso Imediato":"Choose your option for Immediate Access","PACOTE BÁSICO (SÓ OS MAPAS)":"BASIC BUNDLE (MAPS ONLY)","Apenas os mapas base para consulta simples":"Basic maps only for simple consultation","Pagamento único · IVA incluído":"One-time payment · VAT included","Pagamento Único · IVA Já Incluído · Acesso Vitalício":"One-Time Payment · VAT Included · Lifetime Access","Como recebo os mapas após o pagamento?":"How do I receive the maps after payment?","Funciona no telemóvel, tablet e computador?":"Does it work on mobile, tablet, and computer?","O pagamento de 9,97€ é único?":"Is the 9.97€ payment one-time?","Usado e Recomendado ao Lado da Marquesa por Fisioterapeutas em Portugal":"Used and Recommended at the Treatment Table by Physiotherapists","ElectroMapas Fisioterapia © 2026 · Todos os direitos reservados.":"ElectroMapas Fisioterapia © 2026 · All rights reserved.","Recurso visual educativo e de consulta clínica para fisioterapeutas e estudantes de fisioterapia.":"Educational visual reference and clinical resource for physiotherapists and physiotherapy students."}},"fr":{"locale":"fr","langName":"Français","flag":"🇫🇷","selectors":{".topbar":"⚡ <span>OFFRE SPÉCIALE</span>: Accès Immédiat aux +58 Cartes Cliniques · Téléchargement Immédiat",".pill-top":"CONSULTATION CLINIQUE RAPIDE · KINÉSITHÉRAPIE",".hero-question":"Des doutes sur le placement des électrodes lors de la séance?",".hero h1":"+58 Cartes Visuelles de <span>Positionnement des Électrodes</span> pour Kinésithérapie",".hero-sub":"Une région, une fiche, une réponse claire. Consultez en quelques secondes le positionnement des électrodes, points moteurs, canaux CH1 à CH4 et paramètres (Hz, µs) pour TENS, NMES, FES, Russe et Aussie.",".hero-callout":"👉 Conçu pour une utilisation réelle en cabinet: ouvrez le PDF sur smartphone ou tablette à côté de la table et levez le doute avant d'allumer l'appareil.",".zoom-notice-pill":"🔍 Touchez n'importe quelle fiche ci-dessous pour zoomer en haute définition",".inter-cta-wrap .btn-inter":"VOIR LE PACK COMPLET (9,97€) →",".inter-trust":"⚡ Accès Immédiat · Téléchargement Numérique · Garantie 15 Jours",".btn-plan-pro":"JE VEUX LE PACK COMPLET (9,97€) →",".btn-plan-basic":"Je veux seulement les cartes de base (4,97€)",".sticky-btn":"ACCÉDER MAINTENANT (9,97€) →",".sticky-bottom strong":"+58 Cartes · 9 fichiers · 9,97€",".sticky-bottom span":"Paiement Unique · 9,97€","#oferta-box .ribbon-top":"⭐ ÉDITION COMPLÈTE · PACK OFFICIEL DE CABINET","#oferta-box .plan-name":"Pack Clinique Complet ElectroMapas","#oferta-box p":"Consultation visuelle rapide pour confirmer le positionnement des électrodes en quelques secondes en cabinet ou à domicile.",".guarantee-content h2":"GARANTIE DE 15 JOURS",".guarantee-content p":"Si dans les 15 jours vous estimez que le matériel ne vous convient pas, demandez un remboursement sans tracas."},"exactText":{"Identificas-te com alguma destas situações?":"Vous reconnaissez-vous dans l'une de ces situations?","Sabes a teoria, mas hesitas no posicionamento exato na marquesa":"Vous connaissez la théorie, mais hésitez sur le positionnement exact sur la table","Confusão ao cruzar múltiplos canais (CH1 e CH2)":"Confusion en croisant plusieurs canaux (CH1 et CH2)","Perdes tempo à procura de parâmetros (Hz e µs)":"Perte de temps à chercher les paramètres (Hz et µs)","Queres consultar rápido em vez de decorar tabelas":"Vous voulez consulter rapidement au lieu de mémoriser des tableaux","Olha por dentro das lâminas e mapas visuais":"Découvrez l'intérieur des fiches et cartes visuelles","Cada Mapa Resolve uma Dúvida Clínica em Segundos":"Chaque Carte Résout un Doute Clinique en Quelques Secondes","TENS, NMES, FES, Corrente Russa e Aussie":"TENS, NMES, FES, Courant Russe et Aussie","Pares e Canais Diferenciados sem Confusão de Fios":"Paires et Canaux Différenciés sans Confusion de Câbles","Alívio de Tensão e Cervicalgia":"Soulagement de la Tension et Cervicalgie","Ativação Neuromuscular Seletiva":"Activation Neuromusculaire Sélective","Cruzamento Tetrapolar e Bipolar":"Croisement Tétrapolaire et Bipolaire","Da anatomia à decisão clínica: tudo numa só folha":"De l'anatomie à la décision clinique: tout sur une seule fiche","Visualiza":"Visualisez","Relaciona":"Reliez","Aplica com Precisão":"Appliquez avec Précision","8 Regiões Corporais num único atlas visual":"8 Régions Corporelles dans un seul atlas visuel","Pescoço e Coluna Cervical":"Cou et Colonne Cervicale","Ombro e Cintura Escapular":"Épaule et Ceinture Scapulaire","Membro Superior: Braço e Antebraço":"Membre Supérieur: Bras et Avant-bras","Mão e Punho":"Main et Poignet","Tórax, Dorsal e Abdómen":"Thorax, Région Dorsale et Abdomen","Tronco e Região Lombar":"Tronc et Région Lombaire","Coxa e Articulação do Joelho":"Cuisse et Articulation du Genou","Perna, Tornozelo e Pé":"Jambe, Cheville et Pied","Usado e comprovado ao lado da marquesa":"Utilisé et éprouvé au chevet du patient","Aplicação Direta na Região Lombar":"Application Directe sur la Région Lombaire","Avaliação de Cervical e Coifa dos Rotadores":"Évaluation Cervicale et Coiffe des Rotateurs","Precisão no Vasto Medial e Lateral":"Précision sur Vaste Médial et Latéral","Como consultar na prática em 3 passos simples":"Comment consulter en pratique en 3 étapes simples","Identifica a Região e o Objetivo":"Identifiez la Région et l'Objectif","Abre a Lâmina no Ecrã em Segundos":"Ouvrez la Fiche à l'Écran en Quelques Secondes","Aplica com Parâmetros de Referência":"Appliquez avec les Paramètres de Référence","Guia Rápido de Parâmetros (Hz, µs, Rampas e Tempo)":"Guide Rapide des Paramètres (Hz, µs, Rampes et Temps)","Checklist de Segurança e Contraindicações":"Checklist de Sécurité et Contre-indications","Protocolos por Objetivo Terapêutico":"Protocoles par Objectif Thérapeutique","Ficha de Evolução do Paciente (60 segundos)":"Fiche d'Évolution du Patient (60 secondes)","Pocket Card — 15 Casos Mais Comuns":"Pocket Card — 15 Cas les Plus Courants","Guia Visual de Ultrassom (1 e 3 MHz) & Terapia Combinada":"Guide Visuel Ultrasons (1 et 3 MHz) & Thérapie Combinée","Manual de Laserterapia & LED (Tabelas de Joules)":"Manuel de Laserthérapie & LED (Tables de Joules)","Kit Clínico: 25 Testes Ortopédicos + Fichas + Termo":"Kit Clinique: 25 Tests Orthopédiques + Fiches + Consentement","Para quem é este material?":"À qui s'adresse ce matériel?","Escolhe a tua opção de Acesso Imediato":"Choisissez votre option d'Accès Immédiat","PACOTE BÁSICO (SÓ OS MAPAS)":"PACK DE BASE (UNIQUEMENT LES CARTES)","Apenas os mapas base para consulta simples":"Uniquement les cartes de base pour consultation simple","Pagamento único · IVA incluído":"Paiement unique · TVA incluse","Pagamento Único · IVA Já Incluído · Acesso Vitalício":"Paiement Unique · TVA Déjà Incluse · Accès à Vie","Como recebo os mapas após o pagamento?":"Comment recevoir les cartes après le paiement?","Funciona no telemóvel, tablet e computador?":"Fonctionne-t-il sur mobile, tablette et ordinateur?","O pagamento de 9,97€ é único?":"Le paiement de 9,97€ est-il unique?","Usado e Recomendado ao Lado da Marquesa por Fisioterapeutas em Portugal":"Utilisé et Recommandé par des Kinésithérapeutes","ElectroMapas Fisioterapia © 2026 · Todos os direitos reservados.":"ElectroMapas Fisioterapia © 2026 · Tous droits réservés.","Recurso visual educativo e de consulta clínica para fisioterapeutas e estudantes de fisioterapia.":"Ressource visuelle éducative et de consultation clinique pour kinésithérapeutes et étudiants."}},"it":{"locale":"it","langName":"Italiano","flag":"🇮🇹","selectors":{".topbar":"⚡ <span>OFFERTA SPECIALE</span>: Accesso Immediato alle +58 Mappe Cliniche · Download Immediato",".pill-top":"CONSULTAZIONE CLINICA RAPIDA · FISIOTERAPIA",".hero-question":"Dubbi su dove posizionare gli elettrodi durante il trattamento?",".hero h1":"+58 Mappe Visive di <span>Posizionamento degli Elettrodi</span> per Fisioterapia",".hero-sub":"Una regione, una scheda, una risposta chiara. Consulta in pochi secondi il posizionamento degli elettrodi, punti motori, canali CH1 a CH4 e parametri (Hz, µs) per TENS, NMES, FES, Russa e Aussie.",".hero-callout":"👉 Creato per l'uso clinico reale: apri il PDF su smartphone o tablet accanto al lettino e togli ogni dubbio prima di accendere il dispositivo.",".zoom-notice-pill":"🔍 Tocca qualsiasi scheda qui sotto per ingrandire in alta definizione",".inter-cta-wrap .btn-inter":"VEDI IL PACCHETTO COMPLETO (9,97€) →",".inter-trust":"⚡ Accesso Immediato · Download Digitale · Garanzia di 15 Giorni",".btn-plan-pro":"VOGLIO IL PACCHETTO COMPLETO (9,97€) →",".btn-plan-basic":"Voglio solo le mappe base (4,97€)",".sticky-btn":"ACCEDI ORA (9,97€) →",".sticky-bottom strong":"+58 Mappe · 9 file · 9,97€",".sticky-bottom span":"Pagamento Unico · 9,97€","#oferta-box .ribbon-top":"⭐ EDIZIONE COMPLETA · PACCHETTO UFFICIALE DI STUDIO","#oferta-box .plan-name":"Pacchetto Clinico Completo ElectroMapas","#oferta-box p":"Consultazione visiva rapida per confermare il posizionamento degli elettrodi in pochi secondi in studio o a domicilio.",".guarantee-content h2":"GARANZIA DI 15 GIORNI",".guarantee-content p":"Se entro 15 giorni ritieni che il materiale non faccia al caso tuo, ti basta richiedere il rimborso. Senza complicazioni."},"exactText":{"Identificas-te com alguma destas situações?":"Ti riconosci in qualcuna di queste situazioni?","Sabes a teoria, mas hesitas no posicionamento exato na marquesa":"Conosci la teoria, ma esiti sul posizionamento esatto al lettino","Confusão ao cruzar múltiplos canais (CH1 e CH2)":"Confusione nell'incrociare più canali (CH1 e CH2)","Perdes tempo à procura de parâmetros (Hz e µs)":"Perdi tempo cercando i parametri (Hz e µs)","Queres consultar rápido em vez de decorar tabelas":"Vuoi consultare rapidamente invece di memorizzare tabelle","Olha por dentro das lâminas e mapas visuais":"Guarda all'interno delle schede e mappe visive","Cada Mapa Resolve uma Dúvida Clínica em Segundos":"Ogni Mappa Risolve un Dubbio Clinico in Pochi Secondi","TENS, NMES, FES, Corrente Russa e Aussie":"TENS, NMES, FES, Corrente Russa e Aussie","Pares e Canais Diferenciados sem Confusão de Fios":"Coppie e Canali Differenziati senza Confusione di Cavi","Alívio de Tensão e Cervicalgia":"Sollievo dalla Tensione e Cervicalgia","Ativação Neuromuscular Seletiva":"Attivazione Neuromuscolare Selettiva","Cruzamento Tetrapolar e Bipolar":"Incrocio Tetrapolare e Bipolare","Da anatomia à decisão clínica: tudo numa só folha":"Dall'anatomia alla decisione clinica: tutto su un'unica scheda","Visualiza":"Visualizza","Relaciona":"Collega","Aplica com Precisão":"Applica con Precisione","8 Regiões Corporais num único atlas visual":"8 Regioni Corporee in un unico atlante visivo","Pescoço e Coluna Cervical":"Collo e Colonna Cervicale","Ombro e Cintura Escapular":"Spalla e Cingolo Scapolare","Membro Superior: Braço e Antebraço":"Arto Superiore: Braccio e Avambraccio","Mão e Punho":"Mano e Polso","Tórax, Dorsal e Abdómen":"Torace, Colonna Dorsale e Addome","Tronco e Região Lombar":"Tronco e Regione Lombare","Coxa e Articulação do Joelho":"Coscia e Articolazione del Ginocchio","Perna, Tornozelo e Pé":"Gamba, Caviglia e Piede","Usado e comprovado ao lado da marquesa":"Usato e comprovato accanto al lettino","Aplicação Direta na Região Lombar":"Applicazione Diretta sulla Regione Lombare","Avaliação de Cervical e Coifa dos Rotadores":"Valutazione Cervicale e Cuffia dei Rotatori","Precisão no Vasto Medial e Lateral":"Precisione sul Vasto Mediale e Laterale","Como consultar na prática em 3 passos simples":"Come consultare nella pratica in 3 semplici passaggi","Identifica a Região e o Objetivo":"Identifica la Regione e l'Obiettivo","Abre a Lâmina no Ecrã em Segundos":"Apri la Scheda sullo Schermo in Pochi Secondi","Aplica com Parâmetros de Referência":"Applica con i Parametri di Riferimento","Guia Rápido de Parâmetros (Hz, µs, Rampas e Tempo)":"Guida Rapida ai Parametri (Hz, µs, Rampe e Tempo)","Checklist de Segurança e Contraindicações":"Checklist di Sicurezza e Contreindicazioni","Protocolos por Objetivo Terapêutico":"Protocolli per Obiettivo Terapeutico","Ficha de Evolução do Paciente (60 segundos)":"Scheda di Evoluzione del Paziente (60 secondi)","Pocket Card — 15 Casos Mais Comuns":"Pocket Card — 15 Casi Più Comuni","Guia Visual de Ultrassom (1 e 3 MHz) & Terapia Combinada":"Guida Visiva Ultrasoni (1 e 3 MHz) & Terapia Combinata","Manual de Laserterapia & LED (Tabelas de Joules)":"Manuale di Laserterapia & LED (Tabelle di Joule)","Kit Clínico: 25 Testes Ortopédicos + Fichas + Termo":"Kit Clinico: 25 Test Ortopedici + Schede + Consenso","Para quem é este material?":"A chi è rivolto questo materiale?","Escolhe a tua opção de Acesso Imediato":"Scegli la tua opzione di Accesso Immediato","PACOTE BÁSICO (SÓ OS MAPAS)":"PACCHETTO BASE (SOLO LE MAPPE)","Apenas os mapas base para consulta simples":"Solo le mappe base per consultazione semplice","Pagamento único · IVA incluído":"Pagamento unico · IVA inclusa","Pagamento Único · IVA Já Incluído · Acesso Vitalício":"Pagamento Unico · IVA Già Inclusa · Accesso a Vita","Como recebo os mapas após o pagamento?":"Come ricevo le mappe dopo il pagamento?","Funciona no telemóvel, tablet e computador?":"Funziona su smartphone, tablet e computer?","O pagamento de 9,97€ é único?":"Il pagamento di 9,97€ è una tantum?","Usado e Recomendado ao Lado da Marquesa por Fisioterapeutas em Portugal":"Usato e Raccomandato al Lettino da Fisioterapisti","ElectroMapas Fisioterapia © 2026 · Todos os direitos reservados.":"ElectroMapas Fisioterapia © 2026 · Tutti i diritti riservati.","Recurso visual educativo e de consulta clínica para fisioterapeutas e estudantes de fisioterapia.":"Risorsa visiva educativa e di consultazione clinica per fisioterapisti e studenti."}}};
+
+    var originalDomCache = new Map();
+    var currentActiveLang = 'pt';
+
+    function cacheOriginals() {
+      if (originalDomCache.size > 0) return;
+      // Cache selectors
+      var selectorsToCache = [
+        '.topbar', '.pill-top', '.hero-question', '.hero h1', '.hero-sub',
+        '.hero-callout', '.zoom-notice-pill', '.inter-cta-wrap .btn-inter',
+        '.inter-trust', '.btn-plan-pro', '.btn-plan-basic', '.sticky-btn',
+        '.sticky-bottom strong', '.sticky-bottom span', '#oferta-box .ribbon-top',
+        '#oferta-box .plan-name', '#oferta-box p', '.guarantee-content h2',
+        '.guarantee-content p', 'footer'
+      ];
+      selectorsToCache.forEach(function(sel) {
+        document.querySelectorAll(sel).forEach(function(el) {
+          if (!originalDomCache.has(el)) originalDomCache.set(el, el.innerHTML);
+        });
+      });
+      // Cache all h1, h2, h3, p, strong, summary
+      document.querySelectorAll('h1, h2, h3, p, summary, .plan-name').forEach(function(el) {
+        if (!originalDomCache.has(el)) originalDomCache.set(el, el.innerHTML);
+      });
+    }
+
+    function detectVisitorLanguage() {
+      // 1. URL parameter override (?lang=es, ?lang=en, etc)
+      var params = new URLSearchParams(window.location.search);
+      var q = params.get('lang');
+      if (q) {
+        q = q.toLowerCase().substring(0, 2);
+        if (['pt', 'es', 'en', 'fr', 'it'].indexOf(q) !== -1) return q;
+      }
+      // 2. Saved preference in localStorage
+      try {
+        var saved = localStorage.getItem('fv_lang_choice');
+        if (saved && ['pt', 'es', 'en', 'fr', 'it'].indexOf(saved) !== -1) return saved;
+      } catch(e) {}
+      // 3. Browser navigator language
+      var nav = (navigator.languages && navigator.languages.length ? navigator.languages[0] : (navigator.language || 'pt')).toLowerCase().substring(0, 2);
+      if (['pt', 'es', 'en', 'fr', 'it'].indexOf(nav) !== -1) return nav;
+      // 4. Default fallback for other international languages is English
+      return 'en';
+    }
+
+    function updateCheckoutLocale(lang) {
+      var locMap = { pt: 'pt_PT', es: 'es', en: 'en', fr: 'fr', it: 'it' };
+      var targetLocale = locMap[lang] || 'pt_PT';
+      document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach(function(link) {
+        try {
+          var u = new URL(link.href);
+          u.searchParams.set('locale', targetLocale);
+          link.href = u.toString();
+        } catch(e) {}
+      });
+    }
+
+    function updateLanguageUI(lang) {
+      document.querySelectorAll('#fv-lang-picker .fv-lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+    }
+
+    function applyLanguage(lang) {
+      cacheOriginals();
+      currentActiveLang = lang;
+      try { localStorage.setItem('fv_lang_choice', lang); } catch(e) {}
+      updateLanguageUI(lang);
+      updateCheckoutLocale(lang);
+
+      if (lang === 'pt') {
+        // Restore pristine Portuguese
+        originalDomCache.forEach(function(origHtml, el) {
+          el.innerHTML = origHtml;
+        });
+        document.documentElement.lang = 'pt-PT';
+        return;
+      }
+
+      var dict = i18nData[lang];
+      if (!dict) return;
+      document.documentElement.lang = dict.locale || lang;
+
+      // 1. Apply selector translations
+      if (dict.selectors) {
+        for (var sel in dict.selectors) {
+          var trans = dict.selectors[sel];
+          document.querySelectorAll(sel).forEach(function(el) {
+            el.innerHTML = trans;
+          });
+        }
+      }
+
+      // 2. Apply exact text replacements across headings and paragraphs
+      if (dict.exactText) {
+        originalDomCache.forEach(function(origHtml, el) {
+          // Check if clean text matches
+          var temp = document.createElement('div');
+          temp.innerHTML = origHtml;
+          var cleanText = temp.textContent.trim().replace(/\s+/g, ' ');
+          if (dict.exactText[cleanText]) {
+            el.innerHTML = dict.exactText[cleanText];
+          }
+        });
+      }
+    }
+
+    // Expose global switcher
+    window.fvSwitchLang = function(lang) {
+      applyLanguage(lang);
+    };
+
+    // Run automatically on load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        var initialLang = detectVisitorLanguage();
+        applyLanguage(initialLang);
+      });
+    } else {
+      var initialLang = detectVisitorLanguage();
+      applyLanguage(initialLang);
+    }
+  })();
+  </script>
+
 </body>
 </html>
