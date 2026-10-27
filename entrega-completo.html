@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="noindex, nofollow"/>
-  <title>Acesso Liberado — Pacote Completo (+50 Mapas Visuais + 4 Bónus)</title>
+  <title>Acesso Liberado — Pacote Completo (+58 Mapas Visuais · 9 ficheiros)</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=3"/>
   <link rel="shortcut icon" href="./favicon.ico?v=3" type="image/x-icon"/>
   <link rel="stylesheet" href="./assets/styles-MTGModV1.css"/>
@@ -21,12 +21,13 @@
   fbq('init', '1684602679908725');
   fbq('track', 'PageView');
   try {
-    if (!sessionStorage.getItem('pixel_purchase_completo')) {
-      fbq('track', 'Purchase', { value: 9.97, currency: 'EUR', content_name: 'Pacote Completo +50 Mapas + 4 Bonus' });
-      sessionStorage.setItem('pixel_purchase_completo', '1');
+    // localStorage (not sessionStorage) so re-opening this page from the upsell download buttons never double-counts a Purchase.
+    if (!localStorage.getItem('pixel_purchase_completo')) {
+      fbq('track', 'Purchase', { value: 9.97, currency: 'EUR', content_name: 'Pacote Completo +58 Mapas + 9 ficheiros' });
+      localStorage.setItem('pixel_purchase_completo', '1');
     }
   } catch (e) {
-    fbq('track', 'Purchase', { value: 9.97, currency: 'EUR' });
+    // Storage blocked: skip the Purchase event rather than risk duplicates.
   }
   </script>
   <noscript><img height="1" width="1" style="display:none"
@@ -72,14 +73,14 @@
     <div class="delivery-card">
       <div class="delivery-badge">✓ COMPRA CONFIRMADA · ACESSO VITALÍCIO</div>
       <h1>O teu Pacote Completo está pronto!</h1>
-      <p class="sub">Já podes descarregar o PDF oficial em alta resolução (77 páginas) com todos os <b>+50 Mapas Visuais de Posicionamento de Elétrodos</b> + os <b>4 Bónus Exclusivos</b>.</p>
-      <img class="delivery-preview" src="./__l5e/assets-v1/ac0d59f3-5607-485d-be0e-3c7cf30f847d/full-512.webp" alt="Pacote Completo +50 Mapas + 4 Bónus"/>
+      <p class="sub">Já podes descarregar os <b>9 ficheiros</b>: o Atlas com <b>+58 Mapas Visuais de Posicionamento de Elétrodos</b>, os <b>5 Bónus</b> e os <b>3 Guias Extra</b>.</p>
+      <img class="delivery-preview" src="./__l5e/assets-v1/ac0d59f3-5607-485d-be0e-3c7cf30f847d/full-512.webp" alt="Pacote Completo +58 Mapas + 5 Bónus + 3 Guias Extra"/>
             <div style="margin-bottom: 24px;">
         <a class="download-btn download-zip-btn" href="/entregaveis/ElectroMapas_PACOTE_COMPLETO_COM_TODOS_OS_BONUS.zip" download="ElectroMapas_PACOTE_COMPLETO_COM_TODOS_OS_BONUS.zip">
-          📦 Descarregar Coleção Completa (ZIP com os 6 Ficheiros · 7.1 MB)
+          📦 Descarregar Coleção Completa (ZIP com os 9 Ficheiros · 8.4 MB)
         </a>
         <div style="font-size: 12px; color: var(--muted); margin-top: 6px;">
-          Inclui o Atlas Mestre + os 4 Bónus Oficiais + Pocket Card Extra em PDF
+          Inclui o Atlas + 5 Bónus + 3 Guias Extra (Ultrassom · Laser · Testes Ortopédicos) em PDF
         </div>
       </div>
 
@@ -89,12 +90,12 @@
         <!-- ITEM 1: ATLAS MESTRE -->
         <div class="item-file-row">
           <div class="item-file-info">
-            <span class="item-file-tag">PRODUTO PRINCIPAL · 72 PÁGINAS</span>
-            <div class="item-file-name">🗺️ Master Atlas ElectroMapas (+50 Mapas Visuais 3D)</div>
+            <span class="item-file-tag">PRODUTO PRINCIPAL · 76 PÁGINAS</span>
+            <div class="item-file-name">🗺️ Master Atlas ElectroMapas (+58 Mapas Visuais 3D)</div>
             <p class="item-file-desc">Posicionamento anatómico ilustrado para as 8 regiões corporais, identificação de canais CH1 a CH4 por cor e alta definição.</p>
           </div>
-          <a class="item-file-btn" href="/entregaveis/01_ElectroMapas_Atlas_Visual_50_Mapas.pdf" download="01_ElectroMapas_Atlas_Visual_50_Mapas.pdf">
-            ⬇ Baixar PDF (7.4 MB)
+          <a class="item-file-btn" href="/entregaveis/01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" download="01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf">
+            ⬇ Baixar PDF (8.3 MB)
           </a>
         </div>
 
@@ -138,7 +139,7 @@
         <div class="item-file-row">
           <div class="item-file-info">
             <span class="item-file-tag">BÓNUS 4 · DOCUMENTAÇÃO & SOAP</span>
-            <div class="item-file-name">📝 Ficha de Evolução do Paciente & Planeamento</div>
+            <div class="item-file-name">📝 Ficha de Evolução do Utente & Planeamento</div>
             <p class="item-file-desc">Ficha de registo em 60 segundos, modelo de avaliação fisioterapêutica imprimível e registo de acompanhamento para 5 sessões.</p>
           </div>
           <a class="item-file-btn" href="/entregaveis/05_Bonus_4_Ficha_de_Evolucao_do_Paciente.pdf" download="05_Bonus_4_Ficha_de_Evolucao_do_Paciente.pdf">
@@ -157,11 +158,82 @@
             ⬇ Baixar PDF (172 KB)
           </a>
         </div>
+
+        <!-- ITEM 7: ULTRASOUND GUIDE (part of the 9-file Complete Pack) -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag">GUIA EXTRA 1 · ULTRASSOM</span>
+            <div class="item-file-name">🔊 Guia Visual de Ultrassom &amp; Terapia Combinada</div>
+            <p class="item-file-desc">1 MHz vs 3 MHz, ciclo de trabalho e protocolos de terapia combinada com corrente.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/Guia_Ultrassom_e_Terapia_Combinada_Fisioterapia.pdf" download="07_Guia_Ultrassom_e_Terapia_Combinada.pdf">
+            ⬇ Baixar PDF (119 KB)
+          </a>
+        </div>
+
+        <!-- ITEM 8: LASER MANUAL -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag">GUIA EXTRA 2 · LASER &amp; LED</span>
+            <div class="item-file-name">🔴 Manual Prático de Laserterapia &amp; LED</div>
+            <p class="item-file-desc">Dosimetria em Joules por patologia, vermelho vs infravermelho e segurança ocular.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/Manual_Laserterapia_LED_Fotobiomodulacao_Fisioterapia.pdf" download="08_Manual_Laserterapia_e_LED.pdf">
+            ⬇ Baixar PDF (118 KB)
+          </a>
+        </div>
+
+        <!-- ITEM 9: ORTHOPAEDIC TESTS KIT -->
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag">GUIA EXTRA 3 · AVALIAÇÃO</span>
+            <div class="item-file-name">🦴 Kit de Testes Ortopédicos &amp; Fichas de Avaliação</div>
+            <p class="item-file-desc">Testes ortopédicos por região com fichas de avaliação imprimíveis.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/Kit_Clinico_Pro_Testes_Ortopedicos_e_Fichas_Avaliacao.pdf" download="09_Kit_Testes_Ortopedicos_e_Fichas_Avaliacao.pdf">
+            ⬇ Baixar PDF (124 KB)
+          </a>
+        </div>
       </div>
 
-      <a class="secondary-btn" href="/entregaveis/01_ElectroMapas_Atlas_Visual_50_Mapas.pdf" target="_blank" rel="noopener">
+      <a class="secondary-btn" href="/entregaveis/01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" target="_blank" rel="noopener">
         Abrir Atlas Principal no navegador agora →
       </a>
+
+      <!-- UPGRADES OPCIONAIS ADQUIRIDOS NO FUNIL -->
+      <div class="items-download-wrap" style="margin-top: 28px; padding-top: 22px; border-top: 2px dashed rgba(15, 159, 118, 0.25);">
+        <div class="items-download-title">🚀 Adquiriste também algum Upgrade Especial?</div>
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag" style="background: rgba(56, 189, 248, 0.16); color: #0369a1;">UPGRADE 1 · WEB APP &amp; PWA</span>
+            <div class="item-file-name">📱 App ElectroMapas PRO (58 Mapas + Calculadora de Dosimetria)</div>
+            <p class="item-file-desc">Abre a App no navegador ou instala no telemóvel e ativa com o código HP da tua compra Hotmart.</p>
+          </div>
+          <a class="item-file-btn" style="background: #0284c7;" href="/app/index.html">
+            Abrir App PRO →
+          </a>
+        </div>
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag" style="background: rgba(56, 189, 248, 0.16); color: #0369a1;">UPGRADE 2 · 25 PÁGINAS</span>
+            <div class="item-file-name">🧠 Casos Clínicos de Eletroterapia — 20 Raciocínios Resolvidos</div>
+            <p class="item-file-desc">Árvore de decisão clínica, 20 quadros reais com conduta passo a passo, progressão em 3 fases e erros fatais.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/Casos_Clinicos_Eletroterapia_20_Raciocinios.pdf" download="Casos_Clinicos_Eletroterapia_20_Raciocinios.pdf">
+            ⬇ Baixar PDF (235 KB)
+          </a>
+        </div>
+        <div class="item-file-row">
+          <div class="item-file-info">
+            <span class="item-file-tag" style="background: rgba(16, 185, 129, 0.16); color: #047857;">UPGRADE 3 · 15 PÁGINAS EDITÁVEIS</span>
+            <div class="item-file-name">💬 Kit de Comunicação &amp; Retenção do Utente</div>
+            <p class="item-file-desc">Scripts de 30s, Consentimento Informado preenchível, Plano de Tratamento, Reação Normal vs Alerta e Adesão ao Plano.</p>
+          </div>
+          <a class="item-file-btn" href="/entregaveis/Kit_Comunicacao_Retencao_Utente.pdf" download="Kit_Comunicacao_Retencao_Utente.pdf">
+            ⬇ Baixar PDF (248 KB)
+          </a>
+        </div>
+      </div>
 
       <!-- ACESSO DIRETO AO PORTAL INTERATIVO & MÓDULO DE VÍDEOS -->
       <div style="margin: 24px auto 0; max-width: 520px; background: linear-gradient(135deg, #092635 0%, #061822 100%); border: 2px solid #00e5ff; border-radius: 16px; padding: 20px; box-shadow: 0 10px 28px rgba(0, 229, 255, 0.2); text-align: center;">

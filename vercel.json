@@ -1,40 +1,113 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/entrega-completo", "destination": "/entrega-completo.html" },
-    { "source": "/area-membros", "destination": "/area-membros.html" },
-    { "source": "/upsell", "destination": "/upsell.html" },
-    { "source": "/downsell", "destination": "/downsell.html" },
-    { "source": "/upsell-ultrassom", "destination": "/upsell-ultrassom.html" },
-    { "source": "/upsell-3", "destination": "/upsell-ultrassom.html" },
-    { "source": "/upsell-laser", "destination": "/upsell-laser.html" },
-    { "source": "/upsell-4", "destination": "/upsell-laser.html" },
-    { "source": "/obrigado", "destination": "/obrigado.html" },
-    { "source": "/electromapas-pro-app", "destination": "/app/index.html" },
-    { "source": "/electromapas-pro-app.html", "destination": "/app/index.html" },
-    { "source": "/app", "destination": "/app/index.html" },
-    { "source": "/app/", "destination": "/app/index.html" },
-    { "source": "/tailwind.min.js", "destination": "/app/tailwind.min.js" },
-    { "source": "/manifest.json", "destination": "/app/manifest.json" },
-    { "source": "/sw.js", "destination": "/app/sw.js" }
+    {
+      "source": "/entrega-completo",
+      "destination": "/entrega-completo.html"
+    },
+    {
+      "source": "/entrega-pro",
+      "destination": "/entrega-completo.html"
+    },
+    {
+      "source": "/entrega-pro.html",
+      "destination": "/entrega-completo.html"
+    },
+    {
+      "source": "/area-membros",
+      "destination": "/area-membros.html"
+    },
+    {
+      "source": "/upsell",
+      "destination": "/upsell.html"
+    },
+    {
+      "source": "/downsell",
+      "destination": "/downsell.html"
+    },
+    {
+      "source": "/upsell-casos",
+      "destination": "/upsell-casos.html"
+    },
+    {
+      "source": "/upsell-ultrassom",
+      "destination": "/upsell-casos.html"
+    },
+    {
+      "source": "/upsell-3",
+      "destination": "/upsell-casos.html"
+    },
+    {
+      "source": "/upsell-comunicacao",
+      "destination": "/upsell-comunicacao.html"
+    },
+    {
+      "source": "/upsell-laser",
+      "destination": "/upsell-comunicacao.html"
+    },
+    {
+      "source": "/upsell-4",
+      "destination": "/upsell-comunicacao.html"
+    },
+    {
+      "source": "/obrigado",
+      "destination": "/obrigado.html"
+    },
+    {
+      "source": "/electromapas-pro-app",
+      "destination": "/app/index.html"
+    },
+    {
+      "source": "/electromapas-pro-app.html",
+      "destination": "/app/index.html"
+    },
+    {
+      "source": "/app",
+      "destination": "/app/index.html"
+    },
+    {
+      "source": "/app/",
+      "destination": "/app/index.html"
+    },
+    {
+      "source": "/tailwind.min.js",
+      "destination": "/app/tailwind.min.js"
+    },
+    {
+      "source": "/manifest.json",
+      "destination": "/app/manifest.json"
+    },
+    {
+      "source": "/sw.js",
+      "destination": "/app/sw.js"
+    }
   ],
   "headers": [
     {
-      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|obrigado|upsell|downsell|upsell-ultrassom|upsell-laser)",
+      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|obrigado|upsell|downsell|upsell-casos|upsell-comunicacao|upsell-ultrassom|upsell-laser|entrega-completo|funnel\\.css|funnel\\.js)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     },
     {
       "source": "/app/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
       ]
     },
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     }
   ]
