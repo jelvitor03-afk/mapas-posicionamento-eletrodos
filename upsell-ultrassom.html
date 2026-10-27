@@ -95,7 +95,20 @@
         </ul>
       </div>
 
-      <!-- BOTÃO DE COMPRA DO UPSELL ULTRASSOM -->
+      <!-- HOTMART NATIVE 1-CLICK SALES FUNNEL WIDGET -->
+      <div id="hotmart-sales-funnel"></div>
+      <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+      <script>
+        try {
+          if (window.checkoutElements) {
+            checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+          }
+        } catch(e) {
+          console.warn('Hotmart Funnel Widget notice:', e);
+        }
+      </script>
+
+      <!-- BOTÃO DE COMPRA DO UPSELL ULTRASSOM (FALLBACK DIRETO) -->
       <div class="space-y-3 pt-2">
         <a href="https://pay.hotmart.com/G108089733H?off=sobidfz5&checkoutMode=10&locale=pt_PT&sck=upsell_ultrassom_690"
            class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-sm sm:text-base py-4 rounded-xl shadow-xl shadow-cyan-500/25 transition flex items-center justify-center gap-2 text-center">
