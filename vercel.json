@@ -1,13 +1,8 @@
 {
   "cleanUrls": true,
-  "redirects": [
-    {
-      "source": "/(entrega-.*|area-membros.*)",
-      "destination": "/obrigado",
-      "permanent": false
-    }
-  ],
   "rewrites": [
+    { "source": "/entrega-completo", "destination": "/entrega-completo.html" },
+    { "source": "/area-membros", "destination": "/area-membros.html" },
     { "source": "/upsell", "destination": "/upsell.html" },
     { "source": "/downsell", "destination": "/downsell.html" },
     { "source": "/upsell-ultrassom", "destination": "/upsell-ultrassom.html" },
