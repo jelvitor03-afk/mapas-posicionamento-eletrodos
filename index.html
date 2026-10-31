@@ -2275,31 +2275,61 @@
       }, { passive: true });
     })();
 
-        // PRESERVAÇÃO DE UTMS, FBCLID E PARÂMETROS PARA A HOTMART
+    // PRESERVAÇÃO ROBUSTA DE ORIGEM, UTMS, FBCLID E SRC PARA A HOTMART
     (function decorateHotmartLinks() {
-      var currentParams = new URLSearchParams(window.location.search);
-      if (!currentParams.toString()) return;
-
-      document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach(function(link) {
-        try {
-          var targetUrl = new URL(link.href);
-          currentParams.forEach(function(value, key) {
-            if (!targetUrl.searchParams.has(key)) {
-              targetUrl.searchParams.set(key, value);
-            }
-          });
-          var sckParts = [];
-          if (currentParams.get('utm_source')) sckParts.push(currentParams.get('utm_source'));
-          if (currentParams.get('utm_campaign')) sckParts.push(currentParams.get('utm_campaign'));
-          if (currentParams.get('utm_content')) sckParts.push(currentParams.get('utm_content'));
-          if (sckParts.length && !targetUrl.searchParams.has('sck')) {
-            targetUrl.searchParams.set('sck', sckParts.join('|'));
-          }
-          link.href = targetUrl.toString();
-        } catch(e) {
-          console.error('Erro ao decorar link Hotmart:', e);
+      try {
+        var currentParams = new URLSearchParams(window.location.search);
+        var storedSrc = sessionStorage.getItem('em_src') || localStorage.getItem('em_src');
+        var srcValue = currentParams.get('src') || currentParams.get('utm_source');
+        if (!srcValue && storedSrc) {
+          srcValue = storedSrc;
         }
-      });
+        if (!srcValue) {
+          var ref = (document.referrer || '').toLowerCase();
+          if (ref.indexOf('instagram') !== -1) {
+            srcValue = 'instagram_bio';
+          } else if (ref.indexOf('facebook') !== -1 || ref.indexOf('fb.com') !== -1) {
+            srcValue = 'facebook_organico';
+          } else if (ref.indexOf('tiktok') !== -1) {
+            srcValue = 'tiktok_organico';
+          } else if (ref.indexOf('google') !== -1) {
+            srcValue = 'google_organico';
+          } else if (ref.indexOf('whatsapp') !== -1 || ref.indexOf('wa.me') !== -1) {
+            srcValue = 'whatsapp';
+          } else {
+            srcValue = 'site_direto';
+          }
+        }
+        try {
+          sessionStorage.setItem('em_src', srcValue);
+          localStorage.setItem('em_src', srcValue);
+        } catch(e) {}
+
+        document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach(function(link) {
+          try {
+            var targetUrl = new URL(link.href);
+            currentParams.forEach(function(value, key) {
+              if (!targetUrl.searchParams.has(key)) {
+                targetUrl.searchParams.set(key, value);
+              }
+            });
+            if (!targetUrl.searchParams.has('src')) {
+              targetUrl.searchParams.set('src', srcValue);
+            }
+            var sckParts = [srcValue];
+            if (currentParams.get('utm_campaign')) sckParts.push(currentParams.get('utm_campaign'));
+            if (currentParams.get('utm_content')) sckParts.push(currentParams.get('utm_content'));
+            if (!targetUrl.searchParams.has('sck')) {
+              targetUrl.searchParams.set('sck', sckParts.join('|'));
+            }
+            link.href = targetUrl.toString();
+          } catch(e) {
+            console.error('Erro ao decorar link Hotmart:', e);
+          }
+        });
+      } catch(err) {
+        console.error('Erro geral ao processar rastreio Hotmart:', err);
+      }
     })();
 
     // DISPARO SEGURO DO PIXEL META (INITIATECHECKOUT)
