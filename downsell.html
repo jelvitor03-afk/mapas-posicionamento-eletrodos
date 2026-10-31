@@ -6,6 +6,35 @@
   <meta name="theme-color" content="#0a1020" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Última condição — App ElectroMapas PRO por 9,97 €</title>
+  <!-- META PIXEL OFICIAL UNIFICADO (1684602679908725) -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1684602679908725');
+    fbq('track', 'PageView');
+    (function() {
+      var p = new URLSearchParams(window.location.search);
+      var tx = p.get('transaction') || p.get('order') || p.get('hp');
+      var firedKey = 'fb_purchase_fired_' + (tx || 'direct_landing');
+      if (tx && !sessionStorage.getItem(firedKey)) {
+        fbq('track', 'Purchase', {
+          value: 9.97,
+          currency: 'EUR',
+          content_name: '+58 Mapas Visuais de Posicionamento de Elétrodos'
+        });
+        sessionStorage.setItem(firedKey, '1');
+      }
+    })();
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1684602679908725&ev=PageView&noscript=1"/>
+  </noscript>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
   <link rel="preconnect" href="https://checkout.hotmart.com" crossorigin />
   <link rel="stylesheet" href="/funnel.css?v=4" />
