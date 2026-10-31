@@ -17,11 +17,19 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1684602679908725');
     fbq('track', 'PageView');
-    fbq('track', 'Purchase', {
-      value: 9.97,
-      currency: 'EUR',
-      content_name: 'ElectroMapas Fisioterapia - Compra Concluida'
-    });
+    (function() {
+      var p = new URLSearchParams(window.location.search);
+      var tx = p.get('transaction') || p.get('order') || p.get('hp');
+      var firedKey = 'fb_purchase_fired_' + (tx || 'direct_landing');
+      if (!sessionStorage.getItem(firedKey)) {
+        fbq('track', 'Purchase', {
+          value: 9.97,
+          currency: 'EUR',
+          content_name: 'ElectroMapas Fisioterapia - Compra Concluida'
+        });
+        sessionStorage.setItem(firedKey, '1');
+      }
+    })();
   </script>
   <noscript>
     <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1684602679908725&ev=Purchase&noscript=1"/>
