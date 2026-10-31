@@ -10,7 +10,7 @@
   var SUPPORTED = ['pt', 'es', 'en'];
   var LOCALE = { pt: 'pt_PT', es: 'es_ES', en: 'en_US' };
   var STORAGE_KEY = 'fv_lang_choice';
-  var PASS_KEYS = /^(utm_[a-z]+|sck|src|fbclid|xcod|lang)$/i;
+  var PASS_KEYS = /^(utm_[a-z0-9_]+|sck|src|fbclid|xcod|lang|name|email|phone|phone_number|phone_local_code|phone_ac)$/i;
   var WIDGET_TIMEOUT_MS = 3500;
 
   var params = new URLSearchParams(window.location.search);
@@ -102,42 +102,43 @@
 
   function showFallback(reason) {
     var fb = document.querySelector('.fallback');
-    if (fb && fb.hidden) {
+    if (fb) {
       fb.hidden = false;
-      if (window.console) console.info('[funnel] classic checkout shown:', reason);
+      fb.style.display = 'block';
     }
+    var host = document.getElementById('hotmart-sales-funnel');
+    if (host && reason !== 'ready') {
+      host.style.display = 'none';
+    }
+    if (window.console) console.info('[funnel] checkout active:', reason);
   }
 
   function hasHotmartFunnelParams() {
-    var keys = ['token', 'hsrc', 'transaction', 'order', 'funnel', 'Funnel'];
-    for (var i = 0; i < keys.length; i++) {
-      if (params.has(keys[i]) && params.get(keys[i])) return true;
-    }
-    return false;
+    // Only attempt 1-click widget when an explicit 1-click token is present.
+    // 'transaction' is merely a receipt ID passed on normal thank-you redirects,
+    // and passing it without a funnel token triggers 'funnel.invalid_upsell' error.
+    return !!(params.get('token') || params.get('funnelToken'));
   }
 
   function mountHotmartWidget() {
     var host = document.getElementById('hotmart-sales-funnel');
-    if (!host) return;
-    // Only mount the Hotmart 1-click iframe when the visitor arrives with real Hotmart funnel parameters.
-    // Otherwise Hotmart's script injects an error iframe and hides the fallback checkout button.
-    if (!hasHotmartFunnelParams()) {
-      showFallback('direct visit without Hotmart funnel token');
+    // Ensure the rock-solid direct checkout button is ALWAYS visible immediately
+    showFallback('init');
+
+    if (!host || !hasHotmartFunnelParams()) {
+      showFallback('direct checkout mode');
       return;
     }
+
     var s = document.createElement('script');
     s.src = 'https://checkout.hotmart.com/lib/hotmart-checkout-elements.js';
     s.async = true;
     s.onload = function () {
       try {
         if (window.checkoutElements) {
+          host.style.display = 'block';
           window.checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
-          setTimeout(function() {
-            if (host.children.length && host.offsetHeight > 20) {
-              var fb = document.querySelector('.fallback');
-              if (fb) fb.hidden = true;
-            }
-          }, 300);
+          // NEVER hide the fallback button! Portuguese traffic relies on MB WAY / explicit checkout.
         } else {
           showFallback('checkoutElements missing');
         }
@@ -147,9 +148,6 @@
     };
     s.onerror = function () { showFallback('widget script failed to load'); };
     document.head.appendChild(s);
-    setTimeout(function () {
-      if (!host.children.length || host.offsetHeight < 20) showFallback('widget empty after timeout');
-    }, WIDGET_TIMEOUT_MS);
   }
 
   function bindSticky() {
