@@ -132,6 +132,12 @@
       try {
         if (window.checkoutElements) {
           window.checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+          setTimeout(function() {
+            if (host.children.length && host.offsetHeight > 20) {
+              var fb = document.querySelector('.fallback');
+              if (fb) fb.hidden = true;
+            }
+          }, 300);
         } else {
           showFallback('checkoutElements missing');
         }
