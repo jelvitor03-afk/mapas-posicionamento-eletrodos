@@ -10,7 +10,7 @@
   var SUPPORTED = ['pt', 'es', 'en'];
   var LOCALE = { pt: 'pt_PT', es: 'es_ES', en: 'en_US' };
   var STORAGE_KEY = 'fv_lang_choice';
-  var PASS_KEYS = /^(utm_[a-z0-9_]+|sck|src|fbclid|xcod|lang|name|email|phone|phone_number|phone_local_code|phone_ac)$/i;
+  var PASS_KEYS = /^(utm_[a-z0-9_]+|sck|src|fbclid|xcod|lang|name|email|phone|phone_number|phone_local_code|phone_ac|transaction|tx|hp|order|license)$/i;
   var WIDGET_TIMEOUT_MS = 3500;
 
   var params = new URLSearchParams(window.location.search);
