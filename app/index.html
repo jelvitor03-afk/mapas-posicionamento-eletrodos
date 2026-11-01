@@ -1515,10 +1515,21 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
 
     async function initLicenseCheck() {
       const params = new URLSearchParams(window.location.search);
-      const licenseParam = params.get('license') || params.get('token');
+      const licenseParam = params.get('license') || params.get('token') || params.get('transaction') || params.get('tx') || params.get('hp');
 
       if (licenseParam && !isProLicensedSync()) {
-        await verifyLicenseOnServer(licenseParam, '', '');
+        const result = await verifyLicenseOnServer(licenseParam, '', '');
+        if (result && result.valid && result.sessionToken) {
+          try {
+            localStorage.setItem('electromapas_pro_session', result.sessionToken);
+            localStorage.setItem('electromapas_buyer_name', result.buyer || 'Fisioterapeuta Licenciado');
+            localStorage.setItem('electromapas_pro_tx', result.transaction || licenseParam);
+          } catch(e) {}
+          closeLicenseModal();
+          updateLicenseUI();
+          renderProtocolsList(currentFilter || 'all');
+          showToast('✓ Licença Hotmart PRO ativada automaticamente!');
+        }
       }
 
       // Revalidação assíncrona da assinatura criptográfica e status no servidor
