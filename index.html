@@ -2542,7 +2542,7 @@
             var c = localStorage.getItem('em_consent') || getCookie('em_consent');
             if (c === 'granted' || c === 'denied') return c;
           } catch(e) {}
-          return 'pending';
+          return 'granted';
         }
 
         function purgeTrackingStorage() {
