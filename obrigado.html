@@ -5,38 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0a1020" />
   <meta name="robots" content="noindex, nofollow" />
-  <!-- META PIXEL OFICIAL UNIFICADO (1684602679908725) COM PURCHASE -->
+  <!-- META PIXEL OFICIAL UNIFICADO (1684602679908725) COM PURCHASE CONDICIONADO AO CONSENTIMENTO (LEI 41/2004 ART. 5.º) -->
   <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1684602679908725');
-    fbq('track', 'PageView');
-    (function() {
+    window._emPixelBooted = false;
+    window._emPixelRevoked = false;
+    window.emBootMetaPixel = function() {
+      window._emPixelRevoked = false;
+      if (window._emPixelBooted) {
+        if (typeof window.fbq === 'function') {
+          window.fbq('consent', 'grant');
+          window.fbq('track', 'PageView');
+        }
+        return;
+      }
+      window._emPixelBooted = true;
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){
+      if(window._emPixelRevoked && arguments[0] !== 'consent') return;
+      n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('consent', 'grant');
+      window.fbq('init', '1684602679908725');
+      window.fbq('track', 'PageView');
       var p = new URLSearchParams(window.location.search);
-      var tx = p.get('transaction') || p.get('order') || p.get('hp');
-      var firedKey = 'fb_purchase_fired_' + (tx || 'direct_landing');
-      if (!sessionStorage.getItem(firedKey)) {
-        fbq('track', 'Purchase', {
-          value: 9.97,
-          currency: 'EUR',
-          content_name: 'ElectroMapas Fisioterapia - Compra Concluida'
-        });
-        sessionStorage.setItem(firedKey, '1');
+      var tx = p.get('transaction') || p.get('order') || p.get('hp') || p.get('tx');
+      if (tx) {
+        var firedKey = 'fb_purchase_fired_' + tx;
+        var already = false;
+        try {
+          already = !!(sessionStorage.getItem(firedKey) || localStorage.getItem(firedKey));
+        } catch (e) {}
+        if (!already) {
+          window.fbq('track', 'Purchase', {
+            value: 9.97,
+            currency: 'EUR',
+            content_name: 'ElectroMapas Fisioterapia - Compra Concluida'
+          }, { eventID: 'purchase_' + tx });
+          try {
+            sessionStorage.setItem(firedKey, '1');
+            localStorage.setItem(firedKey, '1');
+          } catch (e) {}
+        }
+      }
+    };
+    window.emRevokeMetaPixel = function() {
+      window._emPixelRevoked = true;
+      if (typeof window.fbq === 'function') {
+        window.fbq('consent', 'revoke');
+      }
+    };
+    (function() {
+      var c = null;
+      try {
+        c = localStorage.getItem('em_consent') || (document.cookie.match(/(?:^|; )em_consent=([^;]*)/) || [])[1] || null;
+      } catch (e) {}
+      if (c !== 'denied') {
+        window.emBootMetaPixel();
       }
     })();
   </script>
-  <noscript>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1684602679908725&ev=Purchase&noscript=1"/>
-  </noscript>
   <title>Compra concluída — os teus ficheiros ElectroMapas</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
-  <link rel="stylesheet" href="/funnel.css?v=4" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=3" />
+  <link rel="stylesheet" href="funnel.css?v=4" />
 </head>
 <body>
 <main class="wrap stack">
@@ -85,7 +119,7 @@
             <span style="font-size: 22px; font-weight: 800; color: #38bdf8; margin-left: 6px;">14,97 €</span>
             <small style="font-size: 11px; color: #94a3b8; display: block;">Pagamento unico · Vitalicio</small>
           </div>
-          <a class="cta" href="https://pay.hotmart.com/N108089769S?off=54lg83ib&checkoutMode=10&locale=pt_PT&sck=obrigado_grid_u1_app" style="display: block; text-align: center; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none;">ADICIONAR APP PRO →</a>
+          <a class="cta" data-stage="ob1" data-checkout="https://pay.hotmart.com/N108089769S?off=54lg83ib&sck=ob1" href="https://pay.hotmart.com/N108089769S?off=54lg83ib&checkoutMode=10&locale=pt_PT&sck=ob1" style="display: block; text-align: center; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none;">ADICIONAR APP PRO →</a>
           <div style="font-size: 10px; color: #64748b; text-align: center; margin-top: 6px;">📱 MB WAY · 💳 Cartao · ⚡ Bizum</div>
         </div>
       </div>
@@ -103,7 +137,7 @@
             <span style="font-size: 22px; font-weight: 800; color: #38bdf8; margin-left: 6px;">6,90 €</span>
             <small style="font-size: 11px; color: #94a3b8; display: block;">20 casos · 0,34 € / caso</small>
           </div>
-          <a class="cta" href="https://pay.hotmart.com/G108089733H?off=sobidfz5&checkoutMode=10&locale=pt_PT&sck=obrigado_grid_u2_casos" style="display: block; text-align: center; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; background: #0369a1;">ADICIONAR CASOS (6,90 €) →</a>
+          <a class="cta" data-stage="ob2" data-checkout="https://pay.hotmart.com/G108089733H?off=sobidfz5&sck=ob2" href="https://pay.hotmart.com/G108089733H?off=sobidfz5&checkoutMode=10&locale=pt_PT&sck=ob2" style="display: block; text-align: center; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; background: #0369a1;">ADICIONAR CASOS (6,90 €) →</a>
           <div style="font-size: 10px; color: #64748b; text-align: center; margin-top: 6px;">📱 MB WAY · 💳 Cartao · ⚡ Bizum</div>
         </div>
       </div>
@@ -121,7 +155,7 @@
             <span style="font-size: 22px; font-weight: 800; color: #38bdf8; margin-left: 6px;">7,90 €</span>
             <small style="font-size: 11px; color: #94a3b8; display: block;">Documentos editaveis prontos</small>
           </div>
-          <a class="cta" href="https://pay.hotmart.com/T108089755U?off=tymowbzs&checkoutMode=10&locale=pt_PT&sck=obrigado_grid_u3_kit" style="display: block; text-align: center; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; background: #0369a1;">ADICIONAR KIT (7,90 €) →</a>
+          <a class="cta" data-stage="ob3" data-checkout="https://pay.hotmart.com/T108089755U?off=tymowbzs&sck=ob3" href="https://pay.hotmart.com/T108089755U?off=tymowbzs&checkoutMode=10&locale=pt_PT&sck=ob3" style="display: block; text-align: center; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; background: #0369a1;">ADICIONAR KIT (7,90 €) →</a>
           <div style="font-size: 10px; color: #64748b; text-align: center; margin-top: 6px;">📱 MB WAY · 💳 Cartao · ⚡ Bizum</div>
         </div>
       </div>
@@ -138,15 +172,15 @@
     </a>
     <p class="cta-sub" data-i18n="zip_sub">No telemóvel, se o ZIP não abrir, descarrega os ficheiros um a um:</p>
     <div class="dl-grid" style="margin-top:10px">
-      <a class="dl" href="/entregaveis/01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" target="_blank" rel="noopener"><span class="fi">🗺️</span><b data-i18n="d1">Atlas Visual — +58 mapas</b><em>PDF</em></a>
-      <a class="dl" href="/entregaveis/02_Bonus_1_Guia_Rapido_de_Parametros.pdf" target="_blank" rel="noopener"><span class="fi">⚡</span><b data-i18n="d2">Bónus 1 · Guia rápido de parâmetros</b><em>PDF</em></a>
-      <a class="dl" href="/entregaveis/03_Bonus_2_Checklist_Seguranca_e_Contraindicacoes.pdf" target="_blank" rel="noopener"><span class="fi">🛡️</span><b data-i18n="d3">Bónus 2 · Checklist de segurança</b><em>PDF</em></a>
-      <a class="dl" href="/entregaveis/04_Bonus_3_Protocolos_por_Objetivo_Terapeutico.pdf" target="_blank" rel="noopener"><span class="fi">🎯</span><b data-i18n="d4">Bónus 3 · Protocolos por objetivo</b><em>PDF</em></a>
-      <a class="dl" href="/entregaveis/05_Bonus_4_Ficha_de_Evolucao_do_Paciente.pdf" target="_blank" rel="noopener"><span class="fi">📋</span><b data-i18n="d5">Bónus 4 · Ficha de evolução</b><em>PDF</em></a>
-      <a class="dl" href="/entregaveis/06_Bonus_Especial_Pocket_Card_15_Casos_Clinicos.pdf" target="_blank" rel="noopener"><span class="fi">🃏</span><b data-i18n="d6">Pocket Card · 15 casos</b><em>PDF</em></a>
-      <a class="dl" href="/entregaveis/Guia_Ultrassom_e_Terapia_Combinada_Fisioterapia.pdf" target="_blank" rel="noopener"><span class="fi">🔊</span><b data-i18n="d7">Guia de Ultrassom &amp; Terapia Combinada</b><em>PDF</em></a>
-      <a class="dl" href="/entregaveis/Manual_Laserterapia_LED_Fotobiomodulacao_Fisioterapia.pdf" target="_blank" rel="noopener"><span class="fi">🔴</span><b data-i18n="d8">Manual de Laserterapia &amp; LED</b><em>PDF</em></a>
-      <a class="dl" href="/entregaveis/Kit_Clinico_Pro_Testes_Ortopedicos_e_Fichas_Avaliacao.pdf" target="_blank" rel="noopener"><span class="fi">🦴</span><b data-i18n="d9">Kit de Testes Ortopédicos</b><em>PDF</em></a>
+      <a class="dl" href="/entregaveis/01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" target="_blank" rel="noopener"><span class="fi">🗺️</span><b data-i18n="d1">Atlas Visual — +58 mapas</b><em>HD</em></a>
+      <a class="dl" href="/entregaveis/02_Bonus_1_Guia_Rapido_de_Parametros.pdf" target="_blank" rel="noopener"><span class="fi">⚡</span><b data-i18n="d2">Bónus 1 · Guia rápido de parâmetros</b><em>HD</em></a>
+      <a class="dl" href="/entregaveis/03_Bonus_2_Checklist_Seguranca_e_Contraindicacoes.pdf" target="_blank" rel="noopener"><span class="fi">🛡️</span><b data-i18n="d3">Bónus 2 · Checklist de segurança</b><em>HD</em></a>
+      <a class="dl" href="/entregaveis/04_Bonus_3_Protocolos_por_Objetivo_Terapeutico.pdf" target="_blank" rel="noopener"><span class="fi">🎯</span><b data-i18n="d4">Bónus 3 · Protocolos por objetivo</b><em>HD</em></a>
+      <a class="dl" href="/entregaveis/05_Bonus_4_Ficha_de_Evolucao_do_Paciente.pdf" target="_blank" rel="noopener"><span class="fi">📋</span><b data-i18n="d5">Bónus 4 · Ficha de evolução</b><em>HD</em></a>
+      <a class="dl" href="/entregaveis/06_Bonus_Especial_Pocket_Card_15_Casos_Clinicos.pdf" target="_blank" rel="noopener"><span class="fi">🃏</span><b data-i18n="d6">Pocket Card · 15 casos</b><em>HD</em></a>
+      <a class="dl" href="/entregaveis/Guia_Ultrassom_e_Terapia_Combinada_Fisioterapia.pdf" target="_blank" rel="noopener"><span class="fi">🔊</span><b data-i18n="d7">Guia de Ultrassom &amp; Terapia Combinada</b><em>HD</em></a>
+      <a class="dl" href="/entregaveis/Manual_Laserterapia_LED_Fotobiomodulacao_Fisioterapia.pdf" target="_blank" rel="noopener"><span class="fi">🔴</span><b data-i18n="d8">Manual de Laserterapia &amp; LED</b><em>HD</em></a>
+      <a class="dl" href="/entregaveis/Kit_Clinico_Pro_Testes_Ortopedicos_e_Fichas_Avaliacao.pdf" target="_blank" rel="noopener"><span class="fi">🦴</span><b data-i18n="d9">Kit de Testes Ortopédicos</b><em>HD</em></a>
     </div>
   </section>
 
@@ -157,7 +191,7 @@
       <li><span data-i18n-html="up2"><strong>Casos Clínicos</strong> e <strong>Kit de Comunicação:</strong> aparecem na tua conta Hotmart, em «Compras», com o mesmo e-mail do pagamento.</span></li>
     </ol>
     <div class="dl-grid" style="margin-top:14px">
-      <a class="cta" href="/app" data-carry><span data-i18n="open_app">ABRIR A APP PRO</span> <span aria-hidden="true">→</span></a>
+      <a class="cta" href="app/index.html" data-carry><span data-i18n="open_app">ABRIR A APP PRO</span> <span aria-hidden="true">→</span></a>
       <a class="dl" href="https://consumer.hotmart.com/" target="_blank" rel="noopener noreferrer"><span class="fi">🔐</span><b data-i18n="open_hm">Abrir a minha conta Hotmart</b><em>↗</em></a>
     </div>
   </section>
@@ -220,6 +254,6 @@ window.PAGE_I18N = {
   }
 };
 </script>
-<script src="/funnel.js?v=4" defer></script>
+<script src="funnel.js?v=4" defer></script>
 </body>
 </html>

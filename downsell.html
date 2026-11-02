@@ -6,38 +6,9 @@
   <meta name="theme-color" content="#0a1020" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Última condição — App ElectroMapas PRO por 9,97 €</title>
-  <!-- META PIXEL OFICIAL UNIFICADO (1684602679908725) -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1684602679908725');
-    fbq('track', 'PageView');
-    (function() {
-      var p = new URLSearchParams(window.location.search);
-      var tx = p.get('transaction') || p.get('order') || p.get('hp');
-      var firedKey = 'fb_purchase_fired_' + (tx || 'direct_landing');
-      if (tx && !sessionStorage.getItem(firedKey)) {
-        fbq('track', 'Purchase', {
-          value: 9.97,
-          currency: 'EUR',
-          content_name: '+58 Mapas Visuais de Posicionamento de Elétrodos'
-        });
-        sessionStorage.setItem(firedKey, '1');
-      }
-    })();
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1684602679908725&ev=PageView&noscript=1"/>
-  </noscript>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=3" />
   <link rel="preconnect" href="https://checkout.hotmart.com" crossorigin />
-  <link rel="stylesheet" href="/funnel.css?v=4" />
+  <link rel="stylesheet" href="funnel.css?v=4" />
   <noscript><style>.fallback{display:block!important}</style></noscript>
 </head>
 <body>
@@ -59,17 +30,18 @@
 
   <div class="delivered" role="status">
     <div class="ico">✓</div>
-    <p data-i18n-html="delivered">Os teus <strong>+58 mapas e bónus</strong> já estão garantidos e foram enviados para o teu e-mail.</p>
+    <p data-i18n-html="delivered">Os teus <strong>+58 mapas e bónus</strong> estão garantidos no teu e-mail e na Hotmart.</p>
   </div>
 
   <header class="center">
     <span class="eyebrow amber" data-i18n="eyebrow">Antes de saíres</span>
     <h1 data-i18n-html="h1">Entendido. E se a mesma App PRO custasse <span class="hl">9,97 €</span>?</h1>
     <p class="lead" data-i18n-html="lead">É exatamente a mesma App, completa, com tudo o que viste no passo anterior. Só baixamos o preço <strong>uma vez</strong>, para ser uma decisão fácil.</p>
+    <div class="hero-fast-cta"><a class="cta green" href="#oferta" data-i18n="sticky">Ativar App PRO por 9,97 € (−5 €) ↓</a></div>
   </header>
 
   <figure class="mock" style="margin:0">
-    <img src="/assets/funnel/app-pro-preview.webp" width="900" height="760" alt="Ecrã da App ElectroMapas PRO com protocolo, parâmetros e registo SOAP" loading="eager" />
+    <img src="assets/funnel/app-pro-preview.webp" width="900" height="760" alt="Ecrã da App ElectroMapas PRO com protocolo, parâmetros e registo SOAP" loading="eager" />
   </figure>
 
   <section class="card offer" id="oferta" aria-labelledby="offer-title">
@@ -93,8 +65,8 @@
     <div class="anchor" data-i18n-html="anchor">Pelo mesmo valor que pagaste pelos mapas, passas a <strong>usá-los durante a sessão</strong> — não só a estudá-los.</div>
 
     <div id="hotmart-sales-funnel"></div>
-    <div class="fallback">
-      <a class="cta green" data-checkout="https://pay.hotmart.com/N108089769S?off=ltzqcpoy&sck=funnel_d1_app_997" href="https://pay.hotmart.com/N108089769S?off=ltzqcpoy&checkoutMode=10&locale=pt_PT&sck=funnel_d1_app_997">
+    <div class="fallback" hidden>
+      <a class="cta green" data-stage="d1" data-checkout="https://pay.hotmart.com/N108089769S?off=ltzqcpoy&sck=d1" href="https://pay.hotmart.com/N108089769S?off=ltzqcpoy&checkoutMode=10&locale=pt_PT&sck=d1">
         <span data-i18n="cta">SIM, QUERO A APP PRO POR 9,97 €</span> <span aria-hidden="true">→</span>
       </a>
     </div>
@@ -105,11 +77,13 @@
       <span data-i18n="tr1">Mesma App completa</span><span data-i18n="tr2">Acesso imediato</span><span data-i18n="tr3">Garantia Hotmart</span>
     </div>
 
-    <a class="decline" href="/upsell-casos" data-carry data-i18n="decline">Não, obrigado. Continuar sem a App PRO.</a>
+    <a class="decline" href="upsell-casos.html" data-carry data-i18n="decline">Não, obrigado. Continuar sem a App PRO.</a>
   </section>
 
   <p class="foot" data-i18n-html="foot">ElectroMapas © 2026 · Material de referência para profissionais de fisioterapia · <a href="mailto:ivar.suporte03@gmail.com">Suporte</a></p>
 </main>
+
+<div class="sticky"><a class="cta green" href="#oferta" data-i18n="sticky">Ativar App PRO por 9,97 € (−5 €) ↓</a></div>
 
 <script>
 window.PAGE_I18N = {
@@ -132,7 +106,8 @@ window.PAGE_I18N = {
     cta_sub: 'Hotmart reutiliza los datos de tu compra. Si pagaste con Bizum o MB WAY, aprueba la nueva solicitud en la app del banco.',
     tr1: 'La misma App completa', tr2: 'Acceso inmediato', tr3: 'Garantía Hotmart',
     decline: 'No, gracias. Continuar sin la App PRO.',
-    foot: 'ElectroMapas © 2026 · Material de referencia para profesionales de fisioterapia · <a href="mailto:ivar.suporte03@gmail.com">Soporte</a>'
+    foot: 'ElectroMapas © 2026 · Material de referencia para profesionales de fisioterapia · <a href="mailto:ivar.suporte03@gmail.com">Soporte</a>',
+    sticky: 'Activar App PRO por 9,97 € (−5 €) ↓'
   },
   en: {
     title: 'Last offer — ElectroMapas PRO App for €9.97',
@@ -153,10 +128,11 @@ window.PAGE_I18N = {
     cta_sub: 'Hotmart reuses the details from your purchase. If you paid with a mobile wallet, approve the new request in your banking app.',
     tr1: 'Same complete App', tr2: 'Instant access', tr3: 'Hotmart guarantee',
     decline: 'No thanks. Continue without the PRO App.',
-    foot: 'ElectroMapas © 2026 · Reference material for physiotherapy professionals · <a href="mailto:ivar.suporte03@gmail.com">Support</a>'
+    foot: 'ElectroMapas © 2026 · Reference material for physiotherapy professionals · <a href="mailto:ivar.suporte03@gmail.com">Support</a>',
+    sticky: 'Add the PRO App for €9.97 (−€5) ↓'
   }
 };
 </script>
-<script src="/funnel.js?v=4" defer></script>
+<script src="funnel.js?v=4" defer></script>
 </body>
 </html>

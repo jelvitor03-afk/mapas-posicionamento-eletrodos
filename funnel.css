@@ -195,3 +195,23 @@ code.kbd { background: #0b1328; border: 1px solid var(--border); padding: 1px 6p
 .sticky .cta { font-size: 15px; padding: 14px; min-height: 50px; }
 @media (min-width: 760px) { .sticky { display: none; } }
 @media (prefers-reduced-motion: reduce) { .sticky { transition: none; } }
+
+/* MOBILE FIRST-FOLD OPTIMIZATION */
+.hero-fast-cta {
+  margin-top: 12px;
+}
+.hero-fast-cta .cta {
+  padding: 14px 16px;
+  min-height: 50px;
+  font-size: 15.5px;
+}
+@media (max-width: 600px) {
+  .wrap { padding: 10px 14px 40px; }
+  .stack > * + * { margin-top: 12px; }
+  .delivered { padding: 9px 12px; gap: 10px; }
+  .delivered .ico { width: 28px; height: 28px; font-size: 15px; }
+  .delivered p { font-size: 12px; line-height: 1.35; }
+  h1 { font-size: 21px; line-height: 1.18; margin: 8px 0 6px; }
+  .lead { font-size: 13.8px; line-height: 1.38; }
+  .eyebrow { font-size: 10px; padding: 4px 9px; }
+}

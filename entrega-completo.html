@@ -22,9 +22,11 @@
   fbq('track', 'PageView');
   try {
     // localStorage (not sessionStorage) so re-opening this page from the upsell download buttons never double-counts a Purchase.
-    if (!localStorage.getItem('pixel_purchase_completo')) {
-      fbq('track', 'Purchase', { value: 9.97, currency: 'EUR', content_name: 'Pacote Completo +58 Mapas + 9 ficheiros' });
-      localStorage.setItem('pixel_purchase_completo', '1');
+    var p = new URLSearchParams(window.location.search);
+    var tx = p.get('transaction') || p.get('order') || p.get('hp') || p.get('tx');
+    if (tx && !localStorage.getItem('fb_purchase_fired_' + tx)) {
+      fbq('track', 'Purchase', { value: 9.97, currency: 'EUR', content_name: 'Pacote Completo +58 Mapas + 9 ficheiros' }, { eventID: 'purchase_' + tx });
+      localStorage.setItem('fb_purchase_fired_' + tx, '1');
     }
   } catch (e) {
     // Storage blocked: skip the Purchase event rather than risk duplicates.
