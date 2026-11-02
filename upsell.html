@@ -5,263 +5,188 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0a1020" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Configuração Final (80%) — Sistema Interativo ElectroMapas PRO</title>
+  <title>App ElectroMapas PRO — Upgrade Clínico de Novo Membro</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=3" />
   <link rel="preconnect" href="https://checkout.hotmart.com" crossorigin />
   <link rel="stylesheet" href="funnel.css?v=4" />
   <noscript><style>.fallback{display:block!important}</style></noscript>
   <style>
-    .steps-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 8px; }
-    .steps-5 .bar { height: 7px; border-radius: 99px; background: rgba(255,255,255,0.12); }
-    .steps-5 .bar.done { background: #10b981; }
-    .steps-5 .bar.now { background: #00e5ff; box-shadow: 0 0 10px rgba(0,229,255,0.6); }
-    .decoy-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 12px; margin: 14px 0; }
-    .decoy-card { border-radius: 12px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.03); text-align: left; }
-    .decoy-card.target { border: 1.5px solid #00e5ff; background: rgba(0,229,255,0.07); }
-    .decoy-tag { font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #94a3b8; display: block; margin-bottom: 4px; }
-    .decoy-card.target .decoy-tag { color: #00e5ff; }
-    .credit-box { background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.35); border-radius: 10px; padding: 10px 12px; font-size: 13px; color: #d1fae5; margin-bottom: 12px; text-align: left; }
-    .mbway-timer { display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(245,158,11,0.14); border: 1px solid rgba(245,158,11,0.4); color: #fde68a; border-radius: 10px; padding: 9px 12px; font-size: 12.5px; font-weight: 700; margin: 12px 0; }
-    .mbway-timer strong { color: #fbbf24; font-variant-numeric: tabular-nums; font-size: 14px; }
-    @media (max-width: 600px) {
-      .decoy-grid { grid-template-columns: 1fr; }
+    .delivered-box {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: rgba(16, 185, 129, 0.12); border: 1.5px solid rgba(16, 185, 129, 0.45);
+      border-radius: 14px; padding: 14px 16px; margin-bottom: 20px;
     }
+    .delivered-box .ico {
+      width: 32px; height: 32px; flex: none; border-radius: 50%;
+      background: #10b981; color: #042f1a; font-weight: 900;
+      display: grid; place-items: center; font-size: 17px; margin-top: 1px;
+    }
+    .delivered-box h2 {
+      margin: 0 0 4px; font-size: 15px; font-weight: 800; color: #6ee7b7;
+    }
+    .delivered-box p {
+      margin: 0; font-size: 13px; color: #d1fae5; line-height: 1.45;
+    }
+    .price-clean-box {
+      background: rgba(14, 23, 48, 0.8); border: 1.5px solid #00e5ff;
+      border-radius: 14px; padding: 16px; margin: 18px 0; text-align: center;
+    }
+    .price-clean-box .old {
+      font-size: 14px; color: #94a3b8; text-decoration: line-through;
+    }
+    .price-clean-box .now {
+      font-size: 32px; font-weight: 900; color: #00e5ff; line-height: 1.1; margin: 4px 0;
+    }
+    .price-clean-box .sub {
+      font-size: 12px; color: #a7f3d0; font-weight: 700;
+    }
+    .decline-clean {
+      display: block; text-align: center; margin-top: 16px;
+      font-size: 13.5px; color: #94a3b8; text-decoration: underline;
+      transition: color 0.15s;
+    }
+    .decline-clean:hover { color: #e2e8f0; }
   </style>
 </head>
 <body>
 <main class="wrap stack">
 
+  <!-- TOPLINE LIMPA (SEM SELETOR DE IDIOMAS) -->
   <div class="topline">
-    <span data-i18n="secure">🔒 Ligação segura · Hotmart</span>
-    <div class="lang-switch" role="group" aria-label="Idioma">
-      <button type="button" data-lang="pt" aria-pressed="true">PT</button>
-      <button type="button" data-lang="es" aria-pressed="false">ES</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
-    </div>
+    <span>🔒 Ligação segura · Hotmart</span>
+    <span style="color:#00e5ff; font-weight:700;">Portugal · pt-PT</span>
   </div>
 
-  <!-- GATILHO 1: CONFIGURAÇÃO INACABADA (BARRA DE 80%) -->
-  <div>
-    <div class="steps-5" aria-hidden="true">
-      <div class="bar done"></div>
-      <div class="bar done"></div>
-      <div class="bar done"></div>
-      <div class="bar done"></div>
-      <div class="bar now"></div>
-    </div>
-    <div class="steps-label">
-      <span data-i18n="step_done">✓ Passo 1: Pranchas e Manuais Liberados (80%)</span>
-      <b data-i18n="step_now">⏳ Passo 2 Pendente: Modo de Operação na Clínica</b>
-    </div>
-  </div>
-
-  <!-- CONFIRMAÇÃO SEM LINK DE FUGA PREMATURO -->
-  <div class="delivered" role="status">
+  <!-- REAFIRMAÇÃO IMEDIATA: A COMPRA DOS 9,97€ JÁ ESTÁ CONCLUÍDA E SEGURA -->
+  <div class="delivered-box" role="status">
     <div class="ico">✓</div>
-    <p data-i18n-html="delivered">Pagamento confirmado! As tuas <strong>+58 Pranchas Anatómicas e os 8 Manuais Clínicos (+140 páginas)</strong> já estão garantidos no teu e-mail. Antes de entrares na área de membros, conclui a configuração abaixo:</p>
+    <div>
+      <h2>Compra confirmada com sucesso!</h2>
+      <p>As tuas <strong>+58 Pranchas Anatómicas e os Manuais Clínicos</strong> já foram enviados para o teu e-mail. Estão 100% garantidos e podes descarregá-los a qualquer momento.</p>
+    </div>
   </div>
 
-  <!-- GATILHO 2: ARMADILHA DO VOLUME (+140 PÁGINAS VS 2 SEGUNDOS NA MARQUESA) -->
+  <!-- APRESENTAÇÃO SÓBRIA E CLÍNICA DO UPGRADE OPCIONAL -->
   <header class="center">
-    <span class="eyebrow" data-i18n="eyebrow">Condição exclusiva para novos membros</span>
-    <h1 data-i18n-html="h1">Acabaste de desbloquear +140 páginas de consulta... mas amanhã às 09h com o utente na marquesa, queres o protocolo calculado em <span class="hl">2 segundos</span> num só ecrã?</h1>
-    <p class="lead" data-i18n-html="lead">A <strong>App ElectroMapas PRO</strong> transforma toda a coleção num motor interativo de bolso: tocas na região anatómica, recebes os parâmetros calculados em 0,1s, a triagem de contraindicações e o registo clínico SOAP pronto a colar.</p>
-    <div class="hero-fast-cta"><a class="cta" href="#oferta" data-i18n="sticky">Ativar App PRO com Crédito (−9,97 €) por 14,97 € ↓</a></div>
+    <span class="eyebrow">Upgrade Clínico Opcional · Novo Membro</span>
+    <h1>Queres a App Interativa ao lado da marquesa por apenas <span class="hl">14,97 €</span>?</h1>
+    <p class="lead">Os teus manuais em PDF são perfeitos para estudar e imprimir. A <strong>App ElectroMapas PRO</strong> foi desenhada para a prática: tocas na região anatómica no telemóvel e acedes de imediato aos parâmetros de partida, canais e checklist de segurança.</p>
   </header>
 
   <figure class="mock" style="margin:0">
-    <img src="assets/funnel/app-pro-preview.webp" width="900" height="760" alt="Ecrã da App ElectroMapas PRO com protocolo, parâmetros e registo SOAP" loading="eager" fetchpriority="high" />
+    <img src="assets/funnel/app-pro-preview.webp" width="900" height="760" alt="Ecrã da App ElectroMapas PRO com protocolo e parâmetros ao lado da marquesa" loading="eager" fetchpriority="high" />
   </figure>
 
-  <!-- GATILHO 4: CONTRASTE DE AUTORIDADE -->
-  <section class="contrast" aria-label="Comparação">
-    <div class="bad">
-      <h3 data-i18n="bad_t">Consulta Manual (Sem a App)</h3>
-      <ul>
-        <li data-i18n="bad_1">Procurar entre +140 páginas e 9 manuais com o utente deitado à espera</li>
-        <li data-i18n="bad_2">Calcular dosimetria, rampas e risco térmico de cabeça a meio da sessão</li>
-        <li data-i18n="bad_3">Escrever o registo clínico SOAP à mão no final de um dia cansativo</li>
-      </ul>
-    </div>
-    <div class="good">
-      <h3 data-i18n="good_t">Modo Clínico com a App PRO</h3>
-      <ul>
-        <li data-i18n="good_1">Tocas na região e o protocolo exato abre em 2 segundos</li>
-        <li data-i18n="good_2">Parâmetros (Hz, µs, tempo) e alertas visíveis num único ecrã escuro hospitalar</li>
-        <li data-i18n="good_3">Registo SOAP gerado automaticamente em 1 clique para a ficha do utente</li>
-      </ul>
-    </div>
-  </section>
-
+  <!-- O QUE INCLUI A APP PRO (BENEFÍCIOS REAIS E SEM EXAGERO) -->
   <section class="card">
-    <h2 data-i18n="feat_t">O que ativamos agora no teu telemóvel</h2>
+    <h2>O que levas no teu telemóvel para a consulta</h2>
     <ul class="features">
-      <li><div class="fi">🗺️</div><div><strong data-i18n="f1_t">16 protocolos interativos com associação anatómica</strong><span data-i18n="f1_d">Toca na região (lombar, cervical, ombro, joelho…) e vês de imediato a colocação e os parâmetros de partida.</span></div></li>
-      <li><div class="fi">⚡</div><div><strong data-i18n="f2_t">Calculadora de dosimetria e alerta de risco térmico</strong><span data-i18n="f2_d">Ajusta a corrente e confirma Hz, µs e tempo seguro antes de ligar o equipamento no utente.</span></div></li>
-      <li><div class="fi">🛡️</div><div><strong data-i18n="f3_t">Checklist interativo de contraindicações</strong><span data-i18n="f3_d">Triagem rápida antes de cada sessão — pacemaker, gravidez, integridade da pele e sensibilidade.</span></div></li>
-      <li><div class="fi">📝</div><div><strong data-i18n="f4_t">Gerador automático de registo SOAP</strong><span data-i18n="f4_d">Gera o texto técnico da sessão para colar na ficha clínica do utente. Os dados ficam 100% no teu dispositivo.</span></div></li>
-      <li><div class="fi">📱</div><div><strong data-i18n="f5_t">Funciona offline no gabinete ou ao domicílio</strong><span data-i18n="f5_d">Instala no ecrã inicial do iPhone, Android, iPad ou computador num clique, sem depender de internet.</span></div></li>
+      <li>
+        <div class="fi">🗺️</div>
+        <div>
+          <strong>16 regiões anatómicas interativas</strong>
+          <span>Toca na região (lombar, cervical, ombro, joelho, anca, tornozelo...) e vê a disposição correta dos elétrodos num toque.</span>
+        </div>
+      </li>
+      <li>
+        <div class="fi">⚡</div>
+        <div>
+          <strong>Parâmetros recomendados de partida</strong>
+          <span>Frequência (Hz), largura de pulso (µs) e tempo de aplicação calculados para correntes analgésicas e de estimulação muscular (TENS, FES, Russas).</span>
+        </div>
+      </li>
+      <li>
+        <div class="fi">🛡️</div>
+        <div>
+          <strong>Checklist de segurança e contraindicações</strong>
+          <span>Triagem rápida à frente do utente (pacemaker, sensibilidade, gravidez, feridas) antes de ligar a corrente.</span>
+        </div>
+      </li>
+      <li>
+        <div class="fi">📱</div>
+        <div>
+          <strong>Funciona 100% offline</strong>
+          <span>Instala no ecrã inicial do telemóvel (iOS ou Android) e usa no gabinete ou no domicílio, mesmo em locais sem internet.</span>
+        </div>
+      </li>
     </ul>
   </section>
 
-  <!-- GATILHOS 2, 3, 5 E 6 NA CAIXA DE OFERTA -->
+  <!-- CAIXA DE OFERTA HONESTA (SEM BOLSAS OU ASSINATURAS INVENTADAS) -->
   <section class="card offer" id="oferta" aria-labelledby="offer-title">
-    <span class="ribbon" data-i18n="ribbon">Crédito de Membro Ativo Desbloqueado</span>
-    <h2 id="offer-title" style="margin-top:6px" data-i18n="offer_t">App ElectroMapas PRO — Licença Vitalícia</h2>
-    <p class="lead" style="font-size:14px" data-i18n="offer_d">Por teres adquirido o Sistema Base hoje, tens <strong>9,97 € de Crédito de Membro</strong> + uma bolsa clínica para ativar a versão vitalícia sem mensalidades:</p>
+    <span class="ribbon">Condição Única de Novo Membro</span>
+    <h2 id="offer-title" style="margin-top:6px">App ElectroMapas PRO — Licença Vitalícia</h2>
+    <p class="lead" style="font-size:14px">Por teres adquirido o Sistema Base hoje, podes adicionar a aplicação interativa de bolso com valor reduzido:</p>
 
-    <!-- GATILHO 2: CUSTO IRRECUPERÁVEL (CRÉDITO DE 9,97 € ABATIDO) -->
-    <div class="credit-box" data-i18n-html="credit_box">
-      💳 <strong>Resumo do teu Abatimento de Membro:</strong><br>
-      Licença Vitalícia Oficial (<strong>49,00 €</strong>) − Crédito da tua compra de hoje (<strong>−9,97 €</strong>) − Bolsa de Ativação Imediata (<strong>−24,06 €</strong>) = <strong>Apenas 14,97 € hoje</strong>.
+    <div class="price-clean-box">
+      <div class="old">Preço normal de licença: 49,00 €</div>
+      <div class="now">14,97 €</div>
+      <div class="sub">Pagamento único · Acesso vitalício · Sem mensalidades</div>
     </div>
 
-    <!-- GATILHO 3: EFEITO CHAMARIZ (MENSAL VS VITALÍCIO) -->
-    <div class="decoy-grid">
-      <div class="decoy-card">
-        <span class="decoy-tag" data-i18n="decoy_a_tag">Opção A · Público Geral</span>
-        <div style="font-weight:800; color:#cbd5e1; font-size:15px;" data-i18n="decoy_a_title">Assinatura Mensal</div>
-        <div style="font-size:20px; font-weight:900; color:#94a3b8; margin:4px 0;">19,90 €<small style="font-size:12px;">/mês</small></div>
-        <div style="font-size:11.5px; color:#64748b;" data-i18n="decoy_a_sub">238,80 € por ano · Cobrança recorrente</div>
-      </div>
-      <div class="decoy-card target">
-        <span class="decoy-tag" data-i18n="decoy_b_tag">★ Opção B · Novo Membro (Recomendado)</span>
-        <div style="font-weight:800; color:#ffffff; font-size:15px;" data-i18n="decoy_b_title">Acesso Vitalício Único</div>
-        <div style="font-size:24px; font-weight:900; color:#00e5ff; margin:4px 0;">14,97 € <small style="font-size:12px; color:#a7f3d0;" data-i18n="once">pagamento único</small></div>
-        <div style="font-size:11.5px; color:#a7f3d0; font-weight:700;" data-i18n="decoy_b_sub">Zero mensalidades para sempre · IVA incluído</div>
-      </div>
+    <div class="anchor" style="margin-bottom:16px;">
+      Custa <strong>menos de metade de uma única sessão particular</strong> (35–60 €). Fica paga logo no primeiro atendimento de segunda-feira.
     </div>
 
-    <div class="anchor" data-i18n-html="anchor">Custa <strong>menos de metade de uma única sessão particular</strong> (35–60 €). Paga-se no primeiro utente de segunda-feira.</div>
-
-    <!-- GATILHO 6: CONTADOR REGRESSIVO MB WAY (03:00) -->
-    <div class="mbway-timer" role="timer" aria-live="polite">
-      <span>⏱️</span>
-      <span data-i18n-html="timer_txt">O teu crédito de 9,97 € e a vaga vitalícia expiram em <strong id="em-upsell-timer">03:00</strong> — Aprova na app MB WAY ou com 1 clique.</span>
-    </div>
-
+    <!-- WIDGET NATIVO DE 1-CLIQUE DA HOTMART (PARA QUEM PAGOU COM CARTÃO) -->
     <div id="hotmart-sales-funnel"></div>
-    <div class="fallback" hidden>
+
+    <!-- BOTÃO FALLBACK (PARA QUEM PAGOU COM MB WAY OU SE O WIDGET NÃO CARREGAR) -->
+    <div class="fallback">
       <a class="cta" data-stage="u1" data-checkout="https://pay.hotmart.com/N108089769S?off=54lg83ib&sck=u1" href="https://pay.hotmart.com/N108089769S?off=54lg83ib&checkoutMode=10&locale=pt_PT&sck=u1">
-        <span data-i18n="cta">SIM! ATIVAR A APP PRO VITALÍCIA POR 14,97 €</span> <span aria-hidden="true">→</span>
+        <span>SIM! ADICIONAR A APP PRO POR 14,97 € →</span>
       </a>
     </div>
-    <p class="cta-sub" data-i18n="cta_sub">A Hotmart reaproveita os dados da compra que acabaste de fazer. Se pagaste com MB WAY, abre a app do teu banco para validar antes que o tempo expire.</p>
-    <div class="pay-badges" aria-label="Métodos de pagamento"><span>📱 MB WAY</span><span>💳 Cartão</span><span>⚡ Bizum</span><span>🅿️ PayPal</span></div>
 
-    <div class="trust" style="margin-top:14px">
-      <span data-i18n="tr1">Pagamento único</span><span data-i18n="tr2">Ativação imediata</span><span data-i18n="tr3">Garantia Hotmart 15 Dias</span>
+    <p class="cta-sub" style="margin-top:10px;">
+      A Hotmart processa em 1 clique para quem pagou com cartão. Se pagaste por MB WAY, a app do banco enviará a confirmação rápida de 1 toque.
+    </p>
+
+    <div class="pay-badges" aria-label="Métodos de pagamento">
+      <span>📱 MB WAY</span><span>💳 Cartão</span><span>⚡ Bizum</span><span>🅿️ PayPal</span>
     </div>
 
-    <!-- GATILHO 5: BOTÃO DA VERGONHA (DISSONÂNCIA NA RECUSA) -->
-    <a class="decline" href="downsell.html" data-carry data-i18n="decline">Não, obrigado. Prefiro continuar a calcular parâmetros manualmente à frente do utente e perder o meu crédito de membro de 9,97 €.</a>
+    <div class="trust" style="margin-top:14px">
+      <span>Pagamento único</span><span>Ativação imediata</span><span>Garantia Hotmart 15 Dias</span>
+    </div>
+
+    <!-- BOTÃO DE RECUSA DIGNO E RESPEITOSO -->
+    <a class="decline-clean" href="obrigado.html" data-carry>Não, obrigado. Quero apenas aceder aos meus manuais e pranchas →</a>
   </section>
 
-  <div class="note"><span aria-hidden="true">ℹ️</span><span data-i18n-html="note"><b>Esta condição de membro só aparece agora</b>, imediatamente a seguir à tua inscrição. Ao saíres desta página, o crédito de 9,97 € expira.</span></div>
+  <div class="note">
+    <span aria-hidden="true">ℹ️</span>
+    <span><b>Nota de transparência:</b> Esta condição especial de 14,97 € é exclusiva para esta sessão pós-compra. Os teus materiais principais de 9,97 € já estão disponíveis no teu e-mail independentemente da tua escolha.</span>
+  </div>
 
   <section>
-    <h2 data-i18n="faq_t">Perguntas rápidas</h2>
-    <details><summary data-i18n="q1">Já tenho o Atlas +58 Mapas e os 8 Manuais. Preciso mesmo da App PRO?</summary><p data-i18n="a1">O Atlas e os 8 Manuais são a tua biblioteca visual completa de referência. A App PRO é o teu motor interativo rápido ao lado da marquesa: tocas na região, vês a dosimetria calculada em 0,1s, fazes o checklist de segurança e copias o registo SOAP pronto em 2 segundos.</p></details>
-    <details><summary data-i18n="q2">Funciona no meu telemóvel e tablet?</summary><p data-i18n="a2">Sim. Abre diretamente no iPhone, Android, iPad ou computador e pode ser adicionada ao ecrã inicial como aplicação nativa, funcionando mesmo sem internet no gabinete.</p></details>
-    <details><summary data-i18n="q3">Como ativo depois de confirmar?</summary><p data-i18n-html="a3">Recebes o acesso imediato no teu e-mail e introduzes o <b>código da transação Hotmart</b> (começa por <code class="kbd">HP</code>). A licença vitalícia é ativada na hora.</p></details>
-    <details><summary data-i18n="q4">Tenho garantia nesta ativação?</summary><p data-i18n="a4">Sim! Tens 15 dias de Garantia Incondicional processada e protegida pela Hotmart. Podes testar na clínica com total segurança.</p></details>
+    <h2>Dúvidas rápidas</h2>
+    <details>
+      <summary>Já tenho as +58 Pranchas e os 8 Manuais. Para que serve a App?</summary>
+      <p>Os manuais e pranchas são a tua biblioteca completa para estudo, consulta profunda e impressão A4. A App PRO é o teu atalho na consulta: abres o telemóvel ao lado da marquesa, tocas na zona do corpo e tens os parâmetros recomendados em 2 segundos sem folhear páginas.</p>
+    </details>
+    <details>
+      <summary>Funciona no iPhone, Android e computador?</summary>
+      <p>Sim. Funciona em qualquer telemóvel, tablet ou computador. Podes adicioná-la ao ecrã inicial do teu telemóvel como uma aplicação nativa e funciona mesmo sem internet.</p>
+    </details>
+    <details>
+      <summary>Como recebo o acesso à App PRO?</summary>
+      <p>Recebes de imediato os dados de acesso e a chave de ativação no mesmo e-mail que usaste na tua compra.</p>
+    </details>
+    <details>
+      <summary>Tenho garantia nesta compra?</summary>
+      <p>Sim! Tens 15 dias de Garantia Incondicional assegurada pela Hotmart. Se achares que a app não te poupa tempo na clínica, devolvemos 100% do teu valor.</p>
+    </details>
   </section>
 
-  <p class="foot" data-i18n-html="foot">ElectroMapas © 2026 · Sistema de referência para profissionais de fisioterapia · <a href="mailto:ivar.suporte03@gmail.com">Suporte</a></p>
+  <p class="foot">ElectroMapas © 2026 · Sistema clínico de apoio à fisioterapia · <a href="mailto:ivar.suporte03@gmail.com">Apoio ao Cliente</a></p>
 </main>
 
-<div class="sticky"><a class="cta" href="#oferta" data-i18n="sticky">Ativar App PRO com Crédito (−9,97 €) por 14,97 € ↓</a></div>
+<!-- BARRA FIXA MOBILE SÓBRIA -->
+<div class="sticky">
+  <a class="cta" href="#oferta">Adicionar App PRO Vitalícia por 14,97 € ↓</a>
+</div>
 
-<script>
-// Cronómetro regressivo de 03:00 minutos (Gatilho 6 MB WAY)
-(function() {
-  var sec = 180;
-  var el = document.getElementById('em-upsell-timer');
-  if (!el) return;
-  setInterval(function() {
-    if (sec > 0) sec--;
-    var m = String(Math.floor(sec / 60)).padStart(2, '0');
-    var s = String(sec % 60).padStart(2, '0');
-    el.textContent = m + ':' + s;
-  }, 1000);
-})();
-
-window.PAGE_I18N = {
-  pt: {},
-  es: {
-    title: 'Configuración Final (80%) — Sistema Interactivo ElectroMapas PRO',
-    secure: '🔒 Conexión segura · Hotmart',
-    step_done: '✓ Paso 1: Láminas y Manuales Liberados (80%)', step_now: '⏳ Paso 2 Pendiente: Modo de Operación en Consulta',
-    delivered: '¡Pago confirmado! Tus <strong>+58 Láminas Anatómicas y los 8 Manuales Clínicos (+140 páginas)</strong> ya están garantizados en tu e-mail. Antes de entrar al área de miembros, completa el Paso 2 abajo:',
-    eyebrow: 'Condición exclusiva para nuevos miembros',
-    h1: 'Acabas de desbloquear +140 páginas de consulta... pero mañana a las 09h con el paciente en la camilla, ¿quieres el protocolo calculado en <span class="hl">2 segundos</span> en una sola pantalla?',
-    lead: 'La <strong>App ElectroMapas PRO</strong> reúne los protocolos, el cálculo de dosimetría, las contraindicaciones y el registro SOAP en una sola pantalla del móvil, junto a la camilla.',
-    bad_t: 'Consulta Manual (Sin la App)', bad_1: 'Buscar entre +140 páginas y 9 manuales con el paciente esperando en la camilla', bad_2: 'Calcular dosimetría y riesgo térmico de memoria en mitad de la sesión', bad_3: 'Escribir el registro clínico SOAP a mano al final del día',
-    good_t: 'Modo Clínico con la App PRO', good_1: 'Tocas la región y el protocolo exacto aparece en 2 segundos', good_2: 'Parámetros (Hz, µs, tiempo) y alertas visibles en una sola pantalla', good_3: 'Registro SOAP generado en 1 clic listo para copiar a la ficha',
-    feat_t: 'Lo que activamos hoy en tu móvil',
-    f1_t: '16 protocolos interactivos con referencia anatómica', f1_d: 'Toca la región (lumbar, cervical, hombro, rodilla…) y ves la colocación y los parámetros de inicio.',
-    f2_t: 'Calculadora de dosimetría y riesgo térmico', f2_d: 'Ajusta la corriente y confirma Hz, µs y tiempo antes de encender el equipo.',
-    f3_t: 'Checklist interactivo de contraindicaciones', f3_d: 'Comprobación rápida antes de cada sesión: marcapasos, embarazo, piel y sensibilidad.',
-    f4_t: 'Generador automático de registro SOAP', f4_d: 'Genera el texto técnico de la sesión para pegarlo en la ficha. Los datos se quedan en tu dispositivo.',
-    f5_t: 'Funciona como app, incluso sin conexión', f5_d: 'Se instala en la pantalla de inicio del iPhone, Android u ordenador. Sin tiendas de apps.',
-    ribbon: 'Crédito de Miembro Activo Desbloqueado', offer_t: 'App ElectroMapas PRO — Licencia de por vida',
-    offer_d: 'Por haber adquirido hoy el Sistema Base, tienes <strong>9,97 € de Crédito de Miembro</strong> para activar la versión vitalicia sin cuotas:',
-    credit_box: '💳 <strong>Resumen de tu Abono de Miembro:</strong><br>Licencia Vitalicia Oficial (<strong>49,00 €</strong>) − Crédito de tu compra de hoy (<strong>−9,97 €</strong>) − Beca de Activación (<strong>−24,06 €</strong>) = <strong>Solo 14,97 € hoy</strong>.',
-    decoy_a_tag: 'Opción A · Público General', decoy_a_title: 'Suscripción Mensual', decoy_a_sub: '238,80 € al año · Cobro recurrente',
-    decoy_b_tag: '★ Opción B · Nuevo Miembro (Recomendado)', decoy_b_title: 'Acceso Vitalicio Único', decoy_b_sub: 'Cero cuotas mensuales · IVA incluido',
-    once: 'pago único',
-    anchor: 'Cuesta <strong>menos de la mitad de una sola sesión privada</strong> (35–60 €). Se paga sola con el primer paciente.',
-    cta: '¡SÍ! ACTIVAR LA APP PRO VITALICIA POR 14,97 €',
-    cta_sub: 'Hotmart reutiliza los datos de la compra que acabas de hacer. Si pagaste con Bizum o MB WAY, aprueba la solicitud en la app de tu banco.',
-    tr1: 'Pago único', tr2: 'Activación inmediata', tr3: 'Garantía Hotmart 15 Días',
-    decline: 'No, gracias. Prefiero seguir calculando parâmetros manualmente delante del paciente y perder mi crédito de miembro de 9,97 €.',
-    note: '<b>Esta condición solo aparece ahora</b>, tras tu compra. Al salir de esta página el crédito de 9,97 € expira.',
-    faq_t: 'Preguntas rápidas',
-    q1: 'Ya tengo el Atlas +58 Mapas y los 8 Manuales. ¿De verdad necesito la App PRO?', a1: 'El Atlas y los 8 Manuales son tu biblioteca visual completa. La App PRO es tu motor interactivo junto a la camilla: menos toques, cálculo en 0,1s y registro SOAP listo en 2 segundos.',
-    q2: '¿Funciona en mi móvil y tablet?', a2: 'Sí. Se abre en el navegador del iPhone, Android, iPad u ordenador y se puede instalar en la pantalla de inicio para usar sin internet.',
-    q3: '¿Cómo la activo después de confirmar?', a3: 'Abres la App e introduces el <b>código de transacción Hotmart</b> (empieza por <code class="kbd">HP</code>) que recibes en tu e-mail.',
-    q4: '¿Tengo garantía en esta activación?', a4: 'Sí, tienes 15 días de Garantía Incondicional procesada y protegida directamente por Hotmart.',
-    foot: 'ElectroMapas © 2026 · Sistema de referencia para profesionales de fisioterapia · <a href="mailto:ivar.suporte03@gmail.com">Soporte</a>',
-    sticky: 'Activar App PRO con Crédito (−9,97 €) por 14,97 € ↓'
-  },
-  en: {
-    title: 'Final Setup (80%) — ElectroMapas PRO Interactive System',
-    secure: '🔒 Secure connection · Hotmart',
-    step_done: '✓ Step 1: Visual Sheets & Manuals Unlocked (80%)', step_now: '⏳ Step 2 Pending: Clinical Plinth Mode',
-    delivered: 'Payment confirmed! Your <strong>58+ Visual Sheets and 8 Clinical Manuals (140+ pages)</strong> are guaranteed in your e-mail. Before entering the member area, complete Step 2 below:',
-    eyebrow: 'Exclusive new-member condition',
-    h1: 'You just unlocked 140+ reference pages... but tomorrow at 9 AM with a patient on the plinth, do you want the protocol calculated in <span class="hl">2 seconds</span> on a single screen?',
-    lead: 'The <strong>ElectroMapas PRO App</strong> puts interactive protocols, dosimetry checks, contraindications and SOAP notes on one phone screen, right next to the treatment table.',
-    bad_t: 'Manual Lookup (Without PRO App)', bad_1: 'Searching across 140+ pages and 9 manuals while the patient waits', bad_2: 'Calculating dosimetry and thermal risk mentally mid-session', bad_3: 'Writing SOAP session notes by hand at the end of the day',
-    good_t: 'Clinical Mode with the PRO App', good_1: 'Tap the region and the exact protocol opens in 2 seconds', good_2: 'Parameters (Hz, µs, time) and safety alerts on one hospital-dark screen', good_3: 'SOAP note generated in 1 click, ready to paste',
-    feat_t: 'What you unlock on your phone today',
-    f1_t: '16 interactive protocols with anatomical mapping', f1_d: 'Tap a region (lumbar, neck, shoulder, knee…) to see placement and starting parameters.',
-    f2_t: 'Dosimetry & thermal-risk calculator', f2_d: 'Adjust the current and confirm Hz, µs and time before switching the device on.',
-    f3_t: 'Interactive contraindication checklist', f3_d: 'A quick check before every session — pacemaker, pregnancy, skin, sensation.',
-    f4_t: 'Automatic SOAP note generator', f4_d: 'Generates the technical session text to paste into the patient record. Data stays on your device.',
-    f5_t: 'Works offline like a native app', f5_d: 'Install it on your iPhone, Android, iPad or computer home screen. No app store needed.',
-    ribbon: 'Active Member Credit Unlocked', offer_t: 'ElectroMapas PRO App — Lifetime Licence',
-    offer_d: 'Because you joined the Base System today, you have a <strong>€9.97 Member Credit</strong> towards the lifetime edition with zero monthly fees:',
-    credit_box: '💳 <strong>Your Member Credit Summary:</strong><br>Official Lifetime Licence (<strong>€49.00</strong>) − Today\'s Purchase Credit (<strong>−€9.97</strong>) − Fast-Action Grant (<strong>−€24.06</strong>) = <strong>Only €14.97 today</strong>.',
-    decoy_a_tag: 'Option A · Regular Plan', decoy_a_title: 'Monthly Subscription', decoy_a_sub: '€238.80/year · Recurring billing',
-    decoy_b_tag: '★ Option B · New Member (Recommended)', decoy_b_title: 'One-Time Lifetime Access', decoy_b_sub: 'Zero monthly fees forever · VAT included',
-    once: 'one-time payment',
-    anchor: 'Costs <strong>less than half of one private session</strong> (€35–60). Pays for itself with your first patient on Monday.',
-    cta: 'YES! ACTIVATE THE LIFETIME PRO APP FOR €14.97',
-    cta_sub: 'Hotmart reuses the details from the purchase you just made. If you paid with a mobile wallet, approve the request in your banking app.',
-    tr1: 'One-time payment', tr2: 'Instant activation', tr3: '15-Day Hotmart Guarantee',
-    decline: 'No thanks. I prefer to keep calculating parameters manually in front of the patient and forfeit my €9.97 member credit.',
-    note: '<b>This member offer only appears now</b>, right after your purchase. Leaving this page forfeits the €9.97 credit.',
-    faq_t: 'Quick questions',
-    q1: 'I already have the 58+ Visual Sheets and 8 Manuals. Do I need the PRO App?', a1: 'The Atlas and 8 Manuals are your complete visual reference library. The PRO App is your interactive clinical engine at the plinth: 1 tap, 0.1s calculation, and ready-to-paste SOAP notes.',
-    q2: 'Does it work on my phone and tablet?', a2: 'Yes. It opens in the browser on iPhone, Android, iPad or computer and can be installed on the home screen for offline use.',
-    q3: 'How do I activate it?', a3: 'Open the App and enter your <b>Hotmart transaction code</b> (starts with <code class="kbd">HP</code>) from your confirmation e-mail.',
-    q4: 'Is it covered by a guarantee?', a4: 'Yes, you are covered by the 15-Day Unconditional Hotmart Guarantee.',
-    foot: 'ElectroMapas © 2026 · Clinical reference system for physiotherapy professionals · <a href="mailto:ivar.suporte03@gmail.com">Support</a>',
-    sticky: 'Activate PRO App with Credit (−€9.97) for €14.97 ↓'
-  }
-};
-</script>
 <script src="funnel.js?v=4" defer></script>
 </body>
 </html>
