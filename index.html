@@ -3,49 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- META PIXEL OFICIAL UNIFICADO (1684602679908725) BLOQUEADO ATÉ CONSENTIMENTO EXPLÍCITO (LEI 41/2004 ART. 5.º / RGPD) -->
+<!-- META PIXEL OFICIAL UNIFICADO (1684602679908725) NO TOPO DO HEAD -->
   <script>
-    window._emPixelBooted = false;
-    window._emPixelRevoked = false;
-    window.emBootMetaPixel = function() {
-      window._emPixelRevoked = false;
-      if (window._emPixelBooted) {
-        if (typeof window.fbq === 'function') {
-          window.fbq('consent', 'grant');
-          window.fbq('track', 'PageView');
-        }
-        return;
-      }
-      window._emPixelBooted = true;
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){
-      if(window._emPixelRevoked && arguments[0] !== 'consent') return;
-      n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      window.fbq('consent', 'grant');
-      window.fbq('init', '1684602679908725');
-      window.fbq('track', 'PageView');
-    };
-    window.emRevokeMetaPixel = function() {
-      window._emPixelRevoked = true;
-      if (typeof window.fbq === 'function') {
-        window.fbq('consent', 'revoke');
-      }
-    };
-    (function() {
-      var c = null;
-      try {
-        c = localStorage.getItem('em_consent') || (document.cookie.match(/(?:^|; )em_consent=([^;]*)/) || [])[1] || null;
-      } catch (e) {}
-      if (c !== 'denied') {
-        window.emBootMetaPixel();
-      }
-    })();
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1684602679908725');
+    fbq('track', 'PageView');
   </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1684602679908725&ev=PageView&noscript=1"/>
+  </noscript>
 
   <title>+58 Mapas Visuais de Posicionamento de Elétrodos para Fisioterapia | ElectroMapas</title>
   <meta name="description" content="Uma região, uma lâmina, uma resposta clara. Consulta em segundos o posicionamento de elétrodos, pontos motores, canais CH1 a CH4 e parâmetros (Hz, µs) para TENS, NMES, FES, Russa e Aussie." />
@@ -53,6 +26,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://pay.hotmart.com" crossorigin>
   <link rel="dns-prefetch" href="https://pay.hotmart.com">
+  <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+  <link rel="dns-prefetch" href="https://connect.facebook.net">
   <link rel="preload" as="image" href="/assets/01-hero-espaco-clinico.webp" fetchpriority="high">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=Playfair+Display:ital,wght@1,600;1,700&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -75,7 +50,6 @@
       --text-body: #334155;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --border-mint: #99f6e4;
       --radius-md: 16px;
       --radius-lg: 22px;
       --shadow-sm: 0 6px 20px rgba(15, 23, 42, 0.05);
@@ -1221,7 +1195,7 @@
     }
     details.faq-row p { margin-top: 10px; font-size: 14px; color: var(--text-muted); }
 
-    /* BARRA FIXA MOBILE (OCULTA NA 1ª DOBRA PARA NÃO TAPAR O HERO NEM O BANNER RGPD) */
+    /* BARRA FIXA MOBILE */
     .sticky-bottom {
       position: fixed;
       bottom: 0;
@@ -1229,19 +1203,21 @@
       right: 0;
       background: rgba(6, 22, 30, 0.96);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-top: 1px solid rgba(0, 229, 255, 0.3);
       padding: 10px 16px;
-      display: flex;
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
+      display: none; /* Inicia oculto e so aparece ao rolar apos a Hero */
       align-items: center;
       justify-content: space-between;
       z-index: 999;
       color: #ffffff;
-      transition: transform 0.25s ease, opacity 0.25s ease;
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
     }
-    .sticky-bottom.is-hidden {
-      transform: translateY(110%);
-      opacity: 0;
-      pointer-events: none;
+    @media (min-width: 769px) {
+      .sticky-bottom {
+        display: none !important;
+      }
     }
     .sticky-btn {
       background: linear-gradient(90deg, #00e5ff 0%, #10b981 100%);
@@ -1252,6 +1228,9 @@
       padding: 12px 20px;
       border-radius: 99px;
       text-transform: uppercase;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     footer {
@@ -1280,6 +1259,18 @@
       }
       .pillars-5 {
         grid-template-columns: repeat(2, 1fr);
+      }
+      .pillars-5 .pillar-item:last-child {
+        grid-column: span 2;
+      }
+      .sticky-bottom {
+        padding: 10px 14px;
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+      }
+      .sticky-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+        white-space: nowrap;
       }
       .metrics-row-4,
       .sheets-4-grid {
@@ -1352,16 +1343,10 @@
       background: #cbd5e1;
       border: 0;
       border-radius: 50%;
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       padding: 0;
-      position: relative;
       transition: all 0.2s ease;
-    }
-    .dots button::after {
-      content: '';
-      position: absolute;
-      inset: -10px;
     }
     .dots button.on {
       background: #0f172a;
@@ -1442,191 +1427,52 @@
       }
       .guarantee-content h2 { text-align: center; }
       .guarantee-box img { width: 140px; height: 140px; flex: 0 0 140px; }
-      .topbar { font-size: 11.5px; padding: 7px 10px; line-height: 1.3; }
-      .hero { padding: 14px 0 24px; position: relative; overflow: hidden; }
-      .pill-top { font-size: 10.5px; padding: 4px 12px; margin-bottom: 8px; }
-      .hero h1 { font-size: 24px; line-height: 1.15; margin-bottom: 8px; }
-      .hero-sub { font-size: 13.5px; line-height: 1.42; margin-bottom: 10px; }
-      .hero-single-visual { padding: 6px; margin-bottom: 12px; }
-      .hero-single-visual img { max-height: 185px; }
-      .img-caption-bar { font-size: 11px; padding: 6px 8px; }
-      .btn-main { width: 100%; padding: 14px 18px; font-size: 14.5px; }
-    }
-
-  
-    /* ==========================================================================
-       MELHORIAS DE ALTA DEFINIÇÃO E QUALIDADE MOBILE (SMARTPHONE CRO POLISH)
-       ========================================================================== */
-    html, body {
-      overflow-x: hidden;
-      max-width: 100%;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-    
-    a, button {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    @media (max-width: 640px) {
-      .topbar {
-        font-size: 11px;
-        padding: 7px 12px;
-        line-height: 1.35;
-        font-weight: 700;
-        letter-spacing: 0.2px;
-      }
-      .hero {
-        padding: 12px 0 20px;
-      }
-      .pill-top {
-        font-size: 10px;
-        padding: 4px 10px;
-        margin-bottom: 8px;
-        letter-spacing: 0.3px;
-      }
-      .hero h1 {
-        font-size: 23px;
-        line-height: 1.18;
-        margin-bottom: 8px;
-        font-weight: 800;
-      }
-      .hero-sub {
-        font-size: 13px;
-        line-height: 1.45;
-        margin-bottom: 10px;
-        color: #cbd5e1;
-      }
-      .hero-single-visual {
-        padding: 5px;
-        margin-bottom: 10px;
-        border-radius: 16px;
-        border: 1px solid rgba(0, 229, 255, 0.25);
-        box-shadow: 0 8px 24px rgba(0, 229, 255, 0.15);
-      }
-      .hero-single-visual img {
-        max-height: 180px;
-        border-radius: 12px;
-      }
-      .btn-main {
-        width: 100%;
-        padding: 15px 18px;
-        font-size: 14.5px;
-        font-weight: 900;
-        border-radius: 12px;
-        box-shadow: 0 8px 22px rgba(16, 185, 129, 0.45);
-        transition: transform 0.12s ease;
-      }
-      .btn-main:active {
-        transform: scale(0.98);
-      }
-      .pillars-5 {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 6px !important;
-        margin: 14px 0 10px !important;
-      }
-      .pillars-5 .pillar-item:last-child {
-        grid-column: span 2;
-      }
-      .pillar-item {
-        padding: 7px 8px !important;
-        font-size: 11.5px !important;
-        font-weight: 700 !important;
-      }
-      .trust-checks {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 6px !important;
-        font-size: 11px !important;
-        margin-top: 10px !important;
-      }
-      .trust-checks span {
-        margin: 0 !important;
-        justify-content: flex-start !important;
-      }
-      .bonus-item-row {
-        padding: 18px 14px !important;
-        gap: 14px !important;
-        border-radius: 16px !important;
-      }
-      .bonus-item-row img {
-        max-height: 150px !important;
-        width: 100% !important;
-        object-fit: cover !important;
-        border-radius: 10px !important;
-      }
-      #oferta-box {
-        padding: 24px 16px !important;
-        border-radius: 20px !important;
-      }
-      .btn-plan-pro {
-        padding: 16px 18px !important;
-        font-size: 15.5px !important;
-        border-radius: 12px !important;
-        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.5) !important;
-      }
-      .btn-plan-pro:active {
-        transform: scale(0.98);
-      }
-      .sticky-bottom {
-        padding: 8px 14px max(8px, env(safe-area-inset-bottom)) !important;
-      }
-      .sticky-btn {
-        font-size: 13.5px !important;
-        padding: 10px 16px !important;
-        border-radius: 99px !important;
-        font-weight: 900 !important;
-      }
-      .sticky-btn:active {
-        transform: scale(0.97);
-      }
     }
 
   </style>
 </head>
 <body>
 
-  <!-- BARRA DE TOPO (SEM PREÇO SECO ANTES DA CONSTRUÇÃO DE VALOR) -->
-  <div class="topbar">⚡ CONSULTA RÁPIDA DE GABINETE: +58 Mapas Visuais + 8 Manuais Práticos por apenas 9,97€ (Acesso Imediato)</div>
+  <!-- BARRA DE TOPO -->
+  <div class="topbar">⚡ CONSULTA RÁPIDA DE GABINETE: +58 Mapas Visuais + 4 Guias Práticos por apenas 9,97€ (Acesso Imediato)</div>
 
-  <!-- 1. HERO SECTION (1ª DOBRA OTIMIZADA PARA TELEMÓVEL 390x844 COM BOTÃO VISÍVEL SEM ROLAR) -->
-  <header class="hero" style="position:relative; overflow:hidden;">
-    <div class="container" style="position:relative; z-index:1;">
-      <div class="pill-top">ATLAS CLÍNICO INTERATIVO · TELEMÓVEL, TABLET E COMPUTADOR</div>
+  <!-- 1. HERO SECTION (ESTRUTURA DAS PÁGINAS DE REFERÊNCIA + FOTO 01 E FOTO 02) -->
+  <header class="hero">
+    <div class="container">
+      <div class="pill-top">COLEÇÃO CLÍNICA DIGITAL · TELEMÓVEL, TABLET E COMPUTADOR</div>
 
+      <div class="hero-giant-num" style="opacity:0.04; font-size:110px;">+58</div>
       <h1>+58 Mapas Visuais de <span>Posicionamento de Elétrodos</span> para Fisioterapia</h1>
 
-      <p class="hero-sub">Abre a região anatómica no ecrã, confirma os canais CH1 ciano / CH2 laranja e aplica Hz, µs e tempo em 5 segundos ao lado da marquesa — para <strong>TENS, NMES, FES, Russa e Aussie</strong>, com <strong>8 Manuais Clínicos de Gabinete</strong> incluídos.</p>
+      <p class="hero-sub">Abre a região anatómica, confirma os pares e canais por cor (CH1 a CH4) e aplica os parâmetros sugeridos (Hz, µs e tempo) em 5 segundos — para TENS, NMES, FES, Corrente Russa e Aussie.</p>
 
       <!-- VITRINE HERO PRINCIPAL: FOTO 01 (Espaço Clínico Avançado) -->
       <div class="hero-single-visual">
-        <img src="assets/01-hero-espaco-clinico.webp" alt="Espaço Clínico de Eletroterapia com iPad Pro, iPhone e Aparelho TENS/NMES/FES" fetchpriority="high" decoding="async" />
+        <img src="/assets/01-hero-espaco-clinico.webp" alt="Espaço Clínico de Eletroterapia com iPad Pro, iPhone e Aparelho TENS/NMES/FES" fetchpriority="high" decoding="async" />
         <div class="img-caption-bar">
-          <span>⚡ Consulta Visual Rápida ao Lado da Marquesa</span>
+          <span>⚡ Consulta Visual Rápida ao Lado do Aparelho</span>
           <span class="tag">TENS · NMES · FES · Russa · Aussie</span>
         </div>
       </div>
 
-      <!-- CTA IMEDIATO NA PRIMEIRA DOBRA MOBILE (SMOOTH SCROLL ATÉ A OFERTA) -->
-      <div class="cta-row" style="flex-direction:column; align-items:center; margin-top:10px; margin-bottom:16px;">
-        <a href="#oferta" class="btn-main">QUERO ACEDER AOS +58 MAPAS AGORA (9,97€) →</a>
-        <div style="font-size:12px; color:var(--text-muted); font-weight:700; margin-top:6px;">
-          🔒 Pagamento único de 9,97€ · Recebes no e-mail em 1 minuto (MB WAY, Multibanco ou Cartão)
-        </div>
-      </div>
-
-      <!-- OS 5 PILARES VISUAIS -->
+      <!-- OS 5 PILARES VISUAIS (COMO NA PÁGINA DE REFERÊNCIA 1) -->
       <div class="pillars-5">
         <div class="pillar-item"><span>🗺️</span>8 Regiões Anatómicas</div>
-        <div class="pillar-item"><span>🎯</span>Pontos Motores Exatos</div>
-        <div class="pillar-item"><span>💪</span>Feixes Musculares 3D</div>
+        <div class="pillar-item"><span>🎯</span>Pontos de Aplicação</div>
+        <div class="pillar-item"><span>💪</span>Principais Músculos</div>
         <div class="pillar-item"><span>⚡</span>Pares e Canais CH1-CH4</div>
         <div class="pillar-item"><span>📊</span>Parâmetros (Hz / µs)</div>
       </div>
 
+      <div class="cta-row" style="flex-direction:column; align-items:center;">
+        <a href="#oferta" class="btn-main">QUERO ACEDER AOS +58 MAPAS AGORA →</a>
+        <div style="font-size:12.5px; color:var(--text-muted); font-weight:700; margin-top:8px;">
+          🔒 Pagamento único de 9,97€ · Recebes no e-mail em 1 minuto (MB WAY, Multibanco ou Cartão)
+        </div>
+      </div>
+
       <div class="trust-checks">
-        <span><i>✓</i> Pranchas Visuais em Alta Definição</span>
+        <span><i>✓</i> Material 100% Digital em HD</span>
         <span><i>✓</i> Acesso Imediato no E-mail</span>
         <span><i>✓</i> Telemóvel, Tablet e Computador</span>
         <span><i>✓</i> Pagamento Seguro (9,97€ com IVA)</span>
@@ -1638,7 +1484,7 @@
   <section class="section section-soft">
     <div class="container">
       <div class="sec-head">
-        <span class="sec-pill">IDENTIFICANDO A DIFICULDADE</span>
+        <span class="sec-pill">A DIFICULDADE NO DIA A DIA</span>
         <h2 class="sec-title">Identificas-te com alguma <span class="serif-italic">destas situações?</span></h2>
       </div>
 
@@ -1647,7 +1493,7 @@
           <div class="sit-icon">01</div>
           <div>
             <h3>Sabes a teoria, mas hesitas no posicionamento exato na marquesa</h3>
-            <p>Com o utente já deitado na marquesa à espera, não podes hesitar sobre o ponto motor exato do VMO, a distância entre elétrodos ou a direção das fibras.</p>
+            <p>Conheces os músculos e nervos, mas no momento de colar os elétrodos surge a dúvida sobre a distância, o ponto motor ou a direção das fibras.</p>
           </div>
         </div>
 
@@ -1655,15 +1501,15 @@
           <div class="sit-icon">02</div>
           <div>
             <h3>Confusão ao cruzar múltiplos canais (CH1 e CH2)</h3>
-            <p>Evita trocar cabos ou hesitar entre montagem bipolar longitudinal, coplanar ou tetrapolar cruzada na coluna lombar, cervical, coifa ou joelho.</p>
+            <p>Dúvidas frequentes entre montagem bipolar longitudinal, coplanar ou tetrapolar cruzada na região lombar, cervical, ombro ou joelho.</p>
           </div>
         </div>
 
         <div class="situation-card">
           <div class="sit-icon">03</div>
           <div>
-            <h3>Receio de errar a dosimetria (Hz e µs) e irritar o nervo ou a pele</h3>
-            <p>Aplicar largura de pulso (µs) ou frequência desajustada reduz o efeito analgésico ou gera desconforto elétrico desnecessário no utente.</p>
+            <h3>Perdes tempo à procura de parâmetros (Hz e µs)</h3>
+            <p>A meio da sessão, não é prático procurar em livros extensos qual a frequência (Hz), largura de pulso (µs) e tempo para TENS, NMES ou FES.</p>
           </div>
         </div>
 
@@ -1671,7 +1517,7 @@
           <div class="sit-icon">04</div>
           <div>
             <h3>Queres consultar rápido em vez de decorar tabelas</h3>
-            <p>Em vez de procurar em livros pesados à frente do utente, abres a prancha visual no telemóvel ou tablet em 5 segundos ao lado do aparelho.</p>
+            <p>Procuras um guia visual estruturado que possas abrir no telemóvel, tablet ou computador em 5 segundos ao lado da marquesa.</p>
           </div>
         </div>
       </div>
@@ -1709,7 +1555,7 @@
       <!-- AS 3 FOTOS DE MESA E DISPOSITIVOS (FOTOS 04, 05 E 06) -->
       <div class="preview-showcase-grid">
         <div class="preview-photo-box">
-          <img src="assets/04-mesa-6-regioes.webp" alt="Guia de Eletroterapia na Mesa de Estudo com 6 Regiões e iPad" loading="lazy" decoding="async" />
+          <img src="/assets/04-mesa-6-regioes.webp" alt="Guia de Eletroterapia na Mesa de Estudo com 6 Regiões e iPad" loading="lazy" decoding="async" />
           <div class="preview-photo-caption">
             <strong>Visão Global por Região Corporal</strong>
             <p>Lombar, Membro Inferior, Tórax/Ombro, Membro Superior, Mão/Punho e Cervical organizados lado a lado.</p>
@@ -1717,15 +1563,15 @@
         </div>
 
         <div class="preview-photo-box">
-          <img src="assets/05-telemovel-sobre-mapas.webp" alt="Consulta Rápida no Telemóvel e Tablet" loading="lazy" decoding="async" />
+          <img src="/assets/05-telemovel-sobre-mapas.webp" alt="Consulta Rápida no Telemóvel e Tablet" loading="lazy" decoding="async" />
           <div class="preview-photo-caption">
             <strong>No Ecrã do Telemóvel, Tablet e PC</strong>
-            <p>Abre as lâminas digitais de alto contraste no iPhone, iPad ou no computador do gabinete ou clínica em segundos.</p>
+            <p>Abre as lâminas digitais de alto contraste no iPhone, iPad ou no computador do consultório em segundos.</p>
           </div>
         </div>
 
         <div class="preview-photo-box">
-          <img src="assets/06-secretaria-parametros.webp" alt="Mapas de Eletroterapia na Secretária com Parâmetros Hz e µs" loading="lazy" decoding="async" />
+          <img src="/assets/06-secretaria-parametros.webp" alt="Mapas de Eletroterapia na Secretária com Parâmetros Hz e µs" loading="lazy" decoding="async" />
           <div class="preview-photo-caption">
             <strong>Parâmetros Sugeridos em Cada Lâmina</strong>
             <p>Frequência (Hz), Largura de Pulso (µs) e tempo em minutos indicados na base de cada lâmina.</p>
@@ -1741,33 +1587,33 @@
 
       <!-- 4 PRANCHAS TÉCNICAS DETALHADAS COM ZOOM INTERATIVO -->
       <div class="sheets-4-grid">
-        <div class="sheet-card" onclick="openLightbox('mapa-01.webp', 'Mapa 01: Região Cervical Posterior · TENS / NMES (CH1/CH2)')" title="Clica para ampliar">
+        <div class="sheet-card" onclick="openLightbox('/mapa-01.webp', 'Mapa 01: Região Cervical Posterior · TENS / NMES (CH1/CH2)')" title="Clica para ampliar">
           <div class="zoom-badge">🔍 Ampliar</div>
-          <img src="mapa-01.webp" alt="Mapa 01 Região Cervical Posterior" loading="lazy" />
+          <img src="/mapa-01.webp" alt="Mapa 01 Região Cervical Posterior" loading="lazy" />
           <div class="sheet-footer">
             <span>COLUNA CERVICAL</span>
             Cervical Posterior · CH1/CH2
           </div>
         </div>
-        <div class="sheet-card" onclick="openLightbox('mapa-04.webp', 'Mapa 04: Região Escapular · TENS / NMES')" title="Clica para ampliar">
+        <div class="sheet-card" onclick="openLightbox('/mapa-04.webp', 'Mapa 04: Região Escapular · TENS / NMES')" title="Clica para ampliar">
           <div class="zoom-badge">🔍 Ampliar</div>
-          <img src="mapa-04.webp" alt="Mapa 04 Região Escapular" loading="lazy" />
+          <img src="/mapa-04.webp" alt="Mapa 04 Região Escapular" loading="lazy" />
           <div class="sheet-footer">
             <span>OMBRO E ESCÁPULA</span>
             Região Escapular · TENS
           </div>
         </div>
-        <div class="sheet-card" onclick="openLightbox('mapa-16.webp', 'Mapa 14: Região do Tornozelo · TENS / FES')" title="Clica para ampliar">
+        <div class="sheet-card" onclick="openLightbox('/mapa-16.webp', 'Mapa 14: Região do Tornozelo · TENS / FES')" title="Clica para ampliar">
           <div class="zoom-badge">🔍 Ampliar</div>
-          <img src="mapa-16.webp" alt="Mapa 14 Região do Tornozelo" loading="lazy" />
+          <img src="/mapa-16.webp" alt="Mapa 14 Região do Tornozelo" loading="lazy" />
           <div class="sheet-footer">
             <span>TORNOZELO E PÉ</span>
             Região do Tornozelo · TENS / FES
           </div>
         </div>
-        <div class="sheet-card" onclick="openLightbox('mapa-14.webp', 'Mapa 08: Coxa Anterior · NMES / Ponto Motor Quadricípite')" title="Clica para ampliar">
+        <div class="sheet-card" onclick="openLightbox('/mapa-14.webp', 'Mapa 08: Coxa Anterior · NMES / Ponto Motor Quadricípite')" title="Clica para ampliar">
           <div class="zoom-badge">🔍 Ampliar</div>
-          <img src="mapa-14.webp" alt="Mapa 08 Coxa Anterior NMES" loading="lazy" />
+          <img src="/mapa-14.webp" alt="Mapa 08 Coxa Anterior NMES" loading="lazy" />
           <div class="sheet-footer">
             <span>COXA E JOELHO</span>
             Coxa Anterior · NMES / Ponto Motor
@@ -1798,7 +1644,7 @@
       <!-- DUPLA SUPERIOR: FOTO 07 (4 Tablets com Ondas) + FOTO 08 (Banner Neural Costas) -->
       <div class="dark-top-split">
         <div class="dark-Showcase-box">
-          <img src="assets/07-quatro-tablets-ondas.webp" alt="4 Tablets com Anatomia Interativa e Ondas de Eletroterapia" loading="lazy" decoding="async" />
+          <img src="/assets/07-quatro-tablets-ondas.webp" alt="4 Tablets com Anatomia Interativa e Ondas de Eletroterapia" loading="lazy" decoding="async" />
           <div class="dark-Showcase-text">
             <span class="badge">ONDAS E MODALIDADES POR COR</span>
             <h3>TENS, NMES, FES, Corrente Russa e Aussie</h3>
@@ -1807,7 +1653,7 @@
         </div>
 
         <div class="dark-Showcase-box">
-          <img src="assets/08-banner-neural-costas.webp" alt="Anatomia Neural com Elétrodos Luminosos nas Costas" loading="lazy" decoding="async" />
+          <img src="/assets/08-banner-neural-costas.webp" alt="Anatomia Neural com Elétrodos Luminosos nas Costas" loading="lazy" decoding="async" />
           <div class="dark-Showcase-text">
             <span class="badge">CIRCUITOS E POLARIDADES</span>
             <h3>Pares e Canais Diferenciados sem Confusão de Fios</h3>
@@ -1819,7 +1665,7 @@
       <!-- OS 3 CLOSE-UPS 3D VERTICAIS: FOTOS 09, 10 E 11 -->
       <div class="cards-3d-row">
         <div class="card-3d">
-          <img src="assets/09-3d-cervical.webp" alt="Estimulação Neural da Coluna Cervical" loading="lazy" decoding="async" />
+          <img src="/assets/09-3d-cervical.webp" alt="Estimulação Neural da Coluna Cervical" loading="lazy" decoding="async" />
           <div class="card-3d-info">
             <span>CERVICAL & TRAPÉZIO SUPERIOR</span>
             <h4>Alívio de Tensão e Cervicalgia</h4>
@@ -1828,7 +1674,7 @@
         </div>
 
         <div class="card-3d">
-          <img src="assets/10-3d-joelho.webp" alt="Estimulação Elétrica do Joelho em Detalhe" loading="lazy" decoding="async" />
+          <img src="/assets/10-3d-joelho.webp" alt="Estimulação Elétrica do Joelho em Detalhe" loading="lazy" decoding="async" />
           <div class="card-3d-info">
             <span>JOELHO & VASTO MEDIAL (VMO)</span>
             <h4>Ativação Neuromuscular Seletiva</h4>
@@ -1837,7 +1683,7 @@
         </div>
 
         <div class="card-3d">
-          <img src="assets/11-3d-lombar.webp" alt="Estimulação Nervosa Lombar em Anatomia Detalhada" loading="lazy" decoding="async" />
+          <img src="/assets/11-3d-lombar.webp" alt="Estimulação Nervosa Lombar em Anatomia Detalhada" loading="lazy" decoding="async" />
           <div class="card-3d-info">
             <span>COLUNA LOMBAR & LOMBO-SAGRADA</span>
             <h4>Cruzamento Tetrapolar e Bipolar</h4>
@@ -1855,14 +1701,14 @@
         <!-- VITRINE COM FOTO 03 (COLEÇÃO COMPLETA) E FOTO 02 (IPAD/IPHONE OMBRO) -->
         <div class="solution-visuals-col">
           <div class="solution-img-card">
-            <img src="assets/03-colecao-completa-fichas.webp" alt="Coleção Completa Mapas de Eletroterapia com 7 Lâminas e Parâmetros" loading="lazy" decoding="async" />
+            <img src="/assets/03-colecao-completa-fichas.webp" alt="Coleção Completa Mapas de Eletroterapia com 7 Lâminas e Parâmetros" loading="lazy" decoding="async" />
             <div class="img-caption-bar" style="margin-top:6px;">
               <span>📚 Coleção Completa com +58 Lâminas Clínicas</span>
               <span class="tag">HD · Alta Resolução</span>
             </div>
           </div>
           <div class="solution-img-card" style="margin-top:14px;">
-            <img src="assets/02-hero-ipad-iphone-ombro.webp" alt="iPad Pro Região do Ombro e iPhone Joelho com Parâmetros Hz e µs" loading="lazy" decoding="async" />
+            <img src="/assets/02-hero-ipad-iphone-ombro.webp" alt="iPad Pro Região do Ombro e iPhone Joelho com Parâmetros Hz e µs" loading="lazy" decoding="async" />
             <div class="img-caption-bar" style="margin-top:6px;">
               <span>📱 Consulta em Segundos no Tablet e Telemóvel</span>
               <span class="tag">Hz · µs · Tempo</span>
@@ -1932,7 +1778,7 @@
           <div>
             <span class="reg-num">02</span>
             <h3>Ombro e Cintura Escapular</h3>
-            <p>Deltoide anterior, lateral e posterior, supraespinhal, infraespinhal e redondo menor. Dor no ombro, reabilitação pós-cirúrgica e estabilidade articular.</p>
+            <p>Deltoide anterior, lateral e posterior, supraespinhoso, infraespinhoso e redondo menor. Dor no ombro, reabilitação pós-cirúrgica e estabilidade articular.</p>
           </div>
           <div class="reg-highlight">✓ Mapas em vista lateral, anterior e posterior da coifa dos rotadores</div>
         </div>
@@ -1959,7 +1805,7 @@
           <div>
             <span class="reg-num">05</span>
             <h3>Tórax, Dorsal e Abdómen</h3>
-            <p>Peitoral maior e menor, serrátil anterior, rombóides, intercostais, reto abdominal e oblíquos. Ativação muscular e controlo neuromuscular.</p>
+            <p>Peitoral maior e menor, serratus anterior, romboides, intercostais, reto abdominal e oblíquos. Ativação muscular e controlo neuromuscular.</p>
           </div>
           <div class="reg-highlight">✓ Simetria de canais para reabilitação pós-cirúrgica e estabilização do tronco</div>
         </div>
@@ -2004,7 +1850,7 @@
           CONSULTAR COM SEGURANÇA POR 9,97€ →
         </a>
         <div style="font-size:12px; color:#ccfbf1; margin-top:10px; font-weight:600;">
-          ⚡ Acesso Imediato no E-mail · 📱 Telemóvel, Tablet e Computador · 🔒 Pagamento Seguro (9,97€)
+          ⚡ Acesso Imediato no E-mail · 📱 Telemóvel, Tablet e Computador · 🔒 Pagamento Seguro
         </div>
       </div></div>
   </section>
@@ -2021,7 +1867,7 @@
       <div class="clinical-3-grid">
         <!-- FOTO 12: Fisioterapia com TENS na região lombar.png -->
         <div class="clinical-card">
-          <img src="assets/12-clinica-lombar-iphone.webp" alt="Fisioterapia com TENS na região lombar com consulta no iPhone" loading="lazy" decoding="async" />
+          <img src="/assets/12-clinica-lombar-iphone.webp" alt="Fisioterapia com TENS na região lombar com consulta no iPhone" loading="lazy" decoding="async" />
           <div class="clinical-card-body">
             <span>NA MARQUESA · TELEMÓVEL</span>
             <h3>Aplicação Direta na Região Lombar</h3>
@@ -2031,7 +1877,7 @@
 
         <!-- FOTO 13: Fisioterapia digital_ cervical e ombro.png -->
         <div class="clinical-card">
-          <img src="assets/13-clinica-cervical-ipad.webp" alt="Fisioterapia digital cervical e ombro no iPad Pro" loading="lazy" decoding="async" />
+          <img src="/assets/13-clinica-cervical-ipad.webp" alt="Fisioterapia digital cervical e ombro no iPad Pro" loading="lazy" decoding="async" />
           <div class="clinical-card-body">
             <span>CONSULTA RÁPIDA · TABLET</span>
             <h3>Avaliação de Cervical e Coifa dos Rotadores</h3>
@@ -2041,7 +1887,7 @@
 
         <!-- FOTO 14: Fisioterapia do joelho com tablet anatómico.png -->
         <div class="clinical-card">
-          <img src="assets/14-clinica-joelho-ipad.webp" alt="Fisioterapia do joelho com tablet anatómico" loading="lazy" decoding="async" />
+          <img src="/assets/14-clinica-joelho-ipad.webp" alt="Fisioterapia do joelho com tablet anatómico" loading="lazy" decoding="async" />
           <div class="clinical-card-body">
             <span>PÓS-OPERATÓRIO · JOELHO</span>
             <h3>Precisão no Vasto Medial e Lateral</h3>
@@ -2083,97 +1929,61 @@
     </div>
   </section>
 
-  <!-- 9. STACK COMPLETO INCLUÍDO (5 BÓNUS + 3 MANUAIS CLÍNICOS EXTRA) -->
+  <!-- 9. OS 4 BÓNUS INCLUÍDOS (ESTILO DA PÁGINA 4 DE REFERÊNCIA + FOTOS 15, 16, 17 E 18) -->
   <div class="bonus-header-strip">
-    🎁 8 Manuais Clínicos Incluídos no Sistema Completo (além do Atlas +58 Mapas)
+    🎁 4 Materiais Práticos de Apoio Clínico Incluídos no Pacote Completo
   </div>
   <section class="section">
     <div class="container">
       <div class="sec-head" style="margin-bottom:28px;">
         <p class="sec-desc" style="color:var(--text-main); font-weight:600;">
-          Além do Atlas com +58 Pranchas Visuais (CH1 ciano / CH2 laranja), recebes <strong>5 bónus práticos de gabinete</strong> e ainda <strong>3 manuais clínicos extra</strong> — Ultrassons (1 e 3 MHz), Laserterapia/LED e Kit de 25 Testes Ortopédicos — num único acesso imediato (+140 páginas visuais).
+          Além da coleção completa com +58 Mapas Visuais, ao escolheres o Pacote Completo de 9,97€ recebes estas 4 ferramentas clínicas para complementar as tuas sessões:
         </p>
       </div>
 
       <div class="bonus-list">
+        <!-- BÓNUS 1 + FOTO 15: Estudo de Eletroterapia na Clínica.png -->
         <div class="bonus-item-row">
           <div>
-            <div class="bonus-tag">🎁 Bónus 1 · Valor avulso: 19,00 €</div>
-            <h3>Guia Rápido de Parâmetros (Hz, µs, Rampas e Tempo)</h3>
-            <p>Tabela mestra para TENS, NMES, FES, Russa e Aussie — para consultares ao lado da marquesa sem calcular à mão.</p>
-            <div style="margin-top:10px;"><span style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #a7f3d0;">✓ Incluído gratuitamente no Sistema Completo</span></div>
+            <div class="bonus-tag">🎁 Bónus 1</div>
+            <h3>Guia Rápido de Parâmetros Clínicos (Hz, µs e Tempo)</h3>
+            <p>Dosificação clínica direta para TENS (80-120 Hz / 100-200 µs), NMES (30-50 Hz / 200-400 µs), FES (20-40 Hz), Corrente Russa e Aussie para consultares sem calcular à mão.</p>
+            <div style="margin-top:10px;"><span style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #a7f3d0;">✓ Incluído no Pacote Completo (9,97 €)</span></div>
           </div>
-          <img src="assets/15-bonus1-parametros.webp" alt="Bónus 1 Guia Rápido de Parâmetros Clínicos" loading="lazy" decoding="async" />
+          <img src="/assets/15-bonus1-parametros.webp" alt="Bónus 1 Guia Rápido de Parâmetros Clínicos" loading="lazy" decoding="async" />
         </div>
 
+        <!-- BÓNUS 2 + FOTO 16: Estudo de Eletroterapia em Fisioterapia (1).png -->
         <div class="bonus-item-row">
           <div>
-            <div class="bonus-tag">🎁 Bónus 2 · Valor avulso: 14,00 €</div>
-            <h3>Checklist de Segurança e Contraindicações</h3>
-            <p>Triagem em 15 segundos: bandeiras vermelhas, contraindicações absolutas e boas práticas de pele e elétrodos.</p>
-            <div style="margin-top:10px;"><span style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #a7f3d0;">✓ Incluído gratuitamente no Sistema Completo</span></div>
+            <div class="bonus-tag">🎁 Bónus 2</div>
+            <h3>Coleção de Pranchas Clínicas Digitais para Consulta Rápida</h3>
+            <p>Fichas de alta definição organizadas com Principais Músculos, Indicações e Posicionamento, prontas para manteres no telemóvel, tablet ou portátil no gabinete.</p>
+            <div style="margin-top:10px;"><span style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #a7f3d0;">✓ Incluído no Pacote Completo (9,97 €)</span></div>
           </div>
-          <img src="assets/17-bonus3-protocolos.webp" alt="Bónus 2 Checklist de Segurança" loading="lazy" decoding="async" />
+          <img src="/assets/16-bonus2-pranchas.webp" alt="Bónus 2 Pranchas Clínicas Digitais para Consulta Rápida" loading="lazy" decoding="async" />
         </div>
 
+        <!-- BÓNUS 3 + FOTO 17: Estudo de Eletroterapia em Fisioterapia.png -->
         <div class="bonus-item-row">
           <div>
-            <div class="bonus-tag">🎁 Bónus 3 · Valor avulso: 19,00 €</div>
-            <h3>Protocolos por Objetivo Terapêutico</h3>
-            <p>Modelos práticos de sessão de 50 min: janela analgésica com TENS + integração de NMES sobreposto ao exercício.</p>
-            <div style="margin-top:10px;"><span style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #a7f3d0;">✓ Incluído gratuitamente no Sistema Completo</span></div>
+            <div class="bonus-tag">🎁 Bónus 3</div>
+            <h3>Checklist de Segurança, Triagem e Protocolos por Objetivo</h3>
+            <p>Critérios de segurança antes da eletroterapia, bandeiras vermelhas, contraindicações absolutas/relativas e combinações prontas por patologia.</p>
+            <div style="margin-top:10px;"><span style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #a7f3d0;">✓ Incluído no Pacote Completo (9,97 €)</span></div>
           </div>
-          <img src="assets/16-bonus2-pranchas.webp" alt="Bónus 3 Protocolos por Objetivo" loading="lazy" decoding="async" />
+          <img src="/assets/17-bonus3-protocolos.webp" alt="Bónus 3 Checklist de Segurança e Protocolos" loading="lazy" decoding="async" />
         </div>
 
+        <!-- BÓNUS 4 + FOTO 18: Estudo de Eletroterapia e Anatomia (1).png -->
         <div class="bonus-item-row">
           <div>
-            <div class="bonus-tag">🎁 Bónus 4 · Valor avulso: 12,00 €</div>
-            <h3>Ficha de Evolução Clínica do Utente (60 segundos)</h3>
-            <p>Registo rápido de canais CH1–CH4, parâmetros e EVA pré→pós em 5 sessões — pronta para usar no gabinete.</p>
-            <div style="margin-top:10px;"><span style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #a7f3d0;">✓ Incluído gratuitamente no Sistema Completo</span></div>
+            <div class="bonus-tag">🎁 Bónus 4</div>
+            <h3>Plano de Estudo & Ficha de Planeamento de Sessão</h3>
+            <p>Modelo estruturado para acompanhares o teu estudo por região anatómica e registares a corrente, frequência, tempo e evolução de cada utente.</p>
+            <div style="margin-top:10px;"><span style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #a7f3d0;">✓ Incluído no Pacote Completo (9,97 €)</span></div>
           </div>
-          <img src="assets/18-bonus4-plano-estudo.webp" alt="Bónus 4 Ficha de Evolução do Utente" loading="lazy" decoding="async" />
-        </div>
-
-        <div class="bonus-item-row">
-          <div>
-            <div class="bonus-tag">🎁 Bónus 5 · Valor avulso: 15,00 €</div>
-            <h3>Pocket Card — 15 Casos Mais Comuns em Clínica</h3>
-            <p>Atalho rápido: lombalgia, ciatalgia, cervicalgia, coifa, epicondilite, joelho, tornozelo e mais — com prancha e Hz de referência.</p>
-            <div style="margin-top:10px;"><span style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #a7f3d0;">✓ Incluído gratuitamente no Sistema Completo</span></div>
-          </div>
-          <img src="assets/funnel/cover-casos-clinicos.webp" alt="Pocket Card 15 Casos Clínicos" loading="lazy" decoding="async" />
-        </div>
-
-        <div class="bonus-item-row">
-          <div>
-            <div class="bonus-tag">📦 Manual Extra 1 · Valor avulso: 19,00 €</div>
-            <h3>Guia Visual de Ultrassons (1 e 3 MHz) &amp; Terapia Combinada</h3>
-            <p>Dosimetria, ERA, modo contínuo vs pulsado e associação Ultrassons + corrente elétrica em patologias miofasciais.</p>
-            <div style="margin-top:10px;"><span style="background:#eff6ff; color:#1d4ed8; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #bfdbfe;">✓ Manual Extra incluído no mesmo acesso</span></div>
-          </div>
-          <img src="assets/07-quatro-tablets-ondas.webp" alt="Guia Visual de Ultrassons 1 e 3 MHz" loading="lazy" decoding="async" />
-        </div>
-
-        <div class="bonus-item-row">
-          <div>
-            <div class="bonus-tag">📦 Manual Extra 2 · Valor avulso: 19,00 €</div>
-            <h3>Manual de Laserterapia &amp; LED (Tabelas de Joules)</h3>
-            <p>660 nm vs 808/904 nm, Joules por ponto e tempos por potência — consulta rápida de fotobiomodulação na marquesa.</p>
-            <div style="margin-top:10px;"><span style="background:#eff6ff; color:#1d4ed8; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #bfdbfe;">✓ Manual Extra incluído no mesmo acesso</span></div>
-          </div>
-          <img src="assets/3d/anatomia_neural_3d.webp" alt="Manual de Laserterapia e LED" loading="lazy" decoding="async" />
-        </div>
-
-        <div class="bonus-item-row">
-          <div>
-            <div class="bonus-tag">📦 Manual Extra 3 · Valor avulso: 19,00 €</div>
-            <h3>Kit Clínico: 25 Testes Ortopédicos + Fichas + Consentimento</h3>
-            <p>25 testes especiais por articulação, grelha de avaliação e termo de consentimento informado para cruzar na mesma sessão.</p>
-            <div style="margin-top:10px;"><span style="background:#eff6ff; color:#1d4ed8; font-weight:700; font-size:12px; padding:4px 10px; border-radius:6px; display:inline-block; border:1px solid #bfdbfe;">✓ Manual Extra incluído no mesmo acesso</span></div>
-          </div>
-          <img src="assets/funnel/cover-kit-comunicacao.webp" alt="Kit Clínico 25 Testes Ortopédicos" loading="lazy" decoding="async" />
+          <img src="/assets/18-bonus4-plano-estudo.webp" alt="Bónus 4 Plano de Estudo e Ficha de Sessão" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
@@ -2188,22 +1998,30 @@
         <p class="sec-desc">Para quem quer decidir e aplicar eletroterapia com rapidez e segurança, apoiando-se em imagens claras e não em parágrafos infinitos.</p>
       </div>
 
-      <div class="compare-2-grid" style="margin-top:18px;">
-        <div class="comp-card with">
-          <h3>✓ PARA QUEM É ESTE SISTEMA VISUAL</h3>
-          <ul class="comp-list">
-            <li><span class="ico-yes">✓</span><span><strong>Fisioterapeutas em gabinete, clínica ou domicílio</strong> que querem confirmar pontos motores, canais CH1/CH2 e parâmetros em 5 segundos ao lado da marquesa.</span></li>
-            <li><span class="ico-yes">✓</span><span><strong>Profissionais de ortopedia, desporto e reabilitação</strong> que procuram segurança imediata em TENS, NMES, FES, Russa, Aussie, Ultrassons e Laser.</span></li>
-            <li><span class="ico-yes">✓</span><span><strong>Fisioterapeutas recém-formados e estudantes em estágio</strong> que querem eliminar a insegurança na hora de ligar o equipamento à frente do utente.</span></li>
-          </ul>
+      <div class="who-6-grid">
+        <div class="who-box">
+          <span class="who-icon">✓</span>
+          <span>Estudantes de fisioterapia que querem ligar a anatomia à prática clínica e aos estágios</span>
         </div>
-        <div class="comp-card without">
-          <h3>✗ PARA QUEM NÃO É</h3>
-          <ul class="comp-list">
-            <li><span class="ico-no">✗</span><span>Quem procura tratados teóricos de 600 páginas cheios de biofísica académica que não se conseguem consultar durante o atendimento.</span></li>
-            <li><span class="ico-no">✗</span><span>Quem não realiza atendimentos práticos de fisioterapia nem utiliza recursos eletrotermofototerapêuticos na rotina clínica.</span></li>
-            <li><span class="ico-no">✗</span><span>Quem prefere continuar a improvisar parâmetros de memória ou a hesitar na colocação dos elétrodos à frente do utente.</span></li>
-          </ul>
+        <div class="who-box">
+          <span class="who-icon">✓</span>
+          <span>Fisioterapeutas clínicos que precisam de confirmar pontos e parâmetros em segundos</span>
+        </div>
+        <div class="who-box">
+          <span class="who-icon">✓</span>
+          <span>Profissionais da área desportiva, ortopédica e traumatológica que atendem lesões diariamente</span>
+        </div>
+        <div class="who-box">
+          <span class="who-icon">✓</span>
+          <span>Quem perde tempo a procurar informações em livros pesados e apontamentos dispersos</span>
+        </div>
+        <div class="who-box">
+          <span class="who-icon">✓</span>
+          <span>Docentes, supervisores de estágio e coordenadores que procuram material visual didático</span>
+        </div>
+        <div class="who-box">
+          <span class="who-icon">✓</span>
+          <span>Profissionais recém-formados que querem segurança total em todas as 5 correntes</span>
         </div>
       </div>
     </div>
@@ -2221,22 +2039,22 @@
           Usado e Recomendado ao Lado da Marquesa<br/><span style="color: #064e3b;">por Fisioterapeutas em Portugal</span>
         </h2>
         <p style="color: #64748b; font-size: 15px; margin-top: 10px; max-width: 640px; margin-left: auto; margin-right: auto;">
-          Conversas reais recebidas no Instagram Direct de colegas em Lisboa, Porto, Coimbra, Braga e outras clínicas de norte a sul. Desliza para veres o feedback real de colegas em Portugal.
+          Conversas reais recebidas no Instagram Direct de colegas em Lisboa, Porto, Coimbra, Braga e outras clínicas de norte a sul. Desliza para ver os casos clínicos.
         </p>
       </div>
       
       <div class="slider">
         <div class="slides" id="slidesTrack">
-          <img src="dep1.webp" width="280" height="498" alt="Dr. Tiago Fonseca - Fisioterapia Desportiva Lisboa" loading="lazy" />
-          <img src="dep2.webp" width="280" height="498" alt="Dra. Mariana Costa - Reabilitação Porto" loading="lazy" />
-          <img src="dep3.webp" width="280" height="498" alt="Dr. Pedro Alvim - Clínica Coimbra" loading="lazy" />
-          <img src="dep4.webp" width="280" height="498" alt="Dra. Inês Carmo - Neuro-Reabilitação Braga" loading="lazy" />
-          <img src="dep5.webp" width="280" height="498" alt="Dr. Gonçalo Valente - Osteo e Fisio Faro" loading="lazy" />
-          <img src="dep6.webp" width="280" height="498" alt="Dra. Sofia Martins - Saúde da Coluna Aveiro" loading="lazy" />
-          <img src="dep7.webp" width="280" height="498" alt="Dr. Ricardo Neves - Fisioterapia Setúbal" loading="lazy" />
-          <img src="dep8.webp" width="280" height="498" alt="Dra. Beatriz Lourenço - Clínica Leiria" loading="lazy" />
-          <img src="dep9.webp" width="280" height="498" alt="Dr. Miguel Simões - Fisioterapia Domiciliária Viseu" loading="lazy" />
-          <img src="dep10.webp" width="280" height="498" alt="Dra. Carolina Pires - Reabilitação Évora" loading="lazy" />
+          <img src="/dep1.webp" width="280" height="498" alt="Dr. Tiago Fonseca - Fisioterapia Desportiva Lisboa" loading="lazy" />
+          <img src="/dep2.webp" width="280" height="498" alt="Dra. Mariana Costa - Reabilitação Porto" loading="lazy" />
+          <img src="/dep3.webp" width="280" height="498" alt="Dr. Pedro Alvim - Clínica Coimbra" loading="lazy" />
+          <img src="/dep4.webp" width="280" height="498" alt="Dra. Inês Carmo - Neuro-Reabilitação Braga" loading="lazy" />
+          <img src="/dep5.webp" width="280" height="498" alt="Dr. Gonçalo Valente - Osteo e Fisio Faro" loading="lazy" />
+          <img src="/dep6.webp" width="280" height="498" alt="Dra. Sofia Martins - Saúde da Coluna Aveiro" loading="lazy" />
+          <img src="/dep7.webp" width="280" height="498" alt="Dr. Ricardo Neves - Fisioterapia Setúbal" loading="lazy" />
+          <img src="/dep8.webp" width="280" height="498" alt="Dra. Beatriz Lourenço - Clínica Leiria" loading="lazy" />
+          <img src="/dep9.webp" width="280" height="498" alt="Dr. Miguel Simões - Fisioterapia Domiciliária Viseu" loading="lazy" />
+          <img src="/dep10.webp" width="280" height="498" alt="Dra. Carolina Pires - Reabilitação Évora" loading="lazy" />
         </div>
         
         <div class="dots" id="sliderDots" style="display: flex; justify-content: center; gap: 8px; margin-top: 18px;">
@@ -2262,53 +2080,72 @@
   <section id="oferta" class="section">
     <div class="container">
       <div class="sec-head" style="text-align: center; margin-bottom: 28px;">
-        <span class="sec-pill">CONDIÇÃO ESPECIAL DE ACESSO IMEDIATO</span>
-        <h2 class="sec-title" style="margin-top: 12px;">Desbloqueia o <span class="serif-italic">Sistema Clínico Completo</span></h2>
-        <p class="sec-desc">Menos de 1/4 do valor de uma única sessão particular em clínica (35€ a 60€). No primeiro utente de segunda-feira, a ferramenta já se pagou.</p>
+        <span class="sec-pill">CONDIÇÃO ESPECIAL POR TEMPO LIMITADO</span>
+        <h2 class="sec-title" style="margin-top: 12px;">Escolhe a tua opção de <span class="serif-italic">Acesso Imediato</span></h2>
+        <p class="sec-desc">Pagamento único com IVA já incluído. Acesso digital imediato enviado para o teu e-mail.</p>
       </div>
 
-      <div class="pricing-grid" style="max-width: 640px; grid-template-columns: 1fr;">
-        <!-- CAIXA ÚNICA DE ALTA CONVERSÃO 9,97 € (VALUE STACK €97 -> 9,97€ · ZERO CANIBALIZAÇÃO) -->
-        <div id="oferta-box" class="plan-card pro">
-          <div class="ribbon-top" style="text-align: center;">⭐ EDIÇÃO COMPLETA · SISTEMA OFICIAL DE GABINETE</div>
+      <div class="pricing-grid">
+        <!-- PACOTE BÁSICO 4,97 € (Fica em 2.º no telemóvel como âncora) -->
+        <div class="plan-card">
           <div>
-            <div class="plan-name" style="font-size: 22px; color: #ffffff; font-weight: 800; text-align: center;">
-              Sistema Clínico Completo ElectroMapas (+58 Pranchas + 8 Manuais)
+            <div class="plan-name" style="color:var(--text-main);">PACOTE BÁSICO (SÓ OS MAPAS)</div>
+            <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">Apenas os mapas base para consulta simples</p>
+            <ul class="plan-ul">
+              <li><span style="color:var(--primary); font-weight:900;">✓</span> +58 Mapas Visuais de posicionamento de elétrodos por região</li>
+              <li><span style="color:var(--primary); font-weight:900;">✓</span> Organizados pelas 8 regiões corporais</li>
+              <li><span style="color:var(--primary); font-weight:900;">✓</span> Formato 100% Digital no e-mail</li>
+              <li class="disabled">✗ Sem o Guia Rápido de Parâmetros (Hz e µs)</li>
+              <li class="disabled">✗ Sem os Protocolos por Objetivo e Pontos Motores</li>
+              <li class="disabled">✗ Sem a Checklist de Contraindicações e Ficha de Evolução</li>
+              <li class="disabled">✗ Sem o Atalho dos 15 Casos Mais Comuns</li>
+            </ul>
+          </div>
+          <div>
+            <div class="price-val" style="color:var(--text-main);">4,97€</div>
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">Pagamento único · IVA incluído</div>
+            <a href="https://pay.hotmart.com/H108089502L?off=kc0ltn1r&checkoutMode=10&locale=pt_PT" class="btn-plan-basic js-checkout-btn" data-plan="basico" data-value="4.97" style="display:block; width:100%; text-align:center; padding:14px 18px; border-radius:10px; background:transparent; border:1.5px solid #cbd5e1; color:#475569; font-weight:700; font-size:14px; text-transform:none;">
+              Quero apenas os mapas básicos (4,97€)
+            </a>
+          </div>
+        </div>
+
+        <!-- PACOTE COMPLETO 9,97 € (EM 1.º LUGAR NO TELEMÓVEL!) -->
+        <div id="oferta-box" class="plan-card pro">
+          <div class="ribbon-top" style="text-align: center;">⭐ EDIÇÃO COMPLETA · PACOTE OFICIAL DE GABINETE</div>
+          <div>
+            <div class="plan-name" style="font-size: 20px; color: #ffffff; font-weight: 800; text-align: center;">
+              Pacote Clínico Completo ElectroMapas
             </div>
-            <p style="font-size: 13.5px; color: #a5f3fc; margin-top: 6px; text-align: center;">
-              Consulta visual rápida para confirmares posicionamento, pontos motores e parâmetros em segundos no gabinete ou ao domicílio.
+            <p style="font-size: 13px; color: #a5f3fc; margin-top: 6px; text-align: center;">
+              Consulta visual rápida para confirmares o posicionamento de elétrodos em segundos no gabinete ou ao domicílio.
             </p>
 
             <ul class="plan-ul" style="margin: 18px 0 16px;">
-              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span><div><strong>Atlas +58 Mapas Visuais HD (Valor: 39,00€):</strong> 8 regiões · TENS, NMES, FES, Russa e Aussie · CH1 ciano / CH2 laranja.</div></li>
-              <li><span style="color:#4ade80; font-weight:900;">🎁</span><div><strong>5 Bónus de Gabinete (Valor: 29,00€):</strong> Parâmetros (Hz/µs) · Checklist Contraindicações · Protocolos 50 min · Ficha de Evolução do Utente · Pocket Card 15 Casos.</div></li>
-              <li><span style="color:#38bdf8; font-weight:900;">📦</span><div><strong>Manual Extra 1 (Valor: 10,00€):</strong> Guia Visual de Ultrassons (1 e 3 MHz) &amp; Terapia Combinada.</div></li>
-              <li><span style="color:#38bdf8; font-weight:900;">📦</span><div><strong>Manual Extra 2 (Valor: 10,00€):</strong> Manual de Laserterapia &amp; LED (Tabelas de Joules por ponto).</div></li>
-              <li><span style="color:#38bdf8; font-weight:900;">📦</span><div><strong>Manual Extra 3 (Valor: 9,00€):</strong> Kit Clínico 25 Testes Ortopédicos + Grelha + Consentimento.</div></li>
-              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span><div><strong>Acesso Multi-Dispositivo Vitalício:</strong> Telemóvel, tablet e computador — consulta imediata em alta definição ao lado da marquesa.</div></li>
+              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>+58 Mapas Visuais HD:</strong> Organizados pelas 8 regiões corporais (TENS, NMES, FES, Russa e Aussie).</li>
+              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>Pares e Canais (CH1 a CH4):</strong> Identificados por cor em cada lâmina para evitar cruzamentos.</li>
+              <li><span style="color:var(--accent-cyan); font-weight:900;">✓</span> <strong>Formato 100% Digital HD:</strong> Otimizado para telemóvel, tablet e computador.</li>
+              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #1:</strong> Guia Rápido de Parâmetros Clínicos (Hz, µs, Rampas e Tempo).</li>
+              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #2:</strong> Mapa de Pontos Motores e Protocolos por Objetivo Terapêutico.</li>
+              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #3:</strong> Checklist Visual de Segurança e Contraindicações Clínicas.</li>
+              <li><span style="color:#4ade80; font-weight:900;">🎁</span> <strong>INCLUÍDO #4:</strong> Ficha de Evolução e Registo de Sessão de Eletroterapia.</li>
+              <li><span style="color:#fbbf24; font-weight:900;">🔥</span> <strong>PRESENTE SURPRESA:</strong> Atalho dos 15 Casos Mais Comuns + Pocket Card (0,00 € no Checkout).</li>
             </ul>
           </div>
 
-          <div style="text-align: center; background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 14px; padding: 16px; margin-top: 12px;">
-            <div style="font-size: 13.5px; color: #cbd5e1; font-weight: 700;">Valor total dos 9 materiais em separado: <span style="text-decoration: line-through; color: #f87171;">97,00€</span></div>
-            <div style="font-size: 12px; color: #fde047; font-weight: 800; margin-top: 2px;">⚡ Menos que 1/4 de uma única sessão particular (35€–60€)</div>
-            <div class="price-val" style="font-size: 40px; color: #ffffff; font-weight: 900; margin: 6px 0;">9,97€</div>
-            <div style="font-size: 12.5px; color: #a7f3d0; font-weight: 700; margin-bottom: 14px;">
-              Pagamento Único (IVA Incluído à taxa legal) · Acesso Vitalício Imediato
+          <div style="text-align: center; background: rgba(0, 229, 255, 0.06); border-radius: 12px; padding: 14px; margin-top: 12px;">
+            <div style="font-size: 13px; opacity: 0.75; text-decoration: line-through; color: #94a3b8;">Valor total separado: 39,90€</div>
+            <div class="price-val" style="font-size: 36px; color: #ffffff; font-weight: 900; margin: 4px 0;">9,97€</div>
+            <div style="font-size: 12.5px; color: #a7f3d0; font-weight: 700; margin-bottom: 12px;">
+              Pagamento Único · IVA Já Incluído · Acesso Vitalício
             </div>
 
-            <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10&locale=pt_PT" class="btn-plan-pro js-checkout-btn" data-plan="completo" data-value="9.97" style="display: block; width: 100%; font-size: 16.5px; padding: 17px 20px; border-radius: 12px; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45);">
-              QUERO O SISTEMA COMPLETO AGORA (9,97€) →
+            <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10&locale=pt_PT" class="btn-plan-pro js-checkout-btn" data-plan="completo" data-value="9.97" style="display: block; width: 100%; font-size: 16px; padding: 16px 20px; border-radius: 10px; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);">
+              QUERO O PACOTE COMPLETO (9,97€) →
             </a>
 
-            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:12px; font-size:11.5px; font-weight:800; color:#e2e8f0;">
-              <span style="background:rgba(255,255,255,0.1); padding:4px 10px; border-radius:6px;">📱 MB WAY (Aprovação em 1 toque)</span>
-              <span style="background:rgba(255,255,255,0.1); padding:4px 10px; border-radius:6px;">🏧 Multibanco</span>
-              <span style="background:rgba(255,255,255,0.1); padding:4px 10px; border-radius:6px;">💳 Cartão / Apple Pay</span>
-            </div>
-
             <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 10px; font-weight: 600;">
-              🔒 Acesso enviado ao teu E-mail em 1 minuto · Garantia Incondicional Hotmart de 15 Dias
+              ⚡ Acesso Vitalício Imediato no E-mail · MB WAY, Multibanco e Cartão · Garantia Incondicional de 15 Dias
             </div>
           </div>
         </div>
@@ -2316,35 +2153,33 @@
     </div>
   </section>
 
+  
+
   <!-- ==========================================================================
        GARANTIA DE 15 DIAS (COM O SELO DOURADO OFICIAL)
        ========================================================================== -->
   <section class="guarantee-wrap">
     <div class="container">
       <div class="guarantee-box">
-        <img src="garantia.webp" width="180" height="180" alt="Selo Oficial de Garantia 15 Dias" loading="lazy" />
+        <img src="/garantia.webp?v=15" width="180" height="180" alt="Selo Oficial de Garantia Incondicional de 15 Dias" loading="lazy" />
         <div class="guarantee-content">
           <h2>GARANTIA INCONDICIONAL DE 15 DIAS</h2>
-          <p>Entra, consulta as +58 pranchas anatómicas e os 8 manuais clínicos no teu telemóvel ou tablet durante 15 dias. Se sentires que não poupa tempo nas tuas sessões, pedes o reembolso com 1 clique na Hotmart e devolvemos 100% do valor.</p>
+          <p>Se em 15 dias achares que o material não é para ti, basta pedires o reembolso. Sem burocracia.</p>
         </div>
       </div>
 
       <div class="faq-box" style="margin-top: 48px;">
         <details class="faq-row">
-          <summary>Como recebo o acesso após o pagamento? <span>+</span></summary>
-          <p>Assim que confirmas o pagamento (imediato via MB WAY, Cartão, Apple Pay ou PayPal), recebes automaticamente no teu e-mail o link oficial da Hotmart com acesso imediato às +58 pranchas visuais e aos 8 manuais clínicos.</p>
-        </details>
-        <details class="faq-row">
-          <summary>Como funciona o pagamento rápido por MB WAY? <span>+</span></summary>
-          <p>No checkout seguro da Hotmart, selecionas MB WAY, introduzes o teu número de telemóvel e abres a app MB WAY do teu banco para autorizar a operação (tens 4 minutos para confirmar na app). O acesso é libertado no mesmo segundo.</p>
+          <summary>Como recebo os mapas após o pagamento? <span>+</span></summary>
+          <p>Assim que o pagamento é confirmado (imediato por MB WAY, Cartão ou PayPal), recebes no teu e-mail o acesso completo através da Hotmart.</p>
         </details>
         <details class="faq-row">
           <summary>Funciona no telemóvel, tablet e computador? <span>+</span></summary>
-          <p>Sim! As pranchas visuais foram desenhadas em alta definição para consulta instantânea no ecrã do telemóvel (iPhone ou Android), iPad/tablet ao lado da marquesa ou no computador do gabinete, podendo também ser impressas se preferires.</p>
+          <p>Sim! Podes consultar todos os mapas em alta definição no telemóvel, no tablet ou no computador durante a sessão com navegação rápida e zoom nítido.</p>
         </details>
         <details class="faq-row">
-          <summary>O pagamento de 9,97€ é mesmo único e já inclui IVA? <span>+</span></summary>
-          <p>Sim! É um pagamento 100% único de 9,97€ (IVA já incluído à taxa legal em vigor), sem qualquer mensalidade ou cobrança futura, com acesso vitalício e direito a todas as atualizações da coleção.</p>
+          <summary>O pagamento de 9,97€ é único? <span>+</span></summary>
+          <p>Sim! Pagamento 100% único (já com IVA incluído), sem mensalidades e com acesso vitalício.</p>
         </details>
       </div>
     </div>
@@ -2363,110 +2198,14 @@
     <div class="container">
       <p><strong>ElectroMapas Fisioterapia © 2026 · Todos os direitos reservados.</strong></p>
       <p style="margin-top:6px;">Recurso visual educativo e de consulta clínica para fisioterapeutas e estudantes de fisioterapia.</p>
-      <p style="margin-top:10px; font-size:12px;">
-        <button type="button" id="em-open-consent" onclick="window.emOpenConsentBanner && window.emOpenConsentBanner()" style="background:none;border:none;color:#64748b;text-decoration:underline;cursor:pointer;font:inherit;">Preferências de Privacidade e Cookies (RGPD / Revogar Consentimento)</button>
-      </p>
     </div>
   </footer>
 
-  <!-- BANNER DE CONSENTIMENTO RGPD / LEI N.º 41/2004 (ART. 5.º) -->
-  <style>
-    .em-consent-banner {
-      position: fixed;
-      left: 16px;
-      bottom: 74px;
-      max-width: 520px;
-      z-index: 1005;
-      background: rgba(6, 22, 30, 0.97);
-      color: #f8fafc;
-      border: 1px solid rgba(0, 229, 255, 0.35);
-      border-radius: 14px;
-      padding: 14px 16px;
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
-      font-size: 12px;
-      line-height: 1.45;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-    .em-consent-banner[hidden] { display: none !important; }
-    .em-consent-title {
-      font-weight: 800;
-      color: #00e5ff;
-      font-size: 12px;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-    .em-consent-details {
-      margin-top: 6px;
-      font-size: 11px;
-      color: #cbd5e1;
-    }
-    .em-consent-details summary {
-      cursor: pointer;
-      color: #38bdf8;
-      font-weight: 700;
-      user-select: none;
-    }
-    .em-consent-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-      justify-content: flex-end;
-    }
-    .em-consent-btn {
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      border: 1px solid transparent;
-      font-family: inherit;
-    }
-    .em-consent-btn-reject {
-      background: rgba(255, 255, 255, 0.08);
-      color: #cbd5e1;
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-    .em-consent-btn-reject:hover { background: rgba(255, 255, 255, 0.15); color: #ffffff; }
-    .em-consent-btn-accept {
-      background: #0d9488;
-      color: #ffffff;
-    }
-    .em-consent-btn-accept:hover { background: #0f766e; }
-    @media (max-width: 640px) {
-      .em-consent-banner {
-        left: 8px;
-        right: 8px;
-        bottom: 10px;
-        max-width: none;
-        padding: 10px 12px;
-        font-size: 11.5px;
-      }
-      .em-consent-btn {
-        min-height: 36px;
-        padding: 7px 14px;
-      }
-    }
-  </style>
-  <div id="em-consent-banner" class="em-consent-banner" role="region" aria-label="Preferências de Privacidade e Cookies" hidden>
-    <div class="em-consent-title">Privacidade, Cookies e Rastreamento (RGPD / Lei n.º 41/2004)</div>
-    <p style="margin:0;color:#e2e8f0;">Com o teu consentimento, utilizamos armazenamento local e cookies (30 dias) para identificar o anúncio de origem, medir conversões com a <strong>Meta Platforms Ireland Ltd.</strong> (Meta Pixel) e enviar o identificador de campanha (<code>SCK</code>/<code>SRC</code>/<code>UTM</code>) à <strong>Hotmart BV</strong> no checkout.</p>
-    <details class="em-consent-details">
-      <summary>Finalidades, Terceiros e Revogação</summary>
-      <p style="margin:5px 0 0;">• <strong>Se recusares:</strong> nenhum cookie ou storage de rastreio é gravado, o Pixel da Meta não é carregado (zero ligações à Meta) e nenhum código <code>SCK</code>/<code>UTM</code> é anexado aos links de pagamento (apenas um registo técnico local <code>em_consent=denied</code> por 180 dias guarda a tua recusa para não te perguntar novamente).<br>• <strong>Revogação:</strong> podes alterar ou retirar o consentimento a qualquer momento no link <em>"Preferências de Privacidade e Cookies"</em> no rodapé.</p>
-    </details>
-    <div class="em-consent-actions">
-      <button type="button" id="em-consent-reject" class="em-consent-btn em-consent-btn-reject" onclick="window.emSetConsent && window.emSetConsent('denied')">Recusar</button>
-      <button type="button" id="em-consent-accept" class="em-consent-btn em-consent-btn-accept" onclick="window.emSetConsent && window.emSetConsent('granted')">Aceitar</button>
-    </div>
-  </div>
-
-  <!-- BARRA STICKY MOBILE (SÓ APARECE APÓS ROLAR A 1ª DOBRA E QUANDO O BANNER RGPD ESTÁ FECHADO) -->
-  <div class="sticky-bottom is-hidden" id="em-sticky-bar">
+  <!-- BARRA STICKY MOBILE (CTA #4) -->
+  <div class="sticky-bottom">
     <div>
-      <strong style="display:block; font-size:13px; font-weight:800; color:#ffffff;">+58 Mapas + 8 Manuais Clínicos</strong>
-      <span style="font-size:11.5px; color:var(--accent-cyan); font-weight:700;">Pagamento Único · 9,97€ (Acesso Vitalício)</span>
+      <strong style="display:block; font-size:13.5px; font-weight:800; color:#ffffff;">+58 Mapas + 4 Guias Clínicos</strong>
+      <span style="font-size:12px; color:var(--accent-cyan); font-weight:700;">Pagamento Único · 9,97€</span>
     </div>
     <a href="https://pay.hotmart.com/H108089502L?off=u9xsxrrb&checkoutMode=10&locale=pt_PT" class="sticky-btn js-checkout-btn" data-plan="completo" data-value="9.97">ACEDER AGORA (9,97€) →</a>
   </div>
@@ -2522,406 +2261,95 @@
         }, 50);
       }, { passive: true });
     })();
+    // CONTROLE DE EXIBICAO INTELIGENTE DA BARRA FIXA MOBILE
+    (function handleStickyBar() {
+      var sticky = document.querySelector('.sticky-bottom');
+      var oferta = document.getElementById('oferta') || document.getElementById('oferta-box');
+      if (!sticky) return;
 
-    // TRACKING LINEAGE V1.2.1: BLOQUEIO ESTRITO DE SCK/META SEM CONSENTIMENTO (LEI 41/2004 ART. 5.º) + COOKIE SECURE + META ID LOSSLESS
+      function updateSticky() {
+        if (window.innerWidth > 768) {
+          sticky.style.display = 'none';
+          return;
+        }
+        var scrollY = window.scrollY || window.pageYOffset;
+        var ofertaTop = oferta ? (oferta.getBoundingClientRect().top + scrollY - 320) : 999999;
+
+        if (scrollY > 400 && scrollY < ofertaTop) {
+          sticky.style.display = 'flex';
+        } else {
+          sticky.style.display = 'none';
+        }
+      }
+
+      window.addEventListener('scroll', updateSticky, { passive: true });
+      window.addEventListener('resize', updateSticky, { passive: true });
+      updateSticky();
+    })();
+
+    // PRESERVAÇÃO ROBUSTA DE ORIGEM, UTMS, FBCLID E SRC PARA A HOTMART
     (function decorateHotmartLinks() {
       try {
-        var NON_PAID_RE = /^(direct|site-direto|site_direto|ig-bio|instagram_bio|fb-org|facebook_organico|tt-org|tiktok_organico|google-org|google_organico|whatsapp)$/i;
-        var STAGE_SUFFIX_RE = /\|(u1|d1|u2|u-us|u-lz|u-cm|ob1|ob2|ob3)$/i;
-        var TRACKING_KEYS = ['em_first_sck', 'em_first_src', 'em_first_utm', 'em_first_time', 'em_last_sck', 'em_last_src', 'em_last_utm', 'em_last_time', 'em_sck', 'em_src', 'em_visit_fallback'];
-        var COOKIE_KEYS = ['em_first_sck', 'em_first_src', 'em_last_sck', 'em_last_src', 'em_sck', 'em_src', 'em_visit_fallback'];
-        var ATTR_PARAM_RE = /^(sck|src|xcod|fbclid|gclid|utm_[a-z0-9_]+)$/i;
-
-        function sanitizeToken(str) {
-          if (!str) return '';
-          var s = String(str).trim().replace(/_/g, '-');
-          s = s.replace(/[^a-zA-Z0-9\-|]/g, '');
-          s = s.replace(/-+/g, '-').replace(/\|+/g, '|');
-          return s.replace(/^[|\-]+|[|\-]+$/g, '');
-        }
-
-        function compactNumericId(s) {
-          var mMeta = s.match(/^120250(\d{8})0381$/);
-          if (mMeta) return mMeta[1];
-          var tail = s.slice(-14);
-          var num = parseInt(tail, 10);
-          if (!isNaN(num) && num > 0) return num.toString(36);
-          return s.slice(-8);
-        }
-
-        function compactSource(raw) {
-          var s = sanitizeToken(raw).toLowerCase().replace(/\|/g, '');
-          if (!s) return '';
-          var map = {
-            'an': 'an', 'audiencenetwork': 'an', 'audience-network': 'an',
-            'ig': 'ig', 'insta': 'ig', 'instagram': 'ig', 'ig-ad': 'ig',
-            'fb': 'fb', 'facebook': 'fb', 'meta': 'fb', 'fb-ad': 'fb',
-            'tt': 'tt', 'tiktok': 'tt',
-            'gg': 'gg', 'google': 'gg', 'adwords': 'gg', 'gads': 'gg',
-            'wa': 'wa', 'whatsapp': 'wa'
-          };
-          if (map[s]) return map[s];
-          if (/^(fb|ig|an|tt|gg)-\d+/.test(s)) return s.slice(0, 2);
-          return s.slice(0, 4).replace(/-+$/g, '');
-        }
-
-        function compactCampaign(raw) {
-          var s = sanitizeToken(raw).toLowerCase().replace(/\|/g, '');
-          if (!s) return '';
-          var map = {
-            'novos-criativos': 'nc',
-            'criativos-abo-copia': 'caboc',
-            'criativos-copia': 'caboc',
-            'criativos-abo': 'cabo',
-            'criativos': 'cr'
-          };
-          if (map[s]) return map[s];
-          if (/^\d{10,}$/.test(s)) return compactNumericId(s);
-          if (s.length <= 8) return s;
-          if (s.indexOf('-') !== -1) {
-            var words = s.split('-').filter(Boolean);
-            var acr = words.map(function(w) {
-              if (/^\d+$/.test(w)) return w;
-              var num = w.match(/\d+/);
-              return w.charAt(0) + (num ? num[0] : '');
-            }).join('');
-            if (acr.length >= 2 && acr.length <= 6) return acr;
-          }
-          return (s.slice(0, 4) + s.slice(-2)).replace(/-+/g, '');
-        }
-
-        function compactCreative(raw) {
-          var s = sanitizeToken(raw).toLowerCase().replace(/\|/g, '');
-          if (!s) return '';
-          var map = {
-            'criativo1': 'c1', 'criativo-1': 'c1',
-            'criativo2': 'c2', 'criativo-2': 'c2',
-            'criativo3': 'c3', 'criativo-3': 'c3', 'xriativo3': 'c3', 'xriativo-3': 'c3',
-            'copia1': 'cp1', 'copia-1': 'cp1',
-            'copia2': 'cp2', 'copia-2': 'cp2',
-            'mapa-detlha': 'md', 'mapadetlha': 'md', 'mapa-detalhe': 'md',
-            'mapa-detlha-copia': 'mdc', 'mapadetlha-copia': 'mdc', 'mapa-detalhe-copia': 'mdc'
-          };
-          if (map[s]) return map[s];
-          var mCriativo = s.match(/^x?criativo-?(\d+)(?:-(copia\d*|c\d*))?$/);
-          if (mCriativo) return 'c' + mCriativo[1] + (mCriativo[2] ? 'c' : '');
-          var mCopia = s.match(/^copia-?(\d+)$/);
-          if (mCopia) return 'cp' + mCopia[1];
-          var mMapa = s.match(/^mapa-?det(?:lha|alhe)-?(\d+|copia\d*)$/);
-          if (mMapa) return 'md' + (mMapa[1].indexOf('copia') === 0 ? 'c' + mMapa[1].slice(5) : mMapa[1]);
-          if (/^\d{10,}$/.test(s)) return compactNumericId(s);
-          if (s.length <= 12) return s;
-          var parts = s.split('-').filter(Boolean);
-          if (parts.length >= 2) {
-            var first = parts[0].slice(0, 5);
-            var last = parts[parts.length - 1].slice(-4);
-            var mid = parts.slice(1, -1).map(function(w) { return w.charAt(0); }).join('').slice(0, 2);
-            var comp = mid ? (first + '-' + mid + '-' + last) : (first + '-' + last);
-            return comp.slice(0, 12).replace(/^-+|-+$/g, '');
-          }
-          return s.slice(0, 7) + '-' + s.slice(-4);
-        }
-
-        function buildCompactSck(rawSck, srcVal, rawCamp, rawCont) {
-          if (rawSck) {
-            var cleaned = sanitizeToken(rawSck).replace(STAGE_SUFFIX_RE, '');
-            var segs = cleaned.split('|').filter(Boolean);
-            if (segs.length >= 3) {
-              return [compactSource(segs[0]), compactCampaign(segs[1]), compactCreative(segs.slice(2).join('-'))].filter(Boolean).join('|');
-            } else if (segs.length === 2) {
-              return [compactSource(segs[0]), compactCreative(segs[1])].filter(Boolean).join('|');
-            } else if (segs.length === 1) {
-              return NON_PAID_RE.test(segs[0]) ? segs[0].toLowerCase() : compactCreative(segs[0]);
-            }
-          }
-          var parts = [];
-          if (srcVal) parts.push(compactSource(srcVal));
-          if (rawCamp) parts.push(compactCampaign(rawCamp));
-          if (rawCont) parts.push(compactCreative(rawCont));
-          return parts.filter(Boolean).join('|');
-        }
-
-        function formatCookie(name, value, maxAgeSec, proto) {
-          var age = typeof maxAgeSec === 'number' ? maxAgeSec : 2592000;
-          var p = proto || (window.location && window.location.protocol) || '';
-          var sec = (p === 'https:') ? '; Secure' : '';
-          return name + '=' + encodeURIComponent(value) + '; path=/; max-age=' + age + '; SameSite=Lax' + sec;
-        }
-
-        function setCookie(name, value, maxAgeSec) {
-          try {
-            document.cookie = formatCookie(name, value, maxAgeSec);
-          } catch(e) {}
-        }
-
-        function deleteCookie(name) {
-          try {
-            document.cookie = formatCookie(name, '', 0);
-          } catch(e) {}
-        }
-
-        function getCookie(name) {
-          try {
-            var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
-            return m ? decodeURIComponent(m[1]) : null;
-          } catch(e) { return null; }
-        }
-
-        function getConsentState() {
-          try {
-            var c = localStorage.getItem('em_consent') || getCookie('em_consent');
-            if (c === 'granted' || c === 'denied') return c;
-          } catch(e) {}
-          return 'granted';
-        }
-
-        function purgeTrackingStorage() {
-          try {
-            TRACKING_KEYS.forEach(function(k) {
-              localStorage.removeItem(k);
-              sessionStorage.removeItem(k);
-            });
-          } catch(e) {}
-          COOKIE_KEYS.forEach(function(k) { deleteCookie(k); });
-        }
-
         var currentParams = new URLSearchParams(window.location.search);
-        var hasCampaign = !!(
-          currentParams.get('sck') ||
-          currentParams.get('src') ||
-          currentParams.get('utm_source') ||
-          currentParams.get('utm_campaign') ||
-          currentParams.get('utm_content') ||
-          currentParams.get('utm_medium') ||
-          currentParams.get('utm_term') ||
-          currentParams.get('fbclid') ||
-          currentParams.get('gclid') ||
-          currentParams.get('xcod')
-        );
-
-        var rawSrc = currentParams.get('src') || currentParams.get('utm_source') || '';
-        var rawCampaign = currentParams.get('utm_campaign') || '';
-        var rawContent = currentParams.get('utm_content') || '';
-        var rawSck = currentParams.get('sck') || currentParams.get('xcod') || '';
-
-        var mCompSrc = rawSrc.match(/^(fb|ig|an|tt|gg)[_\-](\d{10,})[_\-](\d{10,})$/i);
-        if (mCompSrc) {
-          if (!rawCampaign) rawCampaign = mCompSrc[2];
-          if (!rawContent) rawContent = mCompSrc[3];
+        var storedSrc = sessionStorage.getItem('em_src') || localStorage.getItem('em_src');
+        var srcValue = currentParams.get('src') || currentParams.get('utm_source');
+        if (!srcValue && storedSrc) {
+          srcValue = storedSrc;
         }
-
-        function computeEffectiveOrigin() {
-          var srcVal = '';
-          var sckVal = '';
-          var utmStr = '';
-
-          if (hasCampaign) {
-            srcVal = compactSource(rawSrc || (rawSck ? rawSck.split('|')[0] : '')) || 'ad';
-            sckVal = buildCompactSck(rawSck, srcVal, rawCampaign, rawContent) || srcVal;
-            utmStr = JSON.stringify({
-              source: sanitizeToken(rawSrc),
-              campaign: sanitizeToken(rawCampaign),
-              content: sanitizeToken(rawContent),
-              medium: sanitizeToken(currentParams.get('utm_medium')),
-              raw_sck: rawSck,
-              raw_src: rawSrc,
-              raw_campaign: rawCampaign,
-              raw_content: rawContent
-            });
-            return { src: srcVal, sck: sckVal, utm: utmStr };
-          }
-
-          if (getConsentState() === 'granted') {
-            try {
-              var candSck = localStorage.getItem('em_last_sck') || localStorage.getItem('em_first_sck') || sessionStorage.getItem('em_sck') || getCookie('em_last_sck') || getCookie('em_first_sck');
-              var candSrc = localStorage.getItem('em_last_src') || localStorage.getItem('em_first_src') || sessionStorage.getItem('em_src') || getCookie('em_last_src') || getCookie('em_first_src');
-              if (candSck && !NON_PAID_RE.test(candSck)) {
-                return {
-                  sck: buildCompactSck(candSck, candSrc, '', ''),
-                  src: compactSource(candSrc) || 'ad',
-                  utm: ''
-                };
-              }
-            } catch(e) {}
-          }
-
+        if (!srcValue) {
           var ref = (document.referrer || '').toLowerCase();
-          if (ref.indexOf('instagram') !== -1) srcVal = 'ig-bio';
-          else if (ref.indexOf('facebook') !== -1 || ref.indexOf('fb.com') !== -1) srcVal = 'fb-org';
-          else if (ref.indexOf('tiktok') !== -1) srcVal = 'tt-org';
-          else if (ref.indexOf('google') !== -1) srcVal = 'google-org';
-          else if (ref.indexOf('whatsapp') !== -1 || ref.indexOf('wa.me') !== -1) srcVal = 'whatsapp';
-          else srcVal = 'direct';
-          return { src: srcVal, sck: srcVal, utm: '' };
-        }
-
-        function persistOriginIfConsented() {
-          var consent = getConsentState();
-          if (consent === 'denied') {
-            purgeTrackingStorage();
-            return;
-          }
-          if (consent !== 'granted') {
-            return;
-          }
-          var eff = computeEffectiveOrigin();
-          var nowIso = new Date().toISOString();
-          if (hasCampaign && !NON_PAID_RE.test(eff.sck)) {
-            try {
-              var existingFirst = localStorage.getItem('em_first_sck') || getCookie('em_first_sck');
-              if (!existingFirst || NON_PAID_RE.test(existingFirst)) {
-                localStorage.setItem('em_first_sck', eff.sck);
-                localStorage.setItem('em_first_src', eff.src);
-                localStorage.setItem('em_first_utm', eff.utm);
-                localStorage.setItem('em_first_time', nowIso);
-                setCookie('em_first_sck', eff.sck);
-                setCookie('em_first_src', eff.src);
-              }
-              localStorage.setItem('em_last_sck', eff.sck);
-              localStorage.setItem('em_last_src', eff.src);
-              localStorage.setItem('em_last_utm', eff.utm);
-              localStorage.setItem('em_last_time', nowIso);
-              localStorage.setItem('em_sck', eff.sck);
-              localStorage.setItem('em_src', eff.src);
-              sessionStorage.setItem('em_sck', eff.sck);
-              sessionStorage.setItem('em_src', eff.src);
-            } catch(e) {}
-            setCookie('em_last_sck', eff.sck);
-            setCookie('em_last_src', eff.src);
-            setCookie('em_sck', eff.sck);
-            setCookie('em_src', eff.src);
-          } else if (!hasCampaign && NON_PAID_RE.test(eff.sck)) {
-            try {
-              localStorage.setItem('em_visit_fallback', eff.src);
-              sessionStorage.setItem('em_visit_fallback', eff.src);
-            } catch(e) {}
-            setCookie('em_visit_fallback', eff.src);
-          }
-        }
-
-        function decorateAllCheckoutLinks() {
-          var consent = getConsentState();
-          var eff = computeEffectiveOrigin();
-          document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach(function(link) {
-            try {
-              var targetUrl = new URL(link.href);
-              // Se o consentimento está pendente ou recusado, NÃO transmitir SCK/SRC/XCOD/UTM/FBCLID à Hotmart
-              if (consent !== 'granted') {
-                var keysToDelete = [];
-                targetUrl.searchParams.forEach(function(_, k) {
-                  if (ATTR_PARAM_RE.test(k)) keysToDelete.push(k);
-                });
-                keysToDelete.forEach(function(k) { targetUrl.searchParams.delete(k); });
-                link.href = targetUrl.toString();
-                return;
-              }
-              // Consentimento 'granted': anexar parâmetros de campanha e SCK/SRC/XCOD
-              currentParams.forEach(function(value, key) {
-                var lower = key.toLowerCase();
-                if (!targetUrl.searchParams.has(key) && lower !== 'sck' && lower !== 'src' && lower !== 'xcod') {
-                  targetUrl.searchParams.set(key, value);
-                }
-              });
-              targetUrl.searchParams.set('src', eff.src);
-              targetUrl.searchParams.set('sck', eff.sck);
-              targetUrl.searchParams.set('xcod', eff.sck);
-              link.href = targetUrl.toString();
-            } catch(e) {
-              console.error('Erro ao decorar link Hotmart:', e);
-            }
-          });
-        }
-
-        function updateStickyBarVisibility() {
-          var sticky = document.getElementById('em-sticky-bar');
-          if (!sticky) return;
-          var banner = document.getElementById('em-consent-banner');
-          var bannerOpen = banner && !banner.hidden;
-          var y = window.scrollY || window.pageYOffset || 0;
-          var oferta = document.getElementById('oferta-box');
-          var ofertaVisible = false;
-          if (oferta) {
-            var r = oferta.getBoundingClientRect();
-            ofertaVisible = (r.top < window.innerHeight - 60 && r.bottom > 80);
-          }
-          if (bannerOpen || y < 420 || ofertaVisible) {
-            sticky.classList.add('is-hidden');
+          if (ref.indexOf('instagram') !== -1) {
+            srcValue = 'instagram_bio';
+          } else if (ref.indexOf('facebook') !== -1 || ref.indexOf('fb.com') !== -1) {
+            srcValue = 'facebook_organico';
+          } else if (ref.indexOf('tiktok') !== -1) {
+            srcValue = 'tiktok_organico';
+          } else if (ref.indexOf('google') !== -1) {
+            srcValue = 'google_organico';
+          } else if (ref.indexOf('whatsapp') !== -1 || ref.indexOf('wa.me') !== -1) {
+            srcValue = 'whatsapp';
           } else {
-            sticky.classList.remove('is-hidden');
+            srcValue = 'site_direto';
           }
         }
-        window.addEventListener('scroll', updateStickyBarVisibility, { passive: true });
+        try {
+          sessionStorage.setItem('em_src', srcValue);
+          localStorage.setItem('em_src', srcValue);
+        } catch(e) {}
 
-        function syncConsentBannerUI() {
-          var banner = document.getElementById('em-consent-banner');
-          if (!banner) return;
-          var st = getConsentState();
-          banner.hidden = (st === 'granted' || st === 'denied');
-          updateStickyBarVisibility();
-        }
-
-        var CONSENT_POLICY_VERSION = 'RGPD-41-2004-v1.2.1';
-
-        window.emHasConsent = function() {
-          return getConsentState() === 'granted';
-        };
-        window.emGetConsentState = getConsentState;
-        window.emGetConsentProof = function() {
+        document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach(function(link) {
           try {
-            var raw = localStorage.getItem('em_consent_proof') || getCookie('em_consent_proof');
-            return raw ? JSON.parse(raw) : null;
-          } catch(e) { return null; }
-        };
-        window.emFormatCookie = formatCookie;
-        window.emOpenConsentBanner = function() {
-          var banner = document.getElementById('em-consent-banner');
-          if (banner) banner.hidden = false;
-        };
-        window.emSetConsent = function(choice) {
-          var val = (choice === 'granted') ? 'granted' : 'denied';
-          var proof = JSON.stringify({
-            choice: val,
-            timestamp: new Date().toISOString(),
-            policy_version: CONSENT_POLICY_VERSION,
-            surface: (window.location && window.location.pathname) || '/'
-          });
-          try {
-            localStorage.setItem('em_consent', val);
-            localStorage.setItem('em_consent_proof', proof);
-          } catch(e) {}
-          setCookie('em_consent', val, 15552000); // 180 dias para registo técnico da escolha RGPD
-          setCookie('em_consent_proof', proof, 15552000);
-          if (val === 'granted') {
-            persistOriginIfConsented();
-            decorateAllCheckoutLinks();
-            if (typeof window.emBootMetaPixel === 'function') {
-              window.emBootMetaPixel();
+            var targetUrl = new URL(link.href);
+            currentParams.forEach(function(value, key) {
+              if (!targetUrl.searchParams.has(key)) {
+                targetUrl.searchParams.set(key, value);
+              }
+            });
+            if (!targetUrl.searchParams.has('src')) {
+              targetUrl.searchParams.set('src', srcValue);
             }
-          } else {
-            purgeTrackingStorage();
-            decorateAllCheckoutLinks();
-            if (typeof window.emRevokeMetaPixel === 'function') {
-              window.emRevokeMetaPixel();
+            var sckParts = [srcValue];
+            if (currentParams.get('utm_campaign')) sckParts.push(currentParams.get('utm_campaign'));
+            if (currentParams.get('utm_content')) sckParts.push(currentParams.get('utm_content'));
+            if (!targetUrl.searchParams.has('sck')) {
+              targetUrl.searchParams.set('sck', sckParts.join('|'));
             }
+            link.href = targetUrl.toString();
+          } catch(e) {
+            console.error('Erro ao decorar link Hotmart:', e);
           }
-          syncConsentBannerUI();
-        };
-
-        // Execução inicial
-        persistOriginIfConsented();
-        decorateAllCheckoutLinks();
-        syncConsentBannerUI();
+        });
       } catch(err) {
         console.error('Erro geral ao processar rastreio Hotmart:', err);
       }
     })();
 
-    // DISPARO SEGURO DO PIXEL META (INITIATECHECKOUT CONDICIONADO ESTRITAMENTE AO CONSENTIMENTO)
+    // DISPARO SEGURO DO PIXEL META (INITIATECHECKOUT)
     document.querySelectorAll('.js-checkout-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var val = parseFloat(this.getAttribute('data-value')) || 9.97;
         var plan = this.getAttribute('data-plan') || 'completo';
-        if (typeof fbq === 'function' && window.emHasConsent && window.emHasConsent()) {
+        if (typeof fbq === 'function') {
           fbq('track', 'InitiateCheckout', {
             value: val,
             currency: 'EUR',
@@ -2935,7 +2363,7 @@
     document.querySelectorAll('a[href="#oferta"]').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
-        if (typeof fbq === 'function' && window.emHasConsent && window.emHasConsent()) {
+        if (typeof fbq === 'function') {
           fbq('trackCustom', 'Clique_Ir_Para_Oferta', {
             posicao: (this.className || 'botao_oferta').substring(0, 30),
             texto: (this.innerText || '').trim().substring(0, 40)
@@ -2949,6 +2377,5 @@
       });
     });
   </script>
-
-  </body>
+</body>
 </html>
