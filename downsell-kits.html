@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a1020" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Só os 3 Kits — 12,97 €</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+  <link rel="preconnect" href="https://checkout.hotmart.com" crossorigin />
+  <link rel="stylesheet" href="/funnel.css?v=4" />
+  <style>
+    .offer .cta:active { transform: translateY(1px); }
+    .decline:active { color: var(--text); }
+    .offer-status { min-height: 1.5em; margin: 8px 0 0; color: #fcd34d; font-size: 13px; text-align: center; }
+    .price { font-size: clamp(34px, 10vw, 42px); }
+  </style>
+</head>
+<body>
+<main class="wrap stack">
+  <div class="topline"><span>🔒 Ligação segura · Hotmart</span></div>
+
+  <div>
+    <div class="steps" aria-hidden="true"><div class="bar done"></div><div class="bar done"></div><div class="bar now"></div></div>
+    <div class="steps-label"><span>✓ Compra principal concluída</span><b>Escolhe o teu complemento</b></div>
+  </div>
+
+  <div class="delivered" role="status">
+    <div class="ico" aria-hidden="true">✓</div>
+    <p>A tua compra principal está concluída. Podes acrescentar apenas os kits, sem a App.</p>
+  </div>
+
+  <header class="center">
+    <span class="eyebrow">Complemento pós-compra</span>
+    <h1>Só os <span class="hl">3 Kits</span></h1>
+    <p class="lead">Ficheiros de consulta e apoio à sessão. Esta opção não inclui a App ElectroMapas PRO.</p>
+  </header>
+
+  <section class="card" aria-labelledby="conteudo-title">
+    <h2 id="conteudo-title">O que está incluído</h2>
+    <ul class="features">
+      <li><div class="fi" aria-hidden="true">01</div><div><strong>Kit de Bolso · 17 páginas</strong><span>Cartões TENS, NMES, interferencial e FES; parâmetros dos 70 mapas; contraindicações.</span></div></li>
+      <li><div class="fi" aria-hidden="true">02</div><div><strong>Kit Clínica · 21 páginas</strong><span>Consentimento, checklist pré-sessão, bandeiras vermelhas, 11 fichas de registo de escalas, registo de sessão, diário de TENS e resumo de alta.</span></div></li>
+      <li><div class="fi" aria-hidden="true">03</div><div><strong>Kit Inverno para Pacientes</strong><span>Folhetos simples para entregar aos pacientes.</span></div></li>
+    </ul>
+  </section>
+
+  <div class="note"><span aria-hidden="true">ℹ️</span><span>Material educativo com referências. Ficheiros PDF A4 vertical, bons no telemóvel e para imprimir. Usa sempre o teu juízo clínico e os protocolos aplicáveis.</span></div>
+
+  <section class="card offer" id="oferta" aria-labelledby="offer-title">
+    <h2 id="offer-title">Só os 3 Kits · sem a App</h2>
+    <p class="lead">Kit de Bolso + Kit Clínica + Kit Inverno para Pacientes.</p>
+    <div class="price-row"><div class="price">12,97 € <small>pagamento único</small></div></div>
+    <div id="hotmart-sales-funnel"></div>
+    <div class="fallback">
+      <a class="cta" data-checkout="https://pay.hotmart.com/HOTMART_OFFER_DOWNSELL_KITS" href="https://pay.hotmart.com/HOTMART_OFFER_DOWNSELL_KITS">Sim, quero os 3 Kits por 12,97 €</a>
+    </div>
+    <p class="cta-sub">A Hotmart poderá apresentar a confirmação da compra adicional. Se usaste MB WAY, confirma qualquer novo pedido na app do banco.</p>
+    <p class="offer-status" id="offer-status" role="status" aria-live="polite"></p>
+    <a class="decline" href="/obrigado" data-carry>Não, obrigado</a>
+  </section>
+
+  <p class="foot">ElectroMapas © 2026 · Material educativo para profissionais de fisioterapia</p>
+</main>
+<script>
+  // Esta página foi escrita apenas em português de Portugal.
+  var pageUrl = new URL(location.href);
+  if (pageUrl.searchParams.get('lang') !== 'pt') {
+    pageUrl.searchParams.set('lang', 'pt');
+    history.replaceState(null, '', pageUrl.pathname + pageUrl.search + pageUrl.hash);
+  }
+</script>
+<script src="/funnel.js?v=4" defer></script>
+<script defer>
+  document.addEventListener('DOMContentLoaded', function () {
+    var checkout = document.querySelector('[data-checkout]');
+    checkout.addEventListener('click', function (event) {
+      if (checkout.getAttribute('data-checkout').includes('HOTMART_OFFER_DOWNSELL_KITS')) {
+        event.preventDefault();
+        document.getElementById('offer-status').textContent = 'A oferta Hotmart ainda não está configurada.';
+      }
+    });
+  });
+</script>
+</body>
+</html>

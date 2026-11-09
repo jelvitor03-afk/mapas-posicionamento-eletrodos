@@ -22,8 +22,16 @@
       "destination": "/upsell.html"
     },
     {
+      "source": "/upsell-pro",
+      "destination": "/upsell-pro.html"
+    },
+    {
       "source": "/downsell",
       "destination": "/downsell.html"
+    },
+    {
+      "source": "/downsell-kits",
+      "destination": "/downsell-kits.html"
     },
     {
       "source": "/upsell-casos",
