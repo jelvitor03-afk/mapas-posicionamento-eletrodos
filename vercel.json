@@ -118,5 +118,12 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/atlas/",
+      "permanent": false
+    }
   ]
 }
