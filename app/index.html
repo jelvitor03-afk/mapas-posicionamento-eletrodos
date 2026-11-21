@@ -578,16 +578,16 @@
               
               <!-- 1. Foto Real de Colocação na Pele -->
               <div id="pane-placement" class="layer-pane block w-full text-center space-y-1.5">
-                <img id="layer-placement-img" src="../assets/3d/clinica_marquesa_joelho.webp" alt="Colocação de Elétrodos" class="max-h-[190px] mx-auto rounded-xl object-contain border border-med-border/50 shadow-md" />
+                <img id="layer-placement-img" src="/assets/3d/clinica_marquesa_joelho.webp" alt="Colocação de Elétrodos" class="max-h-[190px] mx-auto rounded-xl object-contain border border-med-border/50 shadow-md" />
                 <p id="layer-caption-placement" class="text-[10px] text-cyan-300 font-bold">Colocação com Elétrodos Autoadesivos & Cabos de Derivação</p>
               </div>
 
               <!-- 2. Vídeo de Marquesa Comentado em pt-PT -->
               <div id="pane-video" class="layer-pane hidden w-full space-y-2">
                 <div class="aspect-video w-full rounded-xl overflow-hidden border border-cyan-500/40 bg-black">
-                  <video id="layer-video-player" controls playsinline class="w-full h-full object-cover">
-                    <source id="layer-video-source" src="../assets/videos/video_joelho_pt_pt.mp4" type="video/mp4">
-                    <track id="layer-video-track" src="../assets/videos/legendas_joelho_pt_pt.vtt" kind="subtitles" srclang="pt" label="pt-PT" default>
+                  <video id="layer-video-player" controls playsinline preload="none" class="w-full h-full object-cover">
+                    <source id="layer-video-source" src="/assets/videos/video_joelho_pt_pt.mp4" type="video/mp4">
+                    <track id="layer-video-track" src="/assets/videos/legendas_joelho_pt_pt.vtt" kind="subtitles" srclang="pt" label="pt-PT" default>
                   </video>
                 </div>
                 <div id="video-clinical-banner" class="text-[10px] bg-slate-900 p-2 rounded-xl border border-med-border text-slate-300">
@@ -601,13 +601,13 @@
 
               <!-- 3. Músculo 3D -->
               <div id="pane-muscle" class="layer-pane hidden w-full text-center space-y-1.5">
-                <img id="layer-muscle-img" src="../assets/3d/mapa_3d_joelho.webp" alt="Músculo 3D" class="max-h-[190px] mx-auto rounded-xl object-contain border border-med-border/50 shadow-md" />
+                <img id="layer-muscle-img" src="/assets/3d/mapa_3d_joelho.webp" alt="Músculo 3D" class="max-h-[190px] mx-auto rounded-xl object-contain border border-med-border/50 shadow-md" />
                 <p id="layer-caption-muscle" class="text-[10px] text-cyan-300 font-bold">Vasto Medial Oblíquo, Reto Femoral & Patela</p>
               </div>
 
               <!-- 4. Trajeto Nervoso Motor -->
               <div id="pane-nerve" class="layer-pane hidden w-full text-center space-y-1.5">
-                <img id="layer-nerve-img" src="../assets/3d/anatomia_neural_3d.webp" alt="Inervação Neural" class="max-h-[190px] mx-auto rounded-xl object-contain border border-med-border/50 shadow-md" />
+                <img id="layer-nerve-img" src="/assets/3d/anatomia_neural_3d.webp" alt="Inervação Neural" class="max-h-[190px] mx-auto rounded-xl object-contain border border-med-border/50 shadow-md" />
                 <p id="layer-caption-nerve" class="text-[10px] text-cyan-300 font-bold">Nervo Femoral e Inervação Motora do Quadríceps (L2-L4)</p>
               </div>
 
@@ -1125,9 +1125,6 @@
         <button type="button" onclick="submitLicenseCode()" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 hover:from-cyan-300 hover:to-emerald-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg transition">
           🔓 Ativar Licença e Desbloquear Tudo →
         </button>
-        <button type="button" onclick="activateEvaluationAccess()" class="w-full py-2.5 px-3 rounded-xl bg-cyan-950/60 border border-cyan-400/50 hover:bg-cyan-900/60 text-cyan-200 text-xs font-bold transition flex items-center justify-center gap-1.5">
-          <span>⚡</span> <span>Ativar Avaliação Completa PRO (Teste de Fisioterapeuta)</span>
-        </button>
         <button type="button" onclick="activateDemoMode()" class="w-full py-2 rounded-xl bg-med-card border border-med-border text-slate-400 hover:text-white text-xs font-semibold transition">
           Continuar no Modo de Demonstração (Módulo Joelho Grátis)
         </button>
@@ -1136,7 +1133,7 @@
       <div class="border-t border-slate-800 pt-3 text-center">
         <p class="text-[11px] text-slate-400">
           Ainda não adquiriu o ElectroMapas PRO?
-          <a href="../upsell.html" target="_blank" class="text-amber-400 hover:underline font-bold block mt-0.5">Obter Licença Vitalícia por 14,97 € na Hotmart ↗</a>
+          <a href="/funil-v8/upsell-pro" target="_blank" class="text-amber-400 hover:underline font-bold block mt-0.5">Obter Pacote PRO + App por 17,87 € na Hotmart ↗</a>
         </p>
       </div>
     </div>

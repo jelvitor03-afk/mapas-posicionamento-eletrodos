@@ -14,6 +14,8 @@
   ];
   var STORAGE_MAP_KEY = 'em_funnel_utm_v8';
   var STORAGE_SRC_KEY = 'em_src';
+  var STORAGE_PREFILL_KEY = 'em_funnel_prefill_v8';
+  var PREFILL_KEYS = ['name', 'email', 'phonenumber'];
 
   function readJsonStorage(key) {
     try {
@@ -92,8 +94,34 @@
     writeJsonStorage(STORAGE_MAP_KEY, merged);
     writeStringStorage(STORAGE_SRC_KEY, srcValue);
 
+    var storedPrefill = {};
+    try {
+      var rawPrefill = sessionStorage.getItem(STORAGE_PREFILL_KEY);
+      if (rawPrefill) {
+        var parsedPrefill = JSON.parse(rawPrefill);
+        if (parsedPrefill && typeof parsedPrefill === 'object') storedPrefill = parsedPrefill;
+      }
+    } catch (e) {}
+
+    var prefill = {};
+    PREFILL_KEYS.forEach(function (k) {
+      var v = currentParams.get(k);
+      if (!v && k === 'email') v = currentParams.get('buyer_email');
+      if (!v && k === 'phonenumber') v = currentParams.get('phone');
+      if (v) {
+        prefill[k] = v;
+      } else if (storedPrefill[k]) {
+        prefill[k] = storedPrefill[k];
+      }
+    });
+
+    try {
+      sessionStorage.setItem(STORAGE_PREFILL_KEY, JSON.stringify(prefill));
+    } catch (e) {}
+
     return {
       params: merged,
+      prefill: prefill,
       srcValue: srcValue,
       defaultSck: defaultSck
     };
@@ -108,6 +136,13 @@
             targetUrl.searchParams.set(key, attr.params[key]);
           }
         });
+        if (attr.prefill) {
+          PREFILL_KEYS.forEach(function (key) {
+            if (attr.prefill[key] && !targetUrl.searchParams.has(key)) {
+              targetUrl.searchParams.set(key, attr.prefill[key]);
+            }
+          });
+        }
         if (!targetUrl.searchParams.has('checkoutMode')) targetUrl.searchParams.set('checkoutMode', '10');
         if (!targetUrl.searchParams.has('locale')) targetUrl.searchParams.set('locale', 'pt_PT');
         if (!targetUrl.searchParams.has('src')) targetUrl.searchParams.set('src', attr.srcValue);
@@ -294,6 +329,34 @@
     return true;
   }
 
+  function bindStickyBar() {
+    var sticky = document.getElementById('sticky-mobile');
+    var hero = document.querySelector('.hero-funnel');
+    var oferta = document.getElementById('oferta');
+    if (!sticky || !hero || !oferta || !('IntersectionObserver' in window)) return;
+
+    var pastHero = false;
+    var inOferta = false;
+
+    function syncSticky() {
+      var isMobile = window.innerWidth <= 720;
+      sticky.classList.toggle('is-visible', isMobile && pastHero && !inOferta);
+    }
+
+    new IntersectionObserver(function (entries) {
+      pastHero = !entries[0].isIntersecting && entries[0].boundingClientRect.top < 0;
+      syncSticky();
+    }, { threshold: 0 }).observe(hero);
+
+    new IntersectionObserver(function (entries) {
+      inOferta = entries[0].isIntersecting;
+      syncSticky();
+    }, { threshold: 0.08 }).observe(oferta);
+
+    window.addEventListener('resize', syncSticky, { passive: true });
+    syncSticky();
+  }
+
   function init() {
     if (maybeRedirectUpgradeToObrigado()) return;
     var attr = collectAttribution();
@@ -302,6 +365,7 @@
     bindCheckoutTracking();
     bindSmoothAnchors();
     bindLightbox();
+    bindStickyBar();
   }
 
   if (document.readyState === 'loading') {
