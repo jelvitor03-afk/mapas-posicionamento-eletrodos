@@ -84,5 +84,58 @@ Todas as configurações em **Ferramentas → Configurações da página de paga
    - Na Hotmart (`https://app.hotmart.com/tools/webhook`), existem atualmente **`0 configurações`** (nenhum webhook registado para `https://mapas-posicionamento-eletrodos-two.vercel.app/api/hotmart-webhook`).
    - O endpoint `/api/verify-license` respondeu em modo **`resilient_ledger`** (sem Redis/Upstash KV persistente ativo na Vercel). Isto significa que o comprador do Pacote PRO **consegue ativar a App PRO normalmente** por e-mail ou código `HP...`, mas a revogação automática por reembolso via webhook e o bloqueio persistente entre instâncias serverless só ficam ativos depois de configurar o Webhook na Hotmart + variáveis `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` / `HOTMART_HOTTOK` na Vercel.
 2. **Notas menores fora da pasta `funil-v8/` (não alteradas para preservar a produção)**:
-   - O modal de licença em `/app/` ainda contém um link de rodapé legado para `/upsell.html` (`14,97 €`) e uma chamada abortada para `/assets/videos/video_joelho_pt_pt.mp4`.
+   - O modal de licença em `/app/` ainda contém um link de rodapé legado para `/upsell.html` (`14,97 €`) e uma chamada abortada para `/assets/videos/video_joelho_pt_pt.mp4`. *(Resolvido na atualização V8.1 abaixo — commits `dd60548` e `f106928`.)*
    - Em `8931029` (*eBooks, Documentos*), caso deseje que o comprador também tenha o link da App PRO dentro da Área de Membros Hotmart (além da página `entrega-pro`), basta subir um PDF simples de 1 página com o botão clicável para `/electromapas-pro-app`.
+
+---
+
+## Auditoria e Otimização V8.1 — 2026-11-21
+
+### 1. Diagnóstico Real na Hotmart (Fatos Empíricos de `2026-11-21`)
+
+- **Vendas na oferta principal (`8930829`, `csi2p45d` — `11,87 €` bruto / `9,71 €` líquido)**: **4 transações reais** registadas hoje entre `09:27` e `11:38`:
+  1. `HP1041991886` (`11:38:35`, aprovada `12:03:35`) — `Aprovada` — **Multibanco** (`ig`)
+  2. `HP1438283253` (`11:30:47`, aprovada `11:31:35`) — `Aprovada` — **MB WAY** (`ig`)
+  3. `HP2417637770` (`11:12:13`, aprovada `11:12:30`) — `Aprovada` — **MB WAY** (`meta`)
+  4. `HP1896287686` (`09:27:07`) — `Aguardando Pagamento` — **Multibanco** (`meta`)
+- **Produtos `9030792`, `8931029` e `8931107`**: **0 vendas**, **0 carrinhos abandonados**, **0 cartões recusados** nos últimos 7 dias.
+- **Método de pagamento dominante**: **100% dos pedidos em `2026-11-21`** usaram **MB WAY (2)** ou **Multibanco (2)** — `0` via Cartão de Crédito.
+- **Porque o funil não aparece em `Funil de Vendas` nativo da Hotmart**: o funil de 1-clique nativo da Hotmart **não suporta MB WAY**. O funil V8 está ativo e confirmado via **Opções de Páginas de Obrigado → Página externa** nos 4 produtos.
+- **Nota externa**: a inspeção ao Meta Ads Manager foi redirecionada para ecrã de login (`business.facebook.com/business/loginpage`), pelo que não foi consultada nesta auditoria.
+
+### 2. Correções Executadas (Hotmart + Código em Produção)
+
+- **Limpeza de Fricção nos Checkouts Hotmart (`8931029`, `8931107`, `9030792`)** — salvos e confirmados após recarregamento (`8930829` e preços principais preservados intactos):
+  - `Mostrar opção de Inserir Cupom`: **desmarcado** em `8931029`, `8931107` e `9030792`.
+  - `GooglePay`: **ativado** em `8931029`, `8931107` e `9030792` (junto de Cartão, MB WAY, Multibanco e Apple Pay).
+  - `Idioma`: confirmado **`Português (Portugal)`** nos 3 produtos.
+  - `Página externa`: confirmada nos 3 estados (`/funil-v8/entrega-pro`, `/funil-v8/obrigado-kits`, `/funil-v8/upgrade-completo`).
+- **Correções de Conversão em `funil-v8/` (commits `dd60548` e `f106928`)**:
+  - Banner superior alterado para `.confirm-banner.is-hold` ("Passo 1 registado · Não feches esta página antes de concluir o Passo 2"), eliminando a fuga imediata para o e-mail.
+  - Bloco `.hero-offer-box` (preço + botão direto para checkout + métodos reais) colocado acima da dobra — e em `upsell-pro.html` posicionado antes da lista de 3 benefícios para garantir CTA visível na primeira tela do telemóvel (`390×844`) e computador (`1440×900`).
+  - Removido o bloco autossabotador `.info-note` ("Transparência sobre sobreposição") imediatamente acima do botão de compra em `upsell-pro.html`.
+  - Adicionada barra fixa mobile `#sticky-mobile` (visível apenas após sair do hero no telemóvel e oculta ao entrar em `#oferta`) e repasse de pré-preenchimento (`name`, `email`/`buyer_email`, `phonenumber`/`phone` em `sessionStorage`) para links `pay.hotmart.com` em `funnel-v8.js`.
+- **Correções Técnicas na App PRO (`/app/` — commits `dd60548` e `f106928`)**:
+  - `app/index.html`: corrigidos caminhos relativos `../assets/` para `/assets/`, carregamento lazy do `<video id="layer-video-player">` (`preload="none"`, `src=""` até o utilizador abrir a aba de vídeo), removido o botão antigo de acesso grátis permanente (`Ativar Avaliação Completa PRO`) do modal `#modal-license-gate` e atualizado o link inferior para `/funil-v8/upsell-pro` (`17,87 €`).
+  - `app/sw.js` e `vercel.json`: versão de cache atualizada para **`electromapas-pro-v8-1`** com estratégia *Network-First* para documentos HTML e `Cache-Control: public, max-age=0, must-revalidate` em `/app`, `/app/`, `/app/index.html` e `/app/sw.js`.
+
+### 3. Provas de Verificação ao Vivo Após Publicação (`f106928`)
+
+- **HTTP / Headers em Produção**:
+  - Todas as 10 rotas principais (`/`, `/atlas/`, `/funil-v8/*`, `/electromapas-pro-app`, `/app/`) devolveram **HTTP `200`**.
+  - `/app/` e `/app/sw.js` servidos com `Cache-Control: public, max-age=0, must-revalidate`, `electromapas-pro-v8-1` e `/funil-v8/upsell-pro` ativo.
+  - `POST /api/verify-license` (`{"code":"HP123456789012","deviceId":"qa-device-v81"}`) retornou **HTTP `200`** com `"valid": true` e `"storageMode": "resilient_ledger"`.
+  - `/atlas/` intacta (`11,87 €` e `7,87 €`), `0` erros de consola e `0` overflow em `390×844` e `1440×900`.
+  - Repositório: **`23`** ficheiros rastreados em `entregaveis/` preservados sem alteração.
+- **QA ao Vivo em Navegador (Telemóvel `390×844` e Computador `1440×900`)**:
+  - **`/funil-v8/upsell-pro`**: `0` erros de consola, `0` overflow horizontal, `0` eventos `Purchase` no Pixel, CTA da primeira dobra (`17,87 €`) com `bottom = 750.93px` em `390×844` (`<= 844`) e `.hero-offer-box` com `bottom = 705.60px` em `1440×900` (`<= 900`), pré-preenchimento (`name`, `email`, `phonenumber`, `utm_source`) repassado para `pay.hotmart.com/B108418889J?off=urgqavvm`, barra `#sticky-mobile` e link de recusa funcionais.
+  - **`/funil-v8/downsell-kits`** e **`/funil-v8/upgrade-completo`**: `0` erros, `0` overflow, `0` eventos `Purchase`, CTA na primeira dobra mobile (`<= 844`), `#sticky-mobile` funcional, redirecionamento automático de `upgrade-completo` → `/funil-v8/upsell-pro` → `/funil-v8/obrigado-completo` verificado.
+  - **Checkouts públicos Hotmart (somente leitura)**: `B108418889J?off=urgqavvm` (`17,87 €`), `G108419033I?off=1enxjshv` (`8,87 €`) e `K108418562E?off=5k28agkz` (`4,87 €`) validados ao vivo com **zero campo de cupom** e **MB WAY**, **Multibanco**, **Google Pay**, **Cartão**, **PayPal** e **Klarna** visíveis.
+  - **`/app/` após reload limpo**: `0` erros de consola, **`0` pedidos `.mp4` disparados na abertura**, vídeo `video_joelho_pt_pt.mp4` carregado em `206` apenas ao clicar em `🎬 Vídeo Joelho (VMO)`, modal `#modal-license-gate` sem botão de avaliação grátis e com link para `/funil-v8/upsell-pro` (`17,87 €`).
+
+### 4. Próximas Decisões que Dependem da Aprovação do Jel
+
+1. **Adicionar um *Order Bump* no checkout do Atlas Completo (`8930829`)**: como 100% dos compradores de hoje usaram MB WAY ou Multibanco (e não Cartão 1-clique), um Order Bump dentro do mesmo checkout aproveita a **única autorização bancária** e tende a converter muito acima do upsell pós-compra externo.
+2. **Corrigir capa cinzenta (`placeholder`) e descritor da fatura (`HTM*HT`) no produto `8930829`**.
+3. **Configurar `HOTMART_HOTTOK` + Upstash Redis/KV (`UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN`) na Vercel** e registar `https://mapas-posicionamento-eletrodos-two.vercel.app/api/hotmart-webhook` na Hotmart (`0` webhooks ativos atualmente) para persistência real das licenças e revogação automática em caso de reembolso.
+
