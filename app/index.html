@@ -154,7 +154,12 @@
             <span>📋</span> <span class="hidden sm:inline">Registo SOAP</span><span class="sm:hidden">SOAP</span>
           </button>
         </nav>
-        <div id="header-license-badge" class="flex-shrink-0"></div>
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <a href="/area-membros" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-med-card border border-med-border text-slate-200 hover:border-amber-400 hover:text-amber-300 text-[11px] font-bold transition whitespace-nowrap">
+            <span>🎓</span> <span>Área de Membros</span>
+          </a>
+          <div id="header-license-badge" class="flex-shrink-0"></div>
+        </div>
       </div>
 
     </div>
@@ -187,9 +192,11 @@
 
           <!-- Barra de Pesquisa Rápida -->
           <div class="flex items-center gap-2 flex-1 max-w-sm">
-            <div class="relative w-full">
+            <div class="relative w-full" id="quick-search-wrapper">
               <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500 text-xs">🔍</span>
-              <input type="text" id="quick-search-input" oninput="handleQuickSearch(this.value)" placeholder="Pesquisar região, patologia ou corrente..." class="w-full pl-8 pr-3 py-1.5 rounded-xl bg-med-card border border-med-border text-xs text-white placeholder-slate-500 outline-none focus:border-cyan-400 transition" />
+              <input type="text" id="quick-search-input" oninput="handleQuickSearch(this.value)" onfocus="if(this.value.trim().length>=2)handleQuickSearch(this.value)" placeholder="Pesquisar região, patologia ou corrente..." autocomplete="off" class="w-full pl-8 pr-8 py-1.5 rounded-xl bg-med-card border border-med-border text-xs text-white placeholder-slate-500 outline-none focus:border-cyan-400 transition" />
+              <button type="button" id="quick-search-clear" onclick="clearQuickSearch()" aria-label="Limpar pesquisa" class="hidden absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 hover:text-white text-sm font-bold">&times;</button>
+              <div id="quick-search-results" class="hidden absolute left-0 right-0 top-full mt-1.5 z-40 bg-[#05131f] border border-cyan-500/40 rounded-2xl shadow-2xl overflow-hidden max-h-72 overflow-y-auto divide-y divide-slate-800"></div>
             </div>
           </div>
         </div>
@@ -304,7 +311,7 @@
           fill="#051624" stroke="#00e5ff" stroke-width="1.8" opacity="0.6" filter="drop-shadow(0 0 8px rgba(0,229,255,0.4))" />
 
         <!-- 1. Cabeça & Mandíbula -->
-        <path d="M180,48 C180,28 220,28 220,48 C220,68 214,84 200,88 C186,84 180,68 180,48 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Cânio, Face & Mandíbula" data-muscle="Cânio, Face & Mandíbula" />
+        <path d="M180,48 C180,28 220,28 220,48 C220,68 214,84 200,88 C186,84 180,68 180,48 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Crânio, Face & Mandíbula" data-muscle="Crânio, Face & Mandíbula" />
         
         <!-- 2. Pescoço & Esternocleidomastoideus -->
         <path d="M188,88 L212,88 L218,110 L182,110 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Coluna Cervical & Esternocleidomastoideus" data-muscle="Coluna Cervical & Esternocleidomastoideus" />
@@ -353,14 +360,14 @@
         <!-- Vasto Lateral Esquerdo -->
         <path d="M154,346 C140,375 138,415 146,445 C152,448 160,446 162,442 C154,410 156,375 162,346 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Vasto Lateral Esquerdo" data-muscle="Vasto Lateral Esquerdo" />
         <!-- VASTO MEDIAL OBLÍQUO (VMO ESQUERDO) - A famosa gota muscular medial! -->
-        <path d="M176,412 C184,410 196,418 196,438 C196,454 184,458 174,452 C170,444 170,426 176,412 Z" class="muscle-path active-vmo" data-muscle="Vasto Medial Oblíquo (VMO Esq) — Ponto Motor" />
+        <path d="M176,412 C184,410 196,418 196,438 C196,454 184,458 174,452 C170,444 170,426 176,412 Z" class="muscle-path active-vmo" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Vasto Medial Oblíquo (VMO Esq) — Ponto Motor" data-muscle="Vasto Medial Oblíquo (VMO Esq) — Ponto Motor" />
 
         <!-- Reto Femoral Direito -->
         <path d="M236,345 C242,375 242,415 234,442 C228,446 218,444 216,438 C218,405 220,370 224,346 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Reto Femoral Direito" data-muscle="Reto Femoral Direito" />
         <!-- Vasto Lateral Direito -->
         <path d="M246,346 C260,375 262,415 254,445 C248,448 240,446 238,442 C246,410 244,375 238,346 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Vasto Lateral Direito" data-muscle="Vasto Lateral Direito" />
         <!-- VASTO MEDIAL OBLÍQUO (VMO DIREITO) - Gota muscular medial! -->
-        <path d="M224,412 C216,410 204,418 204,438 C204,454 216,458 226,452 C230,444 230,426 224,412 Z" class="muscle-path active-vmo" data-muscle="Vasto Medial Oblíquo (VMO Dir) — Ponto Motor" />
+        <path d="M224,412 C216,410 204,418 204,438 C204,454 216,458 226,452 C230,444 230,426 224,412 Z" class="muscle-path active-vmo" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Vasto Medial Oblíquo (VMO Dir) — Ponto Motor" data-muscle="Vasto Medial Oblíquo (VMO Dir) — Ponto Motor" />
 
         <!-- 13. Joelhos & Patela com Anel Sesamóide -->
         <ellipse cx="170" cy="462" rx="10" ry="12" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Patela Esquerda & Tendão Rotuliano" data-muscle="Patela Esquerda & Tendão Rotuliano" />
@@ -450,12 +457,12 @@
         <path d="M256,176 C264,215 258,260 240,285 L228,215 L244,182 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Grande Dorsal Direito" data-muscle="Grande Dorsal Direito" />
 
         <!-- 8. ERETORES DA COLUNA / PARAVERTEBRAIS LOMBARES (L1-S1) — PONTO-CHAVE LOMBALGIA -->
-        <path d="M172,212 L198,212 L198,295 L168,295 Z" class="muscle-path active-lumbar" data-muscle="Paravertebrais Lombares Esquerdos (L1-S1) — Canal 1 TENS" />
-        <path d="M228,212 L202,212 L202,295 L232,295 Z" class="muscle-path active-lumbar" data-muscle="Paravertebrais Lombares Direitos (L1-S1) — Canal 1 TENS" />
+        <path d="M172,212 L198,212 L198,295 L168,295 Z" class="muscle-path active-lumbar" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Paravertebrais Lombares Esquerdos (L1-S1)" data-muscle="Paravertebrais Lombares Esquerdos (L1-S1) — Canal 1 TENS" />
+        <path d="M228,212 L202,212 L202,295 L232,295 Z" class="muscle-path active-lumbar" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Paravertebrais Lombares Direitos (L1-S1)" data-muscle="Paravertebrais Lombares Direitos (L1-S1) — Canal 1 TENS" />
 
         <!-- 9. GLÚTEOS MÁXIMOS & PIRIFORME (TRAJETO DO NERVO CIÁTICO) -->
-        <path d="M148,285 C138,315 140,358 158,375 C174,382 196,375 198,345 C198,300 178,285 156,282 Z" class="muscle-path active-glute" data-muscle="Glúteo Máximo & Músculo Piriforme (Esq) — Tronco Ciático" />
-        <path d="M252,285 C262,315 260,358 242,375 C226,382 204,375 202,345 C202,300 222,285 244,282 Z" class="muscle-path active-glute" data-muscle="Glúteo Máximo & Músculo Piriforme (Dir) — Tronco Ciático" />
+        <path d="M148,285 C138,315 140,358 158,375 C174,382 196,375 198,345 C198,300 178,285 156,282 Z" class="muscle-path active-glute" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Glúteo Máximo & Músculo Piriforme (Esq)" data-muscle="Glúteo Máximo & Músculo Piriforme (Esq) — Tronco Ciático" />
+        <path d="M252,285 C262,315 260,358 242,375 C226,382 204,375 202,345 C202,300 222,285 244,282 Z" class="muscle-path active-glute" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Glúteo Máximo & Músculo Piriforme (Dir)" data-muscle="Glúteo Máximo & Músculo Piriforme (Dir) — Tronco Ciático" />
 
         <!-- 10. ISQUIOTIBIAIS (BÍCEPS FEMORAL, SEMITENDINOSO, SEMIMEMBRANOSO) -->
         <path d="M152,375 C142,410 146,448 160,466 C170,470 184,466 188,446 C192,415 188,382 180,375 Z" class="muscle-path" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){this.dispatchEvent(new Event('click')); event.preventDefault();}" aria-label="Músculo: Isquiotibiais Esquerdos (Bíceps Femoral & Semitendinoso)" data-muscle="Isquiotibiais Esquerdos (Bíceps Femoral & Semitendinoso)" />
@@ -659,15 +666,25 @@
             </div>
 
             <!-- Temporizador de Apoio ao Gabinete -->
-            <div class="bg-[#030d17] p-3 rounded-2xl border border-med-border flex items-center justify-between">
-              <div>
-                <span class="text-[9px] font-bold uppercase text-slate-400 tracking-wider">Temporizador de Gabinete:</span>
-                <div class="text-xl font-mono font-black text-white" id="session-timer-display">20:00</div>
+            <div class="bg-[#030d17] p-3 rounded-2xl border border-med-border space-y-2.5">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <span class="text-[9px] font-bold uppercase text-slate-400 tracking-wider">Temporizador de Gabinete:</span>
+                  <div class="text-xl font-mono font-black text-white" id="session-timer-display">20:00</div>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button type="button" onclick="toggleTimerSound()" id="btn-timer-sound" title="Ativar ou silenciar sinal sonoro ao terminar" class="px-2.5 py-1.5 rounded-xl bg-med-card border border-cyan-500/40 text-cyan-300 font-bold text-xs hover:border-cyan-400 transition">🔔 Som</button>
+                  <button type="button" onclick="startTimer()" id="btn-timer-start" class="px-3 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400 transition">Iniciar</button>
+                  <button type="button" onclick="pauseTimer()" id="btn-timer-pause" class="px-3 py-1.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 transition hidden">Pausar</button>
+                  <button type="button" onclick="resetTimer()" class="px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 font-bold text-xs hover:text-white transition">Reset</button>
+                </div>
               </div>
-              <div class="flex items-center gap-1.5">
-                <button type="button" onclick="startTimer()" id="btn-timer-start" class="px-3 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400 transition">Iniciar</button>
-                <button type="button" onclick="pauseTimer()" id="btn-timer-pause" class="px-3 py-1.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 transition hidden">Pausar</button>
-                <button type="button" onclick="resetTimer()" class="px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 font-bold text-xs hover:text-white transition">Reset</button>
+              <div class="flex items-center gap-1.5 text-[10px] font-mono pt-1 border-t border-slate-800/80">
+                <span class="text-slate-400 mr-1">Predefinições:</span>
+                <button type="button" onclick="setTimerPreset(10)" data-timer-min="10" class="timer-preset-btn px-2 py-0.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition">10m</button>
+                <button type="button" onclick="setTimerPreset(15)" data-timer-min="15" class="timer-preset-btn px-2 py-0.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition">15m</button>
+                <button type="button" onclick="setTimerPreset(20)" data-timer-min="20" class="timer-preset-btn active px-2 py-0.5 rounded-lg bg-cyan-500 text-slate-950 font-bold transition">20m</button>
+                <button type="button" onclick="setTimerPreset(30)" data-timer-min="30" class="timer-preset-btn px-2 py-0.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition">30m</button>
               </div>
             </div>
 
@@ -697,11 +714,11 @@
 
         <!-- Filtros Rápidos -->
         <div class="flex flex-wrap gap-2 text-xs font-bold border-b border-med-border pb-3">
-          <button onclick="filterProtocols('all')" class="proto-btn active px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950">Todos (16)</button>
-          <button onclick="filterProtocols('spine')" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Coluna & Tronco (4)</button>
-          <button onclick="filterProtocols('lower')" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Membro Inferior (5)</button>
-          <button onclick="filterProtocols('upper')" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Membro Superior & Punho (5)</button>
-          <button onclick="filterProtocols('neuro')" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Neurofuncional / FES (2)</button>
+          <button onclick="filterProtocols('all', this)" class="proto-btn active px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950">Todos (16)</button>
+          <button onclick="filterProtocols('spine', this)" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Coluna & Tronco (4)</button>
+          <button onclick="filterProtocols('lower', this)" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Membro Inferior (5)</button>
+          <button onclick="filterProtocols('upper', this)" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Membro Superior & Punho (5)</button>
+          <button onclick="filterProtocols('neuro', this)" class="proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white">Neurofuncional / FES (2)</button>
         </div>
 
         <!-- Grelha dos 16 Protocolos -->
@@ -760,23 +777,34 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-slate-300 font-bold mb-1">Largura de Pulso (&micro;s):</label>
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-slate-300 font-bold">Largura de Pulso (&micro;s):</label>
+                <span id="calc-pw-display" class="font-mono text-cyan-300 font-bold">350 &micro;s</span>
+              </div>
               <div class="grid grid-cols-3 gap-1.5 font-mono text-[11px]">
-                <button type="button" onclick="setCalcPulseWidth(100)" class="calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400">100</button>
-                <button type="button" onclick="setCalcPulseWidth(250)" class="calc-pw-btn active py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold">250</button>
-                <button type="button" onclick="setCalcPulseWidth(350)" class="calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400">350</button>
+                <button type="button" data-pw="100" onclick="setCalcPulseWidth(100)" class="calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400">100</button>
+                <button type="button" data-pw="150" onclick="setCalcPulseWidth(150)" class="calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400">150</button>
+                <button type="button" data-pw="200" onclick="setCalcPulseWidth(200)" class="calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400">200</button>
+                <button type="button" data-pw="250" onclick="setCalcPulseWidth(250)" class="calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400">250</button>
+                <button type="button" data-pw="300" onclick="setCalcPulseWidth(300)" class="calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400">300</button>
+                <button type="button" data-pw="350" onclick="setCalcPulseWidth(350)" class="calc-pw-btn active py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold">350</button>
               </div>
             </div>
             <div>
               <label class="block text-slate-300 font-bold mb-1">Frequência (Hz):</label>
               <select id="calc-frequency" onchange="runDosimetryCalc()" class="w-full bg-[#030d17] border border-med-border rounded-xl p-2 text-slate-200 focus:border-cyan-400 focus:outline-none font-mono text-xs">
                 <option value="2">2 Hz (Endorfinas / Baixa Freq.)</option>
-                <option value="35">35 Hz (Recrutamento Tetânico Suave)</option>
+                <option value="35">35 Hz (FES Dorsiflexão / Suave)</option>
+                <option value="40">40 Hz (NMES Extremidade Superior)</option>
+                <option value="45">45 Hz (NMES Proprioceptivo)</option>
                 <option value="50" selected>50 Hz (Padrão NMES Fortalecimento)</option>
                 <option value="80">80 Hz (TENS Convencional Parestesia)</option>
+                <option value="90">90 Hz (TENS / Interferencial)</option>
                 <option value="100">100 Hz (Comporta Medular Rápida)</option>
+                <option value="110">110 Hz (TENS Tendão Rotuliano)</option>
+                <option value="120">120 Hz (TENS Modulado Agudo)</option>
               </select>
             </div>
           </div>
@@ -1135,6 +1163,34 @@
           Ainda não adquiriu o ElectroMapas PRO?
           <a href="/funil-v8/upsell-pro" target="_blank" class="text-amber-400 hover:underline font-bold block mt-0.5">Obter Pacote PRO + App por 17,87 € na Hotmart ↗</a>
         </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================= -->
+  <!-- MODAL DE INFORMAÇÕES DA SESSÃO PRO VERIFICADA                           -->
+  <!-- ======================================================================= -->
+  <div id="modal-session-info" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-[#05131f] border-2 border-emerald-500/40 rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl relative">
+      <button type="button" onclick="closeSessionInfoModal()" aria-label="Fechar" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold p-1">&times;</button>
+      <div class="flex items-center gap-2.5">
+        <span class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-lg">✓</span>
+        <div>
+          <h3 class="text-base font-bold text-white">Sessão PRO Verificada</h3>
+          <span class="text-[11px] text-emerald-300">Licença vinculada a este dispositivo</span>
+        </div>
+      </div>
+      <div class="bg-[#030d17] border border-med-border rounded-2xl p-3.5 space-y-2 text-xs font-mono">
+        <div class="flex justify-between gap-2"><span class="text-slate-400">Titular:</span><strong id="session-info-buyer" class="text-white text-right">—</strong></div>
+        <div class="flex justify-between gap-2"><span class="text-slate-400">Referência:</span><strong id="session-info-tx" class="text-cyan-300 text-right">—</strong></div>
+        <div class="flex justify-between gap-2"><span class="text-slate-400">Dispositivo:</span><strong id="session-info-device" class="text-slate-300 text-right">—</strong></div>
+      </div>
+      <p class="text-[11px] text-slate-400 leading-relaxed">
+        Cada licença garante 1 instalação ativa offline/online. Para transferir para outro telemóvel ou tablet, contacta o suporte oficial em <a href="https://consumer.hotmart.com/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline">hotmart.com → Minhas compras</a> com o e-mail utilizado no pagamento.
+      </p>
+      <div class="flex flex-wrap gap-2 pt-1">
+        <a href="/area-membros" class="flex-1 text-center py-2.5 px-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition">Abrir Área de Membros</a>
+        <button type="button" onclick="logoutProSession()" class="py-2.5 px-3 rounded-xl bg-med-card border border-red-500/40 text-red-300 hover:bg-red-950/50 text-xs font-bold transition">Terminar Sessão</button>
       </div>
     </div>
   </div>
@@ -1601,55 +1657,6 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
       if (modal) modal.classList.add('hidden');
     }
 
-    async function activateEvaluationAccess() {
-      const err = document.getElementById('license-error-msg');
-      if (err) {
-        err.textContent = '⏳ A gerar credencial de avaliação técnica no servidor...';
-        err.className = 'text-[11px] text-cyan-300 bg-cyan-950/40 border border-cyan-500/40 rounded-lg p-2 font-mono block';
-        err.classList.remove('hidden');
-      }
-
-      try {
-        const devId = getOrCreateDeviceId();
-        const res = await fetch('/api/verify-license', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'eval_demo', deviceId: devId })
-        });
-        const result = await res.json();
-        if (result.valid && result.sessionToken) {
-          localStorage.setItem('electromapas_pro_session', result.sessionToken);
-          localStorage.setItem('electromapas_buyer_name', result.buyer || 'Fisioterapeuta Avaliador');
-          localStorage.setItem('electromapas_pro_tx', result.transaction || 'EVAL-DEMO');
-          closeLicenseModal();
-          updateLicenseUI();
-          renderProtocolsList(currentFilter || 'all');
-          showToast('✓ Avaliação Completa PRO ativada! 8 módulos e 16 protocolos liberados.');
-          if (_pendingLicenseTarget) {
-            const tgt = _pendingLicenseTarget;
-            _pendingLicenseTarget = null;
-            if (tgt.startsWith('protocol-')) {
-              applyProtocolToAtlas(tgt.replace('protocol-', ''));
-            } else {
-              openModule(tgt);
-            }
-          }
-        } else {
-          if (err) {
-            err.textContent = result.message || 'Erro ao gerar acesso de avaliação.';
-            err.className = 'text-[11px] text-red-400 bg-red-950/40 border border-red-500/40 rounded-lg p-2 font-mono block';
-            err.classList.remove('hidden');
-          }
-        }
-      } catch(e) {
-        if (err) {
-          err.textContent = 'Erro de ligação ao servidor de verificação.';
-          err.className = 'text-[11px] text-red-400 bg-red-950/40 border border-red-500/40 rounded-lg p-2 font-mono block';
-          err.classList.remove('hidden');
-        }
-      }
-    }
-
     function activateDemoMode() {
       closeLicenseModal();
       openModule('knee-ext');
@@ -1677,7 +1684,8 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
         err.classList.remove('hidden');
       }
 
-      let result = await verifyLicenseOnServer(val, val, '');
+      const isEmail = val.includes('@');
+      let result = await verifyLicenseOnServer(isEmail ? '' : val, isEmail ? val : '', '');
 
       if (!result.valid && result.deviceConflict) {
         if (err) {
@@ -1743,10 +1751,10 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
           const buyer = localStorage.getItem('electromapas_buyer_name') || 'Gabinete Clínico';
           const tx = localStorage.getItem('electromapas_pro_tx') || '';
           badge.innerHTML = `
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-mono text-[11px] font-bold" title="Licença Confirmada no Servidor Hotmart (${tx})">
+            <button type="button" onclick="openSessionInfoModal()" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 hover:bg-emerald-500/25 text-emerald-300 font-mono text-[11px] font-bold transition" title="Ver detalhes da licença (${tx})">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               SESSÃO PRO VERIFICADA (${buyer})
-            </span>
+            </button>
           `;
         } else {
           badge.innerHTML = `
@@ -1757,6 +1765,39 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
           `;
         }
       }
+    }
+
+    function openSessionInfoModal() {
+      const modal = document.getElementById('modal-session-info');
+      if (!modal) return;
+      const buyer = localStorage.getItem('electromapas_buyer_name') || 'Fisioterapeuta Licenciado';
+      const tx = localStorage.getItem('electromapas_pro_tx') || 'Sessão Ativa';
+      const dev = getOrCreateDeviceId();
+      const bEl = document.getElementById('session-info-buyer');
+      const tEl = document.getElementById('session-info-tx');
+      const dEl = document.getElementById('session-info-device');
+      if (bEl) bEl.textContent = buyer;
+      if (tEl) tEl.textContent = tx;
+      if (dEl) dEl.textContent = dev.slice(0, 14) + '...';
+      modal.classList.remove('hidden');
+    }
+
+    function closeSessionInfoModal() {
+      const modal = document.getElementById('modal-session-info');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function logoutProSession() {
+      try {
+        localStorage.removeItem('electromapas_pro_session');
+        localStorage.removeItem('electromapas_buyer_name');
+        localStorage.removeItem('electromapas_pro_tx');
+      } catch(e) {}
+      closeSessionInfoModal();
+      updateLicenseUI();
+      renderProtocolsList(currentFilter || 'all');
+      openModule('knee-ext');
+      showToast('Sessão PRO terminada neste dispositivo.');
     }
 
     function openModule(key) {
@@ -1915,17 +1956,21 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
 
     function selectVideoSource(type) {
       const player = document.getElementById('layer-video-player');
+      const source = document.getElementById('layer-video-source');
       const track = document.getElementById('layer-video-track');
       const caption = document.getElementById('video-caption-text');
-      if (!player) return;
+      if (!player || !source) return;
 
+      player.removeAttribute('src');
       if (type === 'placement') {
         const mod = CLINICAL_MODULES[currentModuleIndex];
-        player.src = mod.videoSrc;
+        source.src = mod.videoSrc;
+        player.dataset.pendingSrc = mod.videoSrc || '';
         if (track && mod.videoTrack) track.src = mod.videoTrack;
         if (caption) caption.textContent = mod.videoCaption;
       } else {
-        player.src = '/assets/videos/video_01_preparacao_pele_pt_pt.mp4';
+        source.src = '/assets/videos/video_01_preparacao_pele_pt_pt.mp4';
+        player.dataset.pendingSrc = '/assets/videos/video_01_preparacao_pele_pt_pt.mp4';
         if (track) track.src = '/assets/videos/video_01_preparacao_pele_pt_pt.vtt';
         if (caption) caption.textContent = '🧴 Vídeo Universal: Preparação da Pele com Álcool 70%, Degradação da Resistência Cutânea & Fixação dos Elétrodos (pt-PT).';
       }
@@ -1985,7 +2030,10 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
           document.querySelectorAll('.muscle-path').forEach(x => x.classList.remove('selected-muscle'));
           e.target.classList.add('selected-muscle');
 
-          if (ml.includes('vmo') || ml.includes('quadríceps') || ml.includes('joelho') || ml.includes('patela') || ml.includes('femoral')) {
+          if (ml.includes('isquiotibiais') || ml.includes('semitendinoso') || ml.includes('bíceps femoral')) {
+            openModule('hamstrings-nmes');
+            showToast(`Região ativa: Isquiotibiais (${m})`);
+          } else if (ml.includes('vmo') || ml.includes('quadríceps') || ml.includes('joelho') || ml.includes('patela') || ml.includes('femoral')) {
             openModule('knee-ext');
             showToast(`Região ativa: Joelho / VMO (${m})`);
           } else if (ml.includes('cervical') || ml.includes('trapézio') || ml.includes('espinha')) {
@@ -2149,8 +2197,56 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
     // =========================================================================
     // 11. TEMPORIZADOR DE APOIO AO GABINETE
     // =========================================================================
+    let timerPresetMinutes = 20;
     let timerSeconds = 1200; // 20 min
     let timerInterval = null;
+    let timerSoundEnabled = true;
+
+    function toggleTimerSound() {
+      timerSoundEnabled = !timerSoundEnabled;
+      const btn = document.getElementById('btn-timer-sound');
+      if (btn) {
+        btn.textContent = timerSoundEnabled ? '🔔 Som' : '🔕 Mudo';
+        btn.className = timerSoundEnabled
+          ? 'px-2.5 py-1.5 rounded-xl bg-med-card border border-cyan-500/40 text-cyan-300 font-bold text-xs hover:border-cyan-400 transition'
+          : 'px-2.5 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-400 font-bold text-xs hover:text-white transition';
+      }
+      showToast(timerSoundEnabled ? 'Sinal sonoro do temporizador ativado' : 'Temporizador em modo silencioso');
+    }
+
+    function playTimerChime() {
+      if (!timerSoundEnabled) return;
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        [880, 1174.66].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.08, ctx.currentTime + idx * 0.18);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.18 + 0.32);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + idx * 0.18);
+          osc.stop(ctx.currentTime + idx * 0.18 + 0.34);
+        });
+      } catch(e) {}
+    }
+
+    function setTimerPreset(minutes) {
+      pauseTimer();
+      timerPresetMinutes = minutes;
+      timerSeconds = minutes * 60;
+      document.querySelectorAll('.timer-preset-btn').forEach(btn => {
+        const m = parseInt(btn.getAttribute('data-timer-min'), 10);
+        btn.className = m === minutes
+          ? 'timer-preset-btn active px-2 py-0.5 rounded-lg bg-cyan-500 text-slate-950 font-bold transition'
+          : 'timer-preset-btn px-2 py-0.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400 transition';
+      });
+      updateTimerDisplay();
+    }
 
     function startTimer() {
       if (timerInterval) return;
@@ -2163,7 +2259,8 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
           updateTimerDisplay();
         } else {
           pauseTimer();
-          showToast('Sessão terminada');
+          playTimerChime();
+          showToast('⏱️ Tempo de sessão terminado');
         }
       }, 1000);
     }
@@ -2179,7 +2276,7 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
 
     function resetTimer() {
       pauseTimer();
-      timerSeconds = 1200;
+      timerSeconds = timerPresetMinutes * 60;
       updateTimerDisplay();
     }
 
@@ -2255,34 +2352,104 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
       });
     }
 
-    function filterProtocols(cat) {
+    function filterProtocols(cat, btnEl) {
       document.querySelectorAll('.proto-btn').forEach(b => {
         b.className = 'proto-btn px-3 py-1.5 rounded-xl bg-med-card border border-med-border text-slate-300 hover:text-white';
       });
-      if (event && event.currentTarget) {
-        event.currentTarget.className = 'proto-btn active px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950 font-bold';
+      if (btnEl) {
+        btnEl.className = 'proto-btn active px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950 font-bold';
       }
       renderProtocolsList(cat);
     }
 
+    function clearQuickSearch() {
+      const inp = document.getElementById('quick-search-input');
+      const box = document.getElementById('quick-search-results');
+      const clr = document.getElementById('quick-search-clear');
+      if (inp) inp.value = '';
+      if (box) { box.innerHTML = ''; box.classList.add('hidden'); }
+      if (clr) clr.classList.add('hidden');
+      renderProtocolsList(currentFilter || 'all');
+    }
+
+    function selectQuickResult(type, id) {
+      const box = document.getElementById('quick-search-results');
+      if (box) box.classList.add('hidden');
+      if (type === 'module') {
+        openModule(id);
+        switchViewSection('atlas');
+      } else if (type === 'protocol') {
+        applyProtocolToAtlas(id);
+      }
+    }
+
     function handleQuickSearch(val) {
-      const v = val.trim().toLowerCase();
-      if (!v) return;
+      const v = (val || '').trim().toLowerCase();
+      const box = document.getElementById('quick-search-results');
+      const clr = document.getElementById('quick-search-clear');
+      if (clr) clr.classList.toggle('hidden', !v);
 
-      // 1. Procura módulo anatómico correspondente
-      const matchedMod = CLINICAL_MODULES.find(m => 
-        m.title.toLowerCase().includes(v) ||
-        m.subtitle.toLowerCase().includes(v) ||
-        m.region.toLowerCase().includes(v)
-      );
-
-      if (matchedMod) {
-        openModule(matchedMod.key);
+      if (!v) {
+        if (box) { box.innerHTML = ''; box.classList.add('hidden'); }
+        renderProtocolsList(currentFilter || 'all');
+        return;
       }
 
-      // 2. Filtra protocolos
       renderProtocolsList('all', v);
+      if (v.length < 2) {
+        if (box) box.classList.add('hidden');
+        return;
+      }
+
+      const modMatches = CLINICAL_MODULES.filter(m =>
+        m.title.toLowerCase().includes(v) ||
+        m.subtitle.toLowerCase().includes(v) ||
+        m.region.toLowerCase().includes(v) ||
+        m.modeBadge.toLowerCase().includes(v)
+      ).map(m => ({ type: 'module', id: m.key, badge: m.region, title: m.title, sub: m.modeBadge }));
+
+      const protoMatches = PROTOCOLS_LIST.filter(p =>
+        p.title.toLowerCase().includes(v) ||
+        p.desc.toLowerCase().includes(v) ||
+        p.code.toLowerCase().includes(v) ||
+        p.mode.toLowerCase().includes(v)
+      ).map(p => ({ type: 'protocol', id: p.id, badge: p.code, title: p.title, sub: `${p.mode} · ${p.hz} Hz / ${p.us} µs` }));
+
+      const combined = [...modMatches, ...protoMatches].slice(0, 8);
+      if (!box) return;
+
+      if (combined.length === 0) {
+        box.innerHTML = '<div class="px-3.5 py-2.5 text-[11px] text-slate-400">Sem resultados para "' + v.replace(/[<>"&]/g, '') + '".</div>';
+        box.classList.remove('hidden');
+        return;
+      }
+
+      box.innerHTML = combined.map(item => `
+        <button type="button" onclick="selectQuickResult('${item.type}', '${item.id}')" class="w-full text-left px-3.5 py-2.5 hover:bg-med-card transition flex items-start justify-between gap-2">
+          <div class="min-w-0">
+            <div class="text-xs font-bold text-white truncate">${item.title}</div>
+            <div class="text-[10px] text-slate-400 truncate">${item.sub}</div>
+          </div>
+          <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 flex-shrink-0">${item.badge}</span>
+        </button>
+      `).join('');
+      box.classList.remove('hidden');
     }
+
+    document.addEventListener('click', (e) => {
+      const wrap = document.getElementById('quick-search-wrapper');
+      const box = document.getElementById('quick-search-results');
+      if (box && wrap && !wrap.contains(e.target)) {
+        box.classList.add('hidden');
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const box = document.getElementById('quick-search-results');
+        if (box) box.classList.add('hidden');
+        closeSessionInfoModal();
+      }
+    });
 
     function applyProtocolToAtlas(protoId) {
       const p = PROTOCOLS_LIST.find(x => x.id === protoId);
@@ -2312,10 +2479,17 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
         pmcElem.style.display = 'inline';
       }
 
-      // 3. Atualiza calculadora com estes valores
-      document.getElementById('calc-current-slider').value = Math.min(80, Math.max(10, Math.round(p.hz * 0.4)));
+      // 3. Sincroniza calculadora com valores clínicos seguros
+      const sliderEl = document.getElementById('calc-current-slider');
+      if (sliderEl) sliderEl.value = 25;
+      const freqSelect = document.getElementById('calc-frequency');
+      if (freqSelect) {
+        const targetHz = String(p.hz);
+        if (Array.from(freqSelect.options).some(opt => opt.value === targetHz)) {
+          freqSelect.value = targetHz;
+        }
+      }
       setCalcPulseWidth(p.us);
-      runDosimetryCalc();
 
       // 4. Muda para a secção do Atlas
       switchViewSection('atlas');
@@ -2332,12 +2506,14 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
 
     function setCalcPulseWidth(us) {
       currentCalcPulseWidth = us;
+      const pwDisplay = document.getElementById('calc-pw-display');
+      if (pwDisplay) pwDisplay.textContent = `${us} µs`;
       document.querySelectorAll('.calc-pw-btn').forEach(b => {
-        b.className = 'calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400';
+        const val = parseInt(b.getAttribute('data-pw'), 10);
+        b.className = val === us
+          ? 'calc-pw-btn active py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold'
+          : 'calc-pw-btn py-1.5 rounded-lg bg-med-card border border-med-border text-slate-300 hover:border-cyan-400';
       });
-      if (event && event.currentTarget) {
-        event.currentTarget.className = 'calc-pw-btn active py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold';
-      }
       runDosimetryCalc();
     }
 

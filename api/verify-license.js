@@ -1,127 +1,153 @@
 // Vercel Serverless Function: api/verify-license.js
-// Validação Segura de Licenças de Compra Hotmart por Código HP ou E-mail com Resiliência Operacional
+// Secure Hotmart License Verification by Transaction Code (HP...) or Email with Revocation Enforcement & Single-Device Binding
 
 const crypto = require('crypto');
 
-// Segredo do Servidor: utiliza LICENSE_SERVER_SECRET se definido; caso contrário, utiliza chave estável de alta entropia.
-const SERVER_SECRET = process.env.LICENSE_SERVER_SECRET || crypto.createHash('sha256').update('electromapas_pro_stable_salt_2026').digest('hex');
-
-// Chave mestra de suporte para redefinição/transferência assistida de dispositivo
-const SUPPORT_TRANSFER_SECRET = process.env.LICENSE_TRANSFER_SECRET || 'TRANSFER-SUPORTE-2026';
-
-// Armazenamento em memória (resiliente para instâncias serverless)
-const MEMORY_BINDINGS = global.__ELECTROMAPAS_DEVICE_BINDINGS || new Map();
-global.__ELECTROMAPAS_DEVICE_BINDINGS = MEMORY_BINDINGS;
-
-/**
- * Normaliza e calcula hash SHA-256 de identificadores para consulta anônima
- */
-function hashIdentifier(val) {
-  if (!val) return '';
-  return crypto.createHash('sha256').update(val.trim().toLowerCase()).digest('hex');
+function getServerSecret() {
+  return (
+    process.env.LICENSE_SERVER_SECRET ||
+    crypto.createHash('sha256').update('electromapas_pro_stable_salt_2026').digest('hex')
+  );
 }
 
-/**
- * Consulta compra sincronizada via Webhook oficial Hotmart 2.0 por Transação OU por E-mail
- */
-async function getWebhookPurchase(inputCode, inputEmail) {
-  const kvUrl = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
-  const kvToken = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+function getTransferSecret() {
+  return process.env.LICENSE_TRANSFER_SECRET || 'TRANSFER-SUPORTE-2026';
+}
 
-  // 1. Consulta em KV/Redis se configurado
-  if (kvUrl && kvToken) {
+function getMemoryBindings() {
+  if (!global.__ELECTROMAPAS_DEVICE_BINDINGS) {
+    global.__ELECTROMAPAS_DEVICE_BINDINGS = new Map();
+  }
+  return global.__ELECTROMAPAS_DEVICE_BINDINGS;
+}
+
+function hashIdentifier(val) {
+  if (!val) return '';
+  return crypto.createHash('sha256').update(String(val).trim().toLowerCase()).digest('hex');
+}
+
+function shortHashUpper(val) {
+  return crypto.createHash('sha256').update(String(val).trim().toUpperCase()).digest('hex').slice(0, 16);
+}
+
+function shortHashLower(val) {
+  return crypto.createHash('sha256').update(String(val).trim().toLowerCase()).digest('hex').slice(0, 16);
+}
+
+function getKvConfig() {
+  const url = (process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL || '').replace(/\/+$/, '');
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN || '';
+  return url && token ? { url, token } : null;
+}
+
+async function kvCommand(cmdArray) {
+  const kv = getKvConfig();
+  if (!kv) return null;
+
+  const res = await fetch(kv.url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${kv.token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(cmdArray)
+  });
+
+  if (!res.ok) {
+    throw new Error(`Upstash REST HTTP ${res.status}`);
+  }
+
+  const data = await res.json();
+  if (data && data.error) {
+    throw new Error(`Upstash REST error: ${data.error}`);
+  }
+  return data ? data.result : null;
+}
+
+function parseStoredJson(raw) {
+  if (!raw) return null;
+  if (typeof raw === 'object') return raw;
+  if (typeof raw === 'string') {
     try {
-      // Busca por código de transação
-      if (inputCode) {
-        const txKey = crypto.createHash('sha256').update(inputCode.trim().toUpperCase()).digest('hex').substring(0, 16);
-        const res = await fetch(`${kvUrl}/get/hotmart_license_tx_${txKey}`, {
-          headers: { Authorization: `Bearer ${kvToken}` }
-        });
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.result) {
-            const item = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
-            if (item && item.status === 'ACTIVE') return item;
-          }
-        }
-      }
-      // Busca por e-mail de compra
-      if (inputEmail && inputEmail.includes('@')) {
-        const emailKey = crypto.createHash('sha256').update(inputEmail.trim().toLowerCase()).digest('hex').substring(0, 16);
-        const res = await fetch(`${kvUrl}/get/hotmart_license_email_${emailKey}`, {
-          headers: { Authorization: `Bearer ${kvToken}` }
-        });
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.result) {
-            const item = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
-            if (item && item.status === 'ACTIVE') return item;
-          }
-        }
-      }
-    } catch (err) {
-      console.warn('[Storage] Falha ao consultar KV/Redis:', err.message);
+      return JSON.parse(raw);
+    } catch (e) {
+      return null;
     }
   }
-
-  // 2. Consulta em memória de webhook local (se recebido nesta instância)
-  if (global.__MEM_HOTMART_TX && inputCode) {
-    const txKey = crypto.createHash('sha256').update(inputCode.trim().toUpperCase()).digest('hex').substring(0, 16);
-    const item = global.__MEM_HOTMART_TX.get(txKey);
-    if (item && item.status === 'ACTIVE') return item;
-  }
-  if (global.__MEM_HOTMART_EMAIL && inputEmail) {
-    const emailKey = crypto.createHash('sha256').update(inputEmail.trim().toLowerCase()).digest('hex').substring(0, 16);
-    const item = global.__MEM_HOTMART_EMAIL.get(emailKey);
-    if (item && item.status === 'ACTIVE') return item;
-  }
-
   return null;
 }
 
 /**
- * Consulta vínculo ativo de dispositivo no banco persistente ou ledger local
+ * Looks up webhook purchase records in Upstash Redis / KV and process memory.
+ * CRITICAL: Returns BOTH 'ACTIVE' and 'REVOKED' records so refunded licenses
+ * are explicitly blocked instead of falling through to legacy format checks.
  */
-async function getBinding(txKey) {
-  const kvUrl = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
-  const kvToken = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+async function getWebhookPurchase(inputCode, inputEmail) {
+  const kv = getKvConfig();
+  let txRecord = null;
+  let emailRecord = null;
 
-  if (kvUrl && kvToken) {
+  const txKey = inputCode ? shortHashUpper(inputCode) : null;
+  const emailKey = inputEmail && inputEmail.includes('@') ? shortHashLower(inputEmail) : null;
+
+  if (kv) {
     try {
-      const res = await fetch(`${kvUrl}/get/license_bind_${txKey}`, {
-        headers: { Authorization: `Bearer ${kvToken}` }
-      });
-      if (res.ok) {
-        const data = await res.json();
-        return { boundDevice: data.result || null, storage: 'persistent_kv' };
+      if (txKey) {
+        const rawTx = await kvCommand(['GET', `hotmart_license_tx_${txKey}`]);
+        txRecord = parseStoredJson(rawTx);
+      }
+      if (emailKey) {
+        const rawEmail = await kvCommand(['GET', `hotmart_license_email_${emailKey}`]);
+        emailRecord = parseStoredJson(rawEmail);
       }
     } catch (err) {
-      console.warn('[Storage] Falha ao consultar KV, recorrendo a ledger local:', err.message);
+      console.warn('[Storage] KV lookup failed:', err.message);
     }
   }
 
-  return { boundDevice: MEMORY_BINDINGS.get(txKey) || null, storage: 'resilient_ledger' };
+  if (!txRecord && txKey && global.__MEM_HOTMART_TX) {
+    txRecord = global.__MEM_HOTMART_TX.get(txKey) || null;
+  }
+  if (!emailRecord && emailKey && global.__MEM_HOTMART_EMAIL) {
+    emailRecord = global.__MEM_HOTMART_EMAIL.get(emailKey) || null;
+  }
+
+  // Revocation always takes strict precedence over any stale active record
+  if (txRecord && txRecord.status === 'REVOKED') return txRecord;
+  if (emailRecord && emailRecord.status === 'REVOKED') return emailRecord;
+
+  if (txRecord && txRecord.status === 'ACTIVE') return txRecord;
+  if (emailRecord && emailRecord.status === 'ACTIVE') return emailRecord;
+
+  return null;
 }
 
-/**
- * Grava vínculo de dispositivo
- */
-async function setBinding(txKey, deviceId) {
-  const kvUrl = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
-  const kvToken = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
-
-  if (kvUrl && kvToken) {
+async function getBinding(bindKey) {
+  const kv = getKvConfig();
+  if (kv) {
     try {
-      const res = await fetch(`${kvUrl}/set/license_bind_${txKey}/${encodeURIComponent(deviceId)}`, {
-        headers: { Authorization: `Bearer ${kvToken}` }
-      });
-      if (res.ok) return 'persistent_kv';
+      const boundDevice = await kvCommand(['GET', `license_bind_${bindKey}`]);
+      return { boundDevice: boundDevice || null, storage: 'persistent_kv' };
     } catch (err) {
-      console.warn('[Storage] Falha ao gravar no KV, gravando em ledger local:', err.message);
+      console.warn('[Storage] KV binding read failed, falling back to local ledger:', err.message);
     }
   }
 
-  MEMORY_BINDINGS.set(txKey, deviceId);
+  return { boundDevice: getMemoryBindings().get(bindKey) || null, storage: 'resilient_ledger' };
+}
+
+async function setBinding(bindKey, deviceId) {
+  const kv = getKvConfig();
+  if (kv) {
+    try {
+      await kvCommand(['SET', `license_bind_${bindKey}`, deviceId]);
+      return 'persistent_kv';
+    } catch (err) {
+      console.warn('[Storage] KV binding write failed, falling back to local ledger:', err.message);
+    }
+  }
+
+  getMemoryBindings().set(bindKey, deviceId);
   return 'resilient_ledger';
 }
 
@@ -142,18 +168,23 @@ module.exports = async (req, res) => {
   try {
     let body = req.body;
     if (typeof body === 'string') {
-      try { body = JSON.parse(body); } catch(e) {}
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        body = {};
+      }
     }
     body = body || {};
 
     const action = body.action || 'activate';
-    const deviceId = (body.deviceId || '').trim();
+    const deviceId = String(body.deviceId || '').trim();
+    const serverSecret = getServerSecret();
 
     // =========================================================================
-    // FLUXO 1: REVALIDAÇÃO CRIPTOGRÁFICA DE SESSÃO ATIVA (SERVER-SIDE HMAC)
+    // FLOW 1: CRYPTOGRAPHIC SESSION REVALIDATION + SERVER REVOCATION CHECK
     // =========================================================================
     if (action === 'verify_session') {
-      const rawToken = (body.sessionToken || '').trim();
+      const rawToken = String(body.sessionToken || '').trim();
       if (!rawToken) {
         return res.status(400).json({ valid: false, message: 'Token de sessão não informado.' });
       }
@@ -161,7 +192,7 @@ module.exports = async (req, res) => {
       let parsed;
       try {
         parsed = JSON.parse(Buffer.from(rawToken, 'base64').toString('utf8'));
-      } catch(e) {
+      } catch (e) {
         return res.status(401).json({ valid: false, error: 'malformed_token', message: 'Token de sessão malformado ou corrompido.' });
       }
 
@@ -169,7 +200,6 @@ module.exports = async (req, res) => {
         return res.status(401).json({ valid: false, error: 'invalid_token_schema', message: 'Schema de token inválido.' });
       }
 
-      // Validação de vinculação de dispositivo
       if (deviceId && parsed.deviceId !== deviceId) {
         return res.status(409).json({
           valid: false,
@@ -178,9 +208,8 @@ module.exports = async (req, res) => {
         });
       }
 
-      // Validação criptográfica da assinatura HMAC
       const expectedPayload = `${parsed.tx}:${parsed.email}:${parsed.deviceId}:${parsed.iat}`;
-      const expectedSig = crypto.createHmac('sha256', SERVER_SECRET).update(expectedPayload).digest('hex');
+      const expectedSig = crypto.createHmac('sha256', serverSecret).update(expectedPayload).digest('hex');
 
       if (parsed.sig !== expectedSig) {
         return res.status(401).json({
@@ -190,9 +219,18 @@ module.exports = async (req, res) => {
         });
       }
 
-      // Verificação de revogação/cancelamento/reembolso no banco
-      const txKey = crypto.createHash('sha256').update(parsed.tx.toUpperCase()).digest('hex').substring(0, 16);
-      const { boundDevice } = await getBinding(txKey);
+      // Enforce webhook refund/chargeback/cancel revocation on active sessions
+      const webhookState = await getWebhookPurchase(parsed.tx, parsed.email);
+      if (webhookState && webhookState.status === 'REVOKED') {
+        return res.status(403).json({
+          valid: false,
+          revoked: true,
+          message: 'Esta licença foi revogada devido a reembolso ou cancelamento na Hotmart.'
+        });
+      }
+
+      const bindKey = parsed.bindKey || shortHashUpper(parsed.tx);
+      const { boundDevice } = await getBinding(bindKey);
       if (boundDevice && deviceId && boundDevice !== deviceId) {
         return res.status(409).json({
           valid: false,
@@ -210,162 +248,205 @@ module.exports = async (req, res) => {
     }
 
     // =========================================================================
-    // FLUXO 2: ATIVAÇÃO DE AVALIAÇÃO TÉCNICA (MODO TESTE CLÍNICO)
+    // FLOW 2: TECHNICAL EVALUATION BYPASS DISABLED BY DEFAULT
     // =========================================================================
     if (action === 'eval_demo') {
+      if (process.env.ALLOW_EVAL_DEMO !== 'true') {
+        return res.status(403).json({
+          valid: false,
+          message: 'O modo de avaliação técnica está desativado. Ativa a tua licença com o código Hotmart ou e-mail de compra.'
+        });
+      }
+
       const issuedAt = Date.now();
-      const evalTx = 'EVAL-' + (window_id => crypto.randomBytes(4).toString('hex').toUpperCase())();
+      const evalTx = 'EVAL-' + crypto.randomBytes(4).toString('hex').toUpperCase();
       const evalEmail = 'avaliacao.clinica@electromapas.pt';
       const evalName = 'Fisioterapeuta (Avaliação Clínica)';
       const payload = `${evalTx}:${evalEmail}:${deviceId}:${issuedAt}`;
-      const signature = crypto.createHmac('sha256', SERVER_SECRET).update(payload).digest('hex');
-      const sessionToken = Buffer.from(JSON.stringify({
-        tx: evalTx,
-        email: evalEmail,
-        name: evalName,
-        deviceId: deviceId,
-        iat: issuedAt,
-        sig: signature
-      })).toString('base64');
+      const signature = crypto.createHmac('sha256', serverSecret).update(payload).digest('hex');
+      const sessionToken = Buffer.from(
+        JSON.stringify({
+          tx: evalTx,
+          email: evalEmail,
+          name: evalName,
+          deviceId,
+          iat: issuedAt,
+          sig: signature
+        })
+      ).toString('base64');
 
       return res.status(200).json({
         valid: true,
         message: 'Acesso de avaliação técnica ativado com sucesso para este dispositivo.',
         buyer: evalName,
         transaction: evalTx,
-        deviceId: deviceId,
-        sessionToken: sessionToken
+        deviceId,
+        sessionToken
       });
     }
 
     // =========================================================================
-    // FLUXO 3: ATIVAÇÃO DE NOVA COMPRA (HOTMART HP CODE OU E-MAIL)
+    // FLOW 3: LICENSE ACTIVATION (HOTMART TRANSACTION HP... OR BUYER EMAIL)
     // =========================================================================
-    const inputCode = (body.code || '').trim();
-    const inputEmail = (body.email || '').trim().toLowerCase();
-    const transferKey = (body.transferKey || '').trim();
+    const rawCode = String(body.code || '').trim();
+    const rawEmail = String(body.email || '').trim().toLowerCase();
+    const inputEmail = rawEmail.includes('@') ? rawEmail : (rawCode.includes('@') ? rawCode.toLowerCase() : '');
+    const inputCode = rawCode && !rawCode.includes('@') ? rawCode.toUpperCase() : '';
+    const transferKey = String(body.transferKey || '').trim();
 
     if (!inputCode && !inputEmail) {
       return res.status(400).json({
         valid: false,
-        message: 'Por favor forneça o código da sua transação Hotmart ou o e-mail de compra.'
+        message: 'Por favor indica o código da tua transação Hotmart ou o e-mail utilizado na compra.'
+      });
+    }
+
+    // 1. Query Hotmart Webhook registry FIRST (enforces both ACTIVE and REVOKED records)
+    const webhookRecord = await getWebhookPurchase(inputCode, inputEmail);
+    if (webhookRecord && webhookRecord.status === 'REVOKED') {
+      return res.status(403).json({
+        valid: false,
+        revoked: true,
+        message: 'Esta licença foi revogada devido a reembolso ou cancelamento na Hotmart.'
       });
     }
 
     let match = null;
-
-    // 1. Procura em compras sincronizadas via Hotmart Webhook (por Transação ou E-mail)
-    const webhookRecord = await getWebhookPurchase(inputCode, inputEmail);
-    if (webhookRecord) {
+    if (webhookRecord && webhookRecord.status === 'ACTIVE') {
+      const txVal = String(webhookRecord.transaction || inputCode).toUpperCase();
       match = {
-        transaction: webhookRecord.transaction || inputCode,
-        email: webhookRecord.email || inputEmail,
+        transaction: txVal,
+        email: webhookRecord.email || inputEmail || 'comprador@hotmart.pt',
         name: webhookRecord.name || 'Fisioterapeuta Licenciado',
-        tier: webhookRecord.tier || 'PRO'
+        tier: webhookRecord.tier || 'PRO',
+        bindKey: shortHashUpper(txVal)
       };
     }
 
-    // 2. Procura em compradores autorizados via variável JSON (HOTMART_PURCHASERS_JSON)
+    // 2. Check environment JSON whitelist (HOTMART_PURCHASERS_JSON)
     if (!match && process.env.HOTMART_PURCHASERS_JSON) {
       try {
         const envPurchasers = JSON.parse(process.env.HOTMART_PURCHASERS_JSON);
         if (Array.isArray(envPurchasers)) {
-          match = envPurchasers.find(p => {
-            const mCode = inputCode && (p.transaction && p.transaction.toLowerCase() === inputCode.toLowerCase());
-            const mMail = inputEmail && (p.email && p.email.toLowerCase() === inputEmail);
+          const found = envPurchasers.find((p) => {
+            const mCode = inputCode && p.transaction && p.transaction.toUpperCase() === inputCode;
+            const mMail = inputEmail && p.email && p.email.toLowerCase() === inputEmail;
             return mCode || mMail;
           });
+          if (found) {
+            const txVal = String(found.transaction || inputCode || ('EM-' + shortHashLower(inputEmail).slice(0, 10).toUpperCase())).toUpperCase();
+            match = {
+              transaction: txVal,
+              email: found.email || inputEmail || 'comprador@hotmart.pt',
+              name: found.name || 'Fisioterapeuta Licenciado',
+              tier: found.tier || 'PRO',
+              bindKey: found.transaction ? shortHashUpper(txVal) : `email_${shortHashLower(inputEmail)}`
+            };
+          }
         }
       } catch (e) {}
     }
 
-    // 3. Procura em hashes autorizados via ambiente (AUTHORIZED_PURCHASER_HASHES)
+    // 3. Check authorized SHA-256 whitelist (AUTHORIZED_PURCHASER_HASHES)
     if (!match && process.env.AUTHORIZED_PURCHASER_HASHES) {
-      const allowedHashes = process.env.AUTHORIZED_PURCHASER_HASHES.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
-      const inputHash = hashIdentifier(inputCode || inputEmail);
-      if (allowedHashes.includes(inputHash)) {
+      const allowedHashes = process.env.AUTHORIZED_PURCHASER_HASHES.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
+      const codeHash = inputCode ? hashIdentifier(inputCode) : '';
+      const mailHash = inputEmail ? hashIdentifier(inputEmail) : '';
+      if ((codeHash && allowedHashes.includes(codeHash)) || (mailHash && allowedHashes.includes(mailHash))) {
+        const txVal = inputCode || 'EM-' + shortHashLower(inputEmail).slice(0, 10).toUpperCase();
         match = {
-          transaction: inputCode || 'HOTMART-HASH-AUTH',
+          transaction: txVal,
           email: inputEmail || 'verificado@hotmart.pt',
           name: 'Fisioterapeuta Licenciado',
-          tier: 'PRO'
+          tier: 'PRO',
+          bindKey: inputCode ? shortHashUpper(txVal) : `email_${shortHashLower(inputEmail)}`
         };
       }
     }
 
-    // 4. Reconhecimento Eletrofisiológico de Formato Oficial Hotmart (HP...) ou E-mail Clínico Válido
-    // Garante que compradores reais que possuem transação Hotmart HP... consigam ativar imediatamente
-    const isHotmartTxFormat = /^HP\d{10,14}$/i.test(inputCode);
-    const isValidEmailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(inputCode || inputEmail);
+    // 4. Backward-compatible format check for pre-webhook purchases (disabled when STRICT_WEBHOOK_ONLY=true)
+    if (!match && process.env.STRICT_WEBHOOK_ONLY !== 'true') {
+      const isHotmartTxFormat = /^HP\d{10,14}$/i.test(inputCode);
+      const isValidEmailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(inputEmail);
 
-    if (!match && (isHotmartTxFormat || isValidEmailFormat)) {
-      const txVal = isHotmartTxFormat ? inputCode.toUpperCase() : ('HP' + crypto.randomBytes(5).toString('hex').toUpperCase());
-      const emailVal = isValidEmailFormat ? (inputEmail || inputCode) : 'comprador@hotmart.pt';
-      const displayName = isValidEmailFormat ? emailVal.split('@')[0].replace(/[._]/g, ' ') : 'Fisioterapeuta Licenciado';
-      match = {
-        transaction: txVal,
-        email: emailVal,
-        name: displayName.charAt(0).toUpperCase() + displayName.slice(1),
-        tier: 'PRO'
-      };
+      if (isHotmartTxFormat || isValidEmailFormat) {
+        const emailHash = isValidEmailFormat ? shortHashLower(inputEmail) : '';
+        const txVal = isHotmartTxFormat
+          ? inputCode.toUpperCase()
+          : `EM-${emailHash.slice(0, 10).toUpperCase()}`;
+        const emailVal = isValidEmailFormat ? inputEmail : 'comprador@hotmart.pt';
+        const displayName = isValidEmailFormat
+          ? emailVal.split('@')[0].replace(/[._]/g, ' ')
+          : 'Fisioterapeuta Licenciado';
+
+        match = {
+          transaction: txVal,
+          email: emailVal,
+          name: displayName.charAt(0).toUpperCase() + displayName.slice(1),
+          tier: 'PRO',
+          bindKey: isHotmartTxFormat ? shortHashUpper(txVal) : `email_${emailHash}`
+        };
+      }
     }
 
     if (!match) {
       return res.status(403).json({
         valid: false,
-        message: `Não foi localizada nenhuma compra ativa nos registos associada aos dados fornecidos ("${inputCode || inputEmail}"). Introduza o seu Código de Transação Hotmart (ex: HP1829384756) ou o e-mail exato utilizado na compra.`
+        message: `Não foi localizada nenhuma compra ativa nos registos associada aos dados fornecidos ("${inputCode || inputEmail}"). Introduz o teu Código de Transação Hotmart (ex.: HP1829384756) ou o e-mail exato utilizado na compra.`
       });
     }
 
-    // GESTÃO DE ATIVAÇÃO INDIVIDUAL POR INSTALAÇÃO (PWA BINDING)
-    const txKey = crypto.createHash('sha256').update(match.transaction.toUpperCase()).digest('hex').substring(0, 16);
-    let storageType = 'resilient_ledger';
+    // Single-device PWA binding
+    const bindKey = match.bindKey || shortHashUpper(match.transaction);
+    let storageType = getKvConfig() ? 'persistent_kv' : 'resilient_ledger';
 
     if (deviceId) {
-      const { boundDevice, storage } = await getBinding(txKey);
+      const { boundDevice, storage } = await getBinding(bindKey);
       storageType = storage;
 
       if (boundDevice && boundDevice !== deviceId) {
-        const isAuthorizedTransfer = SUPPORT_TRANSFER_SECRET && (transferKey === SUPPORT_TRANSFER_SECRET);
+        const transferSecret = getTransferSecret();
+        const isAuthorizedTransfer = transferSecret && transferKey === transferSecret;
         if (!isAuthorizedTransfer) {
           return res.status(409).json({
             valid: false,
             deviceConflict: true,
-            boundDeviceShort: boundDevice.substring(0, 8),
+            boundDeviceShort: boundDevice.slice(0, 8),
             storage: storageType,
-            message: `Esta licença já está ativada noutra instalação (ID: ${boundDevice.substring(0, 8)}...). Cada compra confere 1 instalação ativa. Para transferir para este novo telemóvel, contacte o suporte oficial com o seu e-mail de compra.`
+            message: `Esta licença já está ativada noutra instalação (ID: ${boundDevice.slice(0, 8)}...). Cada compra confere 1 instalação ativa. Para transferir para este novo telemóvel, contacta o suporte oficial através da tua conta Hotmart com o teu e-mail de compra.`
           });
         }
       }
 
-      storageType = await setBinding(txKey, deviceId);
+      storageType = await setBinding(bindKey, deviceId);
     }
 
-    // Assinatura HMAC de Sessão (Server-side)
     const issuedAt = Date.now();
     const payload = `${match.transaction}:${match.email}:${deviceId}:${issuedAt}`;
-    const signature = crypto.createHmac('sha256', SERVER_SECRET).update(payload).digest('hex');
-    const sessionToken = Buffer.from(JSON.stringify({
-      tx: match.transaction,
-      email: match.email,
-      name: match.name,
-      deviceId: deviceId,
-      iat: issuedAt,
-      sig: signature
-    })).toString('base64');
+    const signature = crypto.createHmac('sha256', serverSecret).update(payload).digest('hex');
+    const sessionToken = Buffer.from(
+      JSON.stringify({
+        tx: match.transaction,
+        email: match.email,
+        name: match.name,
+        deviceId,
+        bindKey,
+        iat: issuedAt,
+        sig: signature
+      })
+    ).toString('base64');
 
     return res.status(200).json({
       valid: true,
       message: 'Licença confirmada e vinculada com sucesso a esta instalação.',
       buyer: match.name,
       transaction: match.transaction,
-      deviceId: deviceId,
+      deviceId,
       storageMode: storageType,
-      sessionToken: sessionToken
+      sessionToken
     });
-
   } catch (err) {
-    console.error('Erro na verificação de licença:', err.message);
+    console.error('License verification error:', err.message);
     return res.status(500).json({
       valid: false,
       error: 'server_error',

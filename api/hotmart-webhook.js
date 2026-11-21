@@ -1,74 +1,94 @@
 // Vercel Serverless Function: api/hotmart-webhook.js
-// Endpoint de Webhook Oficial Hotmart 2.0 para Sincronização em Tempo Real de Compras, Reembolsos e Cancelamentos
+// Official Hotmart 2.0 Webhook Endpoint for Real-Time Synchronization of Purchases, Refunds, and Cancellations
 
 const crypto = require('crypto');
 
-// Chave secreta de autenticação do Webhook Hotmart
-const EXPECTED_HOTTOK = process.env.HOTMART_HOTTOK || 'electromapas_hotmart_default_token_2026';
+function getExpectedHottok() {
+  return process.env.HOTMART_HOTTOK || 'electromapas_hotmart_default_token_2026';
+}
+
+function constantTimeEquals(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string') return false;
+  const bufA = Buffer.from(a, 'utf8');
+  const bufB = Buffer.from(b, 'utf8');
+  if (bufA.length !== bufB.length) return false;
+  return crypto.timingSafeEqual(bufA, bufB);
+}
+
+function getKvConfig() {
+  const url = (process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL || '').replace(/\/+$/, '');
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN || '';
+  return url && token ? { url, token } : null;
+}
+
+async function kvCommand(cmdArray) {
+  const kv = getKvConfig();
+  if (!kv) return null;
+
+  const res = await fetch(kv.url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${kv.token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(cmdArray)
+  });
+
+  if (!res.ok) {
+    const errText = await res.text().catch(() => '');
+    throw new Error(`Upstash REST HTTP ${res.status}: ${errText}`);
+  }
+
+  const data = await res.json();
+  if (data && data.error) {
+    throw new Error(`Upstash REST error: ${data.error}`);
+  }
+  return data ? data.result : null;
+}
 
 /**
- * Persiste o estado da licença no armazenamento persistente (Upstash Redis ou Vercel KV)
- * Grava índice duplo: por Código de Transação (txKey) e por E-mail (emailKey)
+ * Persists license state into Upstash Redis / Vercel KV (or local memory fallback if unconfigured).
+ * Maintains dual lookup keys: transaction key (`txKey`) and buyer email key (`emailKey`).
  */
 async function updateLicenseStore(txKey, emailKey, action, payloadData) {
-  const kvUrl = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
-  const kvToken = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+  const kv = getKvConfig();
+  const memTx = (global.__MEM_HOTMART_TX = global.__MEM_HOTMART_TX || new Map());
+  const memEmail = (global.__MEM_HOTMART_EMAIL = global.__MEM_HOTMART_EMAIL || new Map());
+  const memBindings = (global.__ELECTROMAPAS_DEVICE_BINDINGS = global.__ELECTROMAPAS_DEVICE_BINDINGS || new Map());
 
-  if (!kvUrl || !kvToken) {
-    console.warn('[Hotmart Webhook] KV/Redis não configurado. Gravando em memória de instância.');
+  if (!kv) {
+    console.warn('[Hotmart Webhook] KV/Redis not configured. Storing in instance memory fallback.');
     if (action === 'ACTIVATE') {
-      global.__MEM_HOTMART_TX = global.__MEM_HOTMART_TX || new Map();
-      global.__MEM_HOTMART_EMAIL = global.__MEM_HOTMART_EMAIL || new Map();
-      global.__MEM_HOTMART_TX.set(txKey, payloadData);
-      if (emailKey) global.__MEM_HOTMART_EMAIL.set(emailKey, payloadData);
+      memTx.set(txKey, payloadData);
+      if (emailKey) memEmail.set(emailKey, payloadData);
     } else if (action === 'REVOKE') {
-      if (global.__MEM_HOTMART_TX) global.__MEM_HOTMART_TX.set(txKey, { status: 'REVOKED' });
-      if (global.__MEM_HOTMART_EMAIL && emailKey) global.__MEM_HOTMART_EMAIL.set(emailKey, { status: 'REVOKED' });
+      memTx.set(txKey, payloadData);
+      if (emailKey) memEmail.set(emailKey, payloadData);
+      memBindings.delete(txKey);
+      if (emailKey) memBindings.delete(`email_${emailKey}`);
     }
-    return true;
+    return 'memory_fallback';
   }
 
-  try {
-    if (action === 'ACTIVATE') {
-      // 1. Grava por Transação
-      await fetch(`${kvUrl}/set/hotmart_license_tx_${txKey}`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${kvToken}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify(payloadData)
-      });
-      // 2. Grava por E-mail (se fornecido)
-      if (emailKey) {
-        await fetch(`${kvUrl}/set/hotmart_license_email_${emailKey}`, {
-          method: 'POST',
-          headers: { Authorization: `Bearer ${kvToken}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify(payloadData)
-        });
-      }
-    } else if (action === 'REVOKE') {
-      const revokePayload = JSON.stringify({ status: 'REVOKED', revokedAt: Date.now() });
-      await fetch(`${kvUrl}/set/hotmart_license_tx_${txKey}`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${kvToken}`, 'Content-Type': 'application/json' },
-        body: revokePayload
-      });
-      if (emailKey) {
-        await fetch(`${kvUrl}/set/hotmart_license_email_${emailKey}`, {
-          method: 'POST',
-          headers: { Authorization: `Bearer ${kvToken}`, 'Content-Type': 'application/json' },
-          body: revokePayload
-        });
-      }
-      // Remove vínculo de aparelho
-      await fetch(`${kvUrl}/del/license_bind_${txKey}`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${kvToken}` }
-      });
+  const serialized = JSON.stringify(payloadData);
+
+  if (action === 'ACTIVATE') {
+    await kvCommand(['SET', `hotmart_license_tx_${txKey}`, serialized]);
+    if (emailKey) {
+      await kvCommand(['SET', `hotmart_license_email_${emailKey}`, serialized]);
     }
-    return true;
-  } catch (err) {
-    console.error('[Hotmart Webhook] Falha ao persistir em KV:', err.message);
-    throw err;
+  } else if (action === 'REVOKE') {
+    await kvCommand(['SET', `hotmart_license_tx_${txKey}`, serialized]);
+    if (emailKey) {
+      await kvCommand(['SET', `hotmart_license_email_${emailKey}`, serialized]);
+    }
+    await kvCommand(['DEL', `license_bind_${txKey}`]);
+    if (emailKey) {
+      await kvCommand(['DEL', `license_bind_email_${emailKey}`]);
+    }
   }
+
+  return 'persistent_kv';
 }
 
 module.exports = async (req, res) => {
@@ -87,72 +107,103 @@ module.exports = async (req, res) => {
   try {
     let body = req.body;
     if (typeof body === 'string') {
-      try { body = JSON.parse(body); } catch(e) {}
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        body = {};
+      }
     }
     body = body || {};
 
-    // 1. AUTENTICAÇÃO OBRIGATÓRIA ANTES DE QUALQUER LEITURA DE PAYLOAD
+    // 1. Mandatory Hottok authentication before reading business payload
     const tokenFromHeader = req.headers['x-hotmart-hottok'] || req.headers['X-HOTMART-HOTTOK'];
     const tokenFromBody = body.hottok;
     const tokenFromQuery = req.query ? req.query.hottok : null;
-    const providedHottok = tokenFromHeader || tokenFromBody || tokenFromQuery;
+    const providedHottok = String(tokenFromHeader || tokenFromBody || tokenFromQuery || '').trim();
+    const expectedHottok = getExpectedHottok();
 
-    // Se o token fornecido for ausente ou diferente do esperado, REJEITA IMEDIATAMENTE com HTTP 401 Unauthorized
-    if (!providedHottok || providedHottok !== EXPECTED_HOTTOK) {
-      console.warn('[Hotmart Webhook] Tentativa de acesso não autorizada: hottok ausente ou inválido.');
+    if (!providedHottok || !constantTimeEquals(providedHottok, expectedHottok)) {
+      console.warn('[Hotmart Webhook] Unauthorized attempt: missing or invalid hottok.');
       return res.status(401).json({
         error: 'Acesso não autorizado: token de autenticação Hotmart (X-HOTMART-HOTTOK) ausente ou inválido.'
       });
     }
 
-    // 2. Extração dos Dados do Evento Hotmart 2.0
-    const event = body.event || (body.data && body.data.event);
+    // 2. Parse Hotmart 2.0 event payload
+    const event = String(body.event || (body.data && body.data.event) || '').trim().toUpperCase();
     const data = body.data || body;
     const purchase = data.purchase || {};
     const buyer = data.buyer || {};
-    const transaction = purchase.transaction || data.transaction;
-    const buyerEmail = buyer.email || data.email;
-    const buyerName = buyer.name || data.name;
+    const product = data.product || {};
+    const offer = purchase.offer || {};
+
+    const transaction = String(purchase.transaction || data.transaction || '').trim();
+    const buyerEmail = buyer.email || data.email ? String(buyer.email || data.email).trim().toLowerCase() : null;
+    const buyerName = buyer.name || data.name ? String(buyer.name || data.name).trim() : null;
+    const productId = product.id ? String(product.id) : null;
+    const offerCode = offer.code ? String(offer.code) : null;
 
     if (!transaction) {
       return res.status(400).json({ error: 'Identificador de transação não informado no payload.' });
     }
 
-    const txKey = crypto.createHash('sha256').update(transaction.toUpperCase()).digest('hex').substring(0, 16);
-    const emailKey = buyerEmail ? crypto.createHash('sha256').update(buyerEmail.trim().toLowerCase()).digest('hex').substring(0, 16) : null;
+    const txKey = crypto.createHash('sha256').update(transaction.toUpperCase()).digest('hex').slice(0, 16);
+    const emailKey = buyerEmail
+      ? crypto.createHash('sha256').update(buyerEmail.toLowerCase()).digest('hex').slice(0, 16)
+      : null;
 
-    // 3. Processamento e Persistência Confiável
+    let storageMode = getKvConfig() ? 'persistent_kv' : 'memory_fallback';
+
+    // 3. Process lifecycle transitions
     switch (event) {
       case 'PURCHASE_APPROVED':
-      case 'PURCHASE_COMPLETE':
-        await updateLicenseStore(txKey, emailKey, 'ACTIVATE', {
-          transaction: transaction,
+      case 'PURCHASE_COMPLETE': {
+        storageMode = await updateLicenseStore(txKey, emailKey, 'ACTIVATE', {
+          transaction,
           email: buyerEmail,
           name: buyerName,
+          productId,
+          offerCode,
+          event,
           status: 'ACTIVE',
           tier: 'PRO',
           updatedAt: Date.now()
         });
-        console.log(`[Hotmart Webhook] Compra ativada por Transação (${transaction}) e E-mail (${buyerEmail})`);
+        console.log(`[Hotmart Webhook] Activated license: ${transaction}`);
         break;
+      }
 
       case 'PURCHASE_REFUNDED':
       case 'PURCHASE_CHARGEBACK':
       case 'PURCHASE_CANCELED':
       case 'PURCHASE_EXPIRED':
-        await updateLicenseStore(txKey, emailKey, 'REVOKE', null);
-        console.log(`[Hotmart Webhook] Licença revogada por reembolso/cancelamento: ${transaction}`);
+      case 'PURCHASE_PROTEST': {
+        storageMode = await updateLicenseStore(txKey, emailKey, 'REVOKE', {
+          transaction,
+          email: buyerEmail,
+          productId,
+          offerCode,
+          event,
+          status: 'REVOKED',
+          revokedAt: Date.now()
+        });
+        console.log(`[Hotmart Webhook] Revoked license (${event}): ${transaction}`);
         break;
+      }
 
       default:
-        console.log(`[Hotmart Webhook] Evento não transacional: ${event}`);
+        console.log(`[Hotmart Webhook] Non-transactional event ignored: ${event || 'UNKNOWN'}`);
         break;
     }
 
-    return res.status(200).json({ received: true, event: event, transaction: transaction, email: buyerEmail });
-
+    return res.status(200).json({
+      received: true,
+      event,
+      transaction,
+      storageMode
+    });
   } catch (err) {
-    console.error('[Hotmart Webhook] ERRO DE PROCESSAMENTO:', err.message);
+    console.error('[Hotmart Webhook] Processing error:', err.message);
     return res.status(500).json({
       error: 'Falha interna ao processar webhook.',
       detail: err.message
