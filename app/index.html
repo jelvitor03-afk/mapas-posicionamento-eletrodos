@@ -154,12 +154,7 @@
             <span>📋</span> <span class="hidden sm:inline">Registo SOAP</span><span class="sm:hidden">SOAP</span>
           </button>
         </nav>
-        <div class="flex items-center gap-2 flex-shrink-0">
-          <a href="/area-membros" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-med-card border border-med-border text-slate-200 hover:border-amber-400 hover:text-amber-300 text-[11px] font-bold transition whitespace-nowrap">
-            <span>🎓</span> <span>Área de Membros</span>
-          </a>
-          <div id="header-license-badge" class="flex-shrink-0"></div>
-        </div>
+        <div id="header-license-badge" class="flex-shrink-0"></div>
       </div>
 
     </div>
@@ -1189,7 +1184,7 @@
         Cada licença garante 1 instalação ativa offline/online. Para transferir para outro telemóvel ou tablet, contacta o suporte oficial em <a href="https://consumer.hotmart.com/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline">hotmart.com → Minhas compras</a> com o e-mail utilizado no pagamento.
       </p>
       <div class="flex flex-wrap gap-2 pt-1">
-        <a href="/area-membros" class="flex-1 text-center py-2.5 px-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition">Abrir Área de Membros</a>
+        <button type="button" onclick="closeSessionInfoModal()" class="flex-1 text-center py-2.5 px-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition">Fechar</button>
         <button type="button" onclick="logoutProSession()" class="py-2.5 px-3 rounded-xl bg-med-card border border-red-500/40 text-red-300 hover:bg-red-950/50 text-xs font-bold transition">Terminar Sessão</button>
       </div>
     </div>

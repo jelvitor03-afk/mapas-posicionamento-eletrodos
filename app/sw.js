@@ -1,4 +1,4 @@
-const CACHE_NAME = 'electromapas-pro-v8-2';
+const CACHE_NAME = 'electromapas-pro-v8-3';
 const STATIC_ASSETS = [
   '/app/',
   '/app/index.html',

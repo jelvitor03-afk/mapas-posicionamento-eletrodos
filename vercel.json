@@ -14,10 +14,6 @@
       "destination": "/entrega-completo.html"
     },
     {
-      "source": "/area-membros",
-      "destination": "/area-membros.html"
-    },
-    {
       "source": "/upsell",
       "destination": "/upsell.html"
     },
@@ -92,7 +88,7 @@
   ],
   "headers": [
     {
-      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|area-membros|area-membros\\.html|obrigado|upsell|downsell|upsell-casos|upsell-comunicacao|upsell-ultrassom|upsell-laser|entrega-completo|funnel\\.css|funnel\\.js)",
+      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|obrigado|upsell|downsell|upsell-casos|upsell-comunicacao|upsell-ultrassom|upsell-laser|entrega-completo|funnel\\.css|funnel\\.js)",
       "headers": [
         {
           "key": "Cache-Control",
