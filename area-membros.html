@@ -3,741 +3,1725 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portal do Fisioterapeuta | FisioVanta ElectroMapas & Módulo Prático</title>
-  <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=3" />
-  <link rel="stylesheet" href="./assets/styles-MTGModV1.css" />
+  <meta name="theme-color" content="#FAF7F2" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Área de Membros ElectroMapas | Vídeo-Guias, Atlas 397p &amp; Complementos</title>
+  <meta name="description" content="Central clínica de membros do Atlas ElectroMapas (Edição Inverno 397 p.): vídeo-guias práticos em português e curadoria internacional, guia rápido de páginas, App PRO e complementos de gabinete." />
+  <link rel="icon" type="image/svg+xml" href="./atlas/icons/favicon.svg" />
+  <link rel="apple-touch-icon" href="./atlas/icons/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://pay.hotmart.com" crossorigin />
+  <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="./atlas/fonts/manrope-800-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="./atlas/fonts/inter-latin.woff2" crossorigin />
   <style>
+    @font-face {
+      font-family: 'Manrope';
+      font-style: normal;
+      font-weight: 700 800;
+      font-display: swap;
+      src: url('./atlas/fonts/manrope-800-latin.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url('./atlas/fonts/inter-latin.woff2') format('woff2');
+    }
+
     :root {
-      --bg-dark: #04121a;
-      --bg-card: #081d28;
-      --bg-card-hover: #0c2635;
-      --cyan: #00e5ff;
-      --emerald: #10b981;
-      --amber: #f59e0b;
-      --text-white: #f8fafc;
-      --text-muted: #94a3b8;
-      --border-cyan: rgba(0, 229, 255, 0.22);
-      --border-light: rgba(255, 255, 255, 0.08);
+      --bg: #FAF7F2;
+      --bg-alt: #F1ECE3;
+      --surface: #FFFFFF;
+      --border: #E4DDD0;
+      --border-strong: #CFC5B4;
+      --navy-950: #07121E;
+      --navy-900: #0B1B2B;
+      --navy-800: #132940;
+      --navy-700: #223D59;
+      --gold: #DFA326;
+      --gold-hover: #C88E18;
+      --gold-soft: #F7E8C6;
+      --gold-ink: #7B5104;
+      --ink: #0E1A26;
+      --ink-body: #2C3A49;
+      --ink-muted: #516070;
+      --ok: #127347;
+      --ok-bg: #EAF6EF;
+      --ok-dark: #63E6A8;
+      --shadow-card: 0 10px 28px rgba(11, 27, 43, 0.06);
+      --shadow-offer: 0 20px 44px rgba(11, 27, 43, 0.16);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+      --max-w: 1120px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
     body {
-      background: var(--bg-dark);
-      color: var(--text-white);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      line-height: 1.5;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink-body);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
+    ::selection { background: var(--gold-soft); color: var(--navy-900); }
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      letter-spacing: -0.025em;
+    }
+    p { margin: 0; }
+    img { display: block; max-width: 100%; height: auto; }
+    a, button { touch-action: manipulation; -webkit-tap-highlight-color: rgba(223, 163, 38, 0.2); }
+    :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 
-    /* TOP NAVBAR */
-    .portal-nav {
-      background: rgba(4, 18, 26, 0.95);
-      border-bottom: 1px solid var(--border-cyan);
-      backdrop-filter: blur(12px);
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: -60px;
+      background: var(--navy-900);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      z-index: 1000;
+    }
+    .skip-link:focus { top: 12px; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+    /* Top Nav */
+    .member-nav {
       position: sticky;
       top: 0;
-      z-index: 100;
-      padding: 14px 20px;
+      z-index: 80;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 11px 0;
     }
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
+    .member-nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
     }
-    .brand-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    .brand-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 2px solid var(--cyan);
-      object-fit: cover;
-    }
-    .brand-text h1 {
-      font-size: 16px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.3px;
-    }
-    .brand-text span {
-      display: block;
-      font-size: 11px;
-      color: var(--cyan);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .user-badge {
+    .brand-lockup {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid var(--emerald);
-      color: var(--emerald);
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 12.5px;
-      font-weight: 700;
-    }
-
-    /* MAIN HERO BANNER */
-    .hero-banner {
-      background: linear-gradient(180deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
-      padding: 40px 20px 28px;
-      border-bottom: 1px solid var(--border-light);
-    }
-    .hero-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .pill-vip {
-      display: inline-block;
-      background: linear-gradient(90deg, #00e5ff, #10b981);
-      color: #03151f;
-      font-size: 11.5px;
-      font-weight: 900;
-      padding: 4px 14px;
-      border-radius: 999px;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--navy-900);
+      font-family: 'Manrope', sans-serif;
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+    }
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: var(--navy-900);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-body);
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 11px;
+      border-radius: 8px;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .nav-links a:hover {
+      background: var(--bg-alt);
+      color: var(--navy-950);
+    }
+    .nav-cta-app {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 14px;
+      border-radius: 9px;
+      background: var(--navy-900);
+      color: #FFFFFF;
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      border: 1px solid rgba(223, 163, 38, 0.55);
+      transition: background-color 0.15s ease;
+      white-space: nowrap;
+    }
+    .nav-cta-app:hover { background: var(--navy-800); }
+
+    /* Hero */
+    .portal-hero {
+      padding: 34px 0 42px;
+      background: linear-gradient(180deg, #F5EFE4 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .eyebrow {
+      display: inline-block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy-900);
+      background: var(--gold-soft);
+      border: 1px solid rgba(223, 163, 38, 0.55);
+      border-radius: 6px;
+      padding: 4px 10px;
       margin-bottom: 12px;
     }
-    .hero-title {
-      font-size: 32px;
-      font-weight: 900;
-      line-height: 1.2;
-      color: #ffffff;
-      margin-bottom: 8px;
-    }
-    .hero-desc {
-      color: var(--text-muted);
-      font-size: 15px;
-      max-width: 720px;
-    }
-
-    /* NAVIGATION TABS */
-    .tab-bar-wrap {
-      background: #061822;
-      border-bottom: 1px solid var(--border-light);
-      position: sticky;
-      top: 67px;
-      z-index: 90;
-    }
-    .tab-bar {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      gap: 8px;
-      padding: 10px 20px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .tab-bar::-webkit-scrollbar { display: none; }
-    .nav-tab-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 14px;
-      font-weight: 700;
-      padding: 10px 18px;
-      border-radius: 10px;
-      cursor: pointer;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-    .nav-tab-btn:hover {
-      color: #ffffff;
-      background: rgba(255,255,255,0.04);
-    }
-    .nav-tab-btn.active {
-      background: rgba(0, 229, 255, 0.12);
-      color: var(--cyan);
-      border: 1px solid var(--border-cyan);
-    }
-
-    /* MAIN CONTENT WRAPPER */
-    .main-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 32px 20px 60px;
-      flex: 1;
-      width: 100%;
-    }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    /* CARDS & MODULE GRIDS */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
-    }
-    @media (max-width: 820px) {
-      .grid-2 { grid-template-columns: 1fr; }
-    }
-
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      border-radius: 16px;
-      padding: 24px;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-    .card:hover {
-      border-color: var(--border-cyan);
-      box-shadow: 0 10px 30px rgba(0, 229, 255, 0.1);
-    }
-    .card-highlight {
-      border: 1.5px solid var(--border-cyan);
-      background: linear-gradient(180deg, #092432 0%, #061823 100%);
-      box-shadow: 0 12px 32px rgba(0, 229, 255, 0.12);
-    }
-    .card-title {
-      font-size: 19px;
+    .portal-hero h1 {
+      font-size: clamp(27px, 4vw, 42px);
       font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      line-height: 1.12;
+      color: var(--navy-950);
+      max-width: 780px;
+      margin-bottom: 12px;
     }
-    .card-desc {
-      color: var(--text-muted);
-      font-size: 13.5px;
-      line-height: 1.55;
-      margin-bottom: 20px;
+    .portal-hero-sub {
+      font-size: clamp(15.5px, 1.8vw, 17.5px);
+      color: var(--ink-body);
+      max-width: 720px;
+      margin-bottom: 24px;
     }
 
-    /* ACTION BUTTONS */
-    .btn-action {
+    .quick-hub {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .hub-card {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .hub-card.is-navy {
+      background: var(--navy-900);
+      color: #F8FAFC;
+      border-color: var(--gold);
+    }
+    .hub-card.is-navy h2,
+    .hub-card.is-navy p { color: #FFFFFF; }
+    .hub-card.is-navy p { color: #CBD5E1; }
+    .hub-kicker {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ok);
+      margin-bottom: 4px;
+    }
+    .hub-card.is-navy .hub-kicker { color: var(--gold); }
+    .hub-card h2 { font-size: 17.5px; font-weight: 800; margin-bottom: 5px; }
+    .hub-card p { font-size: 14px; line-height: 1.5; color: var(--ink-muted); }
+
+    .btn-primary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      background: var(--cyan);
-      color: #03151f;
+      min-height: 46px;
+      padding: 11px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--gold);
+      color: var(--navy-950);
+      font-family: 'Manrope', sans-serif;
+      font-size: 14.5px;
       font-weight: 800;
-      font-size: 14px;
-      padding: 12px 20px;
-      border-radius: 10px;
       text-decoration: none;
-      transition: transform 0.15s, background 0.15s;
+      border: 1px solid #C68B16;
       cursor: pointer;
-      border: none;
+      transition: background-color 0.15s ease, transform 0.15s ease;
     }
-    .btn-action:hover {
-      transform: translateY(-2px);
-      background: #33ecff;
-    }
+    .btn-primary:hover { background: var(--gold-hover); transform: translateY(-1px); }
+
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      color: var(--navy-900);
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1.5px solid var(--border-strong);
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
     }
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: #ffffff;
+    .btn-secondary:hover { background: var(--bg-alt); border-color: var(--navy-700); }
+
+    /* Sections */
+    .sec { padding: 54px 0; scroll-margin-top: 66px; }
+    .sec-alt {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .sec-navy {
+      background: var(--navy-900);
+      color: #E2E8F0;
+    }
+    .sec-navy h2, .sec-navy h3 { color: #FFFFFF; }
+    .sec-head { max-width: 740px; margin-bottom: 24px; }
+    .sec-title {
+      font-size: clamp(24px, 3.2vw, 33px);
+      font-weight: 800;
+      line-height: 1.18;
+      margin-bottom: 8px;
+    }
+    .sec-sub { font-size: 15.5px; color: var(--ink-muted); line-height: 1.55; }
+    .sec-navy .sec-sub { color: #CBD5E1; }
+
+    /* Video Library */
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .filter-pill {
+      min-height: 40px;
+      padding: 8px 14px;
+      border-radius: 99px;
+      border: 1.5px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--ink-body);
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .filter-pill:hover { border-color: var(--navy-700); background: var(--bg-alt); }
+    .filter-pill.is-active {
+      background: var(--navy-900);
+      color: #FFFFFF;
+      border-color: var(--navy-900);
     }
 
-    /* VIDEO SECTION LAYOUT */
-    .video-showcase {
+    .video-theater {
       display: grid;
-      grid-template-columns: 1.35fr 1fr;
-      gap: 24px;
+      grid-template-columns: 1.35fr 0.9fr;
+      gap: 22px;
       align-items: start;
     }
-    @media (max-width: 900px) {
-      .video-showcase { grid-template-columns: 1fr; }
+    .player-card {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-card);
     }
-    .player-box {
-      background: #000;
-      border-radius: 14px;
+    .stage-16x9 {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #07121E;
+      border-radius: 12px;
       overflow: hidden;
-      border: 1.5px solid var(--border-cyan);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.7);
+      border: 1px solid var(--navy-800);
     }
-    video { width: 100%; display: block; }
-    
-    .playlist-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      border-radius: 14px;
-      padding: 20px;
-      max-height: 620px;
-      overflow-y: auto;
+    .stage-16x9 video,
+    .stage-16x9 iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
     }
-    .playlist-header {
-      font-size: 15px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border-light);
+    .video-clinical-card {
+      margin-top: 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 10px;
     }
-    .video-item {
-      padding: 12px 14px;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.03);
-      margin-bottom: 8px;
-      cursor: pointer;
-      border: 1px solid transparent;
+    .video-meta-badges {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
       align-items: center;
-      transition: all 0.2s;
-    }
-    .video-item:hover {
-      background: rgba(0, 229, 255, 0.06);
-      border-color: rgba(0, 229, 255, 0.3);
-    }
-    .video-item.active {
-      background: rgba(0, 229, 255, 0.12);
-      border-color: var(--cyan);
-    }
-    .video-item-title {
-      font-size: 13.5px;
+      gap: 8px;
+      font-size: 12px;
       font-weight: 700;
-      color: #ffffff;
     }
-    .video-item.active .video-item-title {
-      color: var(--cyan);
+    .v-badge {
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: var(--navy-900);
+      color: var(--gold);
+      font-family: 'Manrope', sans-serif;
     }
-    .video-item-meta {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 2px;
+    .v-badge.is-pt {
+      background: var(--ok-bg);
+      color: var(--ok);
+      border: 1px solid #B5DFC7;
     }
-    .video-badge-status {
+    .v-channel { color: var(--ink-muted); font-weight: 600; }
+    .video-clinical-card h3 { font-size: 18.5px; color: var(--navy-950); }
+    .video-clinical-card p { font-size: 14.5px; color: var(--ink-body); line-height: 1.55; }
+    .video-facts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding-top: 6px;
+    }
+    .v-fact {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+    .v-fact strong {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--navy-800);
+      margin-bottom: 3px;
+    }
+    .video-fallback-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+    .video-fallback-link {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      color: var(--navy-900);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .playlist-panel {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+    .playlist-head {
+      background: var(--navy-900);
+      color: #FFFFFF;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .playlist-head strong {
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .playlist-head span {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .playlist-items {
+      max-height: 540px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .playlist-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--surface);
+      border: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 14px;
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 12px;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.14s ease;
+    }
+    .playlist-btn:last-child { border-bottom: 0; }
+    .playlist-btn:hover { background: var(--bg); }
+    .playlist-btn.is-active {
+      background: #FFF9EC;
+      box-shadow: inset 4px 0 0 var(--gold);
+    }
+    .playlist-btn[hidden] { display: none; }
+    .thumb-wrap {
+      position: relative;
+      width: 92px;
+      aspect-ratio: 16 / 9;
+      border-radius: 7px;
+      overflow: hidden;
+      background: var(--navy-900);
+      border: 1px solid var(--border-strong);
+      flex-shrink: 0;
+    }
+    .thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .thumb-dur {
+      position: absolute;
+      right: 4px;
+      bottom: 4px;
+      background: rgba(7, 18, 30, 0.88);
+      color: #FFFFFF;
+      font-family: 'Manrope', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .p-item-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+    .p-item-meta {
+      font-size: 12px;
+      color: var(--ink-muted);
+      line-height: 1.35;
+    }
+    .p-lang-tag {
+      display: inline-block;
+      margin-top: 4px;
       font-size: 10.5px;
       font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
-      white-space: nowrap;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: var(--bg-alt);
+      color: var(--navy-800);
     }
-    .status-ready {
-      background: rgba(16, 185, 129, 0.2);
-      color: var(--emerald);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-    }
-    .status-upcoming {
-      background: rgba(245, 158, 11, 0.15);
-      color: var(--amber);
-      border: 1px solid rgba(245, 158, 11, 0.3);
+    .p-lang-tag.is-local {
+      background: var(--ok-bg);
+      color: var(--ok);
     }
 
-    /* CLINICAL TIPS BOX */
-    .clinical-meta-box {
-      margin-top: 18px;
-      padding: 18px;
-      background: rgba(0,0,0,0.3);
-      border-radius: 12px;
-      border-left: 3px solid var(--cyan);
+    /* Atlas Map + Safety Checklist */
+    .split-guide {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+      align-items: start;
     }
-    .clinical-meta-box h4 {
-      font-size: 14px;
-      color: var(--cyan);
-      margin-bottom: 6px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    .guide-card {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-card);
     }
-    .clinical-meta-box p {
-      font-size: 13px;
-      color: #cbd5e1;
-      line-height: 1.5;
-    }
-
-    /* PWA BANNER */
-    .pwa-banner {
-      background: linear-gradient(90deg, rgba(16, 185, 129, 0.12) 0%, rgba(0, 229, 255, 0.08) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: 14px;
-      padding: 18px 24px;
-      margin-top: 36px;
+    .guide-card h3 { font-size: 19px; margin-bottom: 14px; }
+    .index-rows {
       display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .index-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .index-row strong { color: var(--navy-950); }
+    .page-chip {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      background: var(--gold-soft);
+      color: var(--navy-900);
+      padding: 3px 9px;
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .sample-thumbs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .sample-btn {
+      padding: 0;
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #FFFFFF;
+      cursor: zoom-in;
+      text-align: left;
+    }
+    .sample-btn img { width: 100%; aspect-ratio: 1200 / 848; object-fit: contain; background: #FFFFFF; }
+    .sample-btn span {
+      display: block;
+      padding: 8px 10px;
+      background: var(--navy-900);
+      color: #FFFFFF;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 11px 13px;
+      border-radius: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .check-item input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--ok);
+      flex-shrink: 0;
+    }
+    .check-status {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      background: var(--bg-alt);
+      color: var(--ink-body);
+      border: 1px solid var(--border-strong);
+    }
+    .check-status.is-ready {
+      background: var(--ok-bg);
+      color: var(--ok);
+      border-color: #B5DFC7;
+    }
+
+    /* App PRO Band */
+    .app-band-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 32px;
       align-items: center;
+    }
+    .app-preview-frame {
+      background: var(--navy-800);
+      border: 1px solid rgba(223, 163, 38, 0.45);
+      border-radius: var(--radius-lg);
+      padding: 12px;
+    }
+    .app-preview-frame img { border-radius: 12px; width: 100%; }
+    .app-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 15px;
+      color: #E2E8F0;
+    }
+    .app-bullets li { display: flex; align-items: flex-start; gap: 10px; }
+    .app-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+    .app-link-soft {
+      color: var(--gold);
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Storefront */
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+    .product-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-card);
+    }
+    .product-card.is-featured {
+      border: 2px solid var(--gold);
+      background: linear-gradient(180deg, #FFFDF8 0%, #FFFFFF 100%);
+      box-shadow: var(--shadow-offer);
+    }
+    .product-media {
+      background: #0B1B2B;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .product-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .product-ribbon {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--gold);
+      color: var(--navy-950);
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .product-ribbon.is-navy {
+      background: rgba(11, 27, 43, 0.92);
+      color: #FFFFFF;
+      border: 1px solid rgba(223, 163, 38, 0.6);
+    }
+    .product-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
       justify-content: space-between;
       gap: 16px;
     }
-    @media (max-width: 720px) {
-      .pwa-banner { flex-direction: column; align-items: flex-start; }
+    .product-kicker {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ok);
+      margin-bottom: 5px;
+    }
+    .product-body h3 { font-size: 18px; line-height: 1.25; margin-bottom: 8px; }
+    .product-body p.p-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.5; margin-bottom: 12px; }
+    .product-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 13.5px;
+    }
+    .product-bullets li { display: flex; align-items: flex-start; gap: 7px; line-height: 1.4; }
+    .product-foot {
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .price-line {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .price-val {
+      font-family: 'Manrope', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy-950);
+      line-height: 1;
+    }
+    .price-note { font-size: 12px; font-weight: 600; color: var(--ink-muted); }
+    .pay-mini {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      text-align: center;
+    }
+
+    /* Footer */
+    footer.site-footer {
+      background: var(--navy-950);
+      color: #9FB0C2;
+      padding: 28px 0 38px;
+      font-size: 13px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    footer.site-footer a { color: var(--gold); font-weight: 700; }
+    footer.site-footer p + p { margin-top: 6px; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(7, 18, 30, 0.94);
+      display: none;
+      flex-direction: column;
+      padding: 14px;
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox-bar {
+      max-width: 1040px;
+      width: 100%;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: #FFFFFF;
+    }
+    .lightbox-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .lightbox-close {
+      min-width: 44px;
+      height: 44px;
+      padding: 0 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: var(--navy-800);
+      color: #FFFFFF;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .lightbox-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+    }
+    .lightbox-stage img {
+      max-width: 100%;
+      max-height: calc(100vh - 90px);
+      border-radius: 8px;
+      background: #FFFFFF;
+    }
+
+    @media (max-width: 960px) {
+      .quick-hub, .video-theater, .split-guide, .app-band-grid, .store-grid {
+        grid-template-columns: 1fr;
+      }
+      .playlist-items { max-height: 360px; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 15px; }
+      .sec { padding: 38px 0; }
+      .nav-links { display: none; }
+      .video-facts-grid, .sample-thumbs { grid-template-columns: 1fr; }
+      .playlist-btn { grid-template-columns: 78px 1fr; gap: 10px; }
+      .thumb-wrap { width: 78px; }
     }
   </style>
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','1627467939032653');
+    fbq('track','PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1627467939032653&ev=PageView&noscript=1" alt="" />
+  </noscript>
 </head>
 <body>
+  <a href="#conteudo" class="skip-link">Ir para o conteúdo</a>
 
-  <!-- TOP NAVBAR -->
-  <header class="portal-nav">
-    <div class="nav-container">
-      <a href="./area-membros.html" class="brand-wrap">
-        <img src="./assets/fisiovanta_logo.jpg" alt="FisioVanta" class="brand-avatar" onerror="this.src='./favicon.svg'" />
-        <div class="brand-text">
-          <h1>FisioVanta Portal</h1>
-          <span>Área do Fisioterapeuta · Acesso Clínico</span>
-        </div>
+  <svg hidden aria-hidden="true" width="0" height="0" style="position:absolute">
+    <defs>
+      <symbol id="ic-ok" viewBox="0 0 20 20"><path d="M5 10.5l3.2 3.2L15 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="ic-arr" viewBox="0 0 20 20"><path d="M4.5 10H15.5M15.5 10L10.5 5M15.5 10L10.5 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="member-nav">
+    <div class="container member-nav-inner">
+      <a href="#conteudo" class="brand-lockup">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" fill="#DFA326"/></svg>
+        </span>
+        <span>ElectroMapas · Área de Membros</span>
       </a>
-      <div class="user-badge">
-        <span>●</span> Membro Vitalício Ativo
-      </div>
+      <nav class="nav-links" aria-label="Secções do portal">
+        <a href="#video-guias">Vídeo-Guias</a>
+        <a href="#guia-atlas">Guia do Atlas</a>
+        <a href="#app-pro">App PRO</a>
+        <a href="#complementos">Complementos</a>
+      </nav>
+      <a href="/electromapas-pro-app" class="nav-cta-app">
+        <span>Abrir App PRO</span>
+        <svg width="15" height="15" aria-hidden="true"><use href="#ic-arr"/></svg>
+      </a>
     </div>
   </header>
 
-  <!-- HERO BANNER -->
-  <section class="hero-banner">
-    <div class="hero-container">
-      <div class="pill-vip">⭐ PACOTE CLÍNICO COMPLETO LIBERADO</div>
-      <h2 class="hero-title">Bem-vindo à tua Central de Eletroterapia</h2>
-      <p class="hero-desc">
-        Acede ao <b>Master Atlas 3D Oficial</b>, descarrega as fichas de gabinete e assiste às <b>demonstrações práticas de marquesa da Axelgaard</b> dobradas em Português de Portugal.
-      </p>
-    </div>
-  </section>
+  <main id="conteudo">
+    <!-- HERO -->
+    <section class="portal-hero">
+      <div class="container">
+        <span class="eyebrow">Portal do Membro · Edição Inverno 2026</span>
+        <h1>A tua central prática de eletroterapia junto à marquesa</h1>
+        <p class="portal-hero-sub">
+          Encontra aqui os <strong>vídeo-guias práticos de colocação de elétrodos</strong>, o mapa rápido de páginas do teu Atlas (397 páginas · 70 mapas), o acesso à App ElectroMapas PRO e os complementos clínicos para o teu gabinete.
+        </p>
 
-  <!-- NAVIGATION TABS -->
-  <div class="tab-bar-wrap">
-    <div class="tab-bar">
-      <button class="nav-tab-btn active" onclick="openTab('tab-atlas', this)">
-        🗺️ Módulo 1: Atlas & Mapas 3D
-      </button>
-      <button class="nav-tab-btn" onclick="openTab('tab-videos', this)">
-        🎥 Módulo 2: Vídeos Práticos (Axelgaard pt-PT)
-      </button>
-      <button class="nav-tab-btn" onclick="openTab('tab-guias', this)">
-        📋 Módulo 3: Guias & Parâmetros
-      </button>
-      <button class="nav-tab-btn" onclick="openTab('tab-pocket', this)">
-        ⚡ Módulo 4: Pocket Card (15 Casos)
-      </button>
-      <button class="nav-tab-btn" onclick="openTab('tab-pro', this)">
-        ⭐ Módulo 5: Clínica Pro (VIP)
-      </button>
+        <div class="quick-hub">
+          <article class="hub-card">
+            <div>
+              <div class="hub-kicker">1. Ficheiros PDF adquiridos</div>
+              <h2>Os teus PDFs na Hotmart</h2>
+              <p>Os teus ficheiros oficiais (Atlas 397 p., Essencial 112 p. ou 3 Kits) ficam guardados em <strong>Minhas compras</strong>. Guarda uma cópia na app Ficheiros ou Livros do tablet para abrir offline.</p>
+            </div>
+            <a href="https://consumer.hotmart.com/" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+              <span>Abrir Minhas Compras Hotmart ↗</span>
+            </a>
+          </article>
+
+          <article class="hub-card">
+            <div>
+              <div class="hub-kicker">2. Demonstração na Marquesa</div>
+              <h2>8 Vídeo-Guias Práticos</h2>
+              <p>Começa pela preparação da pele em Português de Portugal (1:36) e percorre os guias verificados por região: joelho, lombar, cervical, ombro, punho e tornozelo.</p>
+            </div>
+            <a href="#video-guias" class="btn-secondary">
+              <span>Ver Vídeo-Guias Abaixo ↓</span>
+            </a>
+          </article>
+
+          <article class="hub-card is-navy">
+            <div>
+              <div class="hub-kicker">3. Aplicação Clínica PWA</div>
+              <h2>App ElectroMapas PRO</h2>
+              <p>Se adquiriste o Pacote PRO, abre a App e introduz o teu e-mail de compra ou código <code>HP...</code>. Podes instalar diretamente no ecrã principal do telemóvel.</p>
+            </div>
+            <a href="/electromapas-pro-app" class="btn-primary">
+              <span>ABRIR A APP PRO</span>
+              <svg width="16" height="16" aria-hidden="true"><use href="#ic-arr"/></svg>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECÇÃO 1: BIBLIOTECA DE VÍDEO-GUIAS -->
+    <section class="sec" id="video-guias">
+      <div class="container">
+        <div class="sec-head">
+          <h2 class="sec-title">Vídeo-Guias Práticos de Colocação &amp; Parâmetros</h2>
+          <p class="sec-sub">
+            Inclui a demonstração clínica dobrada em Português de Portugal e uma curadoria de vídeos reais do YouTube (em português e demonstrações originais da <strong>Axelgaard / USC</strong> citadas na bibliografia do Atlas).
+          </p>
+        </div>
+
+        <div class="filter-pills" role="group" aria-label="Filtrar vídeo-guias por categoria">
+          <button type="button" class="filter-pill is-active" data-cat="all">Todos (8)</button>
+          <button type="button" class="filter-pill" data-cat="pt">Em Português (3)</button>
+          <button type="button" class="filter-pill" data-cat="coluna">Coluna (2)</button>
+          <button type="button" class="filter-pill" data-cat="inferior">Membro Inferior (2)</button>
+          <button type="button" class="filter-pill" data-cat="superior">Membro Superior (2)</button>
+          <button type="button" class="filter-pill" data-cat="fundamentos">Fundamentos &amp; Pele (2)</button>
+        </div>
+
+        <div class="video-theater">
+          <div class="player-card">
+            <div class="stage-16x9" id="video-stage">
+              <video id="local-video-player" controls playsinline preload="metadata" poster="./atlas/img/pagina-10-a01-joelho-atj.webp">
+                <source src="./assets/videos/video_01_preparacao_pele_pt_pt.mp4" type="video/mp4" />
+                <track src="./assets/videos/video_01_preparacao_pele_pt_pt.vtt" kind="subtitles" srclang="pt" label="Português (PT)" />
+                O teu navegador não suporta reprodução direta de vídeo MP4.
+              </video>
+              <iframe
+                id="yt-video-player"
+                hidden
+                title="Vídeo-guia clínico de eletroterapia"
+                src="about:blank"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+
+            <div class="video-clinical-card" id="video-clinical-panel">
+              <div class="video-meta-badges">
+                <span class="v-badge is-pt" id="meta-badge">Prática pt-PT · Áudio &amp; Legendas</span>
+                <span class="v-channel" id="meta-channel">ElectroMapas Clínico · 1:36</span>
+              </div>
+              <h3 id="meta-title">01. Preparação Correta da Pele &amp; Redução de Impedância</h3>
+              <p id="meta-desc">
+                Inspeção cutânea antes da sessão, limpeza de cremes e oleosidade com água ou álcool (deixando evaporar por completo), alinhamento dos elétrodos sem rugas e confirmação dos canais.
+              </p>
+              <div class="video-facts-grid">
+                <div class="v-fact">
+                  <strong>Páginas relacionadas no Atlas</strong>
+                  <span id="meta-atlas-ref">Checklist Pré-Sessão &amp; Capítulo de Inverno (pele seca / preparação)</span>
+                </div>
+                <div class="v-fact">
+                  <strong>Alerta clínico na marquesa</strong>
+                  <span id="meta-safety">Nunca colar elétrodos sobre feridas abertas ou fissuras; pele oleosa sem desengordurar provoca picada pontual.</span>
+                </div>
+              </div>
+              <div class="video-fallback-row">
+                <span id="meta-cc-tip">Dica: toca no ícone CC do leitor se quiseres alternar ou traduzir legendas para Português.</span>
+                <a id="meta-yt-fallback" href="https://www.youtube.com/watch?v=evktAL_hEF8" target="_blank" rel="noopener noreferrer" class="video-fallback-link" hidden>Abrir no YouTube ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <aside class="playlist-panel" aria-label="Lista de vídeo-guias">
+            <div class="playlist-head">
+              <strong>Lista de Vídeo-Guias</strong>
+              <span id="playlist-count-label">8 vídeos verificados</span>
+            </div>
+            <div class="playlist-items" id="playlist-items">
+              <!-- Rendered dynamically from verified GUIDE_VIDEOS catalog -->
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECÇÃO 2: GUIA RÁPIDO DO ATLAS (397P) + CHECKLIST -->
+    <section class="sec sec-alt" id="guia-atlas">
+      <div class="container">
+        <div class="sec-head">
+          <h2 class="sec-title">Mapa Rápido do Atlas (397 p.) &amp; Triagem Pré-Sessão</h2>
+          <p class="sec-sub">Salta diretamente para a secção certa durante a consulta e confirma os 6 pontos essenciais de segurança antes de iniciar a emissão.</p>
+        </div>
+
+        <div class="split-guide">
+          <div class="guide-card">
+            <h3>Onde encontrar cada capítulo no PDF</h3>
+            <div class="index-rows">
+              <div class="index-row">
+                <div><strong>Índice por região corporal</strong><br><small>Lombar, cervical, ombro, joelho, tornozelo e punho</small></div>
+                <span class="page-chip num">pág. 4</span>
+              </div>
+              <div class="index-row">
+                <div><strong>Tabela-resumo de parâmetros</strong><br><small>Hz, largura de pulso (µs) e duração por objetivo</small></div>
+                <span class="page-chip num">pág. 6–10</span>
+              </div>
+              <div class="index-row">
+                <div><strong>70 mapas visuais + 70 fichas práticas</strong><br><small>Canais CH1–CH4, colocação e referência PubMed no rodapé</small></div>
+                <span class="page-chip num">pág. 12–151</span>
+              </div>
+              <div class="index-row">
+                <div><strong>46 guias por condição &amp; anatomia</strong><br><small>Áreas motoras, correntes TENS/NMES/FES e capítulo de inverno</small></div>
+                <span class="page-chip num">pág. 152–305</span>
+              </div>
+              <div class="index-row">
+                <div><strong>Índice por patologia &amp; registo clínico</strong><br><small>Procura rápida por condição e fichas de verificação</small></div>
+                <span class="page-chip num">pág. 379–384</span>
+              </div>
+            </div>
+
+            <div class="sample-thumbs">
+              <button type="button" class="sample-btn" data-zoom="./atlas/img/pagina-02-s01-cervical-tens.webp" data-zoom-title="Exemplo do Atlas — Mapa S01 Cervicalgia (TENS)">
+                <img src="./atlas/img/pagina-02-s01-cervical-tens.webp" alt="Exemplo real do mapa S01 Cervicalgia TENS do Atlas ElectroMapas" loading="lazy" />
+                <span>Ampliar Mapa S01 (Cervical)</span>
+              </button>
+              <button type="button" class="sample-btn" data-zoom="./atlas/img/pagina-10-a01-joelho-atj.webp" data-zoom-title="Exemplo do Atlas — Mapa A01 Joelho Pós-ATJ (NMES)">
+                <img src="./atlas/img/pagina-10-a01-joelho-atj.webp" alt="Exemplo real do mapa A01 Joelho pós-artroplastia do Atlas ElectroMapas" loading="lazy" />
+                <span>Ampliar Mapa A01 (Joelho)</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="guide-card">
+            <h3>Checklist Rápido de Segurança Pré-Sessão</h3>
+            <div class="check-list" id="safety-checklist">
+              <label class="check-item">
+                <input type="checkbox" />
+                <span><strong>Sem pacemaker ou CDI</strong> no tórax/região próxima ao vetor (ou validação cardiológica confirmada — consenso EHRA).</span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" />
+                <span><strong>Pele íntegra e limpa</strong> no local dos elétrodos (sem feridas abertas, eritema ativo, creme ou óleo residual).</span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" />
+                <span><strong>Sensibilidade cutânea e cognição preservadas</strong> para o utente reportar formigueiro, calor ou picada pontual.</span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" />
+                <span><strong>Seio carotídeo livre:</strong> nenhum elétrodo colocado na face anterior ou lateral profunda do pescoço.</span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" />
+                <span><strong>Sem gravidez</strong> para aplicações lombares/abdominais/pélvicas, nem TVP ativa ou neoplasia na região.</span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" />
+                <span><strong>Hidrogel em bom estado:</strong> aderência uniforme nos bordos do elétrodo e polaridade/canais conferidos com aparelho a 0 mA.</span>
+              </label>
+            </div>
+            <div class="check-status" id="check-status-box">
+              0 de 6 verificações assinaladas antes de ligar a corrente.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECÇÃO 3: APP ELECTROMAPAS PRO -->
+    <section class="sec sec-navy" id="app-pro">
+      <div class="container">
+        <div class="app-band-grid">
+          <div class="app-preview-frame">
+            <img src="./assets/funnel/app-pro-preview.webp" width="900" height="600" alt="Vista clínica da App ElectroMapas PRO com mapa interativo e dosimetria" loading="lazy" />
+          </div>
+          <div>
+            <span class="eyebrow">Aplicação Web &amp; PWA</span>
+            <h2 class="sec-title">App ElectroMapas PRO no telemóvel ou computador</h2>
+            <p class="sec-sub">
+              Complementa o Atlas PDF durante a consulta com pesquisa rápida, calculadora de densidade de corrente (FDA 510k), triagem de segurança e registo clínico SOAP local.
+            </p>
+            <ul class="app-bullets">
+              <li>
+                <svg width="18" height="18" style="color:#63E6A8;flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#ic-ok"/></svg>
+                <span><strong>8 regiões anatómicas &amp; 16 protocolos:</strong> vista anterior/posterior interativa com fontes PMC/PubMed.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" style="color:#63E6A8;flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#ic-ok"/></svg>
+                <span><strong>Calculadora mA/cm² + temporizador de gabinete:</strong> verifica densidade de pico, carga por fase e potência média em segundos.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" style="color:#63E6A8;flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#ic-ok"/></svg>
+                <span><strong>Modo Demonstração + Licença PRO:</strong> módulo Joelho (VMO) aberto para experimentares; ativa o acesso total com o código <code>HP...</code> ou e-mail do Pacote PRO.</span>
+              </li>
+            </ul>
+            <div class="app-actions">
+              <a href="/electromapas-pro-app" class="btn-primary">
+                <span>ABRIR A APP ELECTROMAPAS PRO</span>
+                <svg width="17" height="17" aria-hidden="true"><use href="#ic-arr"/></svg>
+              </a>
+              <a href="#complementos" class="app-link-soft">Ainda não tens o Pacote PRO? Ver abaixo ↓</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECÇÃO 4: VITRINE DE COMPLEMENTOS CLÍNICOS (PRODUTOS À VENDA) -->
+    <section class="sec" id="complementos">
+      <div class="container">
+        <div class="sec-head">
+          <span class="eyebrow">Loja de Membros · Preço Especial</span>
+          <h2 class="sec-title">Complementa o teu gabinete com entrega imediata</h2>
+          <p class="sec-sub">
+            Se compraste apenas o Atlas e queres desbloquear a App PRO, imprimir kits verticais para o utente ou aprofundar casos clínicos resolvidos, escolhe o complemento abaixo na Hotmart.
+          </p>
+        </div>
+
+        <div class="store-grid">
+          <!-- Produto 1: Pacote PRO -->
+          <article class="product-card is-featured">
+            <div>
+              <div class="product-media">
+                <img src="./assets/funnel/app-pro-preview.webp" alt="App ElectroMapas PRO e os 3 Kits em A4 vertical" loading="lazy" />
+                <span class="product-ribbon">Mais Completo</span>
+              </div>
+              <div class="product-body">
+                <div>
+                  <div class="product-kicker">App PRO + 3 Kits em A4 Vertical</div>
+                  <h3>Pacote PRO ElectroMapas</h3>
+                  <p class="p-desc">Desbloqueia os 8 módulos e 16 protocolos na App PRO + os 3 kits em A4 vertical (52 páginas) prontos a imprimir para gabinete e telemóvel.</p>
+                  <ul class="product-bullets">
+                    <li><span>✓</span><span>Acesso completo à <strong>App ElectroMapas PRO</strong> (PWA offline)</span></li>
+                    <li><span>✓</span><span><strong>Kit de Bolso (17 p.)</strong> · tabela dos 70 mapas</span></li>
+                    <li><span>✓</span><span><strong>Kit Clínica (21 p.)</strong> · 19 formulários A4 vertical</span></li>
+                    <li><span>✓</span><span><strong>Kit Inverno Utentes (14 p.)</strong> · 10 folhetos PX01–PX10</span></li>
+                  </ul>
+                </div>
+                <div class="product-foot">
+                  <div class="price-line">
+                    <span class="price-val num">17,87 €</span>
+                    <span class="price-note">Pagamento único · IVA incluído</span>
+                  </div>
+                  <a
+                    href="https://pay.hotmart.com/B108418889J?off=urgqavvm&checkoutMode=10&locale=pt_PT&src=area_membros"
+                    data-checkout="https://pay.hotmart.com/B108418889J?off=urgqavvm&checkoutMode=10&locale=pt_PT&src=area_membros"
+                    data-item-name="Pacote PRO ElectroMapas (Area de Membros)"
+                    data-item-value="17.87"
+                    class="btn-primary storefront-cta">
+                    <span>ADICIONAR PACOTE PRO</span>
+                    <svg width="16" height="16" aria-hidden="true"><use href="#ic-arr"/></svg>
+                  </a>
+                  <div class="pay-mini">MB WAY · Multibanco · Google Pay · Cartão</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Produto 2: Só os 3 Kits -->
+          <article class="product-card">
+            <div>
+              <div class="product-media">
+                <img src="./atlas/img/mockup-dispositivos.webp" alt="Os 3 Kits em A4 vertical do ElectroMapas" loading="lazy" />
+                <span class="product-ribbon is-navy">Só os 3 Kits PDF</span>
+              </div>
+              <div class="product-body">
+                <div>
+                  <div class="product-kicker">52 páginas em A4 vertical</div>
+                  <h3>Os 3 Kits Clínicos (Bolso + Clínica + Utentes)</h3>
+                  <p class="p-desc">Preferes apenas os ficheiros verticais para imprimir e entregar ao utente sem a App PRO? Tens aqui os 3 kits completos num só acesso.</p>
+                  <ul class="product-bullets">
+                    <li><span>✓</span><span><strong>Kit de Bolso (17 p.)</strong> para consulta rápida no telemóvel</span></li>
+                    <li><span>✓</span><span><strong>Kit Clínica (21 p.)</strong> com checklists e fichas editáveis</span></li>
+                    <li><span>✓</span><span><strong>10 Folhetos de Inverno (14 p.)</strong> prontos a entregar</span></li>
+                  </ul>
+                </div>
+                <div class="product-foot">
+                  <div class="price-line">
+                    <span class="price-val num">8,87 €</span>
+                    <span class="price-note">Pagamento único · IVA incluído</span>
+                  </div>
+                  <a
+                    href="https://pay.hotmart.com/G108419033I?off=1enxjshv&checkoutMode=10&locale=pt_PT&src=area_membros"
+                    data-checkout="https://pay.hotmart.com/G108419033I?off=1enxjshv&checkoutMode=10&locale=pt_PT&src=area_membros"
+                    data-item-name="3 Kits A4 Vertical ElectroMapas (Area de Membros)"
+                    data-item-value="8.87"
+                    class="btn-primary storefront-cta">
+                    <span>ADICIONAR OS 3 KITS</span>
+                    <svg width="16" height="16" aria-hidden="true"><use href="#ic-arr"/></svg>
+                  </a>
+                  <div class="pay-mini">MB WAY · Multibanco · Google Pay · Cartão</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Produto 3: Upgrade Essencial -> Completo -->
+          <article class="product-card">
+            <div>
+              <div class="product-media">
+                <img src="./atlas/img/capa-arte-anatomia.webp" alt="Upgrade do Essencial 112p para o Atlas Completo 397p" loading="lazy" />
+                <span class="product-ribbon is-navy">Upgrade Atlas 397p</span>
+              </div>
+              <div class="product-body">
+                <div>
+                  <div class="product-kicker">Para quem tem o Essencial (112 p.)</div>
+                  <h3>Upgrade para Atlas Completo (397 p.)</h3>
+                  <p class="p-desc">Adquiriste a versão Essencial de 112 páginas? Completa a coleção com os 70 mapas completos, 46 guias clínicos e capítulo de inverno.</p>
+                  <ul class="product-bullets">
+                    <li><span>✓</span><span>Passa de 44 para <strong>70 mapas visuais com ficha prática</strong></span></li>
+                    <li><span>✓</span><span>+ <strong>46 guias por condição</strong> e anatomia neural (59 p.)</span></li>
+                    <li><span>✓</span><span>+ <strong>Capítulo de Inverno</strong> e 19 formulários clínicos</span></li>
+                  </ul>
+                </div>
+                <div class="product-foot">
+                  <div class="price-line">
+                    <span class="price-val num">4,87 €</span>
+                    <span class="price-note">Diferença de upgrade · IVA incl.</span>
+                  </div>
+                  <a
+                    href="https://pay.hotmart.com/K108418562E?off=5k28agkz&checkoutMode=10&locale=pt_PT&src=area_membros"
+                    data-checkout="https://pay.hotmart.com/K108418562E?off=5k28agkz&checkoutMode=10&locale=pt_PT&src=area_membros"
+                    data-item-name="Upgrade Atlas Essencial para Completo (Area de Membros)"
+                    data-item-value="4.87"
+                    class="btn-primary storefront-cta">
+                    <span>FAZER UPGRADE 397 PÁG.</span>
+                    <svg width="16" height="16" aria-hidden="true"><use href="#ic-arr"/></svg>
+                  </a>
+                  <div class="pay-mini">MB WAY · Multibanco · Google Pay · Cartão</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Produto 4: Casos Clínicos -->
+          <article class="product-card">
+            <div>
+              <div class="product-media">
+                <img src="./assets/funnel/cover-casos-clinicos.webp" alt="Caderno Casos Clínicos de Eletroterapia — 20 Raciocínios Resolvidos" loading="lazy" />
+                <span class="product-ribbon is-navy">Raciocínio Clínico</span>
+              </div>
+              <div class="product-body">
+                <div>
+                  <div class="product-kicker">Caderno Prático · 25 páginas</div>
+                  <h3>Casos Clínicos — 20 Raciocínios Resolvidos</h3>
+                  <p class="p-desc">Vê porquê escolher TENS, NMES, FES ou Interferencial em 20 quadros reais de gabinete, com parâmetros iniciais, progressão e sinais de alerta.</p>
+                  <ul class="product-bullets">
+                    <li><span>✓</span><span><strong>Árvore de decisão clínica</strong> do objetivo à corrente</span></li>
+                    <li><span>✓</span><span><strong>20 casos resolvidos passo a passo</strong> (LCA, lombar, ombro, AVC)</span></li>
+                    <li><span>✓</span><span>Cruzamento direto com a colocação do teu Atlas</span></li>
+                  </ul>
+                </div>
+                <div class="product-foot">
+                  <div class="price-line">
+                    <span class="price-val num">6,90 €</span>
+                    <span class="price-note">Pagamento único · IVA incluído</span>
+                  </div>
+                  <a
+                    href="https://pay.hotmart.com/G108089733H?off=sobidfz5&checkoutMode=10&locale=pt_PT&src=area_membros"
+                    data-checkout="https://pay.hotmart.com/G108089733H?off=sobidfz5&checkoutMode=10&locale=pt_PT&src=area_membros"
+                    data-item-name="Casos Clinicos 20 Raciocinios (Area de Membros)"
+                    data-item-value="6.90"
+                    class="btn-primary storefront-cta">
+                    <span>OBTER OS 20 CASOS</span>
+                    <svg width="16" height="16" aria-hidden="true"><use href="#ic-arr"/></svg>
+                  </a>
+                  <div class="pay-mini">MB WAY · Multibanco · Cartão</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Produto 5: Kit Comunicação & Retenção -->
+          <article class="product-card">
+            <div>
+              <div class="product-media">
+                <img src="./assets/funnel/cover-kit-comunicacao.webp" alt="Kit de Comunicação e Retenção do Utente" loading="lazy" />
+                <span class="product-ribbon is-navy">Gabinete &amp; Utentes</span>
+              </div>
+              <div class="product-body">
+                <div>
+                  <div class="product-kicker">Sistema Editável · 15 páginas</div>
+                  <h3>Kit de Comunicação &amp; Retenção do Utente</h3>
+                  <p class="p-desc">Falas prontas de 30 segundos para explicar a sessão ao utente sem tecnicismos, reduzir medos e aumentar a adesão ao plano de reabilitação.</p>
+                  <ul class="product-bullets">
+                    <li><span>✓</span><span><strong>Scripts prontos</strong> para explicar TENS, NMES, FES e IFT</span></li>
+                    <li><span>✓</span><span><strong>Consentimento informado preenchível</strong> (158 campos)</span></li>
+                    <li><span>✓</span><span><strong>10 mensagens de seguimento</strong> para WhatsApp/SMS</span></li>
+                  </ul>
+                </div>
+                <div class="product-foot">
+                  <div class="price-line">
+                    <span class="price-val num">7,90 €</span>
+                    <span class="price-note">Pagamento único · IVA incluído</span>
+                  </div>
+                  <a
+                    href="https://pay.hotmart.com/T108089755U?off=tymowbzs&checkoutMode=10&locale=pt_PT&src=area_membros"
+                    data-checkout="https://pay.hotmart.com/T108089755U?off=tymowbzs&checkoutMode=10&locale=pt_PT&src=area_membros"
+                    data-item-name="Kit Comunicacao e Retencao (Area de Membros)"
+                    data-item-value="7.90"
+                    class="btn-primary storefront-cta">
+                    <span>OBTER KIT COMUNICAÇÃO</span>
+                    <svg width="16" height="16" aria-hidden="true"><use href="#ic-arr"/></svg>
+                  </a>
+                  <div class="pay-mini">MB WAY · Multibanco · Cartão</div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>ElectroMapas © 2026</strong> · Área de Membros &amp; Central de Consulta para Fisioterapia em Portugal.</p>
+      <p>Material educativo com fontes clínicas citadas. A decisão terapêutica pertence sempre ao profissional habilitado. Suporte e faturas em <a href="https://consumer.hotmart.com/" target="_blank" rel="noopener noreferrer">hotmart.com → Minhas compras</a>.</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox para amostras do Atlas -->
+  <div class="lightbox" id="sample-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden>
+    <div class="lightbox-bar">
+      <span class="lightbox-title" id="lightbox-title">Amostra do Atlas</span>
+      <button type="button" class="lightbox-close" id="lightbox-close-btn">Fechar ×</button>
+    </div>
+    <div class="lightbox-stage">
+      <img id="lightbox-img" src="" alt="" />
     </div>
   </div>
 
-  <!-- MAIN CONTAINER -->
-  <main class="main-wrap">
-
-    <!-- TAB 1: ATLAS & MAPAS 3D -->
-    <section id="tab-atlas" class="tab-content active">
-      <div class="grid-2">
-        <div class="card card-highlight">
-          <div style="font-size: 11.5px; font-weight: 800; color: var(--cyan); text-transform: uppercase; margin-bottom: 6px;">
-            Documento Mestre de Gabinete (76 Páginas)
-          </div>
-          <h3 class="card-title">📖 Master Atlas ElectroMapas 3D</h3>
-          <p class="card-desc">
-            Mais de 58 mapas anatómicos em alta definição organizados pelas 8 regiões corporais. Identificação rigorosa por cor dos pares e canais (CH1 a CH4) para TENS, NMES, FES, Corrente Russa e Aussie.
-          </p>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="./entregaveis/01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" download="01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" class="btn-action">
-              ⬇ Descarregar PDF Master (8.3 MB)
-            </a>
-            <a href="./entregaveis/01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" target="_blank" rel="noopener" class="btn-action btn-secondary">
-              👁️ Abrir no Navegador
-            </a>
-          </div>
-        </div>
-
-        <div class="card">
-          <div style="font-size: 11.5px; font-weight: 800; color: var(--emerald); text-transform: uppercase; margin-bottom: 6px;">
-            Consulta Rápida na Marquesa
-          </div>
-          <h3 class="card-title">📱 Como Utilizar no Gabinete</h3>
-          <p class="card-desc">
-            O material foi diagramado para consulta instantânea em menos de 5 segundos ao lado da marquesa. Salve o ficheiro na aplicação de Livros/PDF do seu telemóvel ou tablet para busca indexada por região corporal.
-          </p>
-          <ul style="list-style: none; color: var(--text-muted); font-size: 13px; line-height: 1.8;">
-            <li>✓ <b>8 Regiões Anatómicas:</b> Cervical, Ombro/Escápula, Cotovelo/Punho, Lombar, Anca, Coxa, Joelho, Tornozelo/Pé.</li>
-            <li>✓ <b>Identificação de Canais:</b> Vermelho (+) e Preto (-) sem risco de inversão.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 2: VÍDEOS PRÁTICOS (AXELGAARD pt-PT) -->
-    <section id="tab-videos" class="tab-content">
-      <div style="margin-bottom: 22px;">
-        <span style="background: rgba(0, 229, 255, 0.15); color: var(--cyan); border: 1px solid var(--border-cyan); font-size: 11.5px; font-weight: 800; padding: 4px 12px; border-radius: 999px; text-transform: uppercase;">
-          Curadoria Internacional Axelgaard EUA · Dobragem Oficial FisioVanta
-        </span>
-        <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin-top: 10px;">
-          Biblioteca de Vídeos Práticos de Marquesa
-        </h3>
-        <p style="color: var(--text-muted); font-size: 14.5px; margin-top: 4px;">
-          Demonstrações clínicas reais com elétrodos de hidrogel aplicados em utentes, com áudio em Português de Portugal e legendas sincronizadas.
-        </p>
-      </div>
-
-      <div class="video-showcase">
-        <!-- PLAYER PRINCIPAL -->
-        <div>
-          <div class="player-box">
-            <video id="playerVid" controls preload="metadata" playsinline>
-              <source id="playerSrc" src="./entregaveis/videos/video_01_preparacao_pele_pt_pt.mp4" type="video/mp4" />
-              <track id="playerTrack" kind="subtitles" src="./entregaveis/videos/video_01_preparacao_pele_pt_pt.vtt" srclang="pt" label="Português de Portugal" default />
-              O seu navegador não suporta reprodução direta de vídeo MP4.
-            </video>
-          </div>
-
-          <div class="clinical-meta-box" id="videoMetaBox">
-            <h4 id="metaTitle">🧼 Aula 01: Preparação Correta da Pele</h4>
-            <p id="metaDesc">
-              Inspeção de escoriações, desengorduramento com água ou álcool, eliminação da impedância cutânea e posicionamento do elétrodo sem rugas.
-            </p>
-            <div style="display: flex; gap: 20px; margin-top: 12px; font-size: 12px; color: var(--cyan); font-weight: 700;">
-              <span>⏱️ Duração: 1 min 36 s</span>
-              <span>🎙️ Voz: pt-PT-DuarteNeural</span>
-              <span>🔊 Som: -16 LUFS (Ducking)</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- LISTA DE AULAS / PLAYLIST -->
-        <div class="playlist-card">
-          <div class="playlist-header">
-            <span>AULAS PRÁTICAS (43 VÍDEOS)</span>
-            <span style="font-size: 12px; color: var(--cyan); font-weight: 700;">Módulos I a V</span>
-          </div>
-
-          <!-- AULA 1 (PRONTA) -->
-          <div class="video-item active" onclick="loadVideo('./entregaveis/videos/video_01_preparacao_pele_pt_pt.mp4', './entregaveis/videos/video_01_preparacao_pele_pt_pt.vtt', '🧼 Aula 01: Preparação da Pele para Elétrodos', 'Inspeção de escoriações, desengorduramento, eliminação de impedância e colocação sem rugas.', this)">
-            <div>
-              <div class="video-item-title">01. Preparação da Pele & Impedância</div>
-              <div class="video-item-meta">Protocolo Inicial · 1:36 min</div>
-            </div>
-            <span class="video-badge-status status-ready">PRONTO ▶</span>
-          </div>
-
-          <!-- AULAS TORNOZELO E PÉ -->
-          <div class="video-item" onclick="loadNotice('02. Dorsiflexão do Tornozelo', 'Posicionamento motor do tibial anterior para controlo da queda do pé na marcha.', this)">
-            <div>
-              <div class="video-item-title">02. Dorsiflexão do Tornozelo (Tibial Anterior)</div>
-              <div class="video-item-meta">Tornozelo e Pé · 50s</div>
-            </div>
-            <span class="video-badge-status status-upcoming">LOTE 2</span>
-          </div>
-
-          <div class="video-item" onclick="loadNotice('03. O Que NÃO Fazer no Tornozelo', 'Erros frequentes de posicionamento que causam eversão excessiva ou dor.', this)">
-            <div>
-              <div class="video-item-title">03. Posicionamento Incorreto (O Que Evitar)</div>
-              <div class="video-item-meta">Tornozelo e Pé · 48s</div>
-            </div>
-            <span class="video-badge-status status-upcoming">LOTE 2</span>
-          </div>
-
-          <div class="video-item" onclick="loadNotice('04. Flexão Plantar: Sóleo vs Gémeos', 'Diferenciação motora entre o sóleo profundo e o gastrocnémio na marquesa.', this)">
-            <div>
-              <div class="video-item-title">04. Flexão Plantar: Sóleo e Gémeos</div>
-              <div class="video-item-meta">Tornozelo e Pé · 1:01 min</div>
-            </div>
-            <span class="video-badge-status status-upcoming">LOTE 2</span>
-          </div>
-
-          <!-- AULAS JOELHO E COXA -->
-          <div class="video-item" onclick="loadNotice('05. Extensão do Joelho (VMO)', 'Ativação seletiva do vasto medial oblíquo no pós-operatório de LCA e femoropatelar.', this)">
-            <div>
-              <div class="video-item-title">05. Extensão de Joelho: Vasto Medial (VMO)</div>
-              <div class="video-item-meta">Joelho e Coxa · 43s</div>
-            </div>
-            <span class="video-badge-status status-upcoming">LOTE 2</span>
-          </div>
-
-          <div class="video-item" onclick="loadNotice('06. Joelho: Duplo Canal Quadricípite', 'Estimulação sincronizada de vasto lateral e vasto medial para reforço máximo.', this)">
-            <div>
-              <div class="video-item-title">06. Quadricípite Duplo Canal (CH1 + CH2)</div>
-              <div class="video-item-meta">Joelho e Coxa · 1:04 min</div>
-            </div>
-            <span class="video-badge-status status-upcoming">LOTE 2</span>
-          </div>
-
-          <div class="video-item" onclick="loadNotice('07. Flexão do Joelho (Isquiotibiais)', 'Posicionamento motor em semitendinoso, semimembranoso e bicípite femoral.', this)">
-            <div>
-              <div class="video-item-title">07. Isquiotibiais: Ponto Motor de Flexão</div>
-              <div class="video-item-meta">Joelho e Coxa · 1:09 min</div>
-            </div>
-            <span class="video-badge-status status-upcoming">LOTE 2</span>
-          </div>
-
-          <!-- AULAS PUNHO E MÃO -->
-          <div class="video-item" onclick="loadNotice('08. Extensão de Punho e Dedos', 'Equilíbrio radial-ulnar e recrutamento de extensores comuns.', this)">
-            <div>
-              <div class="video-item-title">08. Extensão de Punho e Dedos</div>
-              <div class="video-item-meta">Punho e Mão · 59s</div>
-            </div>
-            <span class="video-badge-status status-upcoming">LOTE 3</span>
-          </div>
-
-          <div class="video-item" onclick="loadNotice('09. Oponência do Polegar e Lumbricais', 'Reabilitação neurológica fina e pinça palmar com elétrodos circulares.', this)">
-            <div>
-              <div class="video-item-title">09. Oponência do Polegar e Lumbricais</div>
-              <div class="video-item-meta">Mão e Dedos · 44s</div>
-            </div>
-            <span class="video-badge-status status-upcoming">LOTE 3</span>
-          </div>
-
-          <!-- AULAS OMBRO E ESCÁPULA -->
-          <div class="video-item" onclick="loadNotice('10. Retração da Escápula (Romboides)', 'Estabilização periescapular para impacto subacromial e postura.', this)">
-            <div>
-              <div class="video-item-title">10. Retração Escapular (Romboides/Trapézio)</div>
-              <div class="video-item-meta">Ombro e Coluna · 48s</div>
-            </div>
-            <span class="video-badge-status status-upcoming">LOTE 3</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 3: GUIAS E PARÂMETROS -->
-    <section id="tab-guias" class="tab-content">
-      <div class="grid-3">
-        <div class="card">
-          <h3 class="card-title">📊 Guia de Parâmetros</h3>
-          <p class="card-desc">Frequência em Hertz (Hz), Largura de Pulso em microssegundos (µs), Rampas de Subida/Descida e tempo por objetivo.</p>
-          <a href="./entregaveis/01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" target="_blank" class="btn-action btn-secondary" style="width: 100%;">Consultar Guia Integrado →</a>
-        </div>
-        <div class="card">
-          <h3 class="card-title">🎯 Pontos Motores</h3>
-          <p class="card-desc">Protocolos de contração tetânica sem fadiga e localização da zona de menor resistência dérmica.</p>
-          <a href="./entregaveis/01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" target="_blank" class="btn-action btn-secondary" style="width: 100%;">Consultar Protocolos →</a>
-        </div>
-        <div class="card">
-          <h3 class="card-title">🛡️ Checklist de Segurança</h3>
-          <p class="card-desc">Contraindicações absolutas e relativas (pacemakers, gestação, trombose e áreas de sensibilidade alterada).</p>
-          <a href="./entregaveis/01_ElectroMapas_Atlas_Visual_Completo_58_Mapas.pdf" target="_blank" class="btn-action btn-secondary" style="width: 100%;">Ver Checklist Clínico →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 4: POCKET CARD (15 CASOS) -->
-    <section id="tab-pocket" class="tab-content">
-      <div class="card card-highlight" style="max-width: 800px; margin: 0 auto;">
-        <div style="font-size: 11.5px; font-weight: 800; color: var(--amber); text-transform: uppercase; margin-bottom: 6px;">
-          Bónus Surpresa Oficial
-        </div>
-        <h3 class="card-title">⚡ Atalho Clínico dos 15 Casos + Pocket Card</h3>
-        <p class="card-desc">
-          O resumo de bolso com as 15 situações mais frequentes na clínica (Lombalgia aguda, Cervicalgia tensiva, Entorse de tornozelo, Pós-operatório LCA, Tendinopatia de Aquiles, Epicondilite, Bursite e Parésia facial).
-        </p>
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <a href="./entregaveis/06_Bonus_Especial_Pocket_Card_15_Casos_Clinicos.pdf" download="06_Bonus_Especial_Pocket_Card_15_Casos_Clinicos.pdf" class="btn-action">
-            ⬇ Descarregar Pocket Card PDF
-          </a>
-          <a href="./entregaveis/06_Bonus_Especial_Pocket_Card_15_Casos_Clinicos.pdf" target="_blank" class="btn-action btn-secondary">
-            Visualizar no Ecrã
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 5: CLÍNICA PRO VIP -->
-    <section id="tab-pro" class="tab-content">
-      <div class="grid-2">
-        <div class="card card-highlight">
-          <div style="display: inline-block; background: rgba(0, 229, 255, 0.2); color: var(--cyan); font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px;">
-            SUITE INTERATIVA · WEB &amp; PWA
-          </div>
-          <h3 class="card-title">📱 App ElectroMapas PRO</h3>
-          <p class="card-desc">Pesquisa instantânea dos 58 mapas por patologia ou nervo, calculadora clínica de parâmetros e funcionamento 100% offline na marquesa.</p>
-          <a href="./app/index.html" class="btn-action">Abrir App ElectroMapas PRO →</a>
-        </div>
-
-        <div class="card" style="border: 1.5px solid var(--cyan);">
-          <div style="display: inline-block; background: rgba(0, 229, 255, 0.16); color: var(--cyan); font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px;">
-            UPGRADE CLÍNICO · 25 PÁGINAS
-          </div>
-          <h3 class="card-title">🧠 Casos Clínicos — 20 Raciocínios Resolvidos</h3>
-          <p class="card-desc">Árvore de decisão clínica, 20 quadros reais com escolha justificada da corrente, progressão em 3 fases e erros fatais.</p>
-          <a href="./entregaveis/Casos_Clinicos_Eletroterapia_20_Raciocinios.pdf" download class="btn-action">⬇ Descarregar Casos Clínicos (PDF)</a>
-        </div>
-
-        <div class="card" style="border: 1.5px solid var(--emerald);">
-          <div style="display: inline-block; background: rgba(16, 185, 129, 0.2); color: var(--emerald); font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px;">
-            UPGRADE GABINETE · 15 PÁGINAS EDITÁVEIS
-          </div>
-          <h3 class="card-title">💬 Kit de Comunicação &amp; Retenção do Utente</h3>
-          <p class="card-desc">Scripts de 30 segundos, Consentimento Informado preenchível no PDF, Plano de Tratamento e guia de Adesão às Sessões.</p>
-          <a href="./entregaveis/Kit_Comunicacao_Retencao_Utente.pdf" download class="btn-action">⬇ Descarregar Kit de Comunicação (PDF)</a>
-        </div>
-
-        <div class="card" style="border: 1.5px solid var(--amber);">
-          <div style="display: inline-block; background: rgba(245, 158, 11, 0.2); color: var(--amber); font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px;">
-            MÓDULO AVANÇADO · 3 GUIAS EXTRA
-          </div>
-          <h3 class="card-title">🔦 Laserterapia, Ultrassom &amp; Testes Ortopédicos</h3>
-          <p class="card-desc">Manuais de Fotobiomodulação (Joules/cm²), Ultrassom 1 &amp; 3 MHz e Kit de 25 Testes Ortopédicos com fichas imprimíveis.</p>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <a href="./entregaveis/Manual_Laserterapia_LED_Fotobiomodulacao_Fisioterapia.pdf" download class="btn-action btn-secondary">⬇ Laser</a>
-            <a href="./entregaveis/Guia_Ultrassom_e_Terapia_Combinada_Fisioterapia.pdf" download class="btn-action btn-secondary">⬇ Ultrassom</a>
-            <a href="./entregaveis/Kit_Clinico_Pro_Testes_Ortopedicos_e_Fichas_Avaliacao.pdf" download class="btn-action btn-secondary">⬇ Testes Ortopédicos</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PWA / ADD TO HOMESCREEN INSTRUCTIONS -->
-    <div class="pwa-banner">
-      <div>
-        <h4 style="font-size: 16px; font-weight: 800; color: #ffffff;">📱 Queres usar esta Central como uma App no teu Telemóvel?</h4>
-        <p style="color: var(--text-muted); font-size: 13px; margin-top: 3px;">
-          No Safari do iPhone ou Chrome do Android, toca em <b>Partilhar / Mais Opções</b> e seleciona <b>"Adicionar ao Ecrã Principal"</b>.
-        </p>
-      </div>
-      <button onclick="alert('No Safari (iPhone): toca no botão Partilhar (ícone com quadrado e seta) e seleciona \'Ecrã Principal\'.\n\nNo Android (Chrome): toca nos 3 pontos no topo e seleciona \'Adicionar ao ecrã inicial\'.')" class="btn-action btn-secondary" style="white-space: nowrap;">
-        Ver Passo a Passo
-      </button>
-    </div>
-
-  </main>
-
   <script>
-    function openTab(tabId, btn) {
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-      btn.classList.add('active');
-      window.scrollTo({ top: 120, behavior: 'smooth' });
-    }
+    (function () {
+      var GUIDE_VIDEOS = [
+        {
+          id: 'skin-pt',
+          type: 'local',
+          cats: ['pt', 'fundamentos'],
+          badge: 'Prática pt-PT · Áudio & Legendas',
+          badgePt: true,
+          channel: 'ElectroMapas Clínico',
+          duration: '1:36',
+          title: '01. Preparação Correta da Pele & Redução de Impedância',
+          shortTitle: '01. Preparação da Pele & Impedância',
+          desc: 'Inspeção de escoriações, desengorduramento da pele (água ou álcool deixando evaporar por completo), posicionamento sem rugas, conferência de cabos e subida progressiva da intensidade.',
+          atlasRef: 'Checklist Pré-Sessão & Capítulo de Inverno (pele seca / preparação)',
+          safety: 'Nunca aplicar sobre pele lesada, feridas abertas ou queimaduras; pele sem preparação aumenta a impedância e causa picada.',
+          thumb: './atlas/img/pagina-10-a01-joelho-atj.webp',
+          src: './assets/videos/video_01_preparacao_pele_pt_pt.mp4',
+          track: './assets/videos/video_01_preparacao_pele_pt_pt.vtt',
+          ytUrl: ''
+        },
+        {
+          id: 'knee-yt',
+          type: 'youtube',
+          ytId: 'bY9bbFqPxgM',
+          cats: ['inferior'],
+          badge: 'YouTube Verificado · Membro Inferior',
+          badgePt: false,
+          channel: 'Axelgaard Manufacturing Co., Ltd',
+          duration: '0:43',
+          title: '02. Extensão do Joelho & Quadríceps / VMO (NMES)',
+          shortTitle: '02. Extensão do Joelho & Quadríceps',
+          desc: 'Demonstração clínica de marcas anatómicas no bordo distal da patela e posicionamento dos elétrodos ao longo da coxa para extensão do joelho e recrutamento do quadríceps/VMO.',
+          atlasRef: 'Mapas de Joelho, LCA e Artroplastia (ex.: Mapa A01 / P09)',
+          safety: 'Um elétrodo distal excessivamente medial pode causar cãibra no adutor; ajusta para a linha média se ocorrer.',
+          thumb: 'https://i.ytimg.com/vi/bY9bbFqPxgM/hqdefault.jpg',
+          ytUrl: 'https://www.youtube.com/watch?v=bY9bbFqPxgM'
+        },
+        {
+          id: 'lumbar-yt',
+          type: 'youtube',
+          ytId: 'MNNyq3H6tkQ',
+          cats: ['pt', 'coluna'],
+          badge: 'YouTube Verificado · Português',
+          badgePt: true,
+          channel: 'João Paulo Alcides',
+          duration: '4:27',
+          title: '03. TENS & Parâmetros para Dor Lombar Crónica (Lombalgia)',
+          shortTitle: '03. Lombalgia — TENS & Parâmetros',
+          desc: 'Explicação prática em português sobre escolha de frequência, largura de pulso e enquadramento dos elétrodos para analgesia lombar com TENS.',
+          atlasRef: 'Mapas L01–L05 (Lombar, Multífidos e Ciático) · Guia Lombalgia',
+          safety: 'Evitar colocação direta sobre as apófises espinhosas; posicionar em paralelo sobre os ventres paravertebrais.',
+          thumb: 'https://i.ytimg.com/vi/MNNyq3H6tkQ/hqdefault.jpg',
+          ytUrl: 'https://www.youtube.com/watch?v=MNNyq3H6tkQ'
+        },
+        {
+          id: 'cervical-yt',
+          type: 'youtube',
+          ytId: 'KFRgObnpDJ8',
+          cats: ['pt', 'coluna'],
+          badge: 'YouTube Verificado · Português',
+          badgePt: true,
+          channel: 'Escola de Eletroterapia',
+          duration: '25:02',
+          title: '04. Como Fazer Eletroestimulação Cervical com Segurança',
+          shortTitle: '04. Eletroestimulação Cervical Segura',
+          desc: 'Aula aprofundada em português dedicada à região cervical e trapézio superior, cobrindo zonas proibidas, posicionamento posterior e ajuste gradual.',
+          atlasRef: 'Mapas S01–S04 (Cervicalgia, Trapézio e Cervicobraquialgia)',
+          safety: 'CONTRAINDICAÇÃO ABSOLUTA na face anterior/lateral do pescoço (seio carotídeo e nervo vago).',
+          thumb: 'https://i.ytimg.com/vi/KFRgObnpDJ8/hqdefault.jpg',
+          ytUrl: 'https://www.youtube.com/watch?v=KFRgObnpDJ8'
+        },
+        {
+          id: 'shoulder-yt',
+          type: 'youtube',
+          ytId: '4R-EMQm3jXw',
+          cats: ['superior'],
+          badge: 'YouTube Verificado · Membro Superior',
+          badgePt: false,
+          channel: 'Axelgaard Manufacturing Co., Ltd',
+          duration: '1:39',
+          title: '05. Flexão e Abdução do Ombro — Deltóide & Estabilização',
+          shortTitle: '05. Ombro — Flexão e Abdução',
+          desc: 'Colocação clínica para estimular deltóide anterior/médio e estabilizadores escapulares, alinhada com o manual USC/Axelgaard citado no Atlas.',
+          atlasRef: 'Mapas S07–S11 (Ombro, Deltóide e Coifa dos Rotadores)',
+          safety: 'Verificar subluxação ou dor articular aguda antes de induzir abdução acima de 90 graus.',
+          thumb: 'https://i.ytimg.com/vi/4R-EMQm3jXw/hqdefault.jpg',
+          ytUrl: 'https://www.youtube.com/watch?v=4R-EMQm3jXw'
+        },
+        {
+          id: 'wrist-yt',
+          type: 'youtube',
+          ytId: 'eFbTr936uFI',
+          cats: ['superior'],
+          badge: 'YouTube Verificado · Membro Superior',
+          badgePt: false,
+          channel: 'Axelgaard Manufacturing Co., Ltd',
+          duration: '0:44',
+          title: '06. Extensão do Punho & Antebraço (Pontos Motores)',
+          shortTitle: '06. Punho & Antebraço (Extensão)',
+          desc: 'Posição clínica dos elétrodos sobre os extensores do antebraço para recrutamento limpo sem desvio radial ou ulnar excessivo.',
+          atlasRef: 'Mapas M01–M06 (Epicondilalgia Lateral, Antebraço e Punho)',
+          safety: 'Usar elétrodos pequenos adequados ao ventre muscular do antebraço para evitar densidade térmica elevada ou dispersão para flexores.',
+          thumb: 'https://i.ytimg.com/vi/eFbTr936uFI/hqdefault.jpg',
+          ytUrl: 'https://www.youtube.com/watch?v=eFbTr936uFI'
+        },
+        {
+          id: 'ankle-yt',
+          type: 'youtube',
+          ytId: 'v_3NqHcuxjo',
+          cats: ['inferior'],
+          badge: 'YouTube Verificado · Membro Inferior / FES',
+          badgePt: false,
+          channel: 'Axelgaard Manufacturing Co., Ltd',
+          duration: '0:50',
+          title: '07. Dorsiflexão do Tornozelo — Tibial Anterior (FES)',
+          shortTitle: '07. Tornozelo — Tibial Anterior (FES)',
+          desc: 'Colocação sobre o ramo fibular e ventre do tibial anterior para obter dorsiflexão equilibrada no treino de marcha ou reeducação.',
+          atlasRef: 'Mapas T01–T05 (Tibial Anterior, Entorse e Pé Pendente Pós-AVC)',
+          safety: 'Se surgir eversão exagerada do pé, deslizar ligeiramente o elétrodo proximal para fora da cabeça da fíbula.',
+          thumb: 'https://i.ytimg.com/vi/v_3NqHcuxjo/hqdefault.jpg',
+          ytUrl: 'https://www.youtube.com/watch?v=v_3NqHcuxjo'
+        },
+        {
+          id: 'choose-yt',
+          type: 'youtube',
+          ytId: 'nQlGzqgTu9E',
+          cats: ['fundamentos'],
+          badge: 'YouTube Verificado · Fundamentos',
+          badgePt: false,
+          channel: 'Axelgaard Manufacturing Co., Ltd',
+          duration: '1:46',
+          title: '08. Como Escolher o Posicionamento dos Elétrodos & Pontos Motores',
+          shortTitle: '08. Como Escolher a Colocação',
+          desc: 'Critérios clínicos para decidir tamanho de elétrodo, espaçamento entre polos, relação com o ponto motor e alinhamento segundo o objetivo terapêutico.',
+          atlasRef: 'Páginas de Anatomia & Pontos Motores (pág. 246–305)',
+          safety: 'A distância entre elétrodos do mesmo canal deve permitir penetração sem curto-circuito nem queimadura de bordo.',
+          thumb: 'https://i.ytimg.com/vi/nQlGzqgTu9E/hqdefault.jpg',
+          ytUrl: 'https://www.youtube.com/watch?v=nQlGzqgTu9E'
+        }
+      ];
 
-    function loadVideo(src, vtt, title, desc, element) {
-      document.querySelectorAll('.video-item').forEach(i => i.classList.remove('active'));
-      element.classList.add('active');
-      
-      const vid = document.getElementById('playerVid');
-      const playerSrc = document.getElementById('playerSrc');
-      const playerTrack = document.getElementById('playerTrack');
-      
-      playerSrc.src = src;
-      playerTrack.src = vtt;
-      vid.load();
-      vid.play();
-      
-      document.getElementById('metaTitle').innerText = title;
-      document.getElementById('metaDesc').innerText = desc;
-    }
+      var playlistEl = document.getElementById('playlist-items');
+      var localVid = document.getElementById('local-video-player');
+      var ytFrame = document.getElementById('yt-video-player');
+      var metaBadge = document.getElementById('meta-badge');
+      var metaChannel = document.getElementById('meta-channel');
+      var metaTitle = document.getElementById('meta-title');
+      var metaDesc = document.getElementById('meta-desc');
+      var metaAtlasRef = document.getElementById('meta-atlas-ref');
+      var metaSafety = document.getElementById('meta-safety');
+      var metaYtFallback = document.getElementById('meta-yt-fallback');
+      var metaCcTip = document.getElementById('meta-cc-tip');
+      var activeVideoId = 'skin-pt';
 
-    function loadNotice(title, desc, element) {
-      alert('Aula em sincronização para a versão portuguesa da plataforma: ' + title + '.\n\nO vídeo piloto da Aula 01 já está ativo e pronto para reprodução imediata com dobragem pt-PT.');
-    }
+      function renderPlaylist() {
+        if (!playlistEl) return;
+        playlistEl.innerHTML = '';
+        GUIDE_VIDEOS.forEach(function (v) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'playlist-btn' + (v.id === activeVideoId ? ' is-active' : '');
+          btn.setAttribute('data-id', v.id);
+          btn.setAttribute('data-cats', v.cats.join(','));
+
+          var langClass = v.type === 'local' ? 'p-lang-tag is-local' : 'p-lang-tag';
+          var langLabel = v.type === 'local' ? 'MP4 pt-PT' : (v.badgePt ? 'YouTube PT' : 'YouTube EN (CC)');
+
+          btn.innerHTML =
+            '<div class="thumb-wrap">' +
+              '<img src="' + v.thumb + '" alt="' + v.shortTitle + '" loading="lazy" />' +
+              '<span class="thumb-dur">' + v.duration + '</span>' +
+            '</div>' +
+            '<div>' +
+              '<div class="p-item-title">' + v.shortTitle + '</div>' +
+              '<div class="p-item-meta">' + v.channel + '</div>' +
+              '<span class="' + langClass + '">' + langLabel + '</span>' +
+            '</div>';
+
+          btn.addEventListener('click', function () {
+            selectVideo(v.id);
+          });
+          playlistEl.appendChild(btn);
+        });
+      }
+
+      function selectVideo(id) {
+        var v = GUIDE_VIDEOS.find(function (item) { return item.id === id; });
+        if (!v) return;
+        activeVideoId = id;
+
+        document.querySelectorAll('.playlist-btn').forEach(function (b) {
+          b.classList.toggle('is-active', b.getAttribute('data-id') === id);
+        });
+
+        metaBadge.textContent = v.badge;
+        metaBadge.className = 'v-badge' + (v.badgePt ? ' is-pt' : '');
+        metaChannel.textContent = v.channel + ' · ' + v.duration;
+        metaTitle.textContent = v.title;
+        metaDesc.textContent = v.desc;
+        metaAtlasRef.textContent = v.atlasRef;
+        metaSafety.textContent = v.safety;
+
+        if (v.type === 'local') {
+          if (ytFrame) {
+            ytFrame.hidden = true;
+            ytFrame.src = 'about:blank';
+          }
+          if (localVid) {
+            localVid.hidden = false;
+            localVid.play().catch(function () {});
+          }
+          if (metaYtFallback) metaYtFallback.hidden = true;
+          if (metaCcTip) metaCcTip.textContent = 'Áudio dobrado em Português de Portugal com legendas incluídas.';
+        } else {
+          if (localVid) {
+            localVid.pause();
+            localVid.hidden = true;
+          }
+          if (ytFrame) {
+            ytFrame.hidden = false;
+            ytFrame.src = 'https://www.youtube-nocookie.com/embed/' + v.ytId + '?rel=0&modestbranding=1';
+          }
+          if (metaYtFallback) {
+            metaYtFallback.href = v.ytUrl;
+            metaYtFallback.hidden = false;
+          }
+          if (metaCcTip) {
+            metaCcTip.textContent = v.badgePt
+              ? 'Vídeo público em português. Se o navegador da clínica bloquear embeds, usa o link ao lado.'
+              : 'Dica: toca em Definições (⚙) → Legendas → Traduzir automaticamente → Português.';
+          }
+        }
+      }
+
+      document.querySelectorAll('.filter-pill').forEach(function (pill) {
+        pill.addEventListener('click', function () {
+          var cat = pill.getAttribute('data-cat');
+          document.querySelectorAll('.filter-pill').forEach(function (p) {
+            p.classList.toggle('is-active', p === pill);
+          });
+          var visibleCount = 0;
+          document.querySelectorAll('.playlist-btn').forEach(function (btn) {
+            var cats = (btn.getAttribute('data-cats') || '').split(',');
+            var show = cat === 'all' || cats.indexOf(cat) !== -1;
+            btn.hidden = !show;
+            if (show) visibleCount++;
+          });
+          var countEl = document.getElementById('playlist-count-label');
+          if (countEl) countEl.textContent = visibleCount + ' vídeo(s) visíveis';
+        });
+      });
+
+      renderPlaylist();
+
+      // Checklist interativo
+      var checkBoxes = document.querySelectorAll('#safety-checklist input[type="checkbox"]');
+      var statusBox = document.getElementById('check-status-box');
+      function updateChecklist() {
+        var total = checkBoxes.length;
+        var checked = 0;
+        checkBoxes.forEach(function (cb) { if (cb.checked) checked++; });
+        if (!statusBox) return;
+        if (checked === total) {
+          statusBox.textContent = '6 de 6 verificações confirmadas. Pronto para parametrizar em segurança.';
+          statusBox.className = 'check-status is-ready';
+        } else {
+          statusBox.textContent = checked + ' de ' + total + ' verificações assinaladas antes de ligar a corrente.';
+          statusBox.className = 'check-status';
+        }
+      }
+      checkBoxes.forEach(function (cb) { cb.addEventListener('change', updateChecklist); });
+
+      // Lightbox das amostras
+      var lb = document.getElementById('sample-lightbox');
+      var lbImg = document.getElementById('lightbox-img');
+      var lbTitle = document.getElementById('lightbox-title');
+      var lbClose = document.getElementById('lightbox-close-btn');
+      function closeLb() {
+        if (!lb) return;
+        lb.classList.remove('is-open');
+        lb.hidden = true;
+      }
+      document.querySelectorAll('.sample-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (!lb || !lbImg || !lbTitle) return;
+          lbImg.src = btn.getAttribute('data-zoom');
+          lbImg.alt = btn.getAttribute('data-zoom-title') || 'Amostra do Atlas';
+          lbTitle.textContent = btn.getAttribute('data-zoom-title') || 'Amostra do Atlas';
+          lb.hidden = false;
+          lb.classList.add('is-open');
+        });
+      });
+      if (lbClose) lbClose.addEventListener('click', closeLb);
+      if (lb) lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+
+      // Propagar UTM / InitiateCheckout nos links da vitrine
+      var CARRY_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid','xcod','name','email','phonenumber','doc'];
+      var curParams = new URLSearchParams(window.location.search);
+      document.querySelectorAll('.storefront-cta').forEach(function (cta) {
+        try {
+          var u = new URL(cta.getAttribute('data-checkout') || cta.href);
+          CARRY_KEYS.forEach(function (k) {
+            var v = curParams.get(k);
+            if (v && !u.searchParams.has(k)) u.searchParams.set(k, v);
+          });
+          cta.href = u.toString();
+        } catch (err) {}
+
+        cta.addEventListener('click', function () {
+          if (typeof window.fbq === 'function') {
+            var val = parseFloat(cta.getAttribute('data-item-value') || '0') || 0;
+            var name = cta.getAttribute('data-item-name') || 'Complemento ElectroMapas';
+            window.fbq('track', 'InitiateCheckout', {
+              content_name: name,
+              content_category: 'Fisioterapia',
+              value: val,
+              currency: 'EUR'
+            });
+          }
+        });
+      });
+    })();
   </script>
 </body>
 </html>
