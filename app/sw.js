@@ -1,4 +1,4 @@
-const CACHE_NAME = 'electromapas-pro-v8-root';
+const CACHE_NAME = 'electromapas-pro-v8-1';
 const STATIC_ASSETS = [
   '/app/',
   '/app/index.html',
@@ -58,6 +58,27 @@ self.addEventListener('fetch', (event) => {
   // Vídeos (.mp4): rede direta para streaming sem sobrecarregar armazenamento
   if (event.request.url.endsWith('.mp4')) {
     event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // Documentos HTML: network-first para entregar atualizações de imediato (fallback cache offline)
+  const acceptHeader = event.request.headers.get('accept') || '';
+  if (event.request.mode === 'navigate' || acceptHeader.includes('text/html')) {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          return caches.match(event.request).then((match) => match || caches.match('/app/index.html'));
+        })
+    );
     return;
   }
 

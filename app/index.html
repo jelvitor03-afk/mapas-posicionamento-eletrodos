@@ -586,7 +586,7 @@
               <div id="pane-video" class="layer-pane hidden w-full space-y-2">
                 <div class="aspect-video w-full rounded-xl overflow-hidden border border-cyan-500/40 bg-black">
                   <video id="layer-video-player" controls playsinline preload="none" class="w-full h-full object-cover">
-                    <source id="layer-video-source" src="/assets/videos/video_joelho_pt_pt.mp4" type="video/mp4">
+                    <source id="layer-video-source" src="" type="video/mp4">
                     <track id="layer-video-track" src="/assets/videos/legendas_joelho_pt_pt.vtt" kind="subtitles" srclang="pt" label="pt-PT" default>
                   </video>
                 </div>
@@ -1843,10 +1843,14 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
       }
 
       if (vidPlayer && vidSource) {
-        vidSource.src = mod.videoSrc;
+        vidPlayer.dataset.pendingSrc = mod.videoSrc || '';
         if (vidTrack && mod.videoTrack) vidTrack.src = mod.videoTrack;
         if (vidCaption) vidCaption.textContent = mod.videoCaption;
-        vidPlayer.load();
+        if (currentInspectorLayer === 'video') {
+          vidPlayer.removeAttribute('src');
+          vidSource.src = mod.videoSrc;
+          vidPlayer.load();
+        }
       }
 
       // Atualiza botões de região
@@ -1894,8 +1898,18 @@ Para Extensores do Carpo (FES): elétrodo proximal no terço proximal do antebra
       }
 
       const vidPlayer = document.getElementById('layer-video-player');
-      if (layerName !== 'video' && vidPlayer) {
-        vidPlayer.pause();
+      if (vidPlayer) {
+        if (layerName === 'video') {
+          const vidSource = document.getElementById('layer-video-source');
+          const pendingSrc = vidPlayer.dataset.pendingSrc || (CLINICAL_MODULES[currentModuleIndex] && CLINICAL_MODULES[currentModuleIndex].videoSrc);
+          if (vidSource && pendingSrc && (vidPlayer.getAttribute('src') || vidSource.getAttribute('src')) !== pendingSrc) {
+            vidPlayer.removeAttribute('src');
+            vidSource.src = pendingSrc;
+            vidPlayer.load();
+          }
+        } else {
+          vidPlayer.pause();
+        }
       }
     }
 
