@@ -234,36 +234,16 @@
     .guarantee-inline-box h3{font-size:18px;margin-bottom:4px}
     .guarantee-inline-box p{font-size:14.5px;color:var(--ink-body);line-height:1.5}
 
-    /* 6B. CLIENT FEEDBACK CAROUSEL (RETINA LIGHT & DARK CHAT CARDS) */
+    /* 6B. CLIENT FEEDBACK CAROUSEL (WHATSAPP SCREENSHOTS VIA WHATSGEN) */
     .wa-feedback-shell{margin-top:26px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-sm);max-width:100%;overflow:hidden}
     .wa-feedback-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
     .wa-feedback-top h3{font-size:clamp(19px,2.8vw,24px);margin:4px 0 0;color:var(--navy-950)}
     .wa-feedback-sub{font-size:13.5px;color:var(--ink-muted);margin-top:3px}
-    .wa-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 2px 6px}
+    .wa-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 2px 8px}
     .wa-track::-webkit-scrollbar{display:none}
-    .wa-card{flex:0 0 328px;max-width:328px;scroll-snap-align:start;border-radius:16px;overflow:hidden;border:1px solid #D9D5C9;background:#EFEAE2;display:flex;flex-direction:column;box-shadow:0 6px 20px rgba(7,18,30,0.07)}
-    .wa-card.is-dark{background:#0B141A;border-color:#23323B;box-shadow:0 8px 24px rgba(7,18,30,0.18)}
-    .wa-head{display:flex;align-items:center;gap:10px;padding:11px 14px;background:#075E54;color:#FFF}
-    .wa-card.is-dark .wa-head{background:#1F2C34;border-bottom:1px solid rgba(255,255,255,0.06)}
-    .wa-avatar{width:34px;height:34px;border-radius:99px;background:rgba(255,255,255,0.18);color:#FFF;font-family:'Manrope',sans-serif;font-size:12.5px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:0.02em}
-    .wa-card.is-dark .wa-avatar{background:#00A884;color:#06211B}
-    .wa-person{min-width:0;line-height:1.2}
-    .wa-person strong{display:block;font-family:'Manrope',sans-serif;font-size:13.5px;font-weight:800;color:#FFF}
-    .wa-person span{display:block;font-size:11.5px;color:rgba(255,255,255,0.82);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .wa-chat{padding:12px 12px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
-    .wa-day{align-self:center;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,0.88);color:#54656F;font-size:11px;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,0.06)}
-    .wa-card.is-dark .wa-day{background:#182229;color:#8696A0;box-shadow:none}
-    .wa-msg{max-width:91%;padding:8px 10px 6px;border-radius:10px;font-size:13px;line-height:1.42;color:#111B21;box-shadow:0 1px 1.5px rgba(11,20,26,0.1);position:relative}
-    .wa-msg strong{font-weight:700;color:#07121E}
-    .wa-msg.is-out{align-self:flex-end;background:#D9FDD3;border-top-right-radius:3px}
-    .wa-msg.is-in{align-self:flex-start;background:#FFFFFF;border-top-left-radius:3px}
-    .wa-card.is-dark .wa-msg{color:#E9EDEF;box-shadow:none}
-    .wa-card.is-dark .wa-msg strong{color:#FFFFFF}
-    .wa-card.is-dark .wa-msg.is-out{background:#005C4B}
-    .wa-card.is-dark .wa-msg.is-in{background:#202C33}
-    .wa-time{display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-top:3px;font-size:10.5px;color:#667781;font-variant-numeric:tabular-nums}
-    .wa-card.is-dark .wa-time{color:rgba(233,237,239,0.62)}
-    .wa-ticks{color:#53BDEB;flex-shrink:0}
+    .wa-card{flex:0 0 278px;max-width:278px;scroll-snap-align:start;border-radius:20px;overflow:hidden;border:1.5px solid var(--border-strong);background:#F8F7F2;display:flex;flex-direction:column;box-shadow:0 10px 24px rgba(7,18,30,0.12)}
+    .wa-shot-btn{display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in;line-height:0}
+    .wa-shot-btn img{width:100%;height:auto;display:block}
     .wa-nav-row{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:10px}
 
     /* 8. COMPACT FAQ + FOOTER */
@@ -319,7 +299,7 @@
       .pay-strip{gap:4px}
       .pay-badge{font-size:10.5px;padding:3px 6.5px}
       .carousel-shell,.bonus-carousel-shell,.wa-feedback-shell{padding:12px}
-      .wa-card{flex:0 0 84vw;max-width:316px}
+      .wa-card{flex:0 0 74vw;max-width:276px}
       .carousel-controls{gap:4px}
       .carousel-nav-btn{width:42px;height:42px}
       .carousel-dots{flex-wrap:nowrap;gap:0}
@@ -851,171 +831,40 @@
           </div>
 
           <div class="wa-track" id="wa-track" tabindex="0" aria-label="Carrossel de mensagens de fisioterapeutas e estudantes">
-            <!-- 1. INÊS (LIGHT) -->
             <article class="wa-card">
-              <div class="wa-head">
-                <span class="wa-avatar" aria-hidden="true">IN</span>
-                <div class="wa-person">
-                  <strong>Inês</strong>
-                  <span>Clínica · iPad (30 em 30 min)</span>
-                </div>
-              </div>
-              <div class="wa-chat">
-                <span class="wa-day">Terça-feira</span>
-                <div class="wa-msg is-out">
-                  Olá Inês! Conseguiste descarregar o ElectroMapas tudo certinho no tablet?
-                  <span class="wa-time">19:42 <svg class="wa-ticks" width="14" height="10" viewBox="0 0 16 11" fill="none" aria-hidden="true"><path d="M1.5 5.8L4.5 8.8L10.5 2.2M6 8.8L12 2.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
-                <div class="wa-msg is-in">
-                  Olá! Sim, descarreguei logo no iPad da clínica 👍 Confesso que quando vi quase 400 páginas achei que ia perder tempo à procura.
-                  <span class="wa-time">20:06</span>
-                </div>
-                <div class="wa-msg is-in">
-                  Mas como está dividido por região chego lá em segundos. Atendemos de 30 em 30 min e <strong>olho para o CH1/CH2 por cor e confirmo os Hz e µs</strong> sem quebrar o ritmo com o utente na marquesa.
-                  <span class="wa-time">20:08</span>
-                </div>
-                <div class="wa-msg is-in">
-                  Ter tudo organizado por região dá mesmo jeito entre consultas.
-                  <span class="wa-time">20:09</span>
-                </div>
-              </div>
+              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-01-ines.webp" data-caption="Inês · Clínica (iPad em consultas de 30 em 30 min)">
+                <img src="./img/wa-01-ines.webp" width="787" height="1600" alt="Conversa WhatsApp de Inês sobre uso do ElectroMapas no iPad da clínica" decoding="async" />
+              </button>
             </article>
 
-            <!-- 2. BEATRIZ (DARK) -->
-            <article class="wa-card is-dark">
-              <div class="wa-head">
-                <span class="wa-avatar" aria-hidden="true">BE</span>
-                <div class="wa-person">
-                  <strong>Beatriz</strong>
-                  <span>Estágio · Checklist no telemóvel</span>
-                </div>
-              </div>
-              <div class="wa-chat">
-                <span class="wa-day">Quarta-feira</span>
-                <div class="wa-msg is-out">
-                  Olá Beatriz! Como está a correr o estágio? O Atlas tem-te sido útil?
-                  <span class="wa-time">17:05 <svg class="wa-ticks" width="14" height="10" viewBox="0 0 16 11" fill="none" aria-hidden="true"><path d="M1.5 5.8L4.5 8.8L10.5 2.2M6 8.8L12 2.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
-                <div class="wa-msg is-in">
-                  Nem imaginas 😅 Ontem a orientadora perguntou-me onde colocava os elétrodos para um fortalecimento de deltoide e eu respondi logo, porque tinha revisto o mapa no metro a caminho.
-                  <span class="wa-time">17:18</span>
-                </div>
-                <div class="wa-msg is-in">
-                  A parte que mais uso é <strong>a checklist antes de ligar o aparelho</strong>: pele, sensibilidade, o que perguntar ao utente. Chego ao estágio muito mais descansada.
-                  <span class="wa-time">17:21</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- 3. DIOGO (LIGHT) -->
             <article class="wa-card">
-              <div class="wa-head">
-                <span class="wa-avatar" aria-hidden="true">DI</span>
-                <div class="wa-person">
-                  <strong>Diogo</strong>
-                  <span>Domicílios · Offline (MB WAY)</span>
-                </div>
-              </div>
-              <div class="wa-chat">
-                <span class="wa-day">Segunda-feira</span>
-                <div class="wa-msg is-in">
-                  Bom dia! Comprei ontem por MB WAY. Se descarregar na app da Hotmart consigo abrir sem dados móveis?
-                  <span class="wa-time">10:18</span>
-                </div>
-                <div class="wa-msg is-out">
-                  Bom dia Diogo! Sim, descarregas na área de membros ou na app e fica disponível offline no telemóvel.
-                  <span class="wa-time">10:22 <svg class="wa-ticks" width="14" height="10" viewBox="0 0 16 11" fill="none" aria-hidden="true"><path d="M1.5 5.8L4.5 8.8L10.5 2.2M6 8.8L12 2.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
-                <div class="wa-msg is-in">
-                  Já testei hoje o dia todo nos domicílios e funciona impecável 👌 Em metade dos prédios fico sem rede e <strong>fazendo zoom no telemóvel os números 1A/1B e a tabela lêem-se bem nítidos</strong>. Dá um jeitaço!
-                  <span class="wa-time">19:34</span>
-                </div>
-              </div>
+              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-02-beatriz.webp" data-caption="Beatriz · Estágio (mapa no metro e checklist antes de ligar)">
+                <img src="./img/wa-02-beatriz.webp" width="787" height="1600" alt="Conversa WhatsApp de Beatriz sobre checklist no estágio de fisioterapia" decoding="async" />
+              </button>
             </article>
 
-            <!-- 4. RITA (DARK) -->
-            <article class="wa-card is-dark">
-              <div class="wa-head">
-                <span class="wa-avatar" aria-hidden="true">RI</span>
-                <div class="wa-person">
-                  <strong>Rita</strong>
-                  <span>Departamento Médico · Tablet</span>
-                </div>
-              </div>
-              <div class="wa-chat">
-                <span class="wa-day">Sexta-feira</span>
-                <div class="wa-msg is-out">
-                  Rita, boa tarde! Já conseguiste usar o ElectroMapas no departamento médico?
-                  <span class="wa-time">15:12 <svg class="wa-ticks" width="14" height="10" viewBox="0 0 16 11" fill="none" aria-hidden="true"><path d="M1.5 5.8L4.5 8.8L10.5 2.2M6 8.8L12 2.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
-                <div class="wa-msg is-in">
-                  Consegui sim! Entre o treino da manhã e o da tarde não tenho tempo para folhear livros. Abro o mapa da região no tablet e em meio minuto tenho os elétrodos colocados.
-                  <span class="wa-time">15:20</span>
-                </div>
-                <div class="wa-msg is-in">
-                  O que mais me surpreendeu foi <strong>a tabela de parâmetros ao lado de cada mapa</strong>. Confirmo a frequência e a largura de impulso sem sair da página e o atleta nem repara que consultei algo.
-                  <span class="wa-time">15:23</span>
-                </div>
-                <div class="wa-msg is-out">
-                  É mesmo esse o objetivo: consulta rápida, sem interromper o trabalho.
-                  <span class="wa-time">15:25 <svg class="wa-ticks" width="14" height="10" viewBox="0 0 16 11" fill="none" aria-hidden="true"><path d="M1.5 5.8L4.5 8.8L10.5 2.2M6 8.8L12 2.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
-              </div>
-            </article>
-
-            <!-- 5. MARIANA (LIGHT) -->
             <article class="wa-card">
-              <div class="wa-head">
-                <span class="wa-avatar" aria-hidden="true">MA</span>
-                <div class="wa-person">
-                  <strong>Mariana</strong>
-                  <span>Estágio hospitalar · Pasta A4</span>
-                </div>
-              </div>
-              <div class="wa-chat">
-                <div class="wa-msg is-out">
-                  Olá Mariana! Já conseguiste explorar o Atlas na área de membros?
-                  <span class="wa-time">18:15 <svg class="wa-ticks" width="14" height="10" viewBox="0 0 16 11" fill="none" aria-hidden="true"><path d="M1.5 5.8L4.5 8.8L10.5 2.2M6 8.8L12 2.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
-                <div class="wa-msg is-in">
-                  Olá!! Sim, estou no estágio hospitalar e isto safou-me hoje a sério 🙏 O orientador pediu NMES no quadríceps pós-LCA e numa subluxação pós-AVC.
-                  <span class="wa-time">18:24</span>
-                </div>
-                <div class="wa-msg is-in">
-                  Imprimi em A4 os 12 mapas que mais aparecem lá e meti numa pasta. A folha seguinte com <strong>os 9 passos, o que o utente deve sentir e os sinais para parar</strong> deu-me imensa calma.
-                  <span class="wa-time">18:26</span>
-                </div>
-              </div>
+              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-03-diogo.webp" data-caption="Diogo · Domicílios offline (MB WAY e zoom nítido no telemóvel)">
+                <img src="./img/wa-03-diogo.webp" width="787" height="1600" alt="Conversa WhatsApp de Diogo sobre uso offline nos domicílios" decoding="async" />
+              </button>
             </article>
 
-            <!-- 6. HUGO (DARK) -->
-            <article class="wa-card is-dark">
-              <div class="wa-head">
-                <span class="wa-avatar" aria-hidden="true">HU</span>
-                <div class="wa-person">
-                  <strong>Hugo</strong>
-                  <span>Domicílios no interior · Sem rede</span>
-                </div>
-              </div>
-              <div class="wa-chat">
-                <span class="wa-day">Sábado</span>
-                <div class="wa-msg is-in">
-                  Boas! Faço domicílios em aldeias do interior onde a rede é uma miragem. O ElectroMapas funciona mesmo sem internet?
-                  <span class="wa-time">08:52</span>
-                </div>
-                <div class="wa-msg is-out">
-                  Bom dia Hugo! Sim, depois de descarregado fica todo disponível offline no telemóvel ou no tablet.
-                  <span class="wa-time">09:03 <svg class="wa-ticks" width="14" height="10" viewBox="0 0 16 11" fill="none" aria-hidden="true"><path d="M1.5 5.8L4.5 8.8L10.5 2.2M6 8.8L12 2.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
-                <div class="wa-msg is-in">
-                  Confirmo: hoje estive numa zona sem qualquer cobertura e <strong>abri os mapas sem problema</strong>. O zoom no ecrã do telemóvel chega perfeitamente para ler os pontos e os valores.
-                  <span class="wa-time">20:15</span>
-                </div>
-                <div class="wa-msg is-in">
-                  Para quem anda de casa em casa, é uma segurança enorme.
-                  <span class="wa-time">20:17</span>
-                </div>
-              </div>
+            <article class="wa-card">
+              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-04-rita.webp" data-caption="Rita · Departamento médico desportivo (tablet entre treinos)">
+                <img src="./img/wa-04-rita.webp" width="787" height="1600" alt="Conversa WhatsApp de Rita sobre uso no departamento médico" decoding="async" />
+              </button>
+            </article>
+
+            <article class="wa-card">
+              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-05-mariana.webp" data-caption="Mariana · Estágio hospitalar (12 mapas impressos em A4)">
+                <img src="./img/wa-05-mariana.webp" width="787" height="1600" alt="Conversa WhatsApp de Mariana sobre mapas impressos em A4 no estágio hospitalar" loading="lazy" decoding="async" />
+              </button>
+            </article>
+
+            <article class="wa-card">
+              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-06-hugo.webp" data-caption="Hugo · Domicílios no interior sem cobertura de rede">
+                <img src="./img/wa-06-hugo.webp" width="787" height="1600" alt="Conversa WhatsApp de Hugo sobre consulta offline em aldeias do interior" loading="lazy" decoding="async" />
+              </button>
             </article>
           </div>
 
