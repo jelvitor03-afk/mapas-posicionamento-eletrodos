@@ -61,35 +61,108 @@
     return 'funil_v8';
   }
 
+  function cleanParamVal(val) {
+    if (!val) return '';
+    var t = String(val).trim();
+    if (!t || t.toLowerCase() === 'fbclid' || t.indexOf('{{') !== -1 || t.indexOf('}}') !== -1) return '';
+    return t;
+  }
+
+  function slugToken(val, maxLen) {
+    if (!val) return '';
+    return String(val)
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-zA-Z0-9]+/g, '_')
+      .replace(/^_+|_+$/g, '')
+      .slice(0, maxLen || 16);
+  }
+
+  function compactCampaignToken(camp) {
+    var c = cleanParamVal(camp);
+    if (!c) return '';
+    var upper = c.toUpperCase();
+    var dateM = upper.match(/(\d{2})[-_/]?(\d{2})(?:\s*$)/);
+    var dateTag = dateM ? (dateM[1] + dateM[2]) : '';
+    var prefix = 'CMP';
+    if (upper.indexOf('TESTE') !== -1 && upper.indexOf('V2') !== -1) prefix = 'T2';
+    else if (upper.indexOf('TESTE') !== -1) prefix = 'TST';
+    else if (upper.indexOf('VENDAS') !== -1) prefix = 'V1';
+    else if (upper.indexOf('RETARGET') !== -1) prefix = 'RT';
+    else prefix = slugToken(c, 6).toUpperCase() || 'CMP';
+    return dateTag ? (prefix + '_' + dateTag) : prefix;
+  }
+
+  function compactAdToken(content) {
+    var c = cleanParamVal(content);
+    if (!c) return '';
+    var m = c.match(/\b(AD\d+)\b[\s._-]*(.*)/i);
+    if (m) {
+      var adId = m[1].toUpperCase();
+      var rest = slugToken(m[2], 14).toLowerCase();
+      return rest ? (adId + '_' + rest) : adId;
+    }
+    return slugToken(c, 18);
+  }
+
+  function compactSrcToken(src) {
+    var s = cleanParamVal(src).toLowerCase();
+    if (!s) return 'dir';
+    if (s === 'meta' || s === 'facebook' || s === 'fb' || s === 'facebook_ads') return 'm';
+    if (s === 'instagram' || s === 'ig') return 'ig';
+    if (s === 'instagram_bio') return 'igb';
+    if (s === 'facebook_organico') return 'fbo';
+    if (s === 'site_direto') return 'dir';
+    if (s === 'funil_v8') return 'v8';
+    return slugToken(s, 6).toLowerCase() || 'v8';
+  }
+
+  function buildCompactSck(srcVal, campVal, adVal) {
+    var parts = [compactSrcToken(srcVal)];
+    var adTok = compactAdToken(adVal);
+    var campTok = compactCampaignToken(campVal);
+    if (adTok) parts.push(adTok);
+    if (campTok) parts.push(campTok);
+    return parts.join('|').slice(0, 40);
+  }
+
   function collectAttribution() {
     var currentParams = new URLSearchParams(window.location.search);
     var storedMap = readJsonStorage(STORAGE_MAP_KEY);
     var merged = {};
 
     TRACKED_KEYS.forEach(function (k) {
-      var fromUrl = currentParams.get(k);
+      var fromUrl = cleanParamVal(currentParams.get(k));
+      var fromStore = cleanParamVal(storedMap[k]);
       if (fromUrl) {
         merged[k] = fromUrl;
-      } else if (storedMap[k]) {
-        merged[k] = storedMap[k];
+      } else if (fromStore) {
+        merged[k] = fromStore;
       }
     });
 
-    var srcValue = merged.src || merged.utm_source || readStringStorage(STORAGE_SRC_KEY);
+    var srcValue = merged.src || merged.utm_source || cleanParamVal(readStringStorage(STORAGE_SRC_KEY));
     if (!srcValue) {
       srcValue = inferReferrerSource();
     }
-    if (!merged.src) {
-      merged.src = srcValue;
+    merged.src = srcValue;
+
+    var hasFreshCampaignOrAd = Boolean(cleanParamVal(currentParams.get('utm_campaign')) || cleanParamVal(currentParams.get('utm_content')));
+    var urlSck = cleanParamVal(currentParams.get('sck'));
+    var urlXcod = cleanParamVal(currentParams.get('xcod'));
+    var defaultSck = urlSck ? urlSck.slice(0, 40) : buildCompactSck(srcValue, merged.utm_campaign, merged.utm_content);
+
+    if (hasFreshCampaignOrAd || !merged.sck) {
+      merged.sck = defaultSck;
+    } else {
+      merged.sck = merged.sck.slice(0, 40);
     }
-
-    var sckParts = [srcValue];
-    if (merged.utm_campaign) sckParts.push(merged.utm_campaign);
-    if (merged.utm_content) sckParts.push(merged.utm_content);
-    var defaultSck = sckParts.join('|').slice(0, 40);
-
-    if (!merged.sck) merged.sck = defaultSck;
-    if (!merged.xcod) merged.xcod = defaultSck;
+    if (urlXcod) {
+      merged.xcod = urlXcod.slice(0, 40);
+    } else if (hasFreshCampaignOrAd || !merged.xcod) {
+      merged.xcod = merged.sck;
+    } else {
+      merged.xcod = merged.xcod.slice(0, 40);
+    }
 
     writeJsonStorage(STORAGE_MAP_KEY, merged);
     writeStringStorage(STORAGE_SRC_KEY, srcValue);
@@ -123,7 +196,7 @@
       params: merged,
       prefill: prefill,
       srcValue: srcValue,
-      defaultSck: defaultSck
+      defaultSck: merged.sck || defaultSck
     };
   }
 
@@ -324,19 +397,106 @@
     });
   }
 
-  function maybeRedirectUpgradeToObrigado() {
-    if (window.location.pathname.indexOf('upsell-pro') === -1) return false;
-    var params = new URLSearchParams(window.location.search);
-    var isUpgradeOff = params.get('off') === '5k28agkz';
-    var ts = parseInt(readStringStorage('em_v8_upgraded_ts'), 10) || 0;
-    var isRecentUpgrade = ts > 0 && (Date.now() - ts < 2 * 3600 * 1000);
-    if (!isUpgradeOff && !isRecentUpgrade) return false;
+  function markProOfferSeenOnce() {
+    if (window.location.pathname.indexOf('upsell-pro') === -1) return;
     try {
+      sessionStorage.setItem('em_v8_pro_offer_seen', '1');
       sessionStorage.removeItem('em_v8_upgraded_ts');
       localStorage.removeItem('em_v8_upgraded_ts');
     } catch (e) {}
-    window.location.replace('/funil-v8/obrigado-completo' + window.location.search);
-    return true;
+  }
+
+  function bindAppProDemo() {
+    var root = document.getElementById('app-demo-widget');
+    if (!root) return;
+
+    var CASE_MAP = {
+      I01: {
+        patient: 'M.S., 64 anos · Gonartrose medial bilateral',
+        protocol: 'Mapa I01 · TENS Joelho (4 elétrodos periarticulares) · 80 Hz · 150 µs · 25 min',
+        finding: 'Testes pré-aplicação: dor medial à carga e flexão 105°, sem bandeiras vermelhas.',
+        eva: 'EVA 7 → 4 após sessão',
+        next: 'Manter Mapa I01 + exercício de quadríceps em cadeia aberta; entregar folheto PX04.'
+      },
+      S01: {
+        patient: 'A.R., 42 anos · Cervicalgia crónica inespecífica',
+        protocol: 'Mapa S01 · TENS Quadripolar Cervical · 100 Hz · 100 µs · 30 min',
+        finding: 'Triagem pré-sessão: amplitude cervical limitada em rotação D, sem irradiação radicular.',
+        eva: 'EVA 6 → 3 após sessão',
+        next: 'Combinar Mapa S01 com mobilidade cervical suave + controlo postural no trabalho.'
+      },
+      L02: {
+        patient: 'J.P., 49 anos · Lombalgia crónica T12–S1',
+        protocol: 'Mapa L02 · Corrente Interferencial Tetrapolar · AMF 90 Hz · 25 min',
+        finding: 'Cluster de Laslett negativo; rigidez matinal sem défice motor ou perda de força.',
+        eva: 'EVA 7 → 4 após sessão',
+        next: 'Progredir estabilidade lombo-pélvica e rever tolerância cutânea na próxima consulta.'
+      }
+    };
+
+    var state = { code: 'I01', area: 25, ma: 35 };
+    var densityEl = document.getElementById('demo-density-value');
+    var safetyEl = document.getElementById('demo-density-badge');
+    var soapEl = document.getElementById('demo-soap-output');
+    var copyBtn = document.getElementById('demo-copy-btn');
+
+    function renderDemo() {
+      var info = CASE_MAP[state.code] || CASE_MAP.I01;
+      var density = state.ma / state.area;
+      var densityFmt = density.toFixed(2).replace('.', ',');
+      var isHigh = density > 2.0;
+
+      if (densityEl) densityEl.textContent = densityFmt + ' mA/cm² (' + state.ma + ' mA / ' + state.area + ' cm²)';
+      if (safetyEl) {
+        safetyEl.textContent = isHigh
+          ? 'ATENÇÃO (> 2,0 mA/cm²) — usar elétrodo 5×9 cm (45 cm²)'
+          : 'DENSIDADE SEGURA (≤ 2,0 mA/cm²)';
+        safetyEl.className = 'app-demo-badge ' + (isHigh ? 'is-warn' : 'is-safe');
+      }
+
+      if (soapEl) {
+        soapEl.textContent =
+          'REGISTO CLÍNICO SOAP · ELECTROMAPAS PRO\n' +
+          'Utente (exemplo fictício): ' + info.patient + '\n' +
+          'S: Queixa principal na consulta atual; dor moderada a elevada (' + info.eva + ').\n' +
+          'O: ' + info.finding + '\n' +
+          'A: ' + info.protocol + ' | ' + state.ma + ' mA em elétrodo ' + state.area + ' cm² → ' + densityFmt + ' mA/cm² (' + (isHigh ? 'Reduzir amplitude ou ampliar área' : 'Dentro do limiar cutâneo seguro') + ').\n' +
+          'P: ' + info.next;
+      }
+    }
+
+    root.querySelectorAll('.js-demo-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var group = this.getAttribute('data-group');
+        var val = this.getAttribute('data-val');
+        if (group === 'code') state.code = val;
+        if (group === 'area') state.area = parseInt(val, 10) || 25;
+        if (group === 'ma') state.ma = parseInt(val, 10) || 35;
+
+        root.querySelectorAll('.js-demo-btn[data-group="' + group + '"]').forEach(function (other) {
+          var active = other === btn;
+          other.classList.toggle('is-active', active);
+          other.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        renderDemo();
+      });
+    });
+
+    if (copyBtn && soapEl) {
+      copyBtn.addEventListener('click', function () {
+        var text = soapEl.textContent || '';
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+          navigator.clipboard.writeText(text).catch(function () {});
+        }
+        var prev = copyBtn.textContent;
+        copyBtn.textContent = 'Nota de exemplo gerada e copiada ✓';
+        setTimeout(function () {
+          copyBtn.textContent = prev;
+        }, 2000);
+      });
+    }
+
+    renderDemo();
   }
 
   function bindStickyBar() {
@@ -394,7 +554,7 @@
   }
 
   function init() {
-    if (maybeRedirectUpgradeToObrigado()) return;
+    markProOfferSeenOnce();
     var attr = collectAttribution();
     decorateHotmartLinks(attr);
     decorateInternalLinks(attr);
@@ -403,6 +563,7 @@
     bindLightbox();
     bindStickyBar();
     bindClinicChallenge();
+    bindAppProDemo();
   }
 
   if (document.readyState === 'loading') {

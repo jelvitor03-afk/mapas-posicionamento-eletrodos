@@ -2,10 +2,6 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/entrega-completo",
-      "destination": "/entrega-completo.html"
-    },
-    {
       "source": "/entrega-pro",
       "destination": "/funil-v8/entrega-pro.html"
     },
@@ -54,10 +50,6 @@
       "destination": "/upsell-comunicacao.html"
     },
     {
-      "source": "/obrigado",
-      "destination": "/obrigado.html"
-    },
-    {
       "source": "/electromapas-pro-app",
       "destination": "/app/index.html"
     },
@@ -88,7 +80,7 @@
   ],
   "headers": [
     {
-      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|obrigado|upsell|downsell|upsell-casos|upsell-comunicacao|upsell-ultrassom|upsell-laser|entrega-completo|funnel\\.css|funnel\\.js)",
+      "source": "/(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|index\\.html|pagamento-pendente|upsell|downsell|upsell-casos|upsell-comunicacao|upsell-ultrassom|upsell-laser|funnel\\.css|funnel\\.js)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -102,6 +94,33 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/atlas/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/atlas/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/funil-v8/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
         }
       ]
     },
@@ -164,6 +183,61 @@
     {
       "source": "/",
       "destination": "/atlas/",
+      "permanent": false
+    },
+    {
+      "source": "/area-membros",
+      "destination": "https://hotmart.com/pt-br/club/jel-vitor-sao-pedro-mendes-1",
+      "permanent": false
+    },
+    {
+      "source": "/area-membros/",
+      "destination": "https://hotmart.com/pt-br/club/jel-vitor-sao-pedro-mendes-1",
+      "permanent": false
+    },
+    {
+      "source": "/area-membros/index.html",
+      "destination": "https://hotmart.com/pt-br/club/jel-vitor-sao-pedro-mendes-1",
+      "permanent": false
+    },
+    {
+      "source": "/obrigado",
+      "destination": "https://hotmart.com/pt-br/club/jel-vitor-sao-pedro-mendes-1",
+      "permanent": false
+    },
+    {
+      "source": "/obrigado.html",
+      "destination": "https://hotmart.com/pt-br/club/jel-vitor-sao-pedro-mendes-1",
+      "permanent": false
+    },
+    {
+      "source": "/obrigado-v7",
+      "destination": "https://hotmart.com/pt-br/club/jel-vitor-sao-pedro-mendes-1",
+      "permanent": false
+    },
+    {
+      "source": "/obrigado-v7.html",
+      "destination": "https://hotmart.com/pt-br/club/jel-vitor-sao-pedro-mendes-1",
+      "permanent": false
+    },
+    {
+      "source": "/entrega-completo",
+      "destination": "https://hotmart.com/pt-br/club/jel-vitor-sao-pedro-mendes-1",
+      "permanent": false
+    },
+    {
+      "source": "/entrega-completo.html",
+      "destination": "https://hotmart.com/pt-br/club/jel-vitor-sao-pedro-mendes-1",
+      "permanent": false
+    },
+    {
+      "source": "/entrega-app-pro",
+      "destination": "/funil-v8/entrega-pro",
+      "permanent": false
+    },
+    {
+      "source": "/entrega-app-pro.html",
+      "destination": "/funil-v8/entrega-pro",
       "permanent": false
     },
     {

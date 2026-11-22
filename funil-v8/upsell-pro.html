@@ -82,10 +82,12 @@
           </div>
         </div>
 
-        <div class="confirm-banner is-hold" role="status">
-          <span class="confirm-icon" aria-hidden="true">!</span>
+        <div class="confirm-banner" role="status">
+          <span class="confirm-icon" aria-hidden="true">
+            <svg width="14" height="14"><use href="#ic-ok"/></svg>
+          </span>
           <div>
-            <strong>Passo 1 registado · Não feches esta página antes de concluir o Passo 2.</strong> O teu Atlas Completo (397 p.) está reservado — decide abaixo se queres juntar o Pacote PRO à tua consulta antes de abrir a entrega.
+            <strong>Compra aprovada. O teu Atlas está disponível na Hotmart.</strong> O acesso já foi enviado para o teu e-mail e está guardado no FisioVanta Club — se quiseres, vê abaixo como acelerar ainda mais a consulta antes de abrir.
           </div>
         </div>
 
@@ -126,6 +128,58 @@
             <span><strong>#3 20 Casos + Bandagem (24 p.), App PRO &amp; 3 Kits A4 (52 p.):</strong> casos clínicos completos com Kinesio Taping (I/Y/Fan), calculadora mA/cm², gerador SOAP e 10 folhetos para utentes.</span>
           </li>
         </ul>
+      </div>
+    </section>
+
+    <section class="sec" id="app-demo" aria-labelledby="app-demo-title">
+      <div class="container">
+        <div class="app-demo-card" id="app-demo-widget">
+          <span class="eyebrow">Demonstração interativa · Exemplo fictício da App PRO</span>
+          <h2 class="sec-title" id="app-demo-title">Experimenta 1 tarefa real da App PRO: confirmar mA/cm² e gerar a nota da sessão</h2>
+          <p class="sec-sub">Com o Atlas já sabes onde colocar os elétrodos. A App PRO faz falta quando o utente está à frente do aparelho e precisas de confirmar a densidade segura (mA/cm²) e fechar o registo clínico SOAP em segundos.</p>
+
+          <div class="app-demo-controls">
+            <div>
+              <span class="app-demo-group-label">1. Mapa do teu Atlas (exemplo fictício)</span>
+              <div class="app-demo-chips">
+                <button type="button" class="app-demo-chip js-demo-btn is-active" data-group="code" data-val="I01" aria-pressed="true">I01 · Joelho (OA)</button>
+                <button type="button" class="app-demo-chip js-demo-btn" data-group="code" data-val="S01" aria-pressed="false">S01 · Cervical</button>
+                <button type="button" class="app-demo-chip js-demo-btn" data-group="code" data-val="L02" aria-pressed="false">L02 · Lombar</button>
+              </div>
+            </div>
+            <div>
+              <span class="app-demo-group-label">2. Elétrodo escolhido</span>
+              <div class="app-demo-chips">
+                <button type="button" class="app-demo-chip js-demo-btn is-active" data-group="area" data-val="25" aria-pressed="true">5×5 cm (25 cm²)</button>
+                <button type="button" class="app-demo-chip js-demo-btn" data-group="area" data-val="45" aria-pressed="false">5×9 cm (45 cm²)</button>
+              </div>
+            </div>
+            <div>
+              <span class="app-demo-group-label">3. Intensidade aplicada</span>
+              <div class="app-demo-chips">
+                <button type="button" class="app-demo-chip js-demo-btn" data-group="ma" data-val="25" aria-pressed="false">25 mA</button>
+                <button type="button" class="app-demo-chip js-demo-btn is-active" data-group="ma" data-val="35" aria-pressed="true">35 mA</button>
+                <button type="button" class="app-demo-chip js-demo-btn" data-group="ma" data-val="55" aria-pressed="false">55 mA</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="app-demo-result" aria-live="polite">
+            <div class="app-demo-density-row">
+              <span class="app-demo-density-val num" id="demo-density-value">1,40 mA/cm² (35 mA / 25 cm²)</span>
+              <span class="app-demo-badge is-safe" id="demo-density-badge">DENSIDADE SEGURA (≤ 2,0 mA/cm²)</span>
+            </div>
+            <pre class="app-demo-soap" id="demo-soap-output"></pre>
+            <div class="app-demo-actions">
+              <span style="font-size:12.5px;color:#CBD5E1">Simulação interativa real da ferramenta incluída no Pacote PRO.</span>
+              <button type="button" class="app-demo-copy" id="demo-copy-btn">Copiar nota de exemplo</button>
+            </div>
+          </div>
+
+          <div class="app-demo-bridge">
+            <strong>Diferença prática face à ficha em papel:</strong> enquanto a ficha do Atlas regista o mapa no papel, a App PRO calcula o risco térmico mA/cm² na hora, filtra contraindicações e gera o texto SOAP pronto a colar no processo clínico.
+          </div>
+        </div>
       </div>
     </section>
 
@@ -230,7 +284,7 @@
         <div class="preview-grid">
           <article class="preview-card">
             <button type="button" class="preview-zoom-btn" data-src="./img/v8-testes-ortopedicos.webp" data-caption="#1 Testes Ortopédicos Especiais — Prancha T03 Ombro (Neer, Hawkins e Empty Can)">
-              <img src="./img/v8-testes-ortopedicos.webp" width="1000" height="1415" alt="Prancha T03 ilustrada de testes ortopédicos do ombro com exatidão PubMed" decoding="sync" />
+              <img src="./img/v8-testes-ortopedicos.webp" width="720" height="1019" alt="Prancha T03 ilustrada de testes ortopédicos do ombro com exatidão PubMed" loading="lazy" decoding="async" />
             </button>
             <div class="preview-meta">
               <div class="preview-meta-text">
@@ -243,7 +297,7 @@
 
           <article class="preview-card">
             <button type="button" class="preview-zoom-btn" data-src="./img/v8-ultrassom-combinada.webp" data-caption="#2A Ultrassom &amp; Terapia Combinada — US03 3 MHz no Epicôndilo Lateral">
-              <img src="./img/v8-ultrassom-combinada.webp" width="1000" height="1415" alt="Mapa clínico US03 de ultrassom 3 MHz para origem comum dos extensores" decoding="sync" />
+              <img src="./img/v8-ultrassom-combinada.webp" width="720" height="1019" alt="Mapa clínico US03 de ultrassom 3 MHz para origem comum dos extensores" loading="lazy" decoding="async" />
             </button>
             <div class="preview-meta">
               <div class="preview-meta-text">
@@ -256,7 +310,7 @@
 
           <article class="preview-card">
             <button type="button" class="preview-zoom-btn" data-src="./img/v8-laser-walt.webp" data-caption="#2B Laserterapia &amp; LED WALT — Protocolo PB08 Osteoartrose do Joelho (Stausholm)">
-              <img src="./img/v8-laser-walt.webp" width="1000" height="1415" alt="Grade ponto-a-ponto WALT PB08 para osteoartrose do joelho" decoding="sync" />
+              <img src="./img/v8-laser-walt.webp" width="720" height="1019" alt="Grade ponto-a-ponto WALT PB08 para osteoartrose do joelho" loading="lazy" decoding="async" />
             </button>
             <div class="preview-meta">
               <div class="preview-meta-text">
@@ -269,7 +323,7 @@
 
           <article class="preview-card">
             <button type="button" class="preview-zoom-btn" data-src="./img/v8-casos-bandagem.webp" data-caption="#3 20 Casos Clínicos + Bandagem Funcional — Caso CC12 Pós-LCA com NMES e Leque Linfático">
-              <img src="./img/v8-casos-bandagem.webp" width="1000" height="1415" alt="Caso clínico CC12 pós-LCA integrando NMES P09 e bandagem em leque" decoding="sync" />
+              <img src="./img/v8-casos-bandagem.webp" width="720" height="1019" alt="Caso clínico CC12 pós-LCA integrando NMES P09 e bandagem em leque" loading="lazy" decoding="async" />
             </button>
             <div class="preview-meta">
               <div class="preview-meta-text">
@@ -282,7 +336,7 @@
 
           <article class="preview-card">
             <button type="button" class="preview-zoom-btn" data-src="./img/app-pro-calculadora.webp" data-caption="#4 App ElectroMapas PRO — Calculadora de dosimetria mA/cm² e carga por fase">
-              <img src="./img/app-pro-calculadora.webp" width="780" height="1560" alt="Captura real da calculadora de densidade de corrente mA/cm² na App ElectroMapas PRO" decoding="sync" />
+              <img src="./img/app-pro-calculadora.webp" width="540" height="1080" alt="Captura real da calculadora de densidade de corrente mA/cm² na App ElectroMapas PRO" loading="lazy" decoding="async" />
             </button>
             <div class="preview-meta">
               <div class="preview-meta-text">
@@ -294,15 +348,15 @@
           </article>
 
           <article class="preview-card">
-            <button type="button" class="preview-zoom-btn" data-src="./img/kit2-registo-sessao.webp" data-caption="#5 Os 3 Kits Verticais A4 — Folha SG35, Folhetos PX01–PX10 e Kit de Bolso">
-              <img src="./img/kit2-registo-sessao.webp" width="1000" height="1415" alt="Página real do Kit Clínica com folha de registo de sessão em A4 vertical" decoding="sync" />
+            <button type="button" class="preview-zoom-btn" data-src="./img/kit3-folheto-tens.webp" data-caption="#5 Os 3 Kits Verticais A4 — Folhetos novos PX01–PX10 para utentes + kits prontos a imprimir">
+              <img src="./img/kit3-folheto-tens.webp" width="720" height="1019" alt="Folheto novo PX04 de cuidados com TENS para entregar ao utente" loading="lazy" decoding="async" />
             </button>
             <div class="preview-meta">
               <div class="preview-meta-text">
                 <strong>#5 Os 3 Kits Verticais · 52 p.</strong>
-                <span>Bolso, Clínica e Utentes</span>
+                <span>10 folhetos PX + impressão A4</span>
               </div>
-              <button type="button" class="preview-meta-zoom" data-idx="5" aria-label="Ampliar folha SG35 dos Kits Verticais">Ampliar</button>
+              <button type="button" class="preview-meta-zoom" data-idx="5" aria-label="Ampliar folheto PX04 dos Kits Verticais">Ampliar</button>
             </div>
           </article>
         </div>
@@ -361,8 +415,8 @@
             <div class="num-badge" aria-hidden="true">05</div>
             <div class="deliverable-body">
               <span class="item-tag">Os 3 Kits Verticais A4 (52 páginas)</span>
-              <h3>Kit de Bolso (17 p.) + Kit Clínica (21 p.) + Kit Inverno Utentes (14 p.)</h3>
-              <p>Inclui os 10 folhetos exclusivos PX01–PX10 para entregar ao doente (frio e dor, TENS domiciliário, lombalgia, artrose, sono, sinais de alerta), os 19 formulários clínicos isolados (SG18–SG37 com NPRS, ODI, NDI, DASH, KOOS, LEFS, WOMAC, PSFS, consentimento) e a tabela consolidada dos 70 mapas no formato vertical para o telemóvel.</p>
+              <h3>10 Folhetos Novos Utentes (14 p.) + Kit Clínica (21 p.) + Kit de Bolso (17 p.)</h3>
+              <p>O <strong>Kit Inverno Utentes</strong> traz <strong>10 folhetos 100% novos (`PX01–PX10`)</strong> escritos para entregar diretamente ao utente. Os Kits Clínica e de Bolso reúnem os 19 formulários (`SG18–SG37`) e a tabela dos 70 mapas já separados em A4 vertical leve, prontos a imprimir sem precisar abrir as 397 páginas do Atlas.</p>
               <div class="deliverable-meta">3 PDFs A4 verticais extra · Pacote completo de gabinete</div>
             </div>
           </article>
@@ -432,7 +486,7 @@
             <span>Podes testar os 4 manuais clínicos, a App PRO e os 3 kits durante 15 dias na Hotmart. Se não te ajudar na prática clínica, pedes reembolso integral.</span>
           </div>
 
-          <a href="./downsell-kits.html" class="btn-decline" data-carry>Não, obrigado — ver opção só com os manuais e kits (sem a App PRO)</a>
+          <a href="./downsell-kits.html" class="btn-decline" data-carry>Ver só os manuais e kits</a>
         </div>
 
         <p class="clinical-note">

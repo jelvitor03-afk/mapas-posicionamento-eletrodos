@@ -2,10 +2,8 @@
 .vercel
 extracted_frames/
 assets_congruence/
-entregaveis/videos/
-entregaveis/pacote_completo_com_bonus/
-entregaveis/pacote_oficial_completo/
-entregaveis/ElectroMapas_PACOTE_BASICO.pdf
+entregaveis/
+atlas/qa/
 qa_newpage_*.png
 .impeccable/
 PRODUCT.md
