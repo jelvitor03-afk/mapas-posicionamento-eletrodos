@@ -244,7 +244,11 @@
 
   function bindCheckoutTracking() {
     document.querySelectorAll('.js-checkout-btn').forEach(function (btn) {
+      btn.setAttribute('data-orig-html', btn.innerHTML);
       btn.addEventListener('click', function () {
+        this.style.opacity = '0.9';
+        this.setAttribute('aria-busy', 'true');
+        this.innerHTML = '<span>A abrir pagamento seguro Hotmart…</span>';
         if (window.location.pathname.indexOf('upgrade-completo') !== -1) {
           writeStringStorage('em_v8_upgraded_ts', String(Date.now()));
         }
@@ -270,6 +274,14 @@
             content_name: 'ElectroMapas Funil V8 - ' + plan
           });
         }
+      });
+    });
+    window.addEventListener('pageshow', function () {
+      document.querySelectorAll('.js-checkout-btn[aria-busy="true"]').forEach(function (btn) {
+        btn.style.opacity = '';
+        btn.removeAttribute('aria-busy');
+        var orig = btn.getAttribute('data-orig-html');
+        if (orig) btn.innerHTML = orig;
       });
     });
   }
