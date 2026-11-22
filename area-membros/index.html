@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07131B" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Área de Membros ElectroMapas | Biblioteca Clínica PRO</title>
+  <meta name="description" content="Área de membros estilo vitrine da ElectroMapas: 5 módulos anatómicos incluídos no Atlas + 5 expansões clínicas PRO disponíveis." />
+  <link rel="icon" type="image/svg+xml" href="/atlas/icons/favicon.svg" />
+  <link rel="apple-touch-icon" href="/atlas/icons/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://pay.hotmart.com" crossorigin />
+  <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/atlas/fonts/manrope-800-latin.woff2" crossorigin />
+  <script>
+    !function(f){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);
+    fbq('init','1627467939032653');
+    fbq('track','PageView');
+    (function(){
+      var b=false;
+      function bootFb(){
+        if(b)return;b=true;
+        var t=document.createElement('script');
+        t.async=!0;
+        t.src='https://connect.facebook.net/en_US/fbevents.js';
+        document.head.appendChild(t);
+      }
+      window.__bootFb=bootFb;
+      ['pointerdown','touchstart','scroll','keydown','mousemove'].forEach(function(ev){
+        window.addEventListener(ev,bootFb,{once:true,passive:true});
+      });
+      window.addEventListener('load',function(){setTimeout(bootFb,3500);},{once:true});
+    })();
+  </script>
+  <style>
+    @font-face {
+      font-family: 'Manrope';
+      src: url('/atlas/fonts/manrope-800-latin.woff2') format('woff2');
+      font-weight: 800;
+      font-display: swap;
+    }
+    :root {
+      --bg: #07131B;
+      --bg-card: #0D222E;
+      --bg-elev: #112C3B;
+      --border: rgba(127, 209, 199, 0.18);
+      --gold: #DFA326;
+      --teal: #7FD1C7;
+      --emerald: #10B981;
+      --ink: #F8FAFC;
+      --muted: #B6CAD1;
+      --max-w: 1180px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      letter-spacing: -0.02em;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    button, a { touch-action: manipulation; }
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    /* Top Nav */
+    .club-nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(7, 19, 27, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    .club-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+    .brand-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: var(--gold);
+      color: #07131B;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      min-height: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Showcase Hero */
+    .hero-showcase {
+      position: relative;
+      padding: 18px 0 12px;
+    }
+    .hero-banner-frame {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(223, 163, 38, 0.35);
+      background: #081A24;
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
+    }
+    .hero-img-desktop { width: 100%; height: auto; }
+    .hero-img-mobile { display: none; width: 100%; height: auto; }
+    .hero-cta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding: 16px 20px;
+      border-radius: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+    .hero-cta-copy strong {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 17px;
+      color: #FFFFFF;
+    }
+    .hero-cta-copy span {
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+    .hero-cta-btns {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 11px 20px;
+      border-radius: 9px;
+      background: var(--gold);
+      color: #07131B;
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+    }
+    .btn-gold:hover { filter: brightness(1.07); }
+    .btn-teal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 11px 18px;
+      border-radius: 9px;
+      background: rgba(127, 209, 199, 0.14);
+      color: var(--teal);
+      border: 1px solid rgba(127, 209, 199, 0.45);
+      font-family: 'Manrope', sans-serif;
+      font-size: 13.5px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Rows */
+    .shelf { padding: 22px 0 8px; }
+    .shelf-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .shelf-title {
+      font-size: clamp(19px, 2.8vw, 24px);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge-free {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 99px;
+      background: rgba(16, 185, 129, 0.18);
+      color: #34D399;
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      letter-spacing: 0.04em;
+    }
+    .badge-pro {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 99px;
+      background: rgba(223, 163, 38, 0.18);
+      color: var(--gold);
+      border: 1px solid rgba(223, 163, 38, 0.45);
+      letter-spacing: 0.04em;
+    }
+    .shelf-sub { font-size: 13.5px; color: var(--muted); }
+
+    .posters-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+    .poster-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      padding: 0;
+      text-align: left;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .poster-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.55);
+    }
+    .poster-card img {
+      width: 100%;
+      aspect-ratio: 720 / 1040;
+      object-fit: cover;
+    }
+    .poster-pill {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      background: rgba(7, 19, 27, 0.88);
+      color: var(--gold);
+      border: 1px solid rgba(223, 163, 38, 0.6);
+    }
+    .poster-card.is-unlocked .poster-pill {
+      color: #34D399;
+      border-color: rgba(52, 211, 153, 0.6);
+    }
+
+    /* Unlock Bar */
+    .unlock-bar {
+      margin: 26px 0 12px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: var(--bg-elev);
+      border: 1px solid rgba(223, 163, 38, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .unlock-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .unlock-input {
+      min-height: 44px;
+      padding: 9px 13px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(7, 19, 27, 0.85);
+      color: #FFFFFF;
+      font-size: 14px;
+      min-width: 240px;
+    }
+    .unlock-status {
+      font-size: 13px;
+      color: var(--teal);
+      margin-top: 6px;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(3, 10, 15, 0.84);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-backdrop[hidden] { display: none; }
+    .modal-box {
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--bg-card);
+      border: 1.5px solid var(--gold);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+    }
+    .modal-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .modal-kicker {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .modal-close {
+      min-width: 40px;
+      min-height: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: #FFFFFF;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .modal-body { font-size: 14.5px; color: var(--muted); line-height: 1.55; }
+    .modal-list { padding-left: 18px; margin: 12px 0 18px; color: #E2E8F0; }
+    .modal-list li { margin: 6px 0; }
+    .modal-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+
+    .club-footer {
+      margin-top: 34px;
+      padding: 22px 0 34px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .posters-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 680px) {
+      .hero-img-desktop { display: none; }
+      .hero-img-mobile { display: block; }
+      .posters-grid { grid-template-columns: repeat(2, 1fr); gap: 11px; }
+      .unlock-input { width: 100%; min-width: 0; }
+      .hero-cta-btns, .hero-cta-btns > * { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="club-nav">
+    <div class="container club-nav-inner">
+      <a href="/area-membros" class="brand">
+        <span class="brand-dot" aria-hidden="true">E</span>
+        <span>ELECTROMAPAS CLUB</span>
+      </a>
+      <div class="nav-actions">
+        <a href="/entregaveis/ElectroMapas_PACOTE_COMPLETO.pdf" class="btn-ghost" download>Atlas PDF (397 p.)</a>
+        <a href="#pro-expansoes" class="btn-ghost">Expansões PRO 🔒</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-showcase" aria-label="Vitrine Principal ElectroMapas">
+      <div class="hero-banner-frame">
+        <img src="/area-membros/img/banner-desktop.webp" width="1920" height="800" class="hero-img-desktop" alt="Biblioteca Clínica ElectroMapas — Área de Membros" decoding="sync" />
+        <img src="/area-membros/img/banner-mobile.webp" width="720" height="960" class="hero-img-mobile" alt="Biblioteca Clínica ElectroMapas — Área de Membros" decoding="sync" />
+      </div>
+
+      <div class="hero-cta-bar">
+        <div class="hero-cta-copy">
+          <strong>Acesso Rápido à Beira da Marquesa</strong>
+          <span>Os 5 módulos anatómicos do Atlas já estão abertos abaixo. Toca em qualquer cartão para abrir ou transferir.</span>
+        </div>
+        <div class="hero-cta-btns">
+          <a href="/entregaveis/ElectroMapas_PACOTE_COMPLETO.pdf" class="btn-gold" download>DESCARREGAR ATLAS COMPLETO (PDF)</a>
+          <a href="#pro-expansoes" class="btn-teal">VER EXPANSÕES PRO</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shelf" aria-labelledby="shelf-included">
+      <div class="shelf-head">
+        <h2 class="shelf-title" id="shelf-included">
+          <span>Os Teus Módulos do Atlas</span>
+          <span class="badge-free">INCLUÍDO NO ACESSO</span>
+        </h2>
+        <span class="shelf-sub">Toca num módulo para ver páginas de referência e abrir os ficheiros.</span>
+      </div>
+
+      <div class="posters-grid">
+        <button type="button" class="poster-card is-unlocked" data-mod="m01">
+          <img src="/area-membros/img/m01.webp" width="720" height="1040" alt="Módulo 01: Comece Aqui e Segurança" loading="lazy" />
+          <span class="poster-pill">ABERTO</span>
+        </button>
+        <button type="button" class="poster-card is-unlocked" data-mod="m02">
+          <img src="/area-membros/img/m02.webp" width="720" height="1040" alt="Módulo 02: Coluna Cervical, Lombar e Ciática" loading="lazy" />
+          <span class="poster-pill">ABERTO</span>
+        </button>
+        <button type="button" class="poster-card is-unlocked" data-mod="m03">
+          <img src="/area-membros/img/m03.webp" width="720" height="1040" alt="Módulo 03: Ombro, Cotovelo e Punho" loading="lazy" />
+          <span class="poster-pill">ABERTO</span>
+        </button>
+        <button type="button" class="poster-card is-unlocked" data-mod="m04">
+          <img src="/area-membros/img/m04.webp" width="720" height="1040" alt="Módulo 04: Anca, Joelho e Tornozelo" loading="lazy" />
+          <span class="poster-pill">ABERTO</span>
+        </button>
+        <button type="button" class="poster-card is-unlocked" data-mod="m05">
+          <img src="/area-membros/img/m05.webp" width="720" height="1040" alt="Módulo 05: Neurologia, Pélvica e Inverno" loading="lazy" />
+          <span class="poster-pill">ABERTO</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="shelf" id="pro-expansoes" aria-labelledby="shelf-pro">
+      <div class="shelf-head">
+        <h2 class="shelf-title" id="shelf-pro">
+          <span>Expansões Clínicas Avançadas (Pacote PRO)</span>
+          <span class="badge-pro" id="pro-badge-label">🔒 DESBLOQUEIO EM 1 CLIQUE</span>
+        </h2>
+        <span class="shelf-sub">Os 4 novos manuais ilustrados (84 p.) + App ElectroMapas PRO + 3 Kits Verticais A4 (52 p.).</span>
+      </div>
+
+      <div class="posters-grid">
+        <button type="button" class="poster-card js-pro-card" data-mod="m06">
+          <img src="/area-membros/img/m06.webp" width="720" height="1040" alt="Expansão #1: Testes Ortopédicos e Fichas A4" loading="lazy" />
+          <span class="poster-pill js-pro-pill">🔒 PRO #1</span>
+        </button>
+        <button type="button" class="poster-card js-pro-card" data-mod="m07">
+          <img src="/area-membros/img/m07.webp" width="720" height="1040" alt="Expansão #2A: Ultrassom 1/3 MHz e Combinada" loading="lazy" />
+          <span class="poster-pill js-pro-pill">🔒 PRO #2A</span>
+        </button>
+        <button type="button" class="poster-card js-pro-card" data-mod="m08">
+          <img src="/area-membros/img/m08.webp" width="720" height="1040" alt="Expansão #2B: Laserterapia e LED WALT" loading="lazy" />
+          <span class="poster-pill js-pro-pill">🔒 PRO #2B</span>
+        </button>
+        <button type="button" class="poster-card js-pro-card" data-mod="m09">
+          <img src="/area-membros/img/m09.webp" width="720" height="1040" alt="Expansão #3: 20 Casos Clínicos e Bandagem Funcional" loading="lazy" />
+          <span class="poster-pill js-pro-pill">🔒 PRO #3</span>
+        </button>
+        <button type="button" class="poster-card js-pro-card" data-mod="m10">
+          <img src="/area-membros/img/m10.webp" width="720" height="1040" alt="Expansão #4/#5: App ElectroMapas PRO e 3 Kits A4" loading="lazy" />
+          <span class="poster-pill js-pro-pill">🔒 PRO #4/#5</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="unlock-bar" aria-label="Ativar acesso PRO já adquirido">
+      <div>
+        <strong style="font-family:'Manrope',sans-serif;color:#fff;font-size:15px">Já compraste o Pacote PRO ou os Manuais Clínicos?</strong>
+        <div class="shelf-sub">Introduz o teu e-mail da compra Hotmart ou código de transação (ex.: HP...) para libertar logo todos os PDFs aqui nesta vitrine.</div>
+        <div class="unlock-status" id="unlock-msg" role="status"></div>
+      </div>
+      <form class="unlock-form" id="unlock-form">
+        <input type="text" class="unlock-input" id="unlock-input" placeholder="teu.email@exemplo.pt ou HP..." aria-label="E-mail de compra ou código Hotmart" required />
+        <button type="submit" class="btn-gold">Validar Acesso PRO</button>
+      </form>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="mod-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-box">
+      <div class="modal-top">
+        <div>
+          <div class="modal-kicker" id="modal-kicker">MÓDULO CLÍNICO</div>
+          <h3 id="modal-title" style="color:#fff;font-size:21px">Detalhes do Módulo</h3>
+        </div>
+        <button type="button" class="modal-close" id="modal-close" aria-label="Fechar janela">×</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <footer class="club-footer">
+    <div class="container">
+      <strong>ElectroMapas © 2026</strong> · Material educativo para fisioterapeutas e estudantes em Portugal · Suporte na Hotmart
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var PRO_UNLOCK_KEY = 'em_club_pro_unlocked';
+      var MODULES = {
+        m01: {
+          kicker: 'MÓDULO 01 · INCLUÍDO NO ATLAS',
+          title: 'Comece Aqui & Segurança Obrigatória',
+          desc: 'Guia rápido de consulta em 10 segundos na marquesa, cálculo de densidade de corrente (mA/cm²), regras de pele e checklist pré-sessão.',
+          bullets: [
+            'Página 2–4: Como usar e índice anatómico completo (70 mapas)',
+            'Páginas 6–10: Tabela-resumo de Hz, largura de pulso (µs) e duração',
+            'Checklist de contraindicações (pacemaker, seio carotídeo, gravidez, perda sensitiva)'
+          ],
+          actions: [
+            { label: 'Descarregar Atlas Completo (PDF)', href: '/entregaveis/ElectroMapas_PACOTE_COMPLETO.pdf', cls: 'btn-gold', dl: true },
+            { label: 'Descarregar Versão Essencial (PDF)', href: '/entregaveis/ElectroMapas_PACOTE_BASICO.pdf', cls: 'btn-teal', dl: true }
+          ]
+        },
+        m02: {
+          kicker: 'MÓDULO 02 · INCLUÍDO NO ATLAS',
+          title: 'Coluna Cervical, Lombar & Ciática',
+          desc: 'Mapas visuais baseados em ensaios publicados para lombalgia crónica, dor ciática, cervicalgia e cefaleia tensional.',
+          bullets: [
+            'Lombar (L01–L09): TENS convencional, Interferencial tetrapolar, NMES multífidos e transverso, ciática',
+            'Cervical (S01–S05): TENS, IFC tetrapolar C4–C7, pontos-gatilho do trapézio superior e cefaleia'
+          ],
+          actions: [
+            { label: 'Abrir Atlas Completo (PDF · Mapas L01–L09 e S01–S05)', href: '/entregaveis/ElectroMapas_PACOTE_COMPLETO.pdf', cls: 'btn-gold', dl: true }
+          ]
+        },
+        m03: {
+          kicker: 'MÓDULO 03 · INCLUÍDO NO ATLAS',
+          title: 'Ombro, Cotovelo, Punho & ATM',
+          desc: 'Posicionamento anatómico exato para membro superior e dor orofacial com referências PubMed.',
+          bullets: [
+            'Ombro (S07–S09, P11, N04): subluxação pós-AVC, rotura da coifa e pós-reparação artroscópica',
+            'Cotovelo, Punho e ATM (S06, S10, S11, N03): masséter/temporal, epicondilite lateral e túnel cárpico'
+          ],
+          actions: [
+            { label: 'Abrir Atlas Completo (PDF · Mapas S06–S11)', href: '/entregaveis/ElectroMapas_PACOTE_COMPLETO.pdf', cls: 'btn-gold', dl: true }
+          ]
+        },
+        m04: {
+          kicker: 'MÓDULO 04 · INCLUÍDO NO ATLAS',
+          title: 'Anca, Joelho, Tornozelo & Pé',
+          desc: 'Do joelho pós-LCA e artroplastia total à marcha em pé pendente pós-AVC e fasceíte plantar.',
+          bullets: [
+            'Joelho (I01–I03, P09–P10): osteoartrose medial/IFC, pós-ATJ e reconstrução LCA com NMES',
+            'Anca, Tornozelo e Pé (I05–I11): glúteo médio, FES peroneal, entorse e fasceíte plantar IFC'
+          ],
+          actions: [
+            { label: 'Abrir Atlas Completo (PDF · Mapas I01–I11)', href: '/entregaveis/ElectroMapas_PACOTE_COMPLETO.pdf', cls: 'btn-gold', dl: true }
+          ]
+        },
+        m05: {
+          kicker: 'MÓDULO 05 · INCLUÍDO NO ATLAS',
+          title: 'Neurologia, Pélvica & Guia de Inverno',
+          desc: 'Aplicações especializadas, TTNS (bexiga hiperativa), capítulo de inverno e 19 formulários clínicos.',
+          bullets: [
+            'Neuro & Pélvica (N01–N07, P01–P08): disfagia pós-AVC, paralisia facial, trabalho de parto e TTNS',
+            'Capítulo Inverno + 19 Formulários (SG18–SG37): escalas NPRS, ODI, NDI, DASH, KOOS, consentimento e alta'
+          ],
+          actions: [
+            { label: 'Abrir Atlas Completo (PDF · Formulários & Inverno)', href: '/entregaveis/ElectroMapas_PACOTE_COMPLETO.pdf', cls: 'btn-gold', dl: true }
+          ]
+        },
+        m06: {
+          kicker: 'EXPANSÃO PRO #1 · 24 PÁGINAS ILUSTRADAS',
+          title: 'Testes Ortopédicos Especiais & 4 Fichas de Avaliação',
+          desc: '14 pranchas regionais da cervical ao tornozelo com vetores de força, sensibilidade/especificidade da PubMed (Wainner, Neer, Phalen, SLR, Laslett, Lachman, Ottawa), Goniometria e 4 fichas imprimíveis (F01–F04).',
+          bullets: [
+            'Responde em segundos: que teste confirmar e que mapa do Atlas abrir logo a seguir',
+            'Inclui quadros de Dermátomos/Miótomos C5–S4, Escala MRC e Bandeiras Vermelhas'
+          ],
+          pdfHref: '/entregaveis/Kit_Clinico_Pro_Testes_Ortopedicos_e_Fichas_Avaliacao.pdf',
+          pdfLabel: 'Descarregar Testes Ortopédicos & Fichas (PDF · 24 p.)'
+        },
+        m07: {
+          kicker: 'EXPANSÃO PRO #2A · 18 PÁGINAS ILUSTRADAS',
+          title: 'Guia de Ultrassom (1/3 MHz) & Terapia Combinada',
+          desc: '12 mapas anatómicos com zona de varrimento ERA, elétrodo dispersivo (+) em Terapia Combinada (US + TENS/IFC), taxas térmicas de Draper (PMID 8535471) e técnica subaquática.',
+          bullets: [
+            'Calcula exatamente quantos minutos aquecem em 1 MHz vs 3 MHz (+1 a +4 °C)',
+            'Protocolos do ombro à fasceíte plantar com folha de registo clínico'
+          ],
+          pdfHref: '/entregaveis/Guia_Ultrassom_e_Terapia_Combinada_Fisioterapia.pdf',
+          pdfLabel: 'Descarregar Ultrassom & Terapia Combinada (PDF · 18 p.)'
+        },
+        m08: {
+          kicker: 'EXPANSÃO PRO #2B · 18 PÁGINAS ILUSTRADAS',
+          title: 'Manual Clínico de Laserterapia & LED (WALT)',
+          desc: '12 grades anatómicas ponto-a-ponto (660 nm vs 785–904 nm), doses WALT validadas na PubMed (Chow, Stausholm, Naterstad), biossegurança ocular e tabela instantânea de segundos t = E / P.',
+          bullets: [
+            'De 30 mW a 200 mW: consulta na tabela exatamente quantos segundos aplicar por ponto',
+            'Regra de ajuste -30% em fase inflamatória hiperaguda e fototipo escuro'
+          ],
+          pdfHref: '/entregaveis/Manual_Laserterapia_LED_Fotobiomodulacao_Fisioterapia.pdf',
+          pdfLabel: 'Descarregar Laserterapia WALT (PDF · 18 p.)'
+        },
+        m09: {
+          kicker: 'EXPANSÃO PRO #3 · 24 PÁGINAS ILUSTRADAS',
+          title: '20 Casos Clínicos Reais + Atlas de Bandagem Funcional',
+          desc: 'Do exame à alta em 4 passos: Teste Ortopédico (#1) → Atlas/US/Laser (#2) → Corte vetorial I / Y / Leque de Kinesio Taping com tensões reais → Carga ativa.',
+          bullets: [
+            '20 raciocínios de gabinete (Radiculopatia, Coifa, Epicondilite, Túnel Cárpico, LCA, Gonartrose, Pé Pendente)',
+            'Evidência crítica de Kinesio Taping sem mitos (Mostafavifar, Kalron, Lim & Tay)'
+          ],
+          pdfHref: '/entregaveis/Casos_Clinicos_Eletroterapia_20_Raciocinios.pdf',
+          pdfLabel: 'Descarregar 20 Casos + Bandagem Funcional (PDF · 24 p.)'
+        },
+        m10: {
+          kicker: 'EXPANSÃO PRO #4/#5 · APP + 3 KITS VERTICAIS (52 p.)',
+          title: 'App ElectroMapas PRO + Kit Bolso, Clínica e Utentes',
+          desc: 'Web App/PWA instalável no telemóvel (calculadora mA/cm², 16 protocolos, 8 regiões e gerador SOAP) mais os 3 kits em A4 vertical (10 folhetos PX01–PX10 + 19 formulários + tabela dos 70 mapas).',
+          bullets: [
+            'Exclusivo PRO: calculadora interativa de mA/cm² e carga por fase para trabalhar offline',
+            'Os 3 kits verticais A4 ficam também libertados na tua conta Hotmart'
+          ],
+          pdfHref: '/electromapas-pro-app',
+          pdfLabel: 'Abrir App ElectroMapas PRO (PWA)'
+        }
+      };
+
+      function isUnlocked() {
+        try { return localStorage.getItem(PRO_UNLOCK_KEY) === '1'; } catch (e) { return false; }
+      }
+
+      function setUnlocked(val) {
+        try { localStorage.setItem(PRO_UNLOCK_KEY, val ? '1' : '0'); } catch (e) {}
+        syncCards();
+      }
+
+      function syncCards() {
+        var open = isUnlocked();
+        var badge = document.getElementById('pro-badge-label');
+        if (badge) badge.textContent = open ? '✅ ACESSO LIBERADO' : '🔒 DESBLOQUEIO EM 1 CLIQUE';
+        document.querySelectorAll('.js-pro-card').forEach(function (card, idx) {
+          card.classList.toggle('is-unlocked', open);
+          var pill = card.querySelector('.js-pro-pill');
+          if (pill) {
+            pill.textContent = open ? 'ABERTO' : ('🔒 PRO #' + (idx === 0 ? '1' : idx === 1 ? '2A' : idx === 2 ? '2B' : idx === 3 ? '3' : '4/#5'));
+          }
+        });
+      }
+
+      function appendUtm(url) {
+        try {
+          var src = new URLSearchParams(window.location.search);
+          var dst = new URL(url);
+          ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].forEach(function (k) {
+            if (src.get(k) && !dst.searchParams.has(k)) dst.searchParams.set(k, src.get(k));
+          });
+          if (!dst.searchParams.has('checkoutMode')) dst.searchParams.set('checkoutMode', '10');
+          if (!dst.searchParams.has('locale')) dst.searchParams.set('locale', 'pt_PT');
+          if (!dst.searchParams.has('src')) dst.searchParams.set('src', 'area_membros_netflix');
+          return dst.toString();
+        } catch (e) {
+          return url;
+        }
+      }
+
+      function trackIcOnce(plan, value) {
+        try {
+          if (sessionStorage.getItem('em_ic_club_' + plan) === '1') return;
+          sessionStorage.setItem('em_ic_club_' + plan, '1');
+        } catch (e) {}
+        if (typeof window.__bootFb === 'function') window.__bootFb();
+        if (typeof window.fbq === 'function') {
+          window.fbq('track', 'InitiateCheckout', { value: value, currency: 'EUR', content_name: 'Club Netflix - ' + plan });
+        }
+      }
+
+      var modal = document.getElementById('mod-modal');
+      var mKicker = document.getElementById('modal-kicker');
+      var mTitle = document.getElementById('modal-title');
+      var mBody = document.getElementById('modal-body');
+      var mActions = document.getElementById('modal-actions');
+      var mClose = document.getElementById('modal-close');
+
+      function openModule(id) {
+        var mod = MODULES[id];
+        if (!mod || !modal) return;
+        mKicker.textContent = mod.kicker;
+        mTitle.textContent = mod.title;
+        mBody.innerHTML = '<p>' + mod.desc + '</p><ul class="modal-list">' +
+          mod.bullets.map(function (b) { return '<li>' + b + '</li>'; }).join('') + '</ul>';
+        mActions.innerHTML = '';
+
+        var unlocked = isUnlocked() || !mod.pdfHref;
+        if (unlocked && mod.actions) {
+          mod.actions.forEach(function (a) {
+            var el = document.createElement('a');
+            el.href = a.href;
+            el.className = a.cls;
+            el.textContent = a.label;
+            if (a.dl) el.setAttribute('download', '');
+            mActions.appendChild(el);
+          });
+        } else if (unlocked && mod.pdfHref) {
+          var el = document.createElement('a');
+          el.href = mod.pdfHref;
+          el.className = 'btn-gold';
+          el.textContent = mod.pdfLabel;
+          if (mod.pdfHref.indexOf('.pdf') !== -1) el.setAttribute('download', '');
+          mActions.appendChild(el);
+        } else {
+          var buyPro = document.createElement('a');
+          buyPro.href = appendUtm('https://pay.hotmart.com/B108418889J?off=urgqavvm');
+          buyPro.className = 'btn-gold';
+          buyPro.textContent = 'DESBLOQUEAR PACOTE PRO COMPLETO (4 MANUAIS + APP PRO + 3 KITS) · 17,87 €';
+          buyPro.addEventListener('click', function () { trackIcOnce('pro', 17.87); });
+          mActions.appendChild(buyPro);
+
+          var buyPdf = document.createElement('a');
+          buyPdf.href = appendUtm('https://pay.hotmart.com/G108419033I?off=1enxjshv');
+          buyPdf.className = 'btn-teal';
+          buyPdf.textContent = 'Ou levar só os 7 PDFs (4 Manuais + 3 Kits, sem App PRO) · 8,87 €';
+          buyPdf.addEventListener('click', function () { trackIcOnce('kits', 8.87); });
+          mActions.appendChild(buyPdf);
+        }
+
+        modal.hidden = false;
+        mClose.focus();
+      }
+
+      document.querySelectorAll('.poster-card').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          openModule(this.getAttribute('data-mod'));
+        });
+      });
+
+      if (mClose) mClose.addEventListener('click', function () { modal.hidden = true; });
+      if (modal) modal.addEventListener('click', function (e) { if (e.target === modal) modal.hidden = true; });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal && !modal.hidden) modal.hidden = true; });
+
+      var unlockForm = document.getElementById('unlock-form');
+      var unlockInput = document.getElementById('unlock-input');
+      var unlockMsg = document.getElementById('unlock-msg');
+      if (unlockForm) {
+        unlockForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var val = (unlockInput.value || '').trim();
+          if (!val) return;
+          unlockMsg.textContent = 'A validar acesso na Hotmart...';
+          fetch('/api/verify-license', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: val })
+          })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (d && d.valid) {
+              setUnlocked(true);
+              unlockMsg.textContent = 'Acesso PRO liberado com sucesso nesta vitrine! Toca em qualquer módulo PRO #1–#5 acima.';
+            } else {
+              unlockMsg.textContent = (d && d.message) || 'Não foi possível validar esse código ou e-mail.';
+            }
+          })
+          .catch(function () {
+            unlockMsg.textContent = 'Erro de ligação ao validar licença. Tenta novamente.';
+          });
+        });
+      }
+
+      syncCards();
+    })();
+  </script>
+</body>
+</html>
