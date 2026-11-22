@@ -5,6 +5,7 @@
 const crypto = require('crypto');
 
 const ALLOWED_PAGES = new Set([
+  'atlas',
   'upgrade-completo',
   'upsell-pro',
   'downsell-kits',
