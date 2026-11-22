@@ -565,12 +565,192 @@
     });
   }
 
+  function initFunnelTelemetry(attr) {
+    var path = (window.location.pathname || '').toLowerCase();
+    var page = 'other';
+    if (path.indexOf('upgrade-completo') !== -1) page = 'upgrade-completo';
+    else if (path.indexOf('upsell-pro') !== -1) page = 'upsell-pro';
+    else if (path.indexOf('downsell-kits') !== -1) page = 'downsell-kits';
+    else if (path.indexOf('entrega-pro') !== -1) page = 'entrega-pro';
+    else if (path.indexOf('obrigado-basico') !== -1) page = 'obrigado-basico';
+    else if (path.indexOf('obrigado-completo') !== -1) page = 'obrigado-completo';
+    else if (path.indexOf('obrigado-kits') !== -1) page = 'obrigado-kits';
+    else if (path.indexOf('pagamento-pendente') !== -1) page = 'pagamento-pendente';
+
+    // Boot Meta Pixel immediately on post-purchase pages so even 1-2s bounces are captured
+    if (typeof window.__bootFb === 'function') {
+      window.__bootFb();
+    }
+
+    var sid = '';
+    try {
+      sid = sessionStorage.getItem('em_funnel_sid') || '';
+      if (!sid) {
+        sid = 's' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+        sessionStorage.setItem('em_funnel_sid', sid);
+      }
+    } catch (e) {
+      sid = 's' + Date.now().toString(36);
+    }
+
+    var tStart = Date.now();
+    var maxScroll = 0;
+    var lastAction = 'none';
+    var leaveSent = false;
+    var refHost = '';
+    try {
+      if (document.referrer) refHost = new URL(document.referrer).hostname.slice(0, 48);
+    } catch (e) {}
+    var hasHotmartRef = refHost.indexOf('hotmart') !== -1 || /[?&](transaction|hp|off)=/i.test(window.location.search || '');
+    var device = window.innerWidth <= 768 ? 'mobile' : 'desktop';
+    var sck = (attr && attr.defaultSck) ? String(attr.defaultSck).slice(0, 40) : '';
+
+    function elapsedSec() {
+      return Math.max(0, Math.round((Date.now() - tStart) / 1000));
+    }
+
+    function sendTrack(evName, detail, useBeacon) {
+      var payload = {
+        sid: sid,
+        page: page,
+        event: evName,
+        detail: detail || '',
+        sec: elapsedSec(),
+        max_scroll: maxScroll,
+        device: device,
+        vw: window.innerWidth || 0,
+        sck: sck,
+        ref_host: refHost,
+        has_hotmart_ref: hasHotmartRef
+      };
+
+      // 1. Send to Meta Pixel as clean custom event (persistent in Meta Events Manager)
+      if (typeof window.fbq === 'function' && evName !== 'page_leave') {
+        var metaEv = 'Funil_' + page.replace(/-/g, '_') + '_' + evName;
+        try {
+          window.fbq('trackCustom', metaEv, {
+            page: page,
+            detail: detail || '',
+            sec: payload.sec,
+            max_scroll: maxScroll,
+            device: device,
+            sck: sck
+          });
+        } catch (e) {}
+      }
+
+      // 2. Send to our Vercel endpoint (/api/funnel-track)
+      var bodyStr = JSON.stringify(payload);
+      try {
+        if (useBeacon && navigator.sendBeacon) {
+          var blob = new Blob([bodyStr], { type: 'application/json' });
+          navigator.sendBeacon('/api/funnel-track', blob);
+          return;
+        }
+        if (typeof fetch === 'function') {
+          fetch('/api/funnel-track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: bodyStr,
+            keepalive: true
+          }).catch(function () {});
+        }
+      } catch (e) {}
+    }
+
+    // Immediate arrival beacon
+    sendTrack('page_enter', hasHotmartRef ? 'from_hotmart' : (refHost || 'direct'), false);
+
+    // Scroll depth milestones (25, 50, 75, 90)
+    var firedScroll = {};
+    function checkScroll() {
+      var docH = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+      var pct = Math.min(100, Math.round((window.scrollY / docH) * 100));
+      if (pct > maxScroll) maxScroll = pct;
+      [25, 50, 75, 90].forEach(function (mark) {
+        if (pct >= mark && !firedScroll[mark]) {
+          firedScroll[mark] = true;
+          sendTrack('scroll_' + mark, mark + '%', false);
+        }
+      });
+    }
+    window.addEventListener('scroll', checkScroll, { passive: true });
+
+    // Buy button clicks
+    document.querySelectorAll('.js-checkout-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var zone = this.classList.contains('sticky-mobile-btn')
+          ? 'sticky'
+          : (this.closest('#oferta') ? 'offer_card' : 'hero');
+        var plan = this.getAttribute('data-plan') || page;
+        lastAction = 'buy:' + zone;
+        sendTrack('cta_buy_click', plan + ':' + zone, true);
+      });
+    });
+
+    // Decline / skip links
+    document.querySelectorAll('.btn-decline').forEach(function (link) {
+      link.addEventListener('click', function () {
+        var href = (this.getAttribute('href') || '').slice(0, 48);
+        lastAction = 'decline';
+        sendTrack('cta_decline_click', href, true);
+      });
+    });
+
+    // Interactive demo & quiz & preview zooms
+    var demoSent = false;
+    document.querySelectorAll('.js-demo-btn, #demo-copy-btn').forEach(function (el) {
+      el.addEventListener('click', function () {
+        lastAction = 'demo';
+        if (!demoSent) {
+          demoSent = true;
+          sendTrack('demo_interact', this.getAttribute('data-val') || 'copy', false);
+        }
+      });
+    });
+
+    var quizSent = false;
+    document.querySelectorAll('.js-quiz-opt').forEach(function (el) {
+      el.addEventListener('click', function () {
+        lastAction = 'quiz';
+        if (!quizSent) {
+          quizSent = true;
+          sendTrack('quiz_interact', this.getAttribute('data-opt') || 'opt', false);
+        }
+      });
+    });
+
+    var zoomSent = false;
+    document.querySelectorAll('.preview-zoom-btn, .preview-meta-zoom').forEach(function (el) {
+      el.addEventListener('click', function () {
+        lastAction = 'preview';
+        if (!zoomSent) {
+          zoomSent = true;
+          sendTrack('preview_zoom', 'lightbox', false);
+        }
+      });
+    });
+
+    // Exit / bounce beacon (shows exact time on page, max scroll, and whether they bounced with no click)
+    function fireLeave() {
+      if (leaveSent) return;
+      leaveSent = true;
+      checkScroll();
+      sendTrack('page_leave', lastAction, true);
+    }
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') fireLeave();
+    });
+    window.addEventListener('pagehide', fireLeave);
+  }
+
   function init() {
     markProOfferSeenOnce();
     var attr = collectAttribution();
     decorateHotmartLinks(attr);
     decorateInternalLinks(attr);
     bindCheckoutTracking();
+    initFunnelTelemetry(attr);
     bindSmoothAnchors();
     bindLightbox();
     bindStickyBar();
