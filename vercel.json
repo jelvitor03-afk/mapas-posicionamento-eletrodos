@@ -7,11 +7,11 @@
     },
     {
       "source": "/entrega-pro",
-      "destination": "/entrega-completo.html"
+      "destination": "/funil-v8/entrega-pro.html"
     },
     {
       "source": "/entrega-pro.html",
-      "destination": "/entrega-completo.html"
+      "destination": "/funil-v8/entrega-pro.html"
     },
     {
       "source": "/upsell",
@@ -19,7 +19,7 @@
     },
     {
       "source": "/upsell-pro",
-      "destination": "/upsell-pro.html"
+      "destination": "/funil-v8/upsell-pro.html"
     },
     {
       "source": "/downsell",
@@ -27,7 +27,7 @@
     },
     {
       "source": "/downsell-kits",
-      "destination": "/downsell-kits.html"
+      "destination": "/funil-v8/downsell-kits.html"
     },
     {
       "source": "/upsell-casos",

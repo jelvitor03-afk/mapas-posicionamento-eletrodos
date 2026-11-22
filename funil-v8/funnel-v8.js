@@ -367,6 +367,32 @@
     syncSticky();
   }
 
+  function bindClinicChallenge() {
+    var btns = document.querySelectorAll('.js-quiz-opt');
+    var box = document.getElementById('quiz-feedback');
+    if (!btns.length || !box) return;
+
+    var FEEDBACK = {
+      A: '<strong>Atenção: risco clínico e retrabalho.</strong> Ligar TENS sem executar primeiro Neer/Hawkins (Prancha T03) nem despistar bandeiras vermelhas falha na diferenciação entre conflito subacromial e rotura maciça/luxação. O sequenciamento completo do Pacote PRO garante triagem segura em menos de 1 minuto.',
+      B: '<strong>Sequência clínica exata de gabinete!</strong> 1) Confirmas o cluster subacromial na <strong>Prancha T03</strong> (Neer/Hawkins, <em>PMID 22289231</em>); 2) Preparas o tendão com <strong>Ultrassom 3 MHz (US01)</strong> ou <strong>Laser WALT 4–8 J/pt (PB03)</strong>; 3) Aplicas o <strong>Mapa S09 do teu Atlas</strong>; 4) Fechas com <strong>Bandagem em Y do deltoide a 15–25% (Caso CC03)</strong> + exercício de coifa.',
+      C: '<strong>Erro comum de dosimetria térmica.</strong> Aplicar Ultrassom 1 MHz parado sobre o acrómio causa dor periosteal imediata por reflexão óssea. No <strong>Guia US01</strong> aprendes a usar 3 MHz contínuo ou pulsado com varrimento a ~4 cm/s em 2–3× ERA e rotação interna do ombro para expor o supraespinhoso.'
+    };
+
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var opt = this.getAttribute('data-opt') || 'B';
+        btns.forEach(function (b) {
+          b.classList.remove('is-selected', 'is-correct', 'is-wrong');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        this.classList.add('is-selected', opt === 'B' ? 'is-correct' : 'is-wrong');
+        this.setAttribute('aria-pressed', 'true');
+        box.innerHTML = FEEDBACK[opt] || FEEDBACK.B;
+        box.hidden = false;
+      });
+    });
+  }
+
   function init() {
     if (maybeRedirectUpgradeToObrigado()) return;
     var attr = collectAttribution();
@@ -376,6 +402,7 @@
     bindSmoothAnchors();
     bindLightbox();
     bindStickyBar();
+    bindClinicChallenge();
   }
 
   if (document.readyState === 'loading') {
