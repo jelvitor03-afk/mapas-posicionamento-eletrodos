@@ -911,7 +911,15 @@ btn.addEventListener('click', function () {
 if (window.__bootFb) window.__bootFb();
 var val = parseFloat(this.getAttribute('data-value')) || 11.87;
 var plan = this.getAttribute('data-plan') || 'completo';
-if (typeof window.fbq === 'function') {
+var alreadyFired = !!window.__emIcFired;
+try {
+if (sessionStorage.getItem('em_ic_fired')) alreadyFired = true;
+} catch (e) {}
+if (!alreadyFired && typeof window.fbq === 'function') {
+window.__emIcFired = true;
+try {
+sessionStorage.setItem('em_ic_fired', '1');
+} catch (e) {}
 window.fbq('track', 'InitiateCheckout', {
 value: val,
 currency: 'EUR',
