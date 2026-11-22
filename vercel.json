@@ -165,6 +165,31 @@
       "source": "/",
       "destination": "/atlas/",
       "permanent": false
+    },
+    {
+      "source": "/upsell-pro",
+      "destination": "/funil-v8/upsell-pro",
+      "permanent": false
+    },
+    {
+      "source": "/upsell-pro.html",
+      "destination": "/funil-v8/upsell-pro",
+      "permanent": false
+    },
+    {
+      "source": "/downsell-kits",
+      "destination": "/funil-v8/downsell-kits",
+      "permanent": false
+    },
+    {
+      "source": "/downsell-kits.html",
+      "destination": "/funil-v8/downsell-kits",
+      "permanent": false
+    },
+    {
+      "source": "/entrega-pro",
+      "destination": "/funil-v8/entrega-pro",
+      "permanent": false
     }
   ]
 }
