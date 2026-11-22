@@ -180,7 +180,17 @@
         }
         var val = parseFloat(this.getAttribute('data-value')) || 0;
         var plan = this.getAttribute('data-plan') || 'oferta';
-        if (typeof window.fbq === 'function') {
+        var dedupKey = plan === 'pacote-pro'
+          ? 'em_ic_upsell_fired'
+          : (plan === 'downsell-kits' ? 'em_ic_downsell_fired' : 'em_ic_v8_' + plan);
+        var alreadyFired = false;
+        try {
+          alreadyFired = sessionStorage.getItem(dedupKey) === '1';
+          if (!alreadyFired) {
+            sessionStorage.setItem(dedupKey, '1');
+          }
+        } catch (e) {}
+        if (!alreadyFired && typeof window.fbq === 'function') {
           window.fbq('track', 'InitiateCheckout', {
             value: val,
             currency: 'EUR',
