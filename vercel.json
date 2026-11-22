@@ -191,11 +191,6 @@
       "permanent": false
     },
     {
-      "source": "/area-membros/",
-      "destination": "https://hotmart.com/pt-br/club/jel-vitor-sao-pedro-mendes-1",
-      "permanent": false
-    },
-    {
       "source": "/area-membros/index.html",
       "destination": "https://hotmart.com/pt-br/club/jel-vitor-sao-pedro-mendes-1",
       "permanent": false
