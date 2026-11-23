@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="../atlas/fonts/manrope-800-latin.woff2" crossorigin />
   <link rel="stylesheet" href="./funnel-v8.css" />
+  <style>.mbway-inline-note{display:none;margin:8px 0 0;font-size:12px;line-height:1.4;color:#CBD5E1;text-align:center}.mbway-inline-note.is-show{display:block}</style>
   <script>
     !function(f){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);
     fbq('init','1627467939032653');
@@ -89,7 +90,7 @@
           <span class="confirm-icon" aria-hidden="true">
             <svg width="14" height="14"><use href="#ic-ok"/></svg>
           </span>
-          <div>
+          <div id="confirm-banner-text">
             <strong>Compra aprovada. O teu Atlas Essencial está disponível na Hotmart.</strong> O acesso já seguiu para o teu e-mail — se quiseres, podes completar agora para o Atlas de 397 páginas pagando apenas a diferença.
           </div>
         </div>
@@ -107,6 +108,7 @@
             <span>SIM, COMPLETAR PARA 397 PÁGINAS · 4,87 €</span>
             <svg width="18" height="18" aria-hidden="true"><use href="#ic-arr"/></svg>
           </a>
+          <p class="mbway-inline-note" id="mbway-inline-note" role="note">MB WAY/Multibanco: aprova o pagamento inicial no teu banco — o acesso segue por e-mail.</p>
           <div class="pay-strip" aria-label="Métodos de pagamento disponíveis">
             <span class="pay-badge">MB WAY</span>
             <span class="pay-badge">Multibanco</span>
@@ -287,6 +289,21 @@
     <a href="https://pay.hotmart.com/K108418562E?off=5k28agkz" class="sticky-mobile-btn js-checkout-btn" data-plan="upgrade-completo" data-value="4.87">COMPLETAR · 4,87 €</a>
   </div>
 
+  <script>
+    (function(){
+      try{
+        var qs=new URLSearchParams(window.location.search);
+        if(qs.get('mbway')==='1'||qs.get('status')==='pendente'){
+          var bt=document.getElementById('confirm-banner-text');
+          var note=document.getElementById('mbway-inline-note');
+          if(bt){
+            bt.innerHTML='<strong>Encomenda recebida ✓</strong> O teu Atlas Essencial está registado na Hotmart. Podes completar para o Atlas de 397 páginas pagando apenas a diferença.';
+          }
+          if(note)note.classList.add('is-show');
+        }
+      }catch(e){}
+    })();
+  </script>
   <script src="./funnel-v8.js" defer></script>
 </body>
 </html>
