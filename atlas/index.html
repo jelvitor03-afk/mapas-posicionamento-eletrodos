@@ -327,7 +327,7 @@
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init','1627467939032653');
     fbq('track','PageView');
-    fbq('track','ViewContent',{content_name:'ElectroMapas Atlas Edicao Inverno 397p',content_category:'Fisioterapia',value:11.87,currency:'EUR'});
+    fbq('track','ViewContent',{content_name:'ElectroMapas Atlas Edicao Inverno 397p',content_category:'Fisioterapia',content_ids:['8930829'],content_type:'product',num_items:1,value:11.87,currency:'EUR'});
     (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","zhnyhnfrgq");
   </script>
   <noscript>
@@ -1088,12 +1088,9 @@
         this.innerHTML='<span>A abrir pagamento seguro Hotmart…</span>';
         var val=parseFloat(this.getAttribute('data-value'))||11.87;
         var plan=this.getAttribute('data-plan')||'completo';
-        var alreadyFired=!!window.__emIcFired;
-        try{if(sessionStorage.getItem('em_ic_fired'))alreadyFired=true;}catch(e){}
-        if(!alreadyFired&&typeof window.fbq==='function'){
-          window.__emIcFired=true;
-          try{sessionStorage.setItem('em_ic_fired','1');}catch(e){}
-          window.fbq('track','InitiateCheckout',{value:val,currency:'EUR',content_name:'ElectroMapas Atlas - '+plan});
+        var cid=plan==='essencial'?'9030792':'8930829';
+        if(typeof window.fbq==='function'){
+          window.fbq('track','InitiateCheckout',{value:val,currency:'EUR',content_name:'ElectroMapas Atlas - '+plan,content_category:'Fisioterapia',content_ids:[cid],content_type:'product',num_items:1});
         }
       });
     });
@@ -1183,7 +1180,11 @@
       var refHost='';try{if(document.referrer)refHost=new URL(document.referrer).hostname.slice(0,48);}catch(e){}
       function sec(){return Math.max(0,Math.round((Date.now()-t0)/1000));}
       function send(ev,detail,beacon){
-        var body=JSON.stringify({sid:sid,page:'atlas_v2',event:ev,detail:detail||'',sec:sec(),max_scroll:maxScroll,device:dev,vw:window.innerWidth||0,sck:sck,ref_host:refHost,has_hotmart_ref:false});
+        var s=sec();
+        if(typeof window.fbq==='function'&&ev!=='page_leave'){
+          try{window.fbq('trackCustom','Funil_atlas_'+ev,{page:'atlas',detail:detail||'',sec:s,max_scroll:maxScroll,device:dev,sck:sck});}catch(e){}
+        }
+        var body=JSON.stringify({sid:sid,page:'atlas_v2',event:ev,detail:detail||'',sec:s,max_scroll:maxScroll,device:dev,vw:window.innerWidth||0,sck:sck,ref_host:refHost,has_hotmart_ref:false});
         try{
           if(beacon&&navigator.sendBeacon){navigator.sendBeacon('/api/funnel-track',new Blob([body],{type:'application/json'}));return;}
           if(typeof fetch==='function'){fetch('/api/funnel-track',{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true}).catch(function(){});}
