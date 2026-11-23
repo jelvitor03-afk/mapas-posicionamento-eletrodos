@@ -17,9 +17,18 @@
   <link rel="preload" as="font" type="font/woff2" href="../atlas/fonts/manrope-800-latin.woff2" crossorigin />
   <link rel="stylesheet" href="./funnel-v8.css" />
   <style>
-    .mbway-inline-note{display:none;margin:8px 0 0;font-size:12px;line-height:1.4;color:#CBD5E1;text-align:center}
+    .mbway-inline-note{display:none;margin:6px 0 0;font-size:11.5px;line-height:1.35;color:#CBD5E1;text-align:center}
     .mbway-inline-note.is-show{display:block}
     .pay-badge.is-mbway{border-color:#127347;background:#EAF6EF;color:#127347;font-weight:800}
+    .fold-pack-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:0 0 12px}
+    .fold-pack-item{background:#FFFFFF;border:1px solid #CFC5B4;border-radius:11px;padding:9px 11px;display:flex;flex-direction:column;gap:2px;box-shadow:0 3px 10px rgba(11,27,43,0.04)}
+    .fold-pack-item strong{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;color:#0E1A26;line-height:1.2}
+    .fold-pack-item span{font-size:11.5px;color:#516070;line-height:1.3}
+    .fold-pack-item.is-app{grid-column:1 / -1;background:#0B1B2B;border:1.5px solid #DFA326;flex-direction:row;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px}
+    .fold-pack-app-text{display:flex;flex-direction:column;gap:2px;min-width:0}
+    .fold-pack-item.is-app strong{color:#FFFFFF;font-size:13.5px}
+    .fold-pack-item.is-app span{color:#E2E8F0;font-size:11.5px}
+    .fold-pack-badge{flex-shrink:0;background:#DFA326;color:#07121E;font-family:'Manrope',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;padding:4px 8px;border-radius:99px;white-space:nowrap}
     .hero-app-split{display:grid;grid-template-columns:1fr 0.82fr;gap:20px;align-items:center;margin-top:16px}
     .app-screen-card{background:#0B1B2B;border:1.5px solid rgba(223,163,38,0.55);border-radius:16px;padding:10px;box-shadow:0 16px 34px rgba(11,27,43,0.18)}
     .app-screen-card button{display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in;border-radius:10px;overflow:hidden}
@@ -47,6 +56,28 @@
     .val-mini.is-old strong{color:#0E1A26}
     .val-mini.is-new strong{color:#DFA326}
     @media (max-width:768px){
+      .funnel-header{padding:7px 0}
+      .hero-funnel{padding:10px 0 22px}
+      .step-track{margin-bottom:8px;gap:6px}
+      .step-label{font-size:10.5px;line-height:1.2}
+      .confirm-banner{padding:8px 11px;margin-bottom:9px;font-size:12.5px;line-height:1.32}
+      .hero-funnel h1{font-size:19.5px;line-height:1.15;margin-bottom:9px}
+      .fold-pack-grid{gap:6px;margin-bottom:9px}
+      .fold-pack-item{padding:7px 9px}
+      .fold-pack-item strong{font-size:12px}
+      .fold-pack-item span{font-size:10.8px;line-height:1.24}
+      .fold-pack-item.is-app{padding:8px 10px}
+      .fold-pack-item.is-app strong{font-size:12.5px}
+      .fold-pack-item.is-app span{font-size:10.8px}
+      .hero-offer-box{margin-top:0;padding:11px 12px}
+      .hero-offer-top{margin-bottom:8px;gap:4px 10px}
+      .hero-offer-price{font-size:28px}
+      .hero-offer-meta{font-size:12px}
+      .hero-offer-box .btn-primary{min-height:46px;padding:10px 14px;font-size:14.5px}
+      .hero-offer-box .pay-strip{margin-top:8px;gap:4px}
+      .hero-offer-box .pay-badge{padding:3px 7px;font-size:10.5px}
+      .hero-offer-box .btn-decline{min-height:44px;margin-top:7px;padding:8px 12px;font-size:12.5px}
+      .hero-sub{margin-top:14px;font-size:14.5px}
       .hero-app-split,.value-anchor-row{grid-template-columns:1fr;gap:14px}
       .app-screen-card img{max-height:290px}
       .gift-card{flex:0 0 72vw;max-width:255px}
@@ -102,7 +133,7 @@
           </div>
           <div class="step-item is-active">
             <div class="step-bar"></div>
-            <span class="step-label">2. App PRO (8,97 €)</span>
+            <span class="step-label">2. 4 Manuais + App PRO (8,97 €)</span>
           </div>
           <div class="step-item">
             <div class="step-bar"></div>
@@ -111,17 +142,38 @@
         </div>
 
         <div class="confirm-banner" id="approved-confirm-banner" role="status">
-          <span class="confirm-icon" aria-hidden="true">
-            <svg width="14" height="14"><use href="#ic-ok"/></svg>
-          </span>
           <div id="confirm-banner-text">
-            <strong>Encomenda confirmada ✓</strong> O teu Atlas (397 p. + 6 bónus) está garantido na Hotmart. Vê esta condição para membros (não existe na página principal).
+            ✅ <strong>Compra do Atlas confirmada!</strong> O teu acesso de 397 páginas já foi enviado por e-mail pela Hotmart. Enquanto abre, completa o teu gabinete…
           </div>
         </div>
 
-        <span class="eyebrow">Modo Rápido de Gabinete · Condição Pós-Compra</span>
-        <h1>Garantiste 397 páginas. Queres abrir qualquer mapa em 5 segundos offline?</h1>
-        <p class="hero-sub">Com o utente na marquesa, ninguém quer fazer scroll por 397 páginas. Ativa a <strong>App ElectroMapas PRO no telemóvel</strong> (busca instantânea dos 70 mapas + calculadora segura de mA/cm² + gerador de nota SOAP) e leva <strong>de oferta os 4 Manuais Clínicos PRO + 3 Kits A4 (136 p.)</strong> por apenas <strong>8,97 €</strong>.</p>
+        <h1>Completa o teu gabinete: 4 Manuais Clínicos + App PRO offline</h1>
+
+        <div class="fold-pack-grid" aria-label="Recursos incluídos no Pacote PRO">
+          <div class="fold-pack-item">
+            <strong>1. Testes Ortopédicos</strong>
+            <span>14 pranchas Sn/Sp + 4 fichas A4 (24 p.)</span>
+          </div>
+          <div class="fold-pack-item">
+            <strong>2. Ultrassom 1/3 MHz</strong>
+            <span>12 mapas ERA e combinada (18 p.)</span>
+          </div>
+          <div class="fold-pack-item">
+            <strong>3. Laser WALT &amp; LED</strong>
+            <span>12 grades + tabela t = E/P (18 p.)</span>
+          </div>
+          <div class="fold-pack-item">
+            <strong>4. Bandagem &amp; 20 Casos</strong>
+            <span>Raciocínio clínico + taping (24 p.)</span>
+          </div>
+          <div class="fold-pack-item is-app">
+            <div class="fold-pack-app-text">
+              <strong>+ App ElectroMapas PRO (offline) + 3 Kits A4</strong>
+              <span>70 mapas em 5s, calculadora mA/cm² e gerador SOAP no telemóvel</span>
+            </div>
+            <span class="fold-pack-badge">Vitalício</span>
+          </div>
+        </div>
 
         <div class="hero-offer-box">
           <div class="hero-offer-top">
@@ -129,7 +181,7 @@
             <span class="hero-offer-meta">pagamento único · IVA incluído · sem mensalidades</span>
           </div>
           <a href="https://pay.hotmart.com/B108418889J?off=urgqavvm" class="btn-primary js-checkout-btn" data-plan="pacote-pro" data-value="8.97">
-            <span>SIM, ATIVAR APP PRO + 7 EXTRAS · 8,97 €</span>
+            <span>SIM, COMPLETAR GABINETE · 8,97 €</span>
             <svg width="18" height="18" aria-hidden="true"><use href="#ic-arr"/></svg>
           </a>
           <p class="mbway-inline-note" id="mbway-inline-note" role="note">MB WAY/Multibanco: aprova o pagamento inicial no teu banco — o Atlas segue por e-mail.</p>
@@ -142,6 +194,8 @@
           </div>
           <a href="./downsell-kits.html" class="btn-decline" data-carry style="margin-top:6px">Não preciso da App PRO · avançar para o meu Atlas →</a>
         </div>
+
+        <p class="hero-sub" style="margin-top:16px">Com o utente na marquesa, ninguém quer fazer scroll por 397 páginas. Ativa a <strong>App ElectroMapas PRO no telemóvel</strong> (busca instantânea dos 70 mapas + calculadora segura de mA/cm² + gerador de nota SOAP) e leva <strong>os 4 Manuais Clínicos PRO + 3 Kits A4 (136 p.)</strong> por apenas <strong>8,97 €</strong>.</p>
 
         <div class="hero-app-split">
           <ul class="hero-quick-list" style="margin-top:0">
@@ -391,11 +445,7 @@
       try{
         var qs=new URLSearchParams(window.location.search);
         if(qs.get('mbway')==='1'||qs.get('status')==='pendente'){
-          var bt=document.getElementById('confirm-banner-text');
           var note=document.getElementById('mbway-inline-note');
-          if(bt){
-            bt.innerHTML='<strong>Encomenda recebida ✓</strong> O teu Atlas (397 p. + 6 bónus) está registado na Hotmart. Vê esta condição para membros (não existe na página principal).';
-          }
           if(note)note.classList.add('is-show');
           document.querySelectorAll('a[href*="downsell-kits.html"]').forEach(function(link){
             var u=new URL(link.getAttribute('href'),window.location.href);
