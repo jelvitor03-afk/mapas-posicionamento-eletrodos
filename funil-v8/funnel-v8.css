@@ -1604,3 +1604,106 @@ footer.site-footer p + p {
     padding: 18px 16px;
   }
 }
+
+/* Member Upsell Catalog inside Obrigado / Delivery Pages */
+.member-upsell-card {
+  margin-top: 20px;
+  background: var(--navy-900);
+  color: #F8FAFC;
+  border: 1.5px solid rgba(223, 163, 38, 0.55);
+  border-radius: var(--radius-md);
+  padding: 22px 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.member-upsell-card h2 {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.member-upsell-lead {
+  color: #CBD5E1;
+  font-size: 14.5px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.member-upsell-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.member-upsell-item {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+
+.member-upsell-item.is-featured {
+  border-color: var(--gold);
+  background: rgba(223, 163, 38, 0.1);
+}
+
+.member-upsell-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.member-upsell-top strong {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+.member-upsell-price {
+  font-family: 'Manrope', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.member-upsell-item p {
+  font-size: 14px;
+  color: #E2E8F0;
+  line-height: 1.48;
+  margin: 0 0 12px;
+}
+
+.member-upsell-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.member-upsell-actions .btn-primary {
+  width: auto;
+  min-height: 46px;
+  padding: 11px 18px;
+  font-size: 14.5px;
+}
+
+.member-upsell-link {
+  color: #7FD1C7;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: underline;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 580px) {
+  .member-upsell-actions .btn-primary {
+    width: 100%;
+  }
+}
