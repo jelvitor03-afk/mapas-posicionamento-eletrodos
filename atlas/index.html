@@ -1091,7 +1091,7 @@
         var plan=this.getAttribute('data-plan')||'completo';
         var cid=plan==='essencial'?'9030792':'8930829';
         if(typeof window.fbq==='function'){
-          window.fbq('track','InitiateCheckout',{value:val,currency:'EUR',content_name:'ElectroMapas Atlas - '+plan,content_category:'Fisioterapia',content_ids:[cid],content_type:'product',num_items:1});
+          window.fbq('trackCustom','Clique_Checkout',{value:val,currency:'EUR',content_name:'ElectroMapas Atlas - '+plan,content_category:'Fisioterapia',content_ids:[cid],content_type:'product',num_items:1});
         }
       });
     });

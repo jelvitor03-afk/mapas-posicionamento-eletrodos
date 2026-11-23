@@ -259,7 +259,7 @@
         var plan = this.getAttribute('data-plan') || 'oferta';
         var cid = plan === 'pacote-pro' ? '8931029' : (plan === 'downsell-kits' ? '8931107' : '8930829');
         if (typeof window.fbq === 'function') {
-          window.fbq('track', 'InitiateCheckout', {
+          window.fbq('trackCustom', 'Clique_Checkout', {
             value: val,
             currency: 'EUR',
             content_name: 'ElectroMapas Funil V8 - ' + plan,
