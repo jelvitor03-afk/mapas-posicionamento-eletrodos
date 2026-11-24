@@ -107,3 +107,17 @@ p{margin:0}
 .hr-gift{margin:30px 0 0;background:#FFF7E0;border:1px dashed #F5D27A;border-radius:var(--r);padding:16px;text-align:center}
 .hr-gift h2{font-size:21px}
 .hr-gift p{color:#6B4A00;margin-top:6px;font-size:15px}
+/* escada de upsell (compra X, leva Y grátis) */
+.tiers{display:grid;gap:10px;margin-top:16px}
+.tier{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.18);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .12s,background .12s}
+.tier input{accent-color:#E8B23A;width:20px;height:20px;flex:0 0 auto}
+.tier.active{border-color:var(--gold);background:rgba(232,178,58,.10)}
+.t-main{flex:1;display:flex;flex-direction:column;gap:3px}
+.t-main b{font:800 17px/1.2 Manrope,sans-serif;color:#fff}
+.t-main em{font-style:normal;align-self:flex-start;background:#16A34A;color:#fff;border-radius:999px;padding:2px 8px;font:800 11px/1.5 Manrope,sans-serif}
+.t-main em.gold{background:var(--gold);color:var(--navy)}
+.t-main small{color:#CBD5E1;font-size:13px;line-height:1.35}
+.t-price{display:flex;flex-direction:column;align-items:flex-end;flex:0 0 auto}
+.t-price b{font:800 20px/1 Manrope,sans-serif;color:var(--gold)}
+.t-price s{color:#94A3B8;font-size:13px;margin-top:4px}
+.offer .per{font-weight:600;font-size:12.5px;color:#94A3B8}
