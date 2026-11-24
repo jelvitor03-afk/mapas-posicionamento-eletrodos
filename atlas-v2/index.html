@@ -376,6 +376,10 @@
     .hero-copy .hero-sub{max-width:640px;margin-top:14px}
     @media (min-width:900px){.hero-copy .hero-sample-card{max-width:520px !important}.hero{padding-top:14px !important}}
     @media (min-width:900px) and (max-height:820px){.hero-copy .hero-sample-card{max-width:380px !important}.hero-offer .ho-70,.hero-offer .ho-plus{font-size:24px;padding:9px 16px}.hero-offer{margin:4px 0 10px}}
+      .dor-list{list-style:none;padding:0;margin:16px 0 14px;display:grid;gap:8px}
+    .dor-list li{position:relative;background:#FEF3F2;border:1px solid #FECDCA;border-radius:12px;padding:12px 14px 12px 44px;line-height:1.45;color:#7A271A}
+    .dor-list li b{color:#B42318}
+    .dor-list li:before{content:"✕";position:absolute;left:14px;top:12px;width:20px;height:20px;border-radius:50%;background:#B42318;color:#fff;font-weight:800;font-size:12px;line-height:20px;text-align:center}
   </style>
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -464,6 +468,36 @@
       </div>
     </div>
   </header>
+
+    <section class="sec" id="dor">
+      <div class="container">
+        <div class="split-2">
+          <div>
+            <span class="sec-kicker">Na prática clínica real</span>
+            <h2 class="sec-title">TENS trata a dor. NMES e Russa pedem o ponto motor.</h2>
+            <p class="sec-sub">Com o utente já na marquesa e a agenda apertada, hesitar sobre onde fechar o segundo canal ou que Hz/µs programar quebra a confiança e atrasa a sessão.</p>
+            <ul class="dor-list">
+              <li><b>O utente já está deitado</b> e ainda procuras no livro ou no Google onde colar os elétrodos.</li>
+              <li><b>CH1 e CH2 trocados</b> ou no músculo errado: a corrente incomoda a pele e não chega onde devia.</li>
+              <li><b>Hz e µs «de cabeça»</b>, sem saber se há um estudo por trás do protocolo.</li>
+            </ul>
+            <div class="myth-grid">
+              <div class="myth-card is-wrong">
+                <span class="myth-icon" aria-hidden="true">✕</span>
+                <div><strong>O erro que trava o resultado:</strong> usar a lógica do TENS quando precisas de contração muscular (NMES/Russa) ou colar sobre a articulação. A corrente incomoda a pele e o músculo quase não recruta.</div>
+              </div>
+              <div class="myth-card is-right">
+                <span class="myth-icon" aria-hidden="true">✓</span>
+                <div><strong>Com o Atlas ElectroMapas:</strong> abres a região no telemóvel, confirmas os canais CH1/CH2 por cor, o ponto motor e os parâmetros do estudo publicado em segundos.</div>
+              </div>
+            </div>
+          </div>
+          <div class="photo-frame">
+            <img src="./img/foto-dor-marquesa-v2.webp" width="960" height="717" alt="Fisioterapeuta portuguesa junto à marquesa a confirmar no telemóvel o posicionamento dos elétrodos no quadríceps do utente com cabos azul e vermelho ligados ao aparelho clínico" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="sec" id="recebes">
       <div class="container">
@@ -997,30 +1031,7 @@
         </div>
       </div>
     </section>
-<section class="sec" id="dor">
-      <div class="container">
-        <div class="split-2">
-          <div>
-            <span class="sec-kicker">Na prática clínica real</span>
-            <h2 class="sec-title">TENS trata a dor. NMES e Russa pedem o ponto motor.</h2>
-            <p class="sec-sub">Com o utente já na marquesa e a agenda apertada, hesitar sobre onde fechar o segundo canal ou que Hz/µs programar quebra a confiança e atrasa a sessão.</p>
-            <div class="myth-grid">
-              <div class="myth-card is-wrong">
-                <span class="myth-icon" aria-hidden="true">✕</span>
-                <div><strong>O erro que trava o resultado:</strong> usar a lógica do TENS quando precisas de contração muscular (NMES/Russa) ou colar sobre a articulação. A corrente incomoda a pele e o músculo quase não recruta.</div>
-              </div>
-              <div class="myth-card is-right">
-                <span class="myth-icon" aria-hidden="true">✓</span>
-                <div><strong>Com o Atlas ElectroMapas:</strong> abres a região no telemóvel, confirmas os canais CH1/CH2 por cor, o ponto motor e os parâmetros do estudo publicado em segundos.</div>
-              </div>
-            </div>
-          </div>
-          <div class="photo-frame">
-            <img src="./img/foto-dor-marquesa-v2.webp" width="960" height="717" alt="Fisioterapeuta portuguesa junto à marquesa a confirmar no telemóvel o posicionamento dos elétrodos no quadríceps do utente com cabos azul e vermelho ligados ao aparelho clínico" loading="lazy" decoding="async" />
-          </div>
-        </div>
-      </div>
-    </section><section class="sec band-navy" id="evidencia">
+<section class="sec band-navy" id="evidencia">
       <div class="container">
         <div class="sec-head">
           <span class="sec-kicker">Diferencial que nenhum guia genérico tem</span>
