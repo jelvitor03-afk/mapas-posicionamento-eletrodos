@@ -86,7 +86,7 @@
     .hero-visual{display:flex;flex-direction:column;align-items:center;gap:10px}
     .hero-sample-card{width:100%;max-width:450px;background:var(--surface);border:1.5px solid var(--border-strong);border-radius:14px;overflow:hidden;box-shadow:0 18px 40px rgba(11,27,43,0.14)}
     .hero-sample-btn{display:block;width:100%;padding:6px;border:0;background:#FFF;cursor:zoom-in}
-    .hero-sample-btn img{width:100%;aspect-ratio:680 / 481;object-fit:contain;border-radius:8px;background:#FFF}
+    .hero-sample-btn img{width:100%;aspect-ratio:1200 / 896;object-fit:contain;border-radius:8px;background:#FFF}
     .hero-sample-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;background:var(--navy-900);color:#FFF}
     .hero-sample-meta strong{display:block;font-family:'Manrope',sans-serif;font-size:12.5px;font-weight:800;color:#FFF;line-height:1.25}
     .hero-sample-meta span{display:block;font-size:11px;font-weight:600;color:var(--gold);margin-top:2px}
@@ -350,6 +350,20 @@
     .clube-videos figcaption{text-align:center;color:#CBD5E1;font-size:13px;margin-top:8px}
     .clube-videos figcaption b{color:#F5C451}
     .clube-note{color:#94A3B8;font-size:13.5px;text-align:center;max-width:560px;margin:16px auto 0}
+      .hero-offer{display:inline-flex;align-items:center;gap:8px;margin:0 0 10px;font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:.02em;text-transform:uppercase}
+    .hero-offer .ho-70{background:var(--navy-950);color:#F5C451;border-radius:10px;padding:8px 12px;font-size:17px}
+    .hero-offer .ho-plus{background:#16A34A;color:#fff;border-radius:10px;padding:8px 12px;font-size:17px;box-shadow:0 6px 14px rgba(22,163,74,.28)}
+    .mq-sec{overflow:hidden}
+    .mq-sub{color:var(--ink-muted);max-width:640px;margin:10px auto 0;line-height:1.55}
+    .mq{overflow:hidden;margin-top:18px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+    .mq-track{display:flex;gap:14px;width:max-content;animation:mq 42s linear infinite}
+    .mq-rev .mq-track{animation-direction:reverse;animation-duration:48s}
+    .mq:hover .mq-track{animation-play-state:paused}
+    .mq-card{margin:0;flex:0 0 auto;width:210px;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 6px 16px rgba(11,27,43,.08)}
+    .mq-card img{width:100%;height:auto;aspect-ratio:1000/1414;object-fit:cover;object-position:top;display:block;background:#fff}
+    .mq-card figcaption{padding:8px 10px;font-size:12.5px;font-weight:700;color:var(--navy-950);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @media (prefers-reduced-motion:reduce){.mq-track{animation:none}.mq{overflow-x:auto}}
   </style>
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -385,6 +399,7 @@
             <span>ELECTROMAPAS · ATLAS CLÍNICO PT</span>
           </div>
 
+          <div class="hero-offer"><span class="ho-70">70 mapas</span><span class="ho-plus">+10 grátis</span></div>
           <h1>TENS, NMES ou Russa? <em>Vê o ponto exato</em> em segundos.</h1>
           <p class="hero-sub">
             <strong>70 mapas clínicos</strong> com canais CH1 a CH4 por cor, ponto motor, parâmetros do estudo (Hz, µs) e <strong>referência PubMed no rodapé</strong>. Consulta rápida ao lado da marquesa.
@@ -394,6 +409,7 @@
             <span class="hero-pill"><svg width="15" height="15" aria-hidden="true"><use href="#ic-ok"/></svg>397 páginas · 70 mapas</span>
             <span class="hero-pill"><svg width="15" height="15" aria-hidden="true"><use href="#ic-ok"/></svg>6 bónus inclusos</span>
             <span class="hero-pill"><svg width="15" height="15" aria-hidden="true"><use href="#ic-ok"/></svg>313 refs PubMed</span>
+            <span class="hero-pill"><svg width="15" height="15" aria-hidden="true"><use href="#ic-ok"/></svg>+10 mapas grátis</span>
           </div>
 
           <div class="hero-cta-group">
@@ -419,12 +435,12 @@
         <div class="hero-visual">
           <div class="hero-sample-card">
             <button type="button" class="hero-sample-btn" id="hero-sample-zoom" data-src="./img/v9-s10.webp" data-caption="Amostra real · Mapa 17/70 · S10: Epicondilite lateral · TENS · PMID 23999980">
-              <img src="./img/v9-hero-s10.webp" width="680" height="481" alt="Amostra real do Atlas ElectroMapas: Mapa S10, epicondilite lateral, com canal CH1 por cor, onde colar e referência PubMed" fetchpriority="high" decoding="async" />
+              <img src="./img/hero-produto-70mais10.webp" width="680" height="508" alt="Atlas ElectroMapas: 70 mapas + 10 grátis, com mapas reais no tablet e no telemóvel" fetchpriority="high" decoding="async" />
             </button>
             <div class="hero-sample-bar">
               <div class="hero-sample-meta">
-                <strong>Amostra real · Mapa S10 (17 de 70)</strong>
-                <span>Onde colar · canal por cor · PMID 23999980</span>
+                <strong>70 mapas + 10 grátis · páginas reais nos ecrãs</strong>
+                <span>Toca para ver o mapa S10 em grande</span>
               </div>
               <span class="hero-sample-zoom" aria-hidden="true">Ampliar</span>
             </div>
@@ -452,120 +468,13 @@
       </div>
     </section>
 
-    <section class="sec sec-alt" id="paginas">
+    <section class="sec mq-sec" id="material">
       <div class="container">
-        <div class="sec-head">
-          <span class="sec-kicker">Vê antes de comprar</span>
-          <h2 class="sec-title">6 mapas reais do novo Atlas</h2>
-          <p class="sec-sub">Exportadas diretamente da edição final em Português de Portugal. Desliza e toca em qualquer página para ampliar no ecrã inteiro.</p>
-        </div>
-
-        <div class="carousel-shell">
-          <div class="carousel-topbar">
-            <span class="carousel-hint">Toca numa lâmina para ler canais, Hz, µs e referência PubMed</span>
-            <span class="carousel-counter num" id="carousel-counter" aria-live="polite">1 / 6</span>
-          </div>
-
-          <div class="carousel-track" id="carousel-track" tabindex="0" aria-label="Carrossel com 6 mapas reais do Atlas ElectroMapas">
-            <article class="slide-card">
-              <button type="button" class="slide-zoom-btn" data-src="./img/v9-s10.webp" data-caption="S10 · Epicondilite lateral (TENS) · Mapa 17/70 · PMID 23999980">
-                <img src="./img/v9-s10.webp" width="1000" height="1414" alt="S10 · Epicondilite lateral (TENS), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
-              </button>
-              <div class="slide-meta">
-                <div><strong>S10 · Epicondilite lateral (TENS)</strong><span class="slide-ref num">Mapa 17/70 · PMID 23999980</span></div>
-                <button type="button" class="slide-meta-zoom" data-slide-idx="0">Ampliar</button>
-              </div>
-            </article>
-
-            <article class="slide-card">
-              <button type="button" class="slide-zoom-btn" data-src="./img/v9-l08.webp" data-caption="L08 · Dismenorreia (TENS abdominal) · Mapa 8/70 · PMID 28885348">
-                <img src="./img/v9-l08.webp" width="1000" height="1414" alt="L08 · Dismenorreia (TENS abdominal), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
-              </button>
-              <div class="slide-meta">
-                <div><strong>L08 · Dismenorreia (TENS abdominal)</strong><span class="slide-ref num">Mapa 8/70 · PMID 28885348</span></div>
-                <button type="button" class="slide-meta-zoom" data-slide-idx="1">Ampliar</button>
-              </div>
-            </article>
-
-            <article class="slide-card">
-              <button type="button" class="slide-zoom-btn" data-src="./img/v9-i10.webp" data-caption="I10 · Fasceíte plantar (interferencial) · Mapa 27/70 · PMID 28603360">
-                <img src="./img/v9-i10.webp" width="1000" height="1414" alt="I10 · Fasceíte plantar (interferencial), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
-              </button>
-              <div class="slide-meta">
-                <div><strong>I10 · Fasceíte plantar (interferencial)</strong><span class="slide-ref num">Mapa 27/70 · PMID 28603360</span></div>
-                <button type="button" class="slide-meta-zoom" data-slide-idx="2">Ampliar</button>
-              </div>
-            </article>
-
-            <article class="slide-card">
-              <button type="button" class="slide-zoom-btn" data-src="./img/v9-b02.webp" data-caption="B02 · Cãibras (NMES gémeo medial) · Mapa 61/70 · PMID 33169444">
-                <img src="./img/v9-b02.webp" width="1000" height="1414" alt="B02 · Cãibras (NMES gémeo medial), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
-              </button>
-              <div class="slide-meta">
-                <div><strong>B02 · Cãibras (NMES gémeo medial)</strong><span class="slide-ref num">Mapa 61/70 · PMID 33169444</span></div>
-                <button type="button" class="slide-meta-zoom" data-slide-idx="3">Ampliar</button>
-              </div>
-            </article>
-
-            <article class="slide-card">
-              <button type="button" class="slide-zoom-btn" data-src="./img/v9-b03.webp" data-caption="B03 · Neuropatia pós-quimioterapia (TENS) · Mapa 62/70 · PMID 37993030">
-                <img src="./img/v9-b03.webp" width="1000" height="1414" alt="B03 · Neuropatia pós-quimioterapia (TENS), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
-              </button>
-              <div class="slide-meta">
-                <div><strong>B03 · Neuropatia pós-quimioterapia (TENS)</strong><span class="slide-ref num">Mapa 62/70 · PMID 37993030</span></div>
-                <button type="button" class="slide-meta-zoom" data-slide-idx="4">Ampliar</button>
-              </div>
-            </article>
-
-            <article class="slide-card">
-              <button type="button" class="slide-zoom-btn" data-src="./img/v9-b11.webp" data-caption="B11 · Dorsiflexores (NMES bilateral) · Mapa 69/70 · PMID 29366377">
-                <img src="./img/v9-b11.webp" width="1000" height="1414" alt="B11 · Dorsiflexores (NMES bilateral), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
-              </button>
-              <div class="slide-meta">
-                <div><strong>B11 · Dorsiflexores (NMES bilateral)</strong><span class="slide-ref num">Mapa 69/70 · PMID 29366377</span></div>
-                <button type="button" class="slide-meta-zoom" data-slide-idx="5">Ampliar</button>
-              </div>
-            </article>
-
-          </div>
-
-          <div class="carousel-controls">
-            <button type="button" class="carousel-nav-btn" id="carousel-prev" aria-label="Página anterior">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <div class="carousel-dots" id="carousel-dots" aria-label="Selecionar página">
-              <button type="button" class="carousel-dot" data-slide="0" aria-current="true" aria-label="Página 1"></button>
-              <button type="button" class="carousel-dot" data-slide="1" aria-current="false" aria-label="Página 2"></button>
-              <button type="button" class="carousel-dot" data-slide="2" aria-current="false" aria-label="Página 3"></button>
-              <button type="button" class="carousel-dot" data-slide="3" aria-current="false" aria-label="Página 4"></button>
-              <button type="button" class="carousel-dot" data-slide="4" aria-current="false" aria-label="Página 5"></button>
-              <button type="button" class="carousel-dot" data-slide="5" aria-current="false" aria-label="Página 6"></button>
-              <button type="button" class="carousel-dot" data-slide="6" aria-current="false" aria-label="Página 7"></button>
-              <button type="button" class="carousel-dot" data-slide="7" aria-current="false" aria-label="Página 8"></button>
-            </div>
-            <button type="button" class="carousel-nav-btn" id="carousel-next" aria-label="Página seguinte">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
-        </div>
-
-        <div class="device-strip">
-          <img src="./img/mockup-dispositivos-v9.webp" width="880" height="587" alt="Mapas reais do novo Atlas ElectroMapas no tablet e no telemóvel" loading="lazy" decoding="async" />
-          <div>
-            <h3>Sempre pronto no tablet, no telemóvel ou impresso</h3>
-            <p>Desenho à esquerda, tabela prática à direita e, na página seguinte, os 9 passos, o que o utente deve sentir e os sinais para parar.</p>
-            <ul class="device-bullets">
-              <li><svg width="16" height="16" aria-hidden="true" style="flex-shrink:0;margin-top:2px;color:#0F7A48"><use href="#ic-ok"/></svg><span>Canais CH1 a CH4 por cor e números 1A/1B, 2A/2B</span></li>
-              <li><svg width="16" height="16" aria-hidden="true" style="flex-shrink:0;margin-top:2px;color:#0F7A48"><use href="#ic-ok"/></svg><span>Zoom nítido no telemóvel para confirmar Hz e µs</span></li>
-              <li><svg width="16" height="16" aria-hidden="true" style="flex-shrink:0;margin-top:2px;color:#0F7A48"><use href="#ic-ok"/></svg><span>A4 horizontal pronto a imprimir para gabinete ou estudo</span></li>
-            </ul>
-            <a href="#planos" class="btn-primary" style="width:100%">
-              <span>VER OS PLANOS</span>
-              <svg width="18" height="18" aria-hidden="true"><use href="#ic-arr"/></svg>
-            </a>
-          </div>
-        </div>
+        <div class="sec-head"><span class="sec-kicker">Por dentro</span><h2 class="sec-title">Vê como é o material que vais receber</h2><p class="mq-sub">Cada condição tem o <b>mapa</b> (onde colar, canais por cor, parâmetros do estudo) e a <b>ficha prática</b> (9 passos, o que sentir, cuidados).</p></div>
       </div>
+      <div class="mq" aria-label="Mapas reais do Atlas"><div class="mq-track"><figure class="mq-card"><img src="./img/v9-s10.webp" alt="S10 · Epicondilite lateral" loading="lazy" decoding="async"><figcaption>S10 · Epicondilite lateral</figcaption></figure><figure class="mq-card"><img src="./img/v9-l08.webp" alt="L08 · Dismenorreia" loading="lazy" decoding="async"><figcaption>L08 · Dismenorreia</figcaption></figure><figure class="mq-card"><img src="./img/v9-i10.webp" alt="I10 · Fasceíte plantar" loading="lazy" decoding="async"><figcaption>I10 · Fasceíte plantar</figcaption></figure><figure class="mq-card"><img src="./img/v9-b02.webp" alt="B02 · Cãibras" loading="lazy" decoding="async"><figcaption>B02 · Cãibras</figcaption></figure><figure class="mq-card"><img src="./img/v9-b03.webp" alt="B03 · Neuropatia pós-quimio" loading="lazy" decoding="async"><figcaption>B03 · Neuropatia pós-quimio</figcaption></figure><figure class="mq-card"><img src="./img/v9-b11.webp" alt="B11 · Dorsiflexores" loading="lazy" decoding="async"><figcaption>B11 · Dorsiflexores</figcaption></figure><figure class="mq-card"><img src="./img/v9-s10.webp" alt="S10 · Epicondilite lateral" loading="lazy" decoding="async"><figcaption>S10 · Epicondilite lateral</figcaption></figure><figure class="mq-card"><img src="./img/v9-l08.webp" alt="L08 · Dismenorreia" loading="lazy" decoding="async"><figcaption>L08 · Dismenorreia</figcaption></figure><figure class="mq-card"><img src="./img/v9-i10.webp" alt="I10 · Fasceíte plantar" loading="lazy" decoding="async"><figcaption>I10 · Fasceíte plantar</figcaption></figure><figure class="mq-card"><img src="./img/v9-b02.webp" alt="B02 · Cãibras" loading="lazy" decoding="async"><figcaption>B02 · Cãibras</figcaption></figure><figure class="mq-card"><img src="./img/v9-b03.webp" alt="B03 · Neuropatia pós-quimio" loading="lazy" decoding="async"><figcaption>B03 · Neuropatia pós-quimio</figcaption></figure><figure class="mq-card"><img src="./img/v9-b11.webp" alt="B11 · Dorsiflexores" loading="lazy" decoding="async"><figcaption>B11 · Dorsiflexores</figcaption></figure></div></div>
+      <div class="mq mq-rev" aria-label="Fichas práticas reais do Atlas"><div class="mq-track"><figure class="mq-card"><img src="./img/ficha-s10.webp" alt="Ficha prática S10" loading="lazy" decoding="async"><figcaption>Ficha prática S10</figcaption></figure><figure class="mq-card"><img src="./img/ficha-l08.webp" alt="Ficha prática L08" loading="lazy" decoding="async"><figcaption>Ficha prática L08</figcaption></figure><figure class="mq-card"><img src="./img/ficha-i10.webp" alt="Ficha prática I10" loading="lazy" decoding="async"><figcaption>Ficha prática I10</figcaption></figure><figure class="mq-card"><img src="./img/ficha-b02.webp" alt="Ficha prática B02" loading="lazy" decoding="async"><figcaption>Ficha prática B02</figcaption></figure><figure class="mq-card"><img src="./img/ficha-b03.webp" alt="Ficha prática B03" loading="lazy" decoding="async"><figcaption>Ficha prática B03</figcaption></figure><figure class="mq-card"><img src="./img/ficha-b11.webp" alt="Ficha prática B11" loading="lazy" decoding="async"><figcaption>Ficha prática B11</figcaption></figure><figure class="mq-card"><img src="./img/ficha-s10.webp" alt="Ficha prática S10" loading="lazy" decoding="async"><figcaption>Ficha prática S10</figcaption></figure><figure class="mq-card"><img src="./img/ficha-l08.webp" alt="Ficha prática L08" loading="lazy" decoding="async"><figcaption>Ficha prática L08</figcaption></figure><figure class="mq-card"><img src="./img/ficha-i10.webp" alt="Ficha prática I10" loading="lazy" decoding="async"><figcaption>Ficha prática I10</figcaption></figure><figure class="mq-card"><img src="./img/ficha-b02.webp" alt="Ficha prática B02" loading="lazy" decoding="async"><figcaption>Ficha prática B02</figcaption></figure><figure class="mq-card"><img src="./img/ficha-b03.webp" alt="Ficha prática B03" loading="lazy" decoding="async"><figcaption>Ficha prática B03</figcaption></figure><figure class="mq-card"><img src="./img/ficha-b11.webp" alt="Ficha prática B11" loading="lazy" decoding="async"><figcaption>Ficha prática B11</figcaption></figure></div></div>
+      <div class="container" style="text-align:center;margin-top:22px"><a href="#planos" class="btn-primary"><span>QUERO O ATLAS COMPLETO · 11,87 €</span><svg width="18" height="18" aria-hidden="true"><use href="#ic-arr"/></svg></a></div>
     </section>
 
     <section class="sec" id="bonus">
@@ -962,6 +871,121 @@
     </section>
   
     <div hidden aria-hidden="true">
+<section class="sec sec-alt" id="paginas">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-kicker">Vê antes de comprar</span>
+          <h2 class="sec-title">6 mapas reais do novo Atlas</h2>
+          <p class="sec-sub">Exportadas diretamente da edição final em Português de Portugal. Desliza e toca em qualquer página para ampliar no ecrã inteiro.</p>
+        </div>
+
+        <div class="carousel-shell">
+          <div class="carousel-topbar">
+            <span class="carousel-hint">Toca numa lâmina para ler canais, Hz, µs e referência PubMed</span>
+            <span class="carousel-counter num" id="carousel-counter" aria-live="polite">1 / 6</span>
+          </div>
+
+          <div class="carousel-track" id="carousel-track" tabindex="0" aria-label="Carrossel com 6 mapas reais do Atlas ElectroMapas">
+            <article class="slide-card">
+              <button type="button" class="slide-zoom-btn" data-src="./img/v9-s10.webp" data-caption="S10 · Epicondilite lateral (TENS) · Mapa 17/70 · PMID 23999980">
+                <img src="./img/v9-s10.webp" width="1000" height="1414" alt="S10 · Epicondilite lateral (TENS), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
+              </button>
+              <div class="slide-meta">
+                <div><strong>S10 · Epicondilite lateral (TENS)</strong><span class="slide-ref num">Mapa 17/70 · PMID 23999980</span></div>
+                <button type="button" class="slide-meta-zoom" data-slide-idx="0">Ampliar</button>
+              </div>
+            </article>
+
+            <article class="slide-card">
+              <button type="button" class="slide-zoom-btn" data-src="./img/v9-l08.webp" data-caption="L08 · Dismenorreia (TENS abdominal) · Mapa 8/70 · PMID 28885348">
+                <img src="./img/v9-l08.webp" width="1000" height="1414" alt="L08 · Dismenorreia (TENS abdominal), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
+              </button>
+              <div class="slide-meta">
+                <div><strong>L08 · Dismenorreia (TENS abdominal)</strong><span class="slide-ref num">Mapa 8/70 · PMID 28885348</span></div>
+                <button type="button" class="slide-meta-zoom" data-slide-idx="1">Ampliar</button>
+              </div>
+            </article>
+
+            <article class="slide-card">
+              <button type="button" class="slide-zoom-btn" data-src="./img/v9-i10.webp" data-caption="I10 · Fasceíte plantar (interferencial) · Mapa 27/70 · PMID 28603360">
+                <img src="./img/v9-i10.webp" width="1000" height="1414" alt="I10 · Fasceíte plantar (interferencial), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
+              </button>
+              <div class="slide-meta">
+                <div><strong>I10 · Fasceíte plantar (interferencial)</strong><span class="slide-ref num">Mapa 27/70 · PMID 28603360</span></div>
+                <button type="button" class="slide-meta-zoom" data-slide-idx="2">Ampliar</button>
+              </div>
+            </article>
+
+            <article class="slide-card">
+              <button type="button" class="slide-zoom-btn" data-src="./img/v9-b02.webp" data-caption="B02 · Cãibras (NMES gémeo medial) · Mapa 61/70 · PMID 33169444">
+                <img src="./img/v9-b02.webp" width="1000" height="1414" alt="B02 · Cãibras (NMES gémeo medial), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
+              </button>
+              <div class="slide-meta">
+                <div><strong>B02 · Cãibras (NMES gémeo medial)</strong><span class="slide-ref num">Mapa 61/70 · PMID 33169444</span></div>
+                <button type="button" class="slide-meta-zoom" data-slide-idx="3">Ampliar</button>
+              </div>
+            </article>
+
+            <article class="slide-card">
+              <button type="button" class="slide-zoom-btn" data-src="./img/v9-b03.webp" data-caption="B03 · Neuropatia pós-quimioterapia (TENS) · Mapa 62/70 · PMID 37993030">
+                <img src="./img/v9-b03.webp" width="1000" height="1414" alt="B03 · Neuropatia pós-quimioterapia (TENS), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
+              </button>
+              <div class="slide-meta">
+                <div><strong>B03 · Neuropatia pós-quimioterapia (TENS)</strong><span class="slide-ref num">Mapa 62/70 · PMID 37993030</span></div>
+                <button type="button" class="slide-meta-zoom" data-slide-idx="4">Ampliar</button>
+              </div>
+            </article>
+
+            <article class="slide-card">
+              <button type="button" class="slide-zoom-btn" data-src="./img/v9-b11.webp" data-caption="B11 · Dorsiflexores (NMES bilateral) · Mapa 69/70 · PMID 29366377">
+                <img src="./img/v9-b11.webp" width="1000" height="1414" alt="B11 · Dorsiflexores (NMES bilateral), página do Atlas ElectroMapas" loading="lazy" decoding="async" />
+              </button>
+              <div class="slide-meta">
+                <div><strong>B11 · Dorsiflexores (NMES bilateral)</strong><span class="slide-ref num">Mapa 69/70 · PMID 29366377</span></div>
+                <button type="button" class="slide-meta-zoom" data-slide-idx="5">Ampliar</button>
+              </div>
+            </article>
+
+          </div>
+
+          <div class="carousel-controls">
+            <button type="button" class="carousel-nav-btn" id="carousel-prev" aria-label="Página anterior">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="carousel-dots" id="carousel-dots" aria-label="Selecionar página">
+              <button type="button" class="carousel-dot" data-slide="0" aria-current="true" aria-label="Página 1"></button>
+              <button type="button" class="carousel-dot" data-slide="1" aria-current="false" aria-label="Página 2"></button>
+              <button type="button" class="carousel-dot" data-slide="2" aria-current="false" aria-label="Página 3"></button>
+              <button type="button" class="carousel-dot" data-slide="3" aria-current="false" aria-label="Página 4"></button>
+              <button type="button" class="carousel-dot" data-slide="4" aria-current="false" aria-label="Página 5"></button>
+              <button type="button" class="carousel-dot" data-slide="5" aria-current="false" aria-label="Página 6"></button>
+              <button type="button" class="carousel-dot" data-slide="6" aria-current="false" aria-label="Página 7"></button>
+              <button type="button" class="carousel-dot" data-slide="7" aria-current="false" aria-label="Página 8"></button>
+            </div>
+            <button type="button" class="carousel-nav-btn" id="carousel-next" aria-label="Página seguinte">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="device-strip">
+          <img src="./img/mockup-dispositivos-v9.webp" width="880" height="587" alt="Mapas reais do novo Atlas ElectroMapas no tablet e no telemóvel" loading="lazy" decoding="async" />
+          <div>
+            <h3>Sempre pronto no tablet, no telemóvel ou impresso</h3>
+            <p>Desenho à esquerda, tabela prática à direita e, na página seguinte, os 9 passos, o que o utente deve sentir e os sinais para parar.</p>
+            <ul class="device-bullets">
+              <li><svg width="16" height="16" aria-hidden="true" style="flex-shrink:0;margin-top:2px;color:#0F7A48"><use href="#ic-ok"/></svg><span>Canais CH1 a CH4 por cor e números 1A/1B, 2A/2B</span></li>
+              <li><svg width="16" height="16" aria-hidden="true" style="flex-shrink:0;margin-top:2px;color:#0F7A48"><use href="#ic-ok"/></svg><span>Zoom nítido no telemóvel para confirmar Hz e µs</span></li>
+              <li><svg width="16" height="16" aria-hidden="true" style="flex-shrink:0;margin-top:2px;color:#0F7A48"><use href="#ic-ok"/></svg><span>A4 horizontal pronto a imprimir para gabinete ou estudo</span></li>
+            </ul>
+            <a href="#planos" class="btn-primary" style="width:100%">
+              <span>VER OS PLANOS</span>
+              <svg width="18" height="18" aria-hidden="true"><use href="#ic-arr"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 <section class="sec" id="dor">
       <div class="container">
         <div class="split-2">
