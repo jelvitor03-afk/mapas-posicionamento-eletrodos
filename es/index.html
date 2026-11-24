@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es-ES">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ElectroMapas — Dónde colocar los electrodos, en segundos</title>
+<meta name="description" content="Más de 58 mapas visuales de colocación de electrodos para TENS, NMES y FES, organizados por región. Consulta en el móvil o imprime. Pago único de 9,97 €.">
+<meta property="og:title" content="ElectroMapas — Dónde colocar los electrodos, en segundos">
+<meta property="og:description" content="+58 mapas de electroterapia por región, con parámetros y precauciones. 9,97 €, acceso inmediato.">
+<meta property="og:image" content="https://mapas-posicionamento-eletrodos-two.vercel.app/es/img/mapa_40.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1684602679908725');fbq('track','PageView');fbq('track','ViewContent',{content_name:'ElectroMapas ES',content_category:'electromapas_es',value:9.97,currency:'EUR'});</script>
+<style>
+:root{--ink:#0b1b2b;--muted:#53606e;--line:#e3e8ee;--bg:#f6f8fb;--card:#fff;--blue:#0a5bd3;--blue-d:#08469f;--teal:#0e9f8e;--amber:#ffb020;--shadow:0 18px 40px -24px rgba(11,27,43,.45)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+h1,h2{font-family:'Fraunces',Georgia,serif;letter-spacing:-.02em;line-height:1.08;margin:0}
+h1{font-size:clamp(34px,7.6vw,58px)}h2{font-size:clamp(28px,5.6vw,42px)}
+.kicker{display:inline-block;font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.lead{font-size:clamp(17px,2.4vw,20px);color:var(--muted);margin:14px 0 0}
+section{padding:56px 0}
+.topbar{background:var(--ink);color:#fff;text-align:center;font-size:13.5px;font-weight:700;padding:9px 12px}
+.hero{padding:26px 0 40px;background:linear-gradient(180deg,#fff 0%,var(--bg) 100%)}
+.hero-grid{display:grid;gap:26px}
+.pill{display:inline-flex;gap:8px;align-items:center;background:#e8f1ff;color:var(--blue-d);font-weight:700;font-size:13.5px;padding:7px 13px;border-radius:999px;margin-bottom:14px}
+h1 em{font-style:normal;color:var(--blue)}
+.hero-img{border-radius:20px;overflow:hidden;box-shadow:var(--shadow);background:#fff;border:1px solid var(--line)}
+.buy{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;background:var(--blue);color:#fff;font-weight:800;font-size:19px;text-decoration:none;padding:17px 26px;border-radius:16px;box-shadow:0 12px 26px -12px rgba(10,91,211,.8);transition:transform .15s,background .15s;min-height:58px}
+.btn:hover{background:var(--blue-d);transform:translateY(-1px)}
+.price{display:flex;flex-direction:column;line-height:1.1}.price b{font-size:30px}.price span{font-size:13px;color:var(--muted);font-weight:600}
+.ticks{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px;font-size:14.5px;font-weight:600;color:#2f3d4b}
+.ticks span::before{content:"✓ ";color:var(--teal);font-weight:800}
+.pain{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pain-grid{display:grid;gap:14px;margin-top:26px}
+.pain-card{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px}
+.pain-card b{display:block;font-size:17px;margin-bottom:4px}
+.pain-card p{margin:0;color:var(--muted);font-size:15.5px}
+.center{text-align:center;max-width:760px;margin:0 auto}
+.maps{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:20px 2px 16px}
+.maps figure{flex:0 0 86%;max-width:520px;scroll-snap-align:start;margin:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.maps figcaption{font-size:13.5px;color:var(--muted);padding:10px 12px;border-top:1px solid var(--line)}
+.maps figcaption b{color:var(--ink)}
+.swipe{text-align:center;font-size:13px;color:var(--muted);margin:0}
+.steps{display:grid;gap:14px;margin-top:26px;counter-reset:s}
+.step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;position:relative;padding-left:66px}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:18px;width:34px;height:34px;border-radius:10px;background:var(--blue);color:#fff;font-weight:800;display:grid;place-items:center}
+.step b{display:block;font-size:17px}.step p{margin:2px 0 0;color:var(--muted);font-size:15.5px}
+.regions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}
+.regions span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:700;font-size:14.5px}
+.offer{background:var(--ink);color:#fff}
+.offer .lead{color:#b9c6d4}
+.box{background:#fff;color:var(--ink);border-radius:22px;padding:24px 20px;max-width:560px;margin:28px auto 0;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.box h3{margin:0 0 6px;font-size:21px}
+.box ul{list-style:none;padding:0;margin:14px 0 18px}
+.box li{padding:9px 0;border-bottom:1px dashed var(--line);font-size:15.5px;display:flex;gap:10px}
+.box li::before{content:"✓";color:var(--teal);font-weight:800}
+.box .big{font-size:46px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.box .btn{width:100%;margin-top:16px}
+.small{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
+.guar{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;max-width:760px;margin:0 auto}
+.guar .seal{flex:0 0 58px;height:58px;border-radius:50%;background:var(--amber);display:grid;place-items:center;font-weight:800;font-size:15px;line-height:1;text-align:center}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:10px}
+.faq summary{font-weight:700;cursor:pointer;font-size:16px}
+.faq p{color:var(--muted);margin:8px 0 0;font-size:15.5px}
+footer{padding:30px 0 110px;text-align:center;font-size:13px;color:var(--muted)}
+.sticky{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 14px;display:flex;align-items:center;gap:12px;z-index:20;box-shadow:0 -10px 30px -20px rgba(0,0,0,.4);transform:translateY(110%);transition:transform .25s}
+.sticky.show{transform:none}
+.sticky .price b{font-size:22px}.sticky .btn{flex:1;font-size:17px;padding:13px 16px;min-height:50px}
+@media(min-width:860px){
+  .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center}
+  .pain-grid{grid-template-columns:repeat(3,1fr)}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .maps{overflow:visible;flex-wrap:wrap;justify-content:center}.maps figure{flex:0 0 31%}
+  .swipe{display:none}.sticky{display:none}
+}
+</style>
+</head>
+<body>
+<div class="topbar">Acceso inmediato en tu correo · Úsalo en el móvil, tablet u ordenador</div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill">Para fisioterapeutas y estudiantes de Fisioterapia</span>
+      <h1>Sabe <em>dónde colocar los electrodos</em> en segundos, sin buscar en libros</h1>
+      <p class="lead">Más de 58 mapas visuales de electroterapia (TENS, NMES y FES), organizados por región del cuerpo, con parámetros y precauciones. Lo abres en el móvil entre paciente y paciente.</p>
+      <div class="buy">
+        <a class="btn js-buy" href="#oferta">Quiero los mapas</a>
+        <div class="price"><b>9,97 €</b><span>pago único · IVA incluido</span></div>
+      </div>
+      <div class="ticks"><span>Acceso de por vida</span><span>Garantía de 15 días</span><span>En español</span></div>
+    </div>
+    <div class="hero-img"><img src="img/hero.webp" alt="Fisioterapeuta colocando electrodos en la zona lumbar mientras consulta el mapa en el móvil" width="1536" height="1024"></div>
+  </div>
+</header>
+
+<section class="pain">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">El problema</span>
+      <h2>El paciente ya está en la camilla y tú sigues dudando</h2>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card"><b>Buscar entre apuntes y vídeos</b><p>Pierdes minutos de la sesión buscando una imagen fiable de dónde va cada electrodo.</p></div>
+      <div class="pain-card"><b>Colocar "a ojo"</b><p>Un electrodo mal colocado da una contracción débil o molestias, y el paciente lo nota.</p></div>
+      <div class="pain-card"><b>Parámetros de memoria</b><p>Frecuencia, ancho de pulso y tiempos cambian con cada objetivo y es fácil confundirlos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Por dentro</span>
+      <h2>Así son los mapas</h2>
+      <p class="lead">Un músculo por página: dónde va cada electrodo, la indicación, los parámetros de referencia y las precauciones.</p>
+    </div>
+    <div class="maps">
+      <figure><img src="img/mapa_20.webp" alt="Mapa del bíceps braquial con NMES" loading="lazy" width="1400" height="991"><figcaption><b>Bíceps braquial</b> · NMES/FES</figcaption></figure>
+      <figure><img src="img/mapa_50.webp" alt="Mapa de los isquiotibiales con NMES" loading="lazy" width="1400" height="991"><figcaption><b>Isquiotibiales</b> · NMES</figcaption></figure>
+      <figure><img src="img/mapa_60.webp" alt="Mapa de la tibia anterior con TENS convencional" loading="lazy" width="1400" height="991"><figcaption><b>Tibial anterior</b> · TENS convencional</figcaption></figure>
+    </div>
+    <p class="swipe">Desliza para ver más →</p>
+    <div class="regions">
+      <span>Cuello y cervical</span><span>Hombro</span><span>Brazo, codo y mano</span><span>Tronco y lumbar</span><span>Cadera y muslo</span><span>Rodilla</span><span>Pierna, tobillo y pie</span>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Cómo se usa</span>
+      <h2>De la duda a la sesión en 3 pasos</h2>
+    </div>
+    <div class="hero-img" style="max-width:760px;margin:26px auto 0"><img src="img/uso.webp" alt="Fisioterapeuta con la tablet mostrando el mapa de la rodilla mientras coloca los electrodos" loading="lazy" width="1536" height="1024"></div>
+    <div class="steps">
+      <div class="step"><b>Elige la región</b><p>El índice está organizado por zona del cuerpo y por objetivo: dolor, fuerza o función.</p></div>
+      <div class="step"><b>Mira el mapa</b><p>Ves exactamente dónde van los electrodos y qué parámetros usar como referencia.</p></div>
+      <div class="step"><b>Aplica con seguridad</b><p>Cada mapa incluye contraindicaciones y precauciones para revisar antes de empezar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="offer" id="oferta">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker" style="color:#7fb3ff">Todo incluido</span>
+      <h2>Tu colección de electroterapia completa</h2>
+      <p class="lead">Un único pago. Lo recibes en tu correo en un minuto.</p>
+    </div>
+    <div class="box">
+      <h3>ElectroMapas · Pack completo</h3>
+      <ul>
+        <li>Atlas visual con +58 mapas de colocación de electrodos (TENS, NMES, FES)</li>
+        <li>Guía rápida de parámetros</li>
+        <li>Checklist de seguridad y contraindicaciones</li>
+        <li>Protocolos por objetivo terapéutico</li>
+        <li>Ficha de evolución del paciente</li>
+        <li>Pocket card con 15 casos clínicos frecuentes</li>
+      </ul>
+      <div class="big">9,97 €</div>
+      <div style="color:var(--muted);font-weight:600;font-size:14px;margin-top:4px">Pago único · IVA incluido · Acceso de por vida</div>
+      <a class="btn js-buy" href="#">Quiero el pack completo</a>
+      <p class="small">Pago seguro con tarjeta y otros métodos disponibles en el checkout.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="guar">
+      <div class="seal">15<br>días</div>
+      <div><b style="font-size:17px">Garantía de 15 días</b><p style="margin:4px 0 0;color:var(--muted)">Si los mapas no te son útiles, pides el reembolso en los primeros 15 días y te devolvemos el 100 %, sin preguntas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" style="padding-top:0">
+  <div class="wrap" style="max-width:760px">
+    <h2 style="text-align:center;margin-bottom:12px">Preguntas frecuentes</h2>
+    <details><summary>¿Cómo recibo los mapas?</summary><p>Justo después del pago recibes en tu correo el acceso para descargar todo. Lo puedes usar en el móvil, tablet u ordenador, y también imprimir.</p></details>
+    <details><summary>¿Está en español?</summary><p>Sí. El atlas y las guías están en español.</p></details>
+    <details><summary>¿Sirve para mi aparato de TENS/EMS?</summary><p>Los mapas indican la colocación de los electrodos y parámetros de referencia que se aplican a los equipos habituales de electroterapia. Ajusta siempre según tu equipo y tu valoración clínica.</p></details>
+    <details><summary>¿Es un pago mensual?</summary><p>No. Es un pago único de 9,97 € y el acceso es de por vida.</p></details>
+    <details><summary>¿Sustituye la valoración de un profesional?</summary><p>No. Es material de consulta para profesionales y estudiantes; no sustituye la valoración clínica individual.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">ElectroMapas · Material educativo de electroterapia · No sustituye la valoración clínica individual</div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <div class="price"><b>9,97 €</b><span>pago único</span></div>
+  <a class="btn js-buy" href="#">Quiero los mapas</a>
+</div>
+
+<script>
+const CHECKOUT_URL = 'https://pay.hotmart.com/H108089502L?off=wubwvh9j&checkoutMode=10&locale=es_ES';
+const qs = new URLSearchParams(location.search);
+const short = v => (v || '').replace(/\D/g, '').slice(-8);
+const us = qs.get('utm_source');
+const src = us ? (us.startsWith('fb') || us === 'facebook' ? 'fb' : us.slice(0, 10)) : 'direto';
+const sck = ['em_es', src, short(qs.get('utm_campaign')), short(qs.get('utm_content'))].filter(Boolean).join('|').slice(0, 30);
+const checkoutHref = () => {
+  const u = new URL(CHECKOUT_URL);
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'].forEach(k => { if (qs.get(k)) u.searchParams.set(k, qs.get(k)); });
+  u.searchParams.set('src', src); u.searchParams.set('sck', sck);
+  return u.toString();
+};
+document.querySelectorAll('.js-buy').forEach(a => {
+  a.href = checkoutHref();
+  a.addEventListener('click', () => { if (window.fbq) fbq('track', 'InitiateCheckout', {content_name: 'ElectroMapas ES', value: 9.97, currency: 'EUR'}); });
+});
+const sticky = document.getElementById('sticky');
+const hero = document.querySelector('.hero .btn');
+new IntersectionObserver(([e]) => sticky.classList.toggle('show', !e.isIntersecting)).observe(hero);
+</script>
+</body>
+</html>
