@@ -413,6 +413,13 @@
     @media (max-width:520px){.prova-ciencia{grid-template-columns:1fr}.prova-ciencia div{display:flex;gap:12px;align-items:center;text-align:left}.prova-ciencia b{min-width:96px;font-size:18px}}
     @media (max-width:699px){.bonus-num-pill{left:6px !important;right:6px !important;top:auto !important;bottom:6px !important;font-size:9.5px !important;text-align:center;border-radius:8px !important;padding:4px !important;line-height:1.3 !important;white-space:normal}}
     .mq-zoom img{aspect-ratio:3/4 !important;object-position:center !important}
+    .wa-mq .wa-mq-track{gap:0;animation:mq 34s linear infinite}
+    @media (prefers-reduced-motion:reduce){.wa-mq .wa-mq-track{animation-duration:34s !important}}
+    .wa-mq-card{margin:0 14px 0 0;flex:0 0 auto;width:236px;max-width:none;border-radius:18px;overflow:hidden;border:1.5px solid var(--border-strong);background:#F8F7F2;box-shadow:0 10px 24px rgba(7,18,30,0.12)}
+    .wa-mq-card .wa-shot-btn{display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in;line-height:0;touch-action:manipulation}
+    .wa-mq-card .wa-shot-btn img{width:100%;height:auto;aspect-ratio:787 / 1600;display:block;background:#F8F7F2}
+    @media (max-width:768px){.wa-mq-card{width:206px}}
+    footer.site-footer a{color:#CBD5E1;text-decoration:underline;text-underline-offset:3px}
   </style>
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -690,65 +697,17 @@
       </div>
     </section>
 
-    <section class="sec sec-alt" id="relatos">
+    <section class="sec sec-alt mq-sec" id="relatos">
       <div class="container">
-        <div class="wa-feedback-shell" id="feedback-utentes">
-          <div class="wa-feedback-top">
-            <div>
-              <span class="sec-kicker" style="margin-bottom:4px">Na prática em Portugal</span>
-              <h3>Quem já usa o Atlas na clínica, no estágio e ao domicílio</h3>
-              <p class="wa-feedback-sub">Mensagens de fisioterapeutas e estudantes sobre o uso no iPad, impresso em A4 e offline no telemóvel.</p>
-            </div>
-            <span class="carousel-counter num" id="wa-counter" aria-live="polite">1 / 6</span>
-          </div>
-
-          <div class="wa-track" id="wa-track" tabindex="0" aria-label="Carrossel de mensagens de fisioterapeutas e estudantes">
-            <article class="wa-card">
-              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-01-ines.webp?v=2" data-caption="Inês · Clínica (iPad em consultas de 30 em 30 min)">
-                <img src="./img/wa-01-ines.webp?v=2" width="787" height="1600" alt="Conversa WhatsApp de Inês sobre uso do ElectroMapas no iPad da clínica" decoding="async" />
-              </button>
-            </article>
-
-            <article class="wa-card">
-              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-02-beatriz.webp?v=2" data-caption="Beatriz · Estágio (mapa no metro e checklist antes de ligar)">
-                <img src="./img/wa-02-beatriz.webp?v=2" width="787" height="1600" alt="Conversa WhatsApp de Beatriz sobre checklist no estágio de fisioterapia" decoding="async" />
-              </button>
-            </article>
-
-            <article class="wa-card">
-              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-03-diogo.webp?v=2" data-caption="Diogo · Domicílios offline (MB WAY e zoom nítido no telemóvel)">
-                <img src="./img/wa-03-diogo.webp?v=2" width="787" height="1600" alt="Conversa WhatsApp de Diogo sobre uso offline nos domicílios" decoding="async" />
-              </button>
-            </article>
-
-            <article class="wa-card">
-              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-04-rita.webp?v=2" data-caption="Rita · Departamento médico desportivo (tablet entre treinos)">
-                <img src="./img/wa-04-rita.webp?v=2" width="787" height="1600" alt="Conversa WhatsApp de Rita sobre uso no departamento médico" decoding="async" />
-              </button>
-            </article>
-
-            <article class="wa-card">
-              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-05-mariana.webp?v=2" data-caption="Mariana · Estágio hospitalar (12 mapas impressos em A4)">
-                <img src="./img/wa-05-mariana.webp?v=2" width="787" height="1600" alt="Conversa WhatsApp de Mariana sobre mapas impressos em A4 no estágio hospitalar" loading="lazy" decoding="async" />
-              </button>
-            </article>
-
-            <article class="wa-card">
-              <button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-06-hugo.webp?v=2" data-caption="Hugo · Domicílios no interior sem cobertura de rede">
-                <img src="./img/wa-06-hugo.webp?v=2" width="787" height="1600" alt="Conversa WhatsApp de Hugo sobre consulta offline em aldeias do interior" loading="lazy" decoding="async" />
-              </button>
-            </article>
-          </div>
-
-          <div class="wa-nav-row">
-            <button type="button" class="carousel-nav-btn" id="wa-prev" aria-label="Mensagem anterior">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <span style="font-size:12.5px;font-weight:700;color:var(--ink-muted)">Desliza para ver os 6 relatos · iPad, A4 e offline</span>
-            <button type="button" class="carousel-nav-btn" id="wa-next" aria-label="Mensagem seguinte">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
+        <div class="sec-head">
+          <span class="sec-kicker">Na prática em Portugal</span>
+          <h2 class="sec-title">Quem já usa o Atlas na clínica, no estágio e ao domicílio</h2>
+          <p class="sec-sub">Mensagens de fisioterapeutas e estudantes sobre o uso no iPad, impresso em A4 e offline no telemóvel. Toca em qualquer relato para ampliar.</p>
+        </div>
+      </div>
+      <div class="mq wa-mq" aria-label="Carrossel contínuo de mensagens de fisioterapeutas e estudantes">
+        <div class="mq-track wa-mq-track" id="wa-track">
+          <article class="wa-card wa-mq-card"><button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-01-ines.webp?v=2" data-caption="Inês · Clínica (iPad em consultas de 30 em 30 min)" data-wa-idx="0"><img data-src="./img/wa-01-ines.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Inês sobre uso do ElectroMapas no iPad da clínica" decoding="async" /></button></article><article class="wa-card wa-mq-card"><button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-02-beatriz.webp?v=2" data-caption="Beatriz · Estágio (mapa no metro e checklist antes de ligar)" data-wa-idx="1"><img data-src="./img/wa-02-beatriz.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Beatriz sobre checklist no estágio de fisioterapia" decoding="async" /></button></article><article class="wa-card wa-mq-card"><button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-03-diogo.webp?v=2" data-caption="Diogo · Domicílios offline (MB WAY e zoom nítido no telemóvel)" data-wa-idx="2"><img data-src="./img/wa-03-diogo.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Diogo sobre uso offline nos domicílios" decoding="async" /></button></article><article class="wa-card wa-mq-card"><button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-04-rita.webp?v=2" data-caption="Rita · Departamento médico desportivo (tablet entre treinos)" data-wa-idx="3"><img data-src="./img/wa-04-rita.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Rita sobre uso no departamento médico" decoding="async" /></button></article><article class="wa-card wa-mq-card"><button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-05-mariana.webp?v=2" data-caption="Mariana · Estágio hospitalar (12 mapas impressos em A4)" data-wa-idx="4"><img data-src="./img/wa-05-mariana.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Mariana sobre mapas impressos em A4 no estágio hospitalar" decoding="async" /></button></article><article class="wa-card wa-mq-card"><button type="button" class="wa-shot-btn evidence-zoom-btn" data-src="./img/wa-06-hugo.webp?v=2" data-caption="Hugo · Domicílios no interior sem cobertura de rede" data-wa-idx="5"><img data-src="./img/wa-06-hugo.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Hugo sobre consulta offline em aldeias do interior" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="0" tabindex="-1"><img data-src="./img/wa-01-ines.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Inês sobre uso do ElectroMapas no iPad da clínica" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="1" tabindex="-1"><img data-src="./img/wa-02-beatriz.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Beatriz sobre checklist no estágio de fisioterapia" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="2" tabindex="-1"><img data-src="./img/wa-03-diogo.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Diogo sobre uso offline nos domicílios" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="3" tabindex="-1"><img data-src="./img/wa-04-rita.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Rita sobre uso no departamento médico" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="4" tabindex="-1"><img data-src="./img/wa-05-mariana.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Mariana sobre mapas impressos em A4 no estágio hospitalar" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="5" tabindex="-1"><img data-src="./img/wa-06-hugo.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Hugo sobre consulta offline em aldeias do interior" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="0" tabindex="-1"><img data-src="./img/wa-01-ines.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Inês sobre uso do ElectroMapas no iPad da clínica" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="1" tabindex="-1"><img data-src="./img/wa-02-beatriz.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Beatriz sobre checklist no estágio de fisioterapia" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="2" tabindex="-1"><img data-src="./img/wa-03-diogo.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Diogo sobre uso offline nos domicílios" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="3" tabindex="-1"><img data-src="./img/wa-04-rita.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Rita sobre uso no departamento médico" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="4" tabindex="-1"><img data-src="./img/wa-05-mariana.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Mariana sobre mapas impressos em A4 no estágio hospitalar" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="5" tabindex="-1"><img data-src="./img/wa-06-hugo.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Hugo sobre consulta offline em aldeias do interior" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="0" tabindex="-1"><img data-src="./img/wa-01-ines.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Inês sobre uso do ElectroMapas no iPad da clínica" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="1" tabindex="-1"><img data-src="./img/wa-02-beatriz.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Beatriz sobre checklist no estágio de fisioterapia" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="2" tabindex="-1"><img data-src="./img/wa-03-diogo.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Diogo sobre uso offline nos domicílios" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="3" tabindex="-1"><img data-src="./img/wa-04-rita.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Rita sobre uso no departamento médico" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="4" tabindex="-1"><img data-src="./img/wa-05-mariana.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Mariana sobre mapas impressos em A4 no estágio hospitalar" decoding="async" /></button></article><article class="wa-card wa-mq-card" aria-hidden="true"><button type="button" class="wa-shot-btn wa-clone-zoom" data-wa-idx="5" tabindex="-1"><img data-src="./img/wa-06-hugo.webp?v=2" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="787" height="1600" alt="Conversa WhatsApp de Hugo sobre consulta offline em aldeias do interior" decoding="async" /></button></article>
         </div>
       </div>
     </section>
@@ -1186,6 +1145,7 @@
       <p><strong>ElectroMapas © 2026</strong> · Material educativo e de consulta clínica em eletroterapia para profissionais e estudantes de fisioterapia.</p>
       <p>Os parâmetros apresentados reproduzem os protocolos dos estudos citados; a avaliação clínica e o ajuste final ao utente e ao aparelho pertencem sempre ao profissional habilitado.</p>
     <p style="margin-top:8px">Contacto: <a href="mailto:ivar.suporte03@gmail.com">ivar.suporte03@gmail.com</a> · Pagamento e faturação processados pela Hotmart.</p>
+      <p style="margin-top:6px"><a href="./privacidade.html">Política de Privacidade</a> · <a href="./termos.html">Termos de Utilização</a></p>
     </div>
   </footer>
 
@@ -1343,7 +1303,9 @@
     function closeLb(){if(!lightbox||lightbox.hidden)return;lightbox.classList.remove('is-open');lightbox.hidden=true;document.body.style.overflow='';setZoom(false);}
     zoomTriggers.forEach(function(b,i){b.addEventListener('click',function(){openLb(this.getAttribute('data-src'),this.getAttribute('data-caption'),i);});});
     document.querySelectorAll('.slide-meta-zoom').forEach(function(b){b.addEventListener('click',function(){var i=parseInt(this.getAttribute('data-slide-idx'),10),t=zoomTriggers[i];if(t)openLb(t.getAttribute('data-src'),t.getAttribute('data-caption'),i);});});
+    var waCanonical=Array.prototype.slice.call(document.querySelectorAll('.evidence-zoom-btn[data-wa-idx]'));
     document.querySelectorAll('.evidence-zoom-btn').forEach(function(b){b.addEventListener('click',function(){openLb(this.getAttribute('data-src'),this.getAttribute('data-caption'),-1);});});
+    document.querySelectorAll('.wa-clone-zoom').forEach(function(b){b.addEventListener('click',function(){var idx=parseInt(this.getAttribute('data-wa-idx'),10);var target=waCanonical[idx];if(target)target.click();});});
     var hs=document.getElementById('hero-sample-zoom');if(hs)hs.addEventListener('click',function(){openLb(this.getAttribute('data-src'),this.getAttribute('data-caption'),0);});
     if(lbClose)lbClose.addEventListener('click',closeLb);
     if(lbZoom)lbZoom.addEventListener('click',function(){setZoom(lbZoom.getAttribute('aria-pressed')!=='true');});
@@ -1392,7 +1354,7 @@
         b.addEventListener('click',function(){var pl=this.getAttribute('data-plan')||'completo';lastAction='buy:'+pl;send('cta_buy_click',pl,true);});
       });
       var zSent=false;
-      document.querySelectorAll('.slide-zoom-btn,.evidence-zoom-btn,#hero-sample-zoom').forEach(function(b){
+      document.querySelectorAll('.slide-zoom-btn,.evidence-zoom-btn,.wa-clone-zoom,#hero-sample-zoom').forEach(function(b){
         b.addEventListener('click',function(){lastAction='zoom';if(!zSent){zSent=true;send('preview_zoom','atlas_sample',false);}});
       });
       function leave(){if(leaveSent)return;leaveSent=true;onScroll();send('page_leave',lastAction,true);}
@@ -1401,8 +1363,8 @@
     })();
   })();</script>
 <script>
-(function(){var s=document.getElementById('material');if(!s)return;var go=function(){s.querySelectorAll('img[data-src]').forEach(function(i){i.src=i.getAttribute('data-src');i.removeAttribute('data-src');});};
-if('IntersectionObserver' in window){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){go();o.disconnect();}},{rootMargin:'900px 0px'});o.observe(s);}else{go();}})();
+(function(){['material','relatos'].forEach(function(id){var s=document.getElementById(id);if(!s)return;var go=function(){s.querySelectorAll('img[data-src]').forEach(function(i){i.src=i.getAttribute('data-src');i.removeAttribute('data-src');});};
+if('IntersectionObserver' in window){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){go();o.disconnect();}},{rootMargin:'900px 0px'});o.observe(s);}else{go();}});})();
 </script>
 </body>
 </html>
